@@ -1,36 +1,35 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# GTA Segredos (nome provisório)
 
-## Getting Started
+Portal independente de fãs sobre os segredos de GTA 6: missões secretas, lugares escondidos, easter eggs, mistérios, dinheiro e veículos, com fontes e status de verificação em cada página. Não é afiliado à Rockstar Games nem à Take-Two Interactive.
 
-First, run the development server:
+## Rodar
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+cp .env.example .env.local   # defina ADMIN_PASSWORD e SESSION_SECRET para usar o painel
+npm run dev                  # http://localhost:3000  ·  painel em /admin/
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Sem `DATABASE_URL`, o projeto usa um Postgres embutido (PGlite) em `.data/`, já com o conteúdo de `content/seed/`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Estado
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- O site sobe com `noindex` em tudo. A indexação só é liberada com `SITE_INDEXABLE=true`, depois da revisão humana do conteúdo.
+- As 20 fichas iniciais vêm de relatos publicados, com fontes; **nenhuma foi testada no jogo** e nenhuma está marcada como "Confirmado".
+- A landing do aplicativo está em modo "em preparação": os dados reais do produto entram em `src/lib/app-config.ts`.
 
-## Learn More
+## Documentação
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+| Documento | Assunto |
+|---|---|
+| [01](docs/01-diagnostico-e-estrategia.md) | Diagnóstico, posicionamento, narrativa e **decisões que dependem do fundador** |
+| [02](docs/02-analise-concorrencia.md) | Análise de concorrência e lacunas |
+| [03](docs/03-arquitetura-urls-e-autoridade.md) | Arquitetura, URLs, autoridade temática, linkagem interna |
+| [04](docs/04-design-system.md) | Identidade visual e design system |
+| [05](docs/05-banco-de-palavras-chave.md) | Banco mestre de palavras-chave |
+| [06](docs/06-seo-aeo-geo-discover.md) | SEO técnico, AEO/GEO, Discover, política de robôs |
+| [07](docs/07-conversao-e-analytics.md) | Estratégia comercial, CTAs e mensuração |
+| [08](docs/08-documentacao-tecnica.md) | Pilha, dados, painel, integração com o app, publicação |
+| [09](docs/09-seguranca-privacidade-e-propriedade-intelectual.md) | Segurança, LGPD, acessibilidade, propriedade intelectual |
+| [10](docs/10-relatorio-de-testes.md) | Relatório de testes |
+| [11](docs/11-roadmap.md) | Roteiro de crescimento |
