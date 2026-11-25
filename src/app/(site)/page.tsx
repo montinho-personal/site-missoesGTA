@@ -13,7 +13,7 @@ import { site } from "@/lib/site";
 import { appConfig } from "@/lib/app-config";
 
 export const metadata = pageMeta({
-  title: `${site.name}: segredos, missões secretas e descobertas de GTA 6`,
+  title: `${site.name}: segredos, easter eggs e descobertas de GTA 6`,
   absoluteTitle: true,
   description: "Missões secretas, lugares escondidos, dinheiro, carros raros e mistérios de GTA 6, com fontes e status de verificação. Feito por jogadores, para quem quer ir além da história.",
   path: "/",

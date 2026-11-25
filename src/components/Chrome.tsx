@@ -10,7 +10,7 @@ import { mainNav, site } from "@/lib/site";
 
 export function Wordmark() {
   return (
-    <span className="font-display font-black text-[1.35rem] tracking-tight leading-none">
+    <span className="font-display font-black text-[0.88rem] min-[360px]:text-[1.02rem] min-[420px]:text-[1.2rem] lg:text-[1.3rem] tracking-tight leading-none whitespace-nowrap">
       <span className="text-fg">{site.wordmark[0]}</span>{" "}
       <span className="text-pink">{site.wordmark[1]}</span>
     </span>

@@ -1,4 +1,4 @@
-# GTA Segredos (nome provisório)
+# Missões Secretas GTA
 
 Portal independente de fãs sobre os segredos de GTA 6: missões secretas, lugares escondidos, easter eggs, mistérios, dinheiro e veículos, com fontes e status de verificação em cada página. Não é afiliado à Rockstar Games nem à Take-Two Interactive.
 
