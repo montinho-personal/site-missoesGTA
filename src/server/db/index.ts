@@ -29,6 +29,16 @@ async function runMigrations(db: Db) {
 async function createPostgres(url: string): Promise<Db> {
   const { default: postgres } = await import("postgres");
   const sql = postgres(url, { max: 5, idle_timeout: 20, prepare: false, onnotice: () => {} });
+  // O banco se prepara sozinho: na primeira conexão aplica as migrações pendentes
+  // e, se estiver vazio, carrega o conteúdo inicial. A trava evita que os
+  // processos paralelos do build façam isso ao mesmo tempo.
+  await sql.begin(async (tx) => {
+    await tx`select pg_advisory_xact_lock(72727401)`;
+    const inTx: Db = { driver: "postgres", persistent: true, async query<T>(text: string, params: unknown[] = []) { return (await tx.unsafe(text, params as never[])) as unknown as T[]; } };
+    await runMigrations(inTx);
+    const { seedIfEmpty } = await import("./seed");
+    await seedIfEmpty(inTx);
+  });
   return {
     driver: "postgres",
     persistent: true,

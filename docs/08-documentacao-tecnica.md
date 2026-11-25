@@ -87,8 +87,8 @@ Nada disso foi conectado, porque não há aplicativo para analisar. Não modifiq
 
 ## Publicação (passo a passo)
 
-1. Criar o banco Postgres e definir `DATABASE_URL`.
-2. `npm run db:migrate && npm run db:seed && npm run db:keywords`.
+1. Criar o banco Postgres (Neon pelo marketplace da Vercel) e conectá-lo ao projeto, o que define `DATABASE_URL`.
+2. Fazer um novo deploy. Na primeira conexão o site aplica as migrações e carrega o conteúdo inicial sozinho. As palavras-chave entram pelo painel (importar `data/keywords/banco-mestre.csv`) ou com `npm run db:keywords`.
 3. Definir `NEXT_PUBLIC_SITE_URL`, `ADMIN_PASSWORD`, `SESSION_SECRET` (32+ caracteres aleatórios).
 4. Publicar (Vercel ou qualquer host Node). Conferir o site ainda com `noindex`.
 5. Revisar cada descoberta no painel, assinar a revisão e, de preferência, testar no jogo.
