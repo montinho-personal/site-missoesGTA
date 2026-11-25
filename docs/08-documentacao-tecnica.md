@@ -107,3 +107,8 @@ O site **não roda em hospedagem compartilhada comum** (cPanel só com PHP): ele
 | C. Exportação estática para o cPanel | Subir só HTML/CSS/JS. | **Não recomendado:** perde painel, envio de descobertas, lista de aviso, redirecionamentos e atualização sem rebuild. |
 
 Canônico: `https://missoessecretasgta.com.br` (sem `www`); `www` deve redirecionar para a raiz, o que a Vercel faz ao configurar os dois nomes.
+
+## Infraestrutura criada
+
+- **Vercel:** projeto `missoes-secretas-gta`, ligado ao repositório. Cada push gera um deploy de prévia; o deploy de produção sai do branch `main`.
+- `SESSION_SECRET` já está configurado na Vercel. `ADMIN_PASSWORD` e `DATABASE_URL` são definidos pelo dono do projeto, direto no painel da Vercel (nunca no repositório).
