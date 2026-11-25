@@ -76,7 +76,7 @@ Data: 25/11/2026. Tudo aqui parte do que foi verificado no ambiente e em pesquis
 
 | # | Decisão | Por que é sua | O que já está pronto |
 |---|---|---|---|
-| 1 | **Nome e domínio.** "GTA Segredos" é provisório. | Usar "GTA" no nome/domínio é risco de marca; é decisão comercial e jurídica. | Troca em um arquivo (`src/lib/site.ts`). |
+| 1 | **Nome exibido.** O domínio está definido: `missoessecretasgta.com.br` (registrado na HostGator). Falta decidir se a marca na tela segue "GTA Segredos" ou passa a "Missões Secretas GTA", para bater com o domínio. | Coerência entre marca e endereço; o risco de usar "GTA" no nome e no domínio foi assumido pelo fundador. | Troca em um arquivo (`src/lib/site.ts`). |
 | 2 | **Dados reais do aplicativo:** nome, plataformas, funções existentes, preço, link de compra, política de reembolso, capturas de tela. | Não invento nada sobre o produto. | `src/lib/app-config.ts` com todos os campos; a landing muda sozinha para modo de venda. |
 | 3 | **Banco de dados de produção** (Supabase ou outro Postgres). | Tem custo mensal. | Migrações e seed testados em Postgres 16; basta `DATABASE_URL`. |
 | 4 | **Hospedagem e deploy** (Vercel). | Custo e vínculo de conta. | Build de produção validado. |

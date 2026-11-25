@@ -93,3 +93,17 @@ Nada disso foi conectado, porque não há aplicativo para analisar. Não modifiq
 4. Publicar (Vercel ou qualquer host Node). Conferir o site ainda com `noindex`.
 5. Revisar cada descoberta no painel, assinar a revisão e, de preferência, testar no jogo.
 6. Só então definir `SITE_INDEXABLE=true`, enviar o sitemap ao Search Console e ao Bing.
+
+## Domínio e HostGator
+
+Domínio: `missoessecretasgta.com.br`, na HostGator.
+
+O site **não roda em hospedagem compartilhada comum** (cPanel só com PHP): ele precisa de um servidor Node.js para o painel, os formulários, os redirecionamentos e a revalidação das páginas, além de um banco PostgreSQL. Caminhos possíveis:
+
+| Caminho | O que muda | Avaliação |
+|---|---|---|
+| **A. Domínio continua na HostGator, site na Vercel** | Só o DNS: na zona do domínio, os registros que a Vercel indicar ao adicionar o domínio ao projeto (um registro A para a raiz e um CNAME para `www`). E-mail e registro seguem na HostGator. | **Recomendado.** CDN, HTTPS e deploy automático a cada push. |
+| B. VPS da HostGator | Instalar Node 22, Postgres, proxy reverso, certificado, processo sempre ativo, backups. | Funciona, mas a manutenção é toda manual. |
+| C. Exportação estática para o cPanel | Subir só HTML/CSS/JS. | **Não recomendado:** perde painel, envio de descobertas, lista de aviso, redirecionamentos e atualização sem rebuild. |
+
+Canônico: `https://missoessecretasgta.com.br` (sem `www`); `www` deve redirecionar para a raiz, o que a Vercel faz ao configurar os dois nomes.

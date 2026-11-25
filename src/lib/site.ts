@@ -1,12 +1,15 @@
-// Fonte única de identidade do site. O nome é PROVISÓRIO: a marca final e o
-// domínio são decisão comercial/jurídica do fundador (docs/01-diagnostico-e-estrategia.md).
+// Fonte única de identidade do site. Domínio definido pelo fundador:
+// missoessecretasgta.com.br. O nome exibido ainda é provisório (docs/01).
+export const DOMAIN = "missoessecretasgta.com.br";
+const defaultUrl = process.env.NODE_ENV === "production" ? `https://${DOMAIN}` : "http://localhost:3000";
+
 export const site = {
   name: "GTA Segredos",
   wordmark: ["GTA", "SEGREDOS"] as const,
   tagline: "A paixão de descobrir aquilo que o jogo não te conta.",
   description:
     "Portal independente de fãs sobre os segredos de GTA 6: missões secretas, lugares escondidos, easter eggs, mistérios e recompensas, com fontes e status de verificação em cada descoberta.",
-  url: (process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000").replace(/\/$/, ""),
+  url: (process.env.NEXT_PUBLIC_SITE_URL || defaultUrl).replace(/\/$/, ""),
   locale: "pt-BR",
   indexable: process.env.SITE_INDEXABLE === "true",
   contactEmail: null as string | null, // definir antes do lançamento
