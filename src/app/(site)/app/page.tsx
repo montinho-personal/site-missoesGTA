@@ -116,7 +116,7 @@ export default function AppPage() {
 
         <section className="pt-16 sm:pt-24" aria-labelledby="h-comp">
           <h2 id="h-comp" className="text-3xl sm:text-4xl font-extrabold mb-7">Explorar no improviso ou com o aplicativo</h2>
-          <div className="card overflow-x-auto">
+          <div className="card overflow-x-auto" tabIndex={0} role="region" aria-labelledby="h-comp">
             <table className="w-full text-left text-[0.97rem] min-w-[36rem]">
               <thead><tr className="border-b border-ink-600"><th scope="col" className="p-4 label text-fg-subtle">Situação</th><th scope="col" className="p-4 label text-fg-subtle">No improviso</th><th scope="col" className="p-4 label text-violet">Com o aplicativo</th></tr></thead>
               <tbody>{compare.map((r) => <tr key={r[0]} className="border-b border-ink-700 last:border-0"><th scope="row" className="p-4 font-semibold align-top">{r[0]}</th><td className="p-4 text-fg-muted align-top">{r[1]}</td><td className="p-4 align-top">{r[2]}</td></tr>)}</tbody>

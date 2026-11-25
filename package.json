@@ -1,12 +1,18 @@
 {
-  "name": "web",
+  "name": "gta-segredos",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "keywords": "tsx scripts/keywords.ts",
+    "db:migrate": "tsx --conditions=react-server scripts/db.ts migrate",
+    "db:seed": "tsx --conditions=react-server scripts/db.ts seed",
+    "db:keywords": "tsx --conditions=react-server scripts/db.ts keywords"
   },
   "dependencies": {
     "@electric-sql/pglite": "^0.6.0",
@@ -17,6 +23,7 @@
     "react-dom": "19.3.0",
     "react-markdown": "^10.1.0",
     "remark-gfm": "^4.0.1",
+    "server-only": "^0.0.1",
     "zod": "^4.6.7"
   },
   "devDependencies": {
@@ -26,6 +33,7 @@
     "@types/node": "^22.20.7",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "axe-core": "^4.14.1",
     "eslint": "^9",
     "eslint-config-next": "16.4.6",
     "tailwindcss": "4.3.3",

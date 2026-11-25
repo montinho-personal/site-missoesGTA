@@ -5,9 +5,9 @@ import { joinWaitlist, submitToTeam, type FormState } from "@/server/public-acti
 import { track } from "@/lib/analytics";
 import { Icon } from "./Icon";
 
-function Trap() {
+function Trap({ attempt }: { attempt?: unknown }) {
   const [t, setT] = useState("");
-  useEffect(() => setT(String(Date.now())), []);
+  useEffect(() => setT(String(Date.now())), [attempt]);
   return (
     <>
       <input type="hidden" name="t" value={t} />
@@ -28,45 +28,46 @@ export function SubmissionForm({ kind, refId }: { kind: "descoberta" | "correcao
   useEffect(() => { if (state?.ok) track("submission_sent", { kind }); }, [state, kind]);
   if (state?.ok) return <Status state={state} />;
   const e = state?.errors ?? {};
+  const v = state?.values ?? {};
   const isContact = kind === "contato";
   return (
     <form action={action} className="relative flex flex-col gap-5" noValidate>
-      <Trap />
+      <Trap attempt={state} />
       <input type="hidden" name="kind" value={kind} />
       {refId && <input type="hidden" name="ref" value={refId} />}
       {!isContact && (
         <div>
           <label className="field-label" htmlFor="f-title">{kind === "correcao" ? "O que precisa ser corrigido?" : "O que você encontrou?"}</label>
-          <input className="field" id="f-title" name="title" maxLength={140} placeholder={kind === "correcao" ? "Ex.: a localização está errada" : "Ex.: carro raro perto do píer"} />
+          <input className="field" id="f-title" name="title" defaultValue={v.title} maxLength={140} placeholder={kind === "correcao" ? "Ex.: a localização está errada" : "Ex.: carro raro perto do píer"} />
         </div>
       )}
       <div>
         <label className="field-label" htmlFor="f-msg">{isContact ? "Mensagem" : "Conte os detalhes"}</label>
-        <textarea className="field" id="f-msg" name="message" required maxLength={4000} aria-invalid={!!e.message} aria-describedby="e-msg h-msg" />
+        <textarea className="field" id="f-msg" name="message" defaultValue={v.message} required maxLength={4000} aria-invalid={!!e.message} aria-describedby="e-msg h-msg" />
         <Err id="e-msg" msg={e.message} />
         {!isContact && <span id="h-msg" className="field-hint">Como chegar, com qual personagem, em que horário, o que aconteceu. Quanto mais específico, mais rápido conseguimos conferir.</span>}
       </div>
       {!isContact && (
         <>
           <div className="grid gap-5 sm:grid-cols-2">
-            <div><label className="field-label" htmlFor="f-where">Onde fica?</label><input className="field" id="f-where" name="where" maxLength={300} placeholder="Região e ponto de referência" /></div>
+            <div><label className="field-label" htmlFor="f-where">Onde fica?</label><input className="field" id="f-where" name="where" defaultValue={v.where} maxLength={300} placeholder="Região e ponto de referência" /></div>
             <div><label className="field-label" htmlFor="f-plat">Plataforma</label>
-              <select className="field" id="f-plat" name="platform" defaultValue=""><option value="">Prefiro não dizer</option><option>PlayStation 5</option><option>Xbox Series X|S</option></select></div>
+              <select className="field" id="f-plat" name="platform" defaultValue={v.platform ?? ""}><option value="">Prefiro não dizer</option><option>PlayStation 5</option><option>Xbox Series X|S</option></select></div>
           </div>
           <div>
             <label className="field-label" htmlFor="f-ev">Link de print ou vídeo</label>
-            <input className="field" id="f-ev" name="evidence" type="url" inputMode="url" maxLength={500} placeholder="https://" aria-invalid={!!e.evidence} aria-describedby="e-ev h-ev" />
+            <input className="field" id="f-ev" name="evidence" defaultValue={v.evidence} type="url" inputMode="url" maxLength={500} placeholder="https://" aria-invalid={!!e.evidence} aria-describedby="e-ev h-ev" />
             <Err id="e-ev" msg={e.evidence} />
             <span id="h-ev" className="field-hint">Opcional, mas é o que mais ajuda. Sem evidência, o registro entra no máximo como “Em investigação”.</span>
           </div>
         </>
       )}
       <div className="grid gap-5 sm:grid-cols-2">
-        <div><label className="field-label" htmlFor="f-name">Seu nome ou apelido</label><input className="field" id="f-name" name="name" maxLength={80} autoComplete="nickname" /><span className="field-hint">Opcional. Usado para dar o crédito, se você quiser.</span></div>
-        <div><label className="field-label" htmlFor="f-email">E-mail</label><input className="field" id="f-email" name="email" type="email" maxLength={160} autoComplete="email" aria-invalid={!!e.email} aria-describedby="e-email" /><Err id="e-email" msg={e.email && "Digite um e-mail válido ou deixe em branco."} /><span className="field-hint">Opcional. Só para tirarmos dúvidas sobre o envio.</span></div>
+        <div><label className="field-label" htmlFor="f-name">Seu nome ou apelido</label><input className="field" id="f-name" name="name" defaultValue={v.name} maxLength={80} autoComplete="nickname" /><span className="field-hint">Opcional. Usado para dar o crédito, se você quiser.</span></div>
+        <div><label className="field-label" htmlFor="f-email">E-mail</label><input className="field" id="f-email" name="email" defaultValue={v.email} type="email" maxLength={160} autoComplete="email" aria-invalid={!!e.email} aria-describedby="e-email" /><Err id="e-email" msg={e.email && "Digite um e-mail válido ou deixe em branco."} /><span className="field-hint">Opcional. Só para tirarmos dúvidas sobre o envio.</span></div>
       </div>
       <div>
-        <label className="flex items-start gap-3 cursor-pointer"><input type="checkbox" name="consent" required className="mt-1 size-5 accent-[#ff4d9d]" aria-describedby="e-consent" />
+        <label className="flex items-start gap-3 cursor-pointer"><input type="checkbox" name="consent" required defaultChecked={v.consent === "on"} className="mt-1 size-5 accent-[#ff4d9d]" aria-describedby="e-consent" />
           <span className="text-[0.95rem] text-fg-muted">Concordo que a equipe use este envio para apurar e publicar a informação, conforme a <Link href="/privacidade/" className="link">política de privacidade</Link>.</span></label>
         <Err id="e-consent" msg={e.consent} />
       </div>
@@ -82,16 +83,16 @@ export function WaitlistForm({ source }: { source: string }) {
   if (state?.ok) return <Status state={state} />;
   return (
     <form action={action} className="relative flex flex-col gap-3.5" noValidate>
-      <Trap />
+      <Trap attempt={state} />
       <input type="hidden" name="source" value={source} />
       <div>
         <label className="field-label" htmlFor={`w-${source}`}>Seu e-mail</label>
         <div className="flex flex-col sm:flex-row gap-2.5">
-          <input className="field grow" id={`w-${source}`} name="email" type="email" required autoComplete="email" placeholder="voce@exemplo.com" />
+          <input className="field grow" id={`w-${source}`} name="email" type="email" required autoComplete="email" placeholder="voce@exemplo.com" defaultValue={state?.values?.email} />
           <button className="btn btn-app shrink-0" disabled={pending}>{pending ? "Enviando…" : "Quero ser avisado"}</button>
         </div>
       </div>
-      <label className="flex items-start gap-3 cursor-pointer"><input type="checkbox" name="consent" required className="mt-1 size-5 accent-[#a98bff]" />
+      <label className="flex items-start gap-3 cursor-pointer"><input type="checkbox" name="consent" required defaultChecked={state?.values?.consent === "on"} className="mt-1 size-5 accent-[#a98bff]" />
         <span className="text-sm text-fg-muted">Aceito receber um aviso por e-mail sobre o lançamento do aplicativo. Sem spam; dá para sair quando quiser. <Link href="/privacidade/" className="link">Privacidade</Link>.</span></label>
       {state && !state.ok && <Status state={state} />}
     </form>

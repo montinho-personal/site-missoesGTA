@@ -31,9 +31,9 @@ export async function generateMetadata({ params }: Props) {
 function Fact({ label, value, icon }: { label: string; value: string | null; icon: string }) {
   const f = factValue(value);
   return (
-    <div className="p-4 flex gap-3">
-      <span className="text-cyan mt-0.5 shrink-0"><Icon name={icon} size={19} /></span>
-      <div><dt className="label text-fg-subtle">{label}</dt><dd className={`mt-1 ${f.known ? "" : "text-fg-subtle italic"}`}>{f.text}</dd></div>
+    <div className="p-4">
+      <dt className="label text-fg-subtle flex items-center gap-2"><span className="text-cyan"><Icon name={icon} size={17} /></span>{label}</dt>
+      <dd className={`mt-1.5 ${f.known ? "" : "text-fg-subtle italic"}`}>{f.text}</dd>
     </div>
   );
 }

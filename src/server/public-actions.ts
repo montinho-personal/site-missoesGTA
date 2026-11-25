@@ -3,7 +3,7 @@ import { z } from "zod";
 import { canWrite, q } from "./db";
 import { clientKey, rateLimit } from "./security";
 
-export type FormState = { ok: boolean; message: string; errors?: Record<string, string> } | null;
+export type FormState = { ok: boolean; message: string; errors?: Record<string, string>; values?: Record<string, string> } | null;
 
 const text = (max: number) => z.string().trim().max(max);
 const BOT = "Não foi possível enviar. Tente novamente em instantes.";
@@ -28,17 +28,21 @@ const submissionSchema = z.object({
   consent: z.literal("on", { error: "É preciso concordar para enviarmos." }),
 });
 
+// Em caso de erro devolvemos o que a pessoa digitou: ninguém deve reescrever um relato por causa de um campo.
+const keep = (fd: FormData) => Object.fromEntries([...fd].filter(([k, v]) => typeof v === "string" && !["t", "website"].includes(k)).map(([k, v]) => [k, String(v).slice(0, 4000)]));
+
 export async function submitToTeam(_prev: FormState, fd: FormData): Promise<FormState> {
-  if (looksAutomated(fd)) return { ok: false, message: BOT };
+  const values = keep(fd);
+  if (looksAutomated(fd)) return { ok: false, message: BOT, values };
   const parsed = submissionSchema.safeParse(Object.fromEntries(fd));
   if (!parsed.success) {
     const errors: Record<string, string> = {};
     for (const i of parsed.error.issues) errors[String(i.path[0])] ??= i.message;
-    return { ok: false, message: "Confira os campos destacados.", errors };
+    return { ok: false, message: "Confira os campos destacados.", errors, values };
   }
-  if (!(await canWrite())) return { ok: false, message: "O envio está indisponível neste ambiente de demonstração (sem banco de dados persistente)." };
+  if (!(await canWrite())) return { ok: false, message: "O envio está indisponível neste ambiente de demonstração (sem banco de dados persistente).", values };
   const key = await clientKey();
-  if (!(await rateLimit("submission", key, 5, 3600))) return { ok: false, message: "Você enviou várias mensagens em pouco tempo. Tente de novo mais tarde." };
+  if (!(await rateLimit("submission", key, 5, 3600))) return { ok: false, message: "Você enviou várias mensagens em pouco tempo. Tente de novo mais tarde.", values };
   const d = parsed.data;
   await q(
     `insert into submissions (kind, name, email, payload, entry_id, ip_hash) values ($1, $2, $3, $4::jsonb, $5, $6)`,
@@ -52,8 +56,9 @@ const waitSchema = z.object({ email: z.email("Digite um e-mail válido.").max(16
 export async function joinWaitlist(_prev: FormState, fd: FormData): Promise<FormState> {
   if (looksAutomated(fd)) return { ok: false, message: BOT };
   const parsed = waitSchema.safeParse(Object.fromEntries(fd));
-  if (!parsed.success) return { ok: false, message: parsed.error.issues[0].message };
-  if (!(await canWrite())) return { ok: false, message: "A lista está indisponível neste ambiente de demonstração (sem banco de dados persistente)." };
+  const values = keep(fd);
+  if (!parsed.success) return { ok: false, message: parsed.error.issues[0].message, values };
+  if (!(await canWrite())) return { ok: false, values, message: "A lista está indisponível neste ambiente de demonstração (sem banco de dados persistente)." };
   const key = await clientKey();
   if (!(await rateLimit("waitlist", key, 5, 3600))) return { ok: false, message: "Muitas tentativas. Tente de novo mais tarde." };
   await q(`insert into waitlist (email, source) values ($1, $2) on conflict (email) do nothing`, [parsed.data.email.toLowerCase(), parsed.data.source || null]);

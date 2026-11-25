@@ -1,0 +1,477 @@
+{
+ "quando": "2026-11-25T12:47:45.490Z",
+ "total": 94,
+ "falhas": 0,
+ "results": [
+  {
+   "name": "200 /",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "200 /gta-6/",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "200 /gta-6/segredos/",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "200 /gta-6/dinheiro/",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "200 /gta-6/mapa/",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "200 /gta-6/mapa/vice-city/",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "200 /gta-6/missoes-secretas/pe-grande-skunk-ape/",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "200 /app/",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "200 /sobre/",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "200 /metodologia/",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "200 /radar/",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "200 /ajuda/",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "200 /contato/",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "200 /enviar-descoberta/",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "200 /privacidade/",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "200 /termos/",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "200 /busca/",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "200 /favoritos/",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "200 /robots.txt",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "200 /sitemap.xml",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "200 /llms.txt",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "200 /search-index.json",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "404 real em /gta-6/missoes-secretas/nao-existe/",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "404 real em /gta-6/categoria-falsa/",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "404 real em /gta-5/",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "404 real em /qualquer/coisa/muito/funda/",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "admin exige login",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "admin/entradas exige login",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "um único H1",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "canonical presente",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "resposta rápida no HTML do servidor",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "JSON-LD válido com Article e BreadcrumbList",
+   "pass": true,
+   "detail": "BreadcrumbList,Article,FAQPage"
+  },
+  {
+   "name": "sem preço/avaliação fictícios no schema",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "noindex enquanto SITE_INDEXABLE não está ligado",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "robots.txt bloqueia tudo antes do lançamento",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "cabeçalhos de segurança",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "sitemap lista descobertas e exclui admin/busca",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "sem rolagem horizontal 360px /",
+   "pass": true,
+   "detail": "excesso 0px"
+  },
+  {
+   "name": "sem rolagem horizontal 360px /gta-6/missoes-secretas/pe-grande-skunk-ape/",
+   "pass": true,
+   "detail": "excesso 0px"
+  },
+  {
+   "name": "sem rolagem horizontal 360px /gta-6/segredos/",
+   "pass": true,
+   "detail": "excesso 0px"
+  },
+  {
+   "name": "sem rolagem horizontal 360px /app/",
+   "pass": true,
+   "detail": "excesso 0px"
+  },
+  {
+   "name": "sem rolagem horizontal 390px /",
+   "pass": true,
+   "detail": "excesso 0px"
+  },
+  {
+   "name": "sem rolagem horizontal 390px /gta-6/missoes-secretas/pe-grande-skunk-ape/",
+   "pass": true,
+   "detail": "excesso 0px"
+  },
+  {
+   "name": "sem rolagem horizontal 390px /gta-6/segredos/",
+   "pass": true,
+   "detail": "excesso 0px"
+  },
+  {
+   "name": "sem rolagem horizontal 390px /app/",
+   "pass": true,
+   "detail": "excesso 0px"
+  },
+  {
+   "name": "alvos de toque ≥ 40px na home (mobile)",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "sem rolagem horizontal 768px /",
+   "pass": true,
+   "detail": "excesso 0px"
+  },
+  {
+   "name": "sem rolagem horizontal 768px /gta-6/missoes-secretas/pe-grande-skunk-ape/",
+   "pass": true,
+   "detail": "excesso 0px"
+  },
+  {
+   "name": "sem rolagem horizontal 768px /gta-6/segredos/",
+   "pass": true,
+   "detail": "excesso 0px"
+  },
+  {
+   "name": "sem rolagem horizontal 768px /app/",
+   "pass": true,
+   "detail": "excesso 0px"
+  },
+  {
+   "name": "sem rolagem horizontal 1280px /",
+   "pass": true,
+   "detail": "excesso 0px"
+  },
+  {
+   "name": "sem rolagem horizontal 1280px /gta-6/missoes-secretas/pe-grande-skunk-ape/",
+   "pass": true,
+   "detail": "excesso 0px"
+  },
+  {
+   "name": "sem rolagem horizontal 1280px /gta-6/segredos/",
+   "pass": true,
+   "detail": "excesso 0px"
+  },
+  {
+   "name": "sem rolagem horizontal 1280px /app/",
+   "pass": true,
+   "detail": "excesso 0px"
+  },
+  {
+   "name": "axe sem violações /",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "axe sem violações /gta-6/missoes-secretas/pe-grande-skunk-ape/",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "axe sem violações /gta-6/segredos/",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "axe sem violações /app/",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "axe sem violações /enviar-descoberta/",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "axe sem violações /metodologia/",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "busca tolera erro de digitação (bigfot)",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "busca entende sinônimo (grana → dinheiro)",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "busca sem resultado é honesta e oferece saída",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "da home à resposta em 2 toques + digitação",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "resposta visível sem rolar",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "favorito aparece em Meus favoritos",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "proteção contra spoilers ligada por padrão",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "preferência de spoilers persiste",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "filtro por tipo reduz a lista",
+   "pass": true,
+   "detail": "20 → 4"
+  },
+  {
+   "name": "filtro não muda a URL (nada de combinações indexáveis)",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "link 'pular para o conteúdo' é o primeiro foco",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "menu mobile abre",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "menu fecha com Esc",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "formulário valida campos obrigatórios",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "link de evidência só aceita http(s)",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "erro de validação preserva o que foi digitado",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "envio da comunidade é aceito",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "lista de espera do aplicativo funciona",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "landing não exibe preço nem avaliação inventados",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "login recusa senha errada",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "login com a senha correta",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "painel mostra indicadores",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "envio chega à moderação",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "texto enviado é exibido como texto, não executado",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "moderação muda o estado do envio",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "conteúdo-semente exige assinatura de revisor humano ao ser editado",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "painel bloqueia 'Confirmado' sem teste direto ou fonte oficial",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "mudar slug cria redirecionamento 301",
+   "pass": true,
+   "detail": "308 → /gta-6/dicas/como-salvar-o-jogo-novo/, /gta-6/dicas/como-salvar-o-jogo-novo/"
+  },
+  {
+   "name": "novo endereço responde 200 após revalidação",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "alteração aparece no Radar",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "rascunho não vaza para o site público",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "publicar sem resposta, fonte e revisor é bloqueado",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "banco de palavras-chave acessível no painel",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "sem erros de JavaScript no console",
+   "pass": true,
+   "detail": ""
+  }
+ ]
+}
