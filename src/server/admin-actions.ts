@@ -90,7 +90,7 @@ export async function saveEntry(_p: { error: string } | null, fd: FormData): Pro
   const publishAt = s(fd, "published_at"); // agendamento: data futura só aparece quando chegar a hora
   const names = [...Object.keys(cols), ...Object.keys(json)];
   const vals = [...Object.values(cols), ...Object.values(json).map((v) => JSON.stringify(v))];
-  const ph = (i: number) => (i >= Object.keys(cols).length ? `$${i + 1}::jsonb` : `$${i + 1}`);
+  const ph = (i: number) => (i >= Object.keys(cols).length ? `$${i + 1}::text::jsonb` : `$${i + 1}`);
 
   let entryId = id;
   if (id) {
@@ -123,7 +123,7 @@ export async function saveEntry(_p: { error: string } | null, fd: FormData): Pro
 
 export async function saveCategory(fd: FormData) {
   await requireAdmin();
-  await q(`update categories set name = $2, tagline = $3, description = $4, intro_md = $5, seo_title = $6, seo_description = $7, cta_key = $8, sort = $9, published = $10, faq = $11::jsonb where id = $1`,
+  await q(`update categories set name = $2, tagline = $3, description = $4, intro_md = $5, seo_title = $6, seo_description = $7, cta_key = $8, sort = $9, published = $10, faq = $11::text::jsonb where id = $1`,
     [s(fd, "id"), s(fd, "name"), s(fd, "tagline"), s(fd, "description"), s(fd, "intro_md"), nul(s(fd, "seo_title")), nul(s(fd, "seo_description")), nul(s(fd, "cta_key")), Number(s(fd, "sort")) || 0, fd.get("published") === "on", JSON.stringify(parsePairs(s(fd, "faq"), "q", "a"))]);
   refresh(); revalidatePath("/admin/categorias");
 }

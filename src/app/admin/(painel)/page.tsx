@@ -5,6 +5,10 @@ import type { VerificationStatus, WorkflowStatus } from "@/lib/types";
 
 export const metadata = { title: "Visão geral" };
 
+const Tile = ({ label, value, href }: { label: string; value: React.ReactNode; href?: string }) => (
+    <div className="card p-4"><p className="label text-fg-subtle">{label}</p><p className="font-display text-3xl font-black mt-1">{href ? <Link href={href} className="hover:text-pink">{value}</Link> : value}</p></div>
+);
+
 export default async function Dashboard() {
   const [wf, vs, pend, wait, kw, stale, scheduled, noSrc] = await Promise.all([
     q<{ k: WorkflowStatus; n: number }>(`select workflow_status as k, count(*)::int as n from entries group by 1`),
@@ -17,9 +21,6 @@ export default async function Dashboard() {
     q<{ id: string; title: string; published_at: string }>(`select id, title, published_at::text from entries where workflow_status = 'publicado' and published_at > now() order by published_at`),
     q<{ n: number; unrev: number }>(`select count(*) filter (where jsonb_array_length(sources) = 0)::int as n, count(*) filter (where reviewed_by is null)::int as unrev from entries where workflow_status = 'publicado'`),
   ]);
-  const Tile = ({ label, value, href }: { label: string; value: React.ReactNode; href?: string }) => (
-    <div className="card p-4"><p className="label text-fg-subtle">{label}</p><p className="font-display text-3xl font-black mt-1">{href ? <Link href={href} className="hover:text-pink">{value}</Link> : value}</p></div>
-  );
   return (
     <div className="flex flex-col gap-8">
       <h1 className="text-3xl font-black">Visão geral</h1>

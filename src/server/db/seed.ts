@@ -14,7 +14,7 @@ async function insertRows(db: Db, table: string, rows: Record<string, unknown>[]
   for (const row of rows) {
     const cols = Object.keys(row).filter((c) => !c.startsWith("_"));
     const vals = cols.map((c) => (JSON_COLS.has(c) && row[c] != null ? JSON.stringify(row[c]) : row[c]));
-    const ph = cols.map((c, i) => (JSON_COLS.has(c) ? `$${i + 1}::jsonb` : `$${i + 1}`));
+    const ph = cols.map((c, i) => (JSON_COLS.has(c) ? `$${i + 1}::text::jsonb` : `$${i + 1}`));
     await db.query(
       `insert into ${table} (${cols.join(",")}) values (${ph.join(",")}) on conflict do nothing`,
       vals,

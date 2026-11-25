@@ -45,7 +45,7 @@ export async function submitToTeam(_prev: FormState, fd: FormData): Promise<Form
   if (!(await rateLimit("submission", key, 5, 3600))) return { ok: false, message: "Você enviou várias mensagens em pouco tempo. Tente de novo mais tarde.", values };
   const d = parsed.data;
   await q(
-    `insert into submissions (kind, name, email, payload, entry_id, ip_hash) values ($1, $2, $3, $4::jsonb, $5, $6)`,
+    `insert into submissions (kind, name, email, payload, entry_id, ip_hash) values ($1, $2, $3, $4::text::jsonb, $5, $6)`,
     [d.kind, d.name || null, d.email || null, JSON.stringify({ title: d.title, message: d.message, where: d.where, evidence: d.evidence, platform: d.platform }), d.ref || null, key],
   );
   return { ok: true, message: d.kind === "contato" ? "Mensagem recebida. Obrigado por escrever." : "Recebido. Vamos apurar antes de publicar qualquer coisa, e o status vai refletir o que conseguirmos comprovar." };

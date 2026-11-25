@@ -1,6 +1,9 @@
 import "server-only";
 import { migrations } from "./schema";
 
+// Convenção para colunas JSONB: o valor vai como texto JSON e o SQL faz o cast
+// "$n::text::jsonb". Com "$n::jsonb" direto, o driver postgres serializa a string
+// outra vez e grava um JSON duplamente codificado (o PGlite não faz isso).
 export interface Db {
   query<T = Record<string, unknown>>(text: string, params?: unknown[]): Promise<T[]>;
   /** "postgres" = banco persistente; "pglite" = banco local/efêmero */

@@ -1,16 +1,17 @@
 "use client";
-import { useActionState, useEffect, useState } from "react";
+import { useActionState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { joinWaitlist, submitToTeam, type FormState } from "@/server/public-actions";
 import { track } from "@/lib/analytics";
 import { Icon } from "./Icon";
 
 function Trap({ attempt }: { attempt?: unknown }) {
-  const [t, setT] = useState("");
-  useEffect(() => setT(String(Date.now())), [attempt]);
+  // carimbo de tempo escrito direto no campo, depois da hidratação e a cada tentativa
+  const ref = useRef<HTMLInputElement>(null);
+  useEffect(() => { if (ref.current) ref.current.value = String(Date.now()); }, [attempt]);
   return (
     <>
-      <input type="hidden" name="t" value={t} />
+      <input ref={ref} type="hidden" name="t" defaultValue="" />
       <div aria-hidden="true" className="absolute -left-[9999px]"><label>Não preencha este campo<input type="text" name="website" tabIndex={-1} autoComplete="off" /></label></div>
     </>
   );

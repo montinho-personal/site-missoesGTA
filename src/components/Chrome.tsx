@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { Icon } from "./Icon";
 import { SearchDialog, SearchTrigger } from "./Search";
 import { SpoilerToggle } from "./client";
@@ -74,18 +74,20 @@ function loadGtm() {
 }
 
 /** Aviso de consentimento. Só aparece quando existe mensuração configurada. */
+const subConsent = (cb: () => void) => { window.addEventListener("gs:consent", cb); return () => window.removeEventListener("gs:consent", cb); };
+
 export function Consent() {
-  const [show, setShow] = useState(false);
+  // "ssr" no servidor e na hidratação: o aviso só aparece depois de lermos a escolha salva.
+  const consent = useSyncExternalStore(subConsent, () => getConsent() ?? "none", () => "ssr");
+  const [reopened, setReopened] = useState(false);
   useEffect(() => {
-    if (!GTM_ID) return;
-    const c = getConsent();
-    if (c === "granted") loadGtm(); else if (c === null) setShow(true);
-    const reopen = () => setShow(true);
+    if (consent === "granted") loadGtm();
+    const reopen = () => setReopened(true);
     window.addEventListener("gs:consent-open", reopen);
     return () => window.removeEventListener("gs:consent-open", reopen);
-  }, []);
-  if (!show) return null;
-  const choose = (v: "granted" | "denied") => { setConsent(v); if (v === "granted") loadGtm(); setShow(false); };
+  }, [consent]);
+  if (!GTM_ID || !(consent === "none" || reopened)) return null;
+  const choose = (v: "granted" | "denied") => { setConsent(v); if (v === "granted") loadGtm(); setReopened(false); };
   return (
     <div role="region" aria-label="Privacidade" className="fixed inset-x-0 bottom-0 z-50 border-t border-ink-600 bg-ink-900 no-print">
       <div className="wrap py-4 flex flex-col md:flex-row md:items-center gap-4">

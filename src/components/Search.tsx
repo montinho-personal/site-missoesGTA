@@ -20,7 +20,8 @@ const subHist = (cb: () => void) => { window.addEventListener("gs:hist", cb); re
 
 export function SearchPanel({ initial = "", autoFocus, onNavigate }: { initial?: string; autoFocus?: boolean; onNavigate?: () => void }) {
   const [query, setQuery] = useState(initial);
-  const [hits, setHits] = useState<SearchHit[] | null>(null);
+  const [found, setHits] = useState<SearchHit[] | null>(null);
+  const hits = query.trim().length >= 2 ? found : null; // menos de 2 letras: volta aos atalhos
   const [failed, setFailed] = useState(false);
   const listId = useId();
   const spoilersOn = useSpoilersOn();
@@ -30,7 +31,7 @@ export function SearchPanel({ initial = "", autoFocus, onNavigate }: { initial?:
 
   useEffect(() => {
     const term = query.trim();
-    if (term.length < 2) { setHits(null); return; }
+    if (term.length < 2) return;
     let alive = true;
     const t = setTimeout(async () => {
       try {

@@ -62,8 +62,8 @@ export async function importKeywordRows(rows: KeywordRow[], defaults: { source: 
     if (existing.length) {
       await q(
         `update keywords set
-           original_terms = case when original_terms @> $2::jsonb then original_terms else original_terms || $2::jsonb end,
-           sources = case when sources @> $3::jsonb then sources else sources || $3::jsonb end,
+           original_terms = case when original_terms @> $2::text::jsonb then original_terms else original_terms || $2::text::jsonb end,
+           sources = case when sources @> $3::text::jsonb then sources else sources || $3::text::jsonb end,
            last_collected = greatest(last_collected, $4::date), first_collected = least(first_collected, $4::date),
            volume = case when $5::int is null then volume when volume is null then $5::int else greatest(volume, $5::int) end,
            difficulty = coalesce($6::int, difficulty), trend = coalesce($7, trend),
@@ -75,7 +75,7 @@ export async function importKeywordRows(rows: KeywordRow[], defaults: { source: 
       await q(
         `insert into keywords (keyword, keyword_norm, original_terms, sources, first_collected, last_collected, country, language, volume, trend, difficulty, relevance,
            intent_primary, cluster, subcluster, game, planned_url, priority, commercial_potential, app_conversion_potential, entity)
-         values ($1,$2,$3::jsonb,$4::jsonb,$5::date,$5::date,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20)`,
+         values ($1,$2,$3::text::jsonb,$4::text::jsonb,$5::date,$5::date,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20)`,
         [r.keyword.toLowerCase().trim(), c.keyword_norm, JSON.stringify([r.keyword]), src, date, r.country || defaults.country || "BR", r.language || defaults.language || "pt-BR",
           r.volume ?? null, r.trend ?? null, r.difficulty ?? null, r.relevance ?? null, c.intent_primary, c.cluster, c.subcluster, c.game, c.planned_url, c.priority, c.commercial_potential, c.app_conversion_potential, "Grand Theft Auto VI"]);
       inserted++;
