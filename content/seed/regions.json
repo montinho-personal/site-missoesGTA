@@ -1,0 +1,56 @@
+[
+ {
+  "id": "gta6-vice-city",
+  "game_id": "gta6",
+  "slug": "vice-city",
+  "name": "Vice City",
+  "description": "Cidade principal do estado de Leonida, listada na página oficial Only in Leonida.",
+  "source_url": "https://www.rockstargames.com/VI/only-in-leonida",
+  "sort": 1
+ },
+ {
+  "id": "gta6-leonida-keys",
+  "game_id": "gta6",
+  "slug": "leonida-keys",
+  "name": "Leonida Keys",
+  "description": "Arquipélago no sul de Leonida, listado na página oficial Only in Leonida. É onde ficam Key Lento e a base Mile Zero, segundo os guias.",
+  "source_url": "https://www.rockstargames.com/VI/only-in-leonida",
+  "sort": 2
+ },
+ {
+  "id": "gta6-grassrivers",
+  "game_id": "gta6",
+  "slug": "grassrivers",
+  "name": "Grassrivers",
+  "description": "Região de pântanos citada pela Wikipedia e por guias. Ainda não conferimos o nome em fonte oficial.",
+  "source_url": "https://en.wikipedia.org/wiki/Grand_Theft_Auto_VI",
+  "sort": 3
+ },
+ {
+  "id": "gta6-port-gellhorn",
+  "game_id": "gta6",
+  "slug": "port-gellhorn",
+  "name": "Port Gellhorn",
+  "description": "Cidade costeira listada na página oficial Only in Leonida.",
+  "source_url": "https://www.rockstargames.com/VI/only-in-leonida",
+  "sort": 4
+ },
+ {
+  "id": "gta6-ambrosia",
+  "game_id": "gta6",
+  "slug": "ambrosia",
+  "name": "Ambrosia",
+  "description": "Região citada pela Wikipedia e por guias. Ainda não conferimos o nome em fonte oficial.",
+  "source_url": "https://en.wikipedia.org/wiki/Grand_Theft_Auto_VI",
+  "sort": 5
+ },
+ {
+  "id": "gta6-mount-kalaga",
+  "game_id": "gta6",
+  "slug": "mount-kalaga",
+  "name": "Mount Kalaga",
+  "description": "Área do Mount Kalaga National Park, listada na página oficial Only in Leonida.",
+  "source_url": "https://www.rockstargames.com/VI/only-in-leonida",
+  "sort": 6
+ }
+]

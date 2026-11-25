@@ -1,0 +1,2162 @@
+[
+ {
+  "id": "gta6-0001",
+  "app_ref": null,
+  "game_id": "gta6",
+  "category_id": "gta6-easter-eggs",
+  "region_id": null,
+  "author_id": "redacao",
+  "kind": "descoberta",
+  "slug": "ovo-de-pascoa-torre-de-radio",
+  "title": "O ovo de Páscoa de verdade no topo da torre de rádio",
+  "direct_answer": "No topo de uma torre de rádio muito alta em Vice-Dale County há um ninho com ovos de Páscoa coloridos. Pegar um ovo e jogar lá de cima dispara uma cena escondida.",
+  "summary": "GTA 6 tem um easter egg que é literalmente um ovo de Páscoa: um ninho no topo de uma torre de rádio. A subida leva cerca de sete minutos de escada e a recompensa é só a cena, sem item.",
+  "body_md": "A piada é simples e a subida é longa. No alto de uma torre de rádio há um ninho de pássaro com ovos coloridos. Com Jason ou com Lucia, dá para pegar um ovo e arremessar para fora da torre. Isso dispara uma cutscene curta que não aparece em nenhum outro lugar do jogo.\n\nAs fontes falam em seis a sete minutos subindo escadas, sem nada que segure o personagem se ele cair. Segundo a Red Bull, a mesma plataforma serve de ponto de partida para um BASE jump com checkpoints, então a descida pelo menos é rápida.\n\nNão existe item de recompensa. O prêmio é a cena.\n\n## De onde vem a referência\n\nAs fontes ligam a brincadeira ao ovo de chocolate escondido numa sala secreta de GTA: Vice City, de 2002, um dos easter eggs mais famosos da série.\n\n## O que ainda não se sabe\n\n- **Qual torre exatamente.** Cinco fontes falam na torre de rádio mais alta de Vice City, em (South) Vice-Dale County. A Pizza Fria coloca a torre ao norte de Key Lento. Enquanto não testarmos no jogo, não publicamos ponto exato no mapa.\n- **Se dá para repetir a cena.** Nenhuma fonte lida diz.",
+  "location_text": "Topo de uma torre de rádio descrita pela maioria das fontes como a mais alta de Vice City, em (South) Vice-Dale County. Uma fonte diverge e a situa ao norte de Key Lento.",
+  "landmark": "Ninho de pássaro na plataforma do topo da torre.",
+  "coords": null,
+  "character_req": "Jason ou Lucia",
+  "requirements": null,
+  "progress_required": null,
+  "conditions": null,
+  "steps": [
+   "Vá até a torre de rádio e suba todas as escadas até o topo. São cerca de seis a sete minutos.",
+   "Pegue um ovo no ninho.",
+   "Arremesse o ovo para fora da torre. A Red Bull recomenda carregar a barra de força até o máximo.",
+   "Assista à cena escondida."
+  ],
+  "reward": "Só a cena secreta. Nenhum item.",
+  "reward_type": "cena",
+  "repeatable": null,
+  "missable": null,
+  "common_mistakes": [
+   "Subir com pressa: segundo o GTA Side, nada segura o personagem se ele cair durante a subida."
+  ],
+  "troubleshooting": [],
+  "platform_tested": null,
+  "game_version": null,
+  "last_verified_on": null,
+  "verification_status": "relato",
+  "evidence_type": "relatos",
+  "spoiler_level": "leve",
+  "sources": [
+   {
+    "nome": "GTA Side",
+    "url": "https://gtaside.com/tips/gta6/easter-eggs/",
+    "tipo": "comunidade",
+    "data": "2026-11-25",
+    "nota": "Ninho com ovos no topo da torre mais alta de Vice City; ~7 min de subida; arremessar dispara cutscene; sem recompensa."
+   },
+   {
+    "nome": "Red Bull Gaming",
+    "url": "https://www.redbull.com/int-en/gta-6-easter-eggs",
+    "tipo": "imprensa",
+    "data": "2026-11-23",
+    "nota": "Torre de rádio mais alta de Vice City (Vice-Dale County); arremessar com força máxima; cutscene; BASE jump no topo."
+   },
+   {
+    "nome": "GameSpot",
+    "url": "https://www.gamespot.com/articles/gta-6-easter-eggs-list-and-locations/",
+    "tipo": "imprensa",
+    "data": "2026-11-23",
+    "nota": "No topo da torre mais alta de Vice City; ~7 minutos; Jason ou Lucia pegam e jogam o ovo."
+   },
+   {
+    "nome": "ComicBook.com",
+    "url": "https://comicbook.com/gaming/list/5-most-exciting-gta-6-easter-eggs-players-have-found-after-launch-day/",
+    "tipo": "imprensa",
+    "data": "2026-11-20",
+    "nota": "Torre de rádio em South Vice-Dale County; o ovo atinge o para-brisa de alguém na cutscene."
+   },
+   {
+    "nome": "DualShockers",
+    "url": "https://www.dualshockers.com/best-easter-eggs-in-gta-6/",
+    "tipo": "imprensa",
+    "data": "2026-11-20",
+    "nota": "Torre de rádio em South Vice Dale County; envolve cutscene."
+   },
+   {
+    "nome": "Pizza Fria (iG)",
+    "url": "https://pizzafria.ig.com.br/listas/gta-vi-melhores-easter-eggs-descobertos/",
+    "tipo": "imprensa",
+    "data": "2026-11-22",
+    "nota": "Ninho com ovos coloridos no topo de uma grande torre de telecomunicações; pegar e arremessar aciona cena especial."
+   }
+  ],
+  "media": [],
+  "faq": [
+   {
+    "q": "Onde fica o ovo de Páscoa literal de GTA 6?",
+    "a": "No topo de uma torre de rádio que a maioria das fontes situa em Vice-Dale County, descrita como a mais alta de Vice City. Uma fonte diverge e fala em uma torre ao norte de Key Lento."
+   },
+   {
+    "q": "O ovo de Páscoa da torre dá alguma recompensa?",
+    "a": "Não. Segundo as fontes, a única recompensa é a cena escondida que aparece quando você arremessa o ovo."
+   },
+   {
+    "q": "Precisa de algum personagem específico?",
+    "a": "Não. As fontes dizem que tanto Jason quanto Lucia conseguem pegar e jogar o ovo."
+   }
+  ],
+  "related": [
+   "gta6-0009",
+   "gta6-0005"
+  ],
+  "tags": [
+   "ovo de páscoa",
+   "easter egg",
+   "torre de rádio",
+   "torre",
+   "ninho",
+   "vice-dale",
+   "easter egg tower"
+  ],
+  "seo_title": "Ovo de Páscoa na torre de rádio em GTA 6: onde fica",
+  "seo_description": "O easter egg do ovo de Páscoa de GTA 6 fica no topo de uma torre de rádio. Veja como chegar, o que acontece e onde as fontes ainda divergem.",
+  "workflow_status": "publicado",
+  "featured": false,
+  "reviewed_by": null,
+  "published_at": "2026-11-25T12:00:00Z",
+  "created_at": "2026-11-25T12:00:00Z",
+  "updated_at": "2026-11-25T12:00:00Z"
+ },
+ {
+  "id": "gta6-0002",
+  "app_ref": null,
+  "game_id": "gta6",
+  "category_id": "gta6-missoes-secretas",
+  "region_id": null,
+  "author_id": "redacao",
+  "kind": "descoberta",
+  "slug": "pe-grande-skunk-ape",
+  "title": "Pé Grande em GTA 6: o Skunk Ape e a missão Search for the Skunk Ape",
+  "direct_answer": "O Pé Grande de GTA 6 é o Skunk Ape, uma criatura dos pântanos. A missão secundária Search for the Skunk Ape começa quando você lê um panfleto da criatura e liga para Kirk, e só inicia à noite, na região de Gullet Marsh.",
+  "summary": "Panfletos espalhados por Leonida salvam no celular o contato de Kirk, um caçador de criaturas. Ele abre uma linha de missões noturnas no mangue, com três idas ao pântano e uma busca por efígies de galhos. A recompensa final não aparece em nenhuma fonte lida.",
+  "body_md": "Depois de anos de boato em San Andreas, o Pé Grande agora é oficial e tem nome local: Skunk Ape. Para chegar nele você precisa de um panfleto. Eles ficam em vitrines de lojas. A Polygon cita a Shrimp & Save, em Key Lento, e a Red Bull cita o Skeeter's Bar, em Hamlet. Ler o panfleto salva o número de Kirk no celular.\n\nLigue para Kirk e vá ao mangue à noite. De dia a missão não começa. Na primeira ida, a criatura aparece comendo uma carcaça de cervo numa estrada de terra. Ao segui-la, o personagem desmaia.\n\nA segunda etapa é a mais trabalhosa: achar sozinho três efígies de galhos. Segundo a Polygon, uma fica logo ao sul da Thorpe Adventures, outra num trecho isolado de mata entre os canais e a terceira ao sul, no fim de uma faixa longa e estreita de árvores. A área é grande e a própria Polygon recomenda ir de airboat. Depois disso, Kirk liga e chama para a terceira caçada.\n\n## De onde vem a referência\n\nO mito do Pé Grande acompanha a série desde os rumores de San Andreas e virou aparição oficial em jogos posteriores. Skunk Ape é o nome da lenda nos pântanos da Flórida, que inspira Leonida.\n\n## O que ainda não se sabe\n\n- **A recompensa final.** Nenhuma fonte lida descreve o que você ganha ao terminar.\n- **Se é opcional.** GameSpot e DualShockers tratam o encontro como parte de uma missão inevitável. As outras fontes tratam como missão secundária.\n- **O nome da área.** Parte das fontes fala em Gullet Marsh, a Polygon fala no mangue de Pelican Valley, em Mariana County. Há relatos de avistamento também nos Grassrivers e perto de Cottonmouth Lake.\n- **O boato da caçada final.** O GTA Side lista como não confirmado o rumor de que dá para caçar a criatura de vez no fim da missão.",
+  "location_text": "Gullet Marsh, do outro lado de Gambit Bay em relação à casa de Jason, segundo GTA Side e Red Bull. A Polygon situa a busca no mangue de Pelican Valley, em Mariana County, a noroeste de Key Lento.",
+  "landmark": "Panfletos do Skunk Ape em vitrines de lojas. Thorpe Adventures, para a etapa das efígies.",
+  "coords": null,
+  "character_req": "Jason ou Lucia",
+  "requirements": "Ler um panfleto do Skunk Ape, que salva o número de Kirk, e ligar para ele.",
+  "progress_required": "Os panfletos aparecem a partir do Capítulo 1.",
+  "conditions": "A missão só começa à noite.",
+  "steps": [
+   "Ache e leia um panfleto do Skunk Ape numa área de lojas.",
+   "Abra o celular, vá em contatos e ligue para Kirk.",
+   "À noite, vá até o mangue e siga a criatura, que come uma carcaça de cervo numa estrada de terra.",
+   "Na segunda etapa, encontre as três efígies de galhos no mangue. A Polygon recomenda usar um airboat.",
+   "Espere a ligação de Kirk e acompanhe a terceira caçada."
+  ],
+  "reward": null,
+  "reward_type": null,
+  "repeatable": null,
+  "missable": null,
+  "common_mistakes": [
+   "Chegar de dia. A missão não inicia: avance o tempo até anoitecer.",
+   "Procurar as efígies a pé. A área de busca é enorme."
+  ],
+  "troubleshooting": [
+   {
+    "problema": "A missão não começa quando chego ao pântano.",
+    "solucao": "Segundo GTA Side e Red Bull, ela só inicia à noite. Avance o tempo e volte."
+   }
+  ],
+  "platform_tested": null,
+  "game_version": null,
+  "last_verified_on": null,
+  "verification_status": "relato",
+  "evidence_type": "relatos",
+  "spoiler_level": "leve",
+  "sources": [
+   {
+    "nome": "GTA Side",
+    "url": "https://gtaside.com/tips/gta6/easter-eggs/",
+    "tipo": "comunidade",
+    "data": "2026-11-25",
+    "nota": "Avistamento em Gullet Marsh; panfletos adicionam Kirk; missão só à noite; relatos também em Grassrivers e Cottonmouth Lake."
+   },
+   {
+    "nome": "Red Bull Gaming",
+    "url": "https://www.redbull.com/int-en/gta-6-easter-eggs",
+    "tipo": "imprensa",
+    "data": "2026-11-23",
+    "nota": "Locais: Gullet Marsh, Grassrivers, Cottonmouth Lake; panfleto no Skeeter's Bar em Hamlet; missão só à noite."
+   },
+   {
+    "nome": "Polygon",
+    "url": "https://www.polygon.com/gta-6-skunk-ape-tree-effigies-locations-where-to-find/",
+    "tipo": "imprensa",
+    "data": null,
+    "nota": "Como iniciar (panfleto, ligar para Kirk) e as três localizações das efígies no mangue de Pelican Valley; a criatura é chamada de Mr. Mangrove."
+   },
+   {
+    "nome": "ComicBook.com",
+    "url": "https://comicbook.com/gaming/list/5-most-exciting-gta-6-easter-eggs-players-have-found-after-launch-day/",
+    "tipo": "imprensa",
+    "data": "2026-11-20",
+    "nota": "Skunk Ape na área dos Grassrivers, perto de efígies de palha e corda; NPC Kirk dá missões."
+   },
+   {
+    "nome": "GameSpot",
+    "url": "https://www.gamespot.com/articles/gta-6-easter-eggs-list-and-locations/",
+    "tipo": "imprensa",
+    "data": "2026-11-23",
+    "nota": "Bigfoot em Gullet Marsh ligado a uma missão."
+   },
+   {
+    "nome": "Pizza Fria (iG)",
+    "url": "https://pizzafria.ig.com.br/listas/gta-vi-melhores-easter-eggs-descobertos/",
+    "tipo": "imprensa",
+    "data": "2026-11-22",
+    "nota": "Skunk Ape associado a Mr. Mangrove e à linha secundária de Kirk, à noite nos pântanos."
+   }
+  ],
+  "media": [],
+  "faq": [
+   {
+    "q": "Tem Pé Grande em GTA 6?",
+    "a": "Sim. Ele aparece como Skunk Ape, uma criatura dos pântanos, ligado à missão secundária Search for the Skunk Ape."
+   },
+   {
+    "q": "Como começar a missão do Skunk Ape?",
+    "a": "Leia um panfleto do Skunk Ape em uma vitrine de loja, ligue para o contato Kirk que aparece no celular e vá ao mangue à noite."
+   },
+   {
+    "q": "Qual é a recompensa da missão do Pé Grande?",
+    "a": "Ainda não sabemos. Nenhuma das fontes que lemos descreve a recompensa final."
+   }
+  ],
+  "related": [
+   "gta6-0012",
+   "gta6-0003"
+  ],
+  "tags": [
+   "bigfoot",
+   "pé grande",
+   "skunk ape",
+   "kirk",
+   "gullet marsh",
+   "efígies",
+   "mr. mangrove",
+   "search for the skunk ape"
+  ],
+  "seo_title": "Pé Grande em GTA 6: como achar o Skunk Ape",
+  "seo_description": "O Pé Grande de GTA 6 é o Skunk Ape. Veja como iniciar a missão com Kirk, onde ficam as efígies e o que ainda não foi confirmado.",
+  "workflow_status": "publicado",
+  "featured": false,
+  "reviewed_by": null,
+  "published_at": "2026-11-25T12:00:00Z",
+  "created_at": "2026-11-25T12:00:00Z",
+  "updated_at": "2026-11-25T12:00:00Z"
+ },
+ {
+  "id": "gta6-0003",
+  "app_ref": null,
+  "game_id": "gta6",
+  "category_id": "gta6-missoes-secretas",
+  "region_id": "gta6-port-gellhorn",
+  "author_id": "redacao",
+  "kind": "descoberta",
+  "slug": "abducao-por-ovni-port-gellhorn",
+  "title": "Abdução por OVNI perto de Port Gellhorn (troféu The Truth Is Out There)",
+  "direct_answer": "Numa estrada rural a leste de Port Gellhorn, perto do Starlet Motel, por volta das 2h da manhã do jogo, um carro abandonado com os faróis acesos leva a um encontro com um OVNI. O evento existe a partir do Capítulo 2 e libera o troféu oculto The Truth Is Out There.",
+  "summary": "Uma trilha sai do carro abandonado e leva a uma mulher presa num feixe de luz. Depois de soltá-la, o próprio personagem é abduzido no caminho de volta. Quatro fontes descrevem a mesma sequência.",
+  "body_md": "OVNI em GTA não é novidade, mas aqui ele faz mais do que pairar no céu. De madrugada, na estrada rural a leste de Port Gellhorn, aparece um carro parado no acostamento com as luzes acesas. A Red Bull descreve portas abertas e alarme tocando.\n\nUma trilha com roupas espalhadas leva para dentro da mata. Lá, uma mulher flutua num feixe de luz. Quando você chega perto, ela é solta e pede para você buscar o carro dela. No caminho, o OVNI volta e leva o personagem. Segundo GTA Side, ele acorda três dias de jogo depois.\n\nO evento libera o troféu de bronze no PS5, e a conquista no Xbox, chamado The Truth Is Out There.\n\n## De onde vem a referência\n\nOVNIs são easter egg recorrente desde GTA: San Andreas. O nome do troféu é o bordão de Arquivo X.\n\n## O que ainda não se sabe\n\n- **Se muda conforme o personagem.** O ComicBook afirma que Lucia veria o interior da nave e Jason acordaria no dia seguinte. As outras fontes não fazem essa distinção. Tratamos como não verificado.\n- **Se dá para repetir.** Nenhuma fonte lida diz.\n\nA abdução é também o gatilho de uma continuação secreta. Veja o registro do resgate do alienígena.",
+  "location_text": "Estrada rural a leste de Port Gellhorn, perto do Starlet Motel.",
+  "landmark": "Starlet Motel. Carro parado no acostamento com os faróis acesos.",
+  "coords": null,
+  "character_req": null,
+  "requirements": null,
+  "progress_required": "A partir do Capítulo 2.",
+  "conditions": "À noite, por volta das 2h da manhã no relógio do jogo.",
+  "steps": [
+   "A partir do Capítulo 2, vá à estrada rural a leste de Port Gellhorn por volta das 2h.",
+   "Encontre o carro abandonado no acostamento e siga a trilha com roupas espalhadas até a mata.",
+   "Chegue perto do feixe de luz para a mulher ser solta e fale com ela.",
+   "Volte para buscar o carro dela. O OVNI abduz o personagem no caminho."
+  ],
+  "reward": "Troféu de bronze no PS5 e conquista no Xbox: The Truth Is Out There.",
+  "reward_type": "conquista",
+  "repeatable": null,
+  "missable": null,
+  "common_mistakes": [],
+  "troubleshooting": [
+   {
+    "problema": "O carro abandonado não está na estrada.",
+    "solucao": "Segundo as fontes, saia da área e volte em outra noite, por volta das 2h."
+   }
+  ],
+  "platform_tested": null,
+  "game_version": null,
+  "last_verified_on": null,
+  "verification_status": "relato",
+  "evidence_type": "relatos",
+  "spoiler_level": "leve",
+  "sources": [
+   {
+    "nome": "GTA Side",
+    "url": "https://gtaside.com/tips/gta6/easter-eggs/",
+    "tipo": "comunidade",
+    "data": "2026-11-25",
+    "nota": "Local, horário (~2h), Capítulo 2, sequência do encontro, 3 dias de jogo perdidos e troféu de bronze."
+   },
+   {
+    "nome": "Red Bull Gaming",
+    "url": "https://www.redbull.com/int-en/gta-6-easter-eggs",
+    "tipo": "imprensa",
+    "data": "2026-11-23",
+    "nota": "Mesma localização e pré-requisito de Capítulo 2 (~2 horas de jogo); troféu oculto."
+   },
+   {
+    "nome": "ComicBook.com",
+    "url": "https://comicbook.com/gaming/list/5-most-exciting-gta-6-easter-eggs-players-have-found-after-launch-day/",
+    "tipo": "imprensa",
+    "data": "2026-11-20",
+    "nota": "Em Port Gellhorn às 2h ou depois; mulher sendo abduzida; depois o jogador é abduzido; conquista 'The Truth is Out There'."
+   },
+   {
+    "nome": "Pizza Fria (iG)",
+    "url": "https://pizzafria.ig.com.br/listas/gta-vi-melhores-easter-eggs-descobertos/",
+    "tipo": "imprensa",
+    "data": "2026-11-22",
+    "nota": "OVNI noturno perto do Starlet Motel, estrada a leste de Port Gellhorn; ligado ao troféu oculto."
+   }
+  ],
+  "media": [],
+  "faq": [
+   {
+    "q": "Onde fica o OVNI em GTA 6?",
+    "a": "Numa estrada rural a leste de Port Gellhorn, perto do Starlet Motel. O encontro acontece de madrugada, por volta das 2h no relógio do jogo."
+   },
+   {
+    "q": "Como ganhar o troféu The Truth Is Out There?",
+    "a": "Completando o encontro da abdução: ache o carro abandonado, siga a trilha, solte a mulher do feixe de luz e volte para buscar o carro dela."
+   },
+   {
+    "q": "A partir de quando dá para fazer?",
+    "a": "Segundo GTA Side e Red Bull, a partir do Capítulo 2."
+   }
+  ],
+  "related": [
+   "gta6-0004",
+   "gta6-0008"
+  ],
+  "tags": [
+   "ovni",
+   "ufo",
+   "alien",
+   "abdução",
+   "port gellhorn",
+   "starlet motel",
+   "the truth is out there",
+   "troféu oculto"
+  ],
+  "seo_title": "OVNI em GTA 6: abdução perto de Port Gellhorn",
+  "seo_description": "Onde fica o OVNI de GTA 6, a que horas aparece e como liberar o troféu The Truth Is Out There, com as divergências entre as fontes.",
+  "workflow_status": "publicado",
+  "featured": false,
+  "reviewed_by": null,
+  "published_at": "2026-11-25T12:00:00Z",
+  "created_at": "2026-11-25T12:00:00Z",
+  "updated_at": "2026-11-25T12:00:00Z"
+ },
+ {
+  "id": "gta6-0004",
+  "app_ref": null,
+  "game_id": "gta6",
+  "category_id": "gta6-missoes-secretas",
+  "region_id": null,
+  "author_id": "redacao",
+  "kind": "descoberta",
+  "slug": "resgate-do-alienigena",
+  "title": "O resgate do alienígena: a continuação secreta da abdução",
+  "direct_answer": "Depois da abdução por OVNI, dormir com o personagem abduzido leva a um sonho dentro da nave, com um quebra-cabeça. O sonho aponta para uma instalação restrita no sul de Leonida, onde o quebra-cabeça se repete e libera um alienígena vivo.",
+  "summary": "Três fontes descrevem a mesma sequência: sonho na nave, código num teclado, garrafa de leite e uma instalação no sul do estado. Elas divergem sobre o código, então não publicamos nenhum. A recompensa, um aumento permanente de atributos, vem de relatos de jogadores.",
+  "body_md": "Quem foi abduzido perto de Port Gellhorn ainda não terminou a história. Continue jogando com o mesmo personagem e vá dormir. Depois de algumas noites, ele acorda dentro da nave.\n\nO sonho é um quebra-cabeça curto. Você passa escondido por uma sala cheia de ovos, vê uma maquete do sistema solar que indica um lugar em Leonida, digita um código num teclado e mexe num painel de quatro botões até todas as luzes ficarem iguais. Três portas se abrem. As fontes dizem para evitar a do meio. Na sala da esquerda há uma garrafa de leite, que vai na máquina da sala da direita. Aí o personagem acorda.\n\nA segunda parte é no mundo real. Numa instalação restrita no sul do estado, o mesmo código abre a porta e o quebra-cabeça se repete, leite incluído. A máquina libera um alienígena vivo. Carregue ele para fora e a nave vem buscar.\n\n## O que ainda não se sabe\n\n- **O código.** A Red Bull publica um número, o ComicBook publica outro, e o GTA Side trata o código fixo como pista não confirmada, dizendo que ele vem das linhas desenhadas acima do teclado no sonho. Por isso não publicamos código aqui. Conte as linhas no seu jogo.\n- **Onde se descobre o código.** O ComicBook diz que é num campo de pouso militar. As outras fontes não.\n- **Onde fica a instalação.** O ComicBook fala em Pelican Valley, perto da divisa de Mariana County. As outras dizem só sul do estado.\n- **A recompensa.** Aumento permanente de vida, fôlego e Foco aparece como relato de jogadores em GTA Side e Red Bull.\n- **Qual personagem.** O GTA Side fala no personagem que foi abduzido. O ComicBook diz que a parte da instalação acontece com Jason.",
+  "location_text": "Interior da nave, em sonho, e depois uma instalação de pesquisa restrita no sul de Leonida. O ComicBook a situa em Pelican Valley, perto da divisa de Mariana County.",
+  "landmark": null,
+  "coords": null,
+  "character_req": "O personagem que foi abduzido, segundo o GTA Side.",
+  "requirements": "Ter passado pela abdução por OVNI perto de Port Gellhorn.",
+  "progress_required": "Capítulo 2 em diante, por depender da abdução.",
+  "conditions": "O sonho acontece ao dormir, depois de algumas noites.",
+  "steps": [
+   "Depois da abdução, continue com o mesmo personagem e durma até acordar na nave.",
+   "Passe pela sala dos ovos sem chegar perto deles.",
+   "Olhe a maquete do sistema solar, que indica um lugar em Leonida.",
+   "No teclado, digite o código indicado pelas linhas desenhadas acima dele. As fontes divergem sobre o número, então conte as linhas no seu jogo.",
+   "No painel, aperte os quatro botões até todas as luzes ficarem iguais. Evite a porta do meio.",
+   "Pegue a garrafa de leite na sala da esquerda e coloque na máquina da sala da direita para acordar.",
+   "Vá à instalação restrita no sul do estado, use o mesmo código na porta e repita o quebra-cabeça.",
+   "Carregue o alienígena para fora. A nave vem buscá-lo."
+  ],
+  "reward": "Segundo relatos de jogadores citados por GTA Side e Red Bull, aumento permanente de vida, fôlego e Foco.",
+  "reward_type": null,
+  "repeatable": null,
+  "missable": null,
+  "common_mistakes": [
+   "Entrar pela porta do meio no sonho. As fontes dizem para evitá-la."
+  ],
+  "troubleshooting": [],
+  "platform_tested": null,
+  "game_version": null,
+  "last_verified_on": null,
+  "verification_status": "relato",
+  "evidence_type": "relatos",
+  "spoiler_level": "leve",
+  "sources": [
+   {
+    "nome": "GTA Side",
+    "url": "https://gtaside.com/tips/gta6/easter-eggs/",
+    "tipo": "comunidade",
+    "data": "2026-11-25",
+    "nota": "Descreve o sonho, o quebra-cabeça, a instalação no sul e a recompensa; status 'visto por vários jogadores'."
+   },
+   {
+    "nome": "Red Bull Gaming",
+    "url": "https://www.redbull.com/int-en/gta-6-easter-eggs",
+    "tipo": "imprensa",
+    "data": "2026-11-23",
+    "nota": "Mesma sequência; publica um código para a instalação; recompensa 'segundo jogadores'."
+   },
+   {
+    "nome": "ComicBook.com",
+    "url": "https://comicbook.com/gaming/list/5-most-exciting-gta-6-easter-eggs-players-have-found-after-launch-day/",
+    "tipo": "imprensa",
+    "data": "2026-11-20",
+    "nota": "Instalação abandonada em Pelican Valley, a sudeste; publica outro código; leite em um recipiente revela alienígena vivo; aumenta atributos."
+   }
+  ],
+  "media": [],
+  "faq": [
+   {
+    "q": "Qual é o código da instalação do alienígena em GTA 6?",
+    "a": "As fontes divergem. Red Bull e ComicBook publicam números diferentes, e o GTA Side diz que o código vem das linhas desenhadas acima do teclado no sonho. Por isso não publicamos um código fixo."
+   },
+   {
+    "q": "Como começar o resgate do alienígena?",
+    "a": "Primeiro passe pela abdução por OVNI perto de Port Gellhorn. Depois continue com o mesmo personagem e durma até acordar dentro da nave."
+   },
+   {
+    "q": "O que se ganha ao resgatar o alienígena?",
+    "a": "Jogadores relatam aumento permanente de vida, fôlego e Foco. Ainda é relato, não confirmação nossa."
+   }
+  ],
+  "related": [
+   "gta6-0003"
+  ],
+  "tags": [
+   "alien",
+   "alienígena",
+   "ovni",
+   "ufo",
+   "nave",
+   "código",
+   "leite",
+   "instalação secreta"
+  ],
+  "seo_title": "Resgate do alienígena em GTA 6: como fazer",
+  "seo_description": "A continuação secreta da abdução por OVNI em GTA 6: o sonho na nave, o quebra-cabeça e a instalação no sul, com o que as fontes ainda discordam.",
+  "workflow_status": "publicado",
+  "featured": false,
+  "reviewed_by": null,
+  "published_at": "2026-11-25T12:00:00Z",
+  "created_at": "2026-11-25T12:00:00Z",
+  "updated_at": "2026-11-25T12:00:00Z"
+ },
+ {
+  "id": "gta6-0005",
+  "app_ref": null,
+  "game_id": "gta6",
+  "category_id": "gta6-easter-eggs",
+  "region_id": null,
+  "author_id": "redacao",
+  "kind": "descoberta",
+  "slug": "casa-de-belville-foto-de-san-andreas",
+  "title": "A casa de Belville: a foto misteriosa de San Andreas existe em GTA 6",
+  "direct_answer": "A casa suburbana com duas palmeiras que aparecia numa foto do bar Lil' Probe'Inn, na versão de 2021 de GTA: San Andreas, existe em GTA 6. Ela fica em Belville, Leonard County, e a garagem esconde o quadro de um teórico da conspiração.",
+  "summary": "A foto intrigava a comunidade desde 2021 porque não batia com nenhum jogo conhecido. A casa foi localizada em GTA 6 no dia do lançamento. Na garagem, anotações de alguém convencido de que vive dentro de um videogame.",
+  "body_md": "Em 2021, a versão remasterizada de GTA: San Andreas trocou uma das fotos na parede do Lil' Probe'Inn por uma casa suburbana com duas palmeiras. A casa não existia em nenhum jogo da série e virou assunto de fórum por anos.\n\nEla existe agora. Fica em Belville, em Leonard County, com a mesma garagem e os mesmos arbustos da foto. Jogadores acharam no dia do lançamento.\n\nO melhor está na garagem. Entrando, você encontra o esconderijo de um teórico da conspiração que chegou à conclusão de que vive dentro de um videogame. Segundo a Polygon, o quadro de evidências tem anotações sobre não conseguir sair do estado, sobre pessoas idênticas andando pela rua, sobre a ausência de crianças e sobre dois indivíduos, J e L, que não seguem as mesmas regras que todo mundo.\n\nNão há recompensa material descrita. É um lugar para ler com calma.\n\n## De onde vem a referência\n\nA foto está na parede do Lil' Probe'Inn em GTA: San Andreas – The Definitive Edition, de 2021. O bar já era temático de OVNIs no jogo original.\n\n## O que ainda não se sabe\n\n- **Se foi planejado desde 2021.** A Rockstar não comentou. A ligação entre a foto e a casa é leitura da comunidade e da imprensa.\n- **O detalhe do OVNI.** A Polygon descreve a foto original com um OVNI sobre a casa. As outras fontes não citam isso.",
+  "location_text": "Belville, Leonard County.",
+  "landmark": "Casa suburbana com duas palmeiras, garagem e arbustos iguais aos da foto de 2021.",
+  "coords": null,
+  "character_req": null,
+  "requirements": "Arrombar ou entrar na garagem.",
+  "progress_required": null,
+  "conditions": null,
+  "steps": [
+   "Vá até a casa em Belville.",
+   "Entre na garagem.",
+   "Leia o quadro de evidências e as anotações."
+  ],
+  "reward": "Nenhuma recompensa material descrita.",
+  "reward_type": "cena",
+  "repeatable": null,
+  "missable": null,
+  "common_mistakes": [],
+  "troubleshooting": [],
+  "platform_tested": null,
+  "game_version": null,
+  "last_verified_on": null,
+  "verification_status": "relato",
+  "evidence_type": "relatos",
+  "spoiler_level": "nenhum",
+  "sources": [
+   {
+    "nome": "GTA Side",
+    "url": "https://gtaside.com/tips/gta6/easter-eggs/",
+    "tipo": "comunidade",
+    "data": "2026-11-25",
+    "nota": "Casa em Belville, Leonard County, achada no dia do lançamento; garagem com esconderijo do conspiracionista."
+   },
+   {
+    "nome": "Red Bull Gaming",
+    "url": "https://www.redbull.com/int-en/gta-6-easter-eggs",
+    "tipo": "imprensa",
+    "data": "2026-11-23",
+    "nota": "Belville, Leonard County; arrombar a garagem; conspiracionista que acha que vive em um jogo."
+   },
+   {
+    "nome": "Polygon",
+    "url": "https://www.polygon.com/gta-6-strangest-secret-san-andreas-easter-egg/",
+    "tipo": "imprensa",
+    "data": "2026-11-23",
+    "nota": "Detalha as mensagens do quadro (simulação, pessoas idênticas, 'por que não posso sair?', ausência de crianças, 'J e L')."
+   },
+   {
+    "nome": "Pizza Fria (iG)",
+    "url": "https://pizzafria.ig.com.br/listas/gta-vi-melhores-easter-eggs-descobertos/",
+    "tipo": "imprensa",
+    "data": "2026-11-22",
+    "nota": "Casa encontrada em Belville, Leonard County, correspondendo à foto de 2021."
+   }
+  ],
+  "media": [],
+  "faq": [
+   {
+    "q": "Onde fica a casa da foto de San Andreas em GTA 6?",
+    "a": "Em Belville, Leonard County. É uma casa suburbana com duas palmeiras na frente, igual à da foto."
+   },
+   {
+    "q": "O que tem na garagem da casa de Belville?",
+    "a": "O esconderijo de um teórico da conspiração, com um quadro de evidências e anotações de quem acredita viver dentro de um videogame."
+   },
+   {
+    "q": "Que foto de San Andreas é essa?",
+    "a": "Uma foto na parede do bar Lil' Probe'Inn em GTA: San Andreas – The Definitive Edition, de 2021, que mostrava uma casa que não existia em nenhum jogo da série até então."
+   }
+  ],
+  "related": [
+   "gta6-0009",
+   "gta6-0006"
+  ],
+  "tags": [
+   "belville",
+   "san andreas",
+   "lil probe inn",
+   "casa",
+   "foto",
+   "teoria da conspiração",
+   "leonard county"
+  ],
+  "seo_title": "Casa de Belville em GTA 6: a foto de San Andreas",
+  "seo_description": "A casa da foto misteriosa de San Andreas (2021) existe em GTA 6, em Belville. Veja onde fica e o que há na garagem do teórico da conspiração.",
+  "workflow_status": "publicado",
+  "featured": true,
+  "reviewed_by": null,
+  "published_at": "2026-11-25T12:00:00Z",
+  "created_at": "2026-11-25T12:00:00Z",
+  "updated_at": "2026-11-25T12:00:00Z"
+ },
+ {
+  "id": "gta6-0006",
+  "app_ref": null,
+  "game_id": "gta6",
+  "category_id": "gta6-easter-eggs",
+  "region_id": "gta6-vice-city",
+  "author_id": "redacao",
+  "kind": "descoberta",
+  "slug": "apartamento-do-dexter",
+  "title": "O apartamento do Dexter em Vice City (Trinity Apartments)",
+  "direct_answer": "O prédio que copia a casa de Dexter Morgan, da série Dexter, fica em Washington Island, no nordeste de Vice City, perto da loja Top Fun Drones de Vice Beach. O complexo se chama Trinity Apartments e tem um kit de ferramentas suspeito no telhado.",
+  "summary": "Sete fontes localizam o prédio no mesmo lugar. No telhado há uma caixa de ferramentas com seringa, faca e corda, e no píer em frente há um barco parecido com o da série. Não há recompensa.",
+  "body_md": "Vice City é a Miami de GTA, e a série Dexter se passa em Miami. A Rockstar não deixou passar. Em Washington Island há um prédio com uma seção cilíndrica que reproduz a residência do personagem. O nome do complexo, Trinity Apartments, lembra um dos vilões da série.\n\nSuba ao telhado e procure uma caixa de ferramentas. As fontes citam seringa, faca e corda. O ComicBook acrescenta luvas e algemas. No píer em frente há um barco atracado que lembra o Slice of Life, o barco de Dexter.\n\nDá para visitar cedo. Segundo as fontes, o local fica acessível assim que o mapa abre, antes mesmo de a história levar você a Vice City.\n\n## O que ainda não se sabe\n\n- **Se dá para entrar.** A Polygon diz que é possível entrar no prédio e achar o apartamento. GTA Side, Red Bull e GameSpot dizem que não dá para entrar no apartamento.\n- **A lista exata de itens no telhado.** Ela varia de fonte para fonte.",
+  "location_text": "Washington Island, no nordeste de Vice City, perto da loja Top Fun Drones de Vice Beach.",
+  "landmark": "Loja Top Fun Drones. Prédio com seção cilíndrica e um barco atracado no píer em frente.",
+  "coords": null,
+  "character_req": null,
+  "requirements": "n/a",
+  "progress_required": "Acessível assim que o mapa abre, antes de a história levar a Vice City.",
+  "conditions": null,
+  "steps": [
+   "Vá a Washington Island e localize o Trinity Apartments.",
+   "Suba ao telhado e procure a caixa de ferramentas.",
+   "Olhe o barco atracado no píer próximo."
+  ],
+  "reward": "Nenhuma recompensa descrita.",
+  "reward_type": "cena",
+  "repeatable": null,
+  "missable": null,
+  "common_mistakes": [],
+  "troubleshooting": [],
+  "platform_tested": null,
+  "game_version": null,
+  "last_verified_on": null,
+  "verification_status": "relato",
+  "evidence_type": "relatos",
+  "spoiler_level": "nenhum",
+  "sources": [
+   {
+    "nome": "GTA Side",
+    "url": "https://gtaside.com/tips/gta6/easter-eggs/",
+    "tipo": "comunidade",
+    "data": "2026-11-25",
+    "nota": "Prédio em Washington Island; não dá para entrar no apartamento; kit no telhado; barco no píer."
+   },
+   {
+    "nome": "Red Bull Gaming",
+    "url": "https://www.redbull.com/int-en/gta-6-easter-eggs",
+    "tipo": "imprensa",
+    "data": "2026-11-23",
+    "nota": "Perto da Top Fun Drones; apartamento não acessível; 'kill kit' na caixa de ferramentas no telhado."
+   },
+   {
+    "nome": "GameSpot",
+    "url": "https://www.gamespot.com/articles/gta-6-easter-eggs-list-and-locations/",
+    "tipo": "imprensa",
+    "data": "2026-11-23",
+    "nota": "Washington Island, perto da Top Fun Drones; não dá para entrar; barco lembra o Slice of Life."
+   },
+   {
+    "nome": "ComicBook.com",
+    "url": "https://comicbook.com/gaming/list/5-most-exciting-gta-6-easter-eggs-players-have-found-after-launch-day/",
+    "tipo": "imprensa",
+    "data": "2026-11-20",
+    "nota": "Trinity Apartments; itens no telhado (seringas, faca, corda, luvas, algemas)."
+   },
+   {
+    "nome": "Polygon",
+    "url": "https://www.polygon.com/gta-6-easter-eggs/",
+    "tipo": "imprensa",
+    "data": "2026-11-22",
+    "nota": "Trinity Apartments perto do topo de Washington Island; ferramentas no telhado."
+   },
+   {
+    "nome": "DualShockers",
+    "url": "https://www.dualshockers.com/best-easter-eggs-in-gta-6/",
+    "tipo": "imprensa",
+    "data": "2026-11-20",
+    "nota": "Apartamento em Washington Island; ferramentas no telhado."
+   },
+   {
+    "nome": "Pizza Fria (iG)",
+    "url": "https://pizzafria.ig.com.br/listas/gta-vi-melhores-easter-eggs-descobertos/",
+    "tipo": "imprensa",
+    "data": "2026-11-22",
+    "nota": "Complexo Trinity Apartments em Washington Island, Vice Beach."
+   }
+  ],
+  "media": [],
+  "faq": [
+   {
+    "q": "Onde fica o apartamento do Dexter em GTA 6?",
+    "a": "Em Washington Island, no nordeste de Vice City, perto da loja Top Fun Drones de Vice Beach. O complexo se chama Trinity Apartments."
+   },
+   {
+    "q": "Dá para entrar no apartamento do Dexter?",
+    "a": "As fontes divergem. A Polygon diz que dá para entrar no prédio; GTA Side, Red Bull e GameSpot dizem que o apartamento não é acessível."
+   },
+   {
+    "q": "O que tem no telhado do Trinity Apartments?",
+    "a": "Uma caixa de ferramentas com itens como seringa, faca e corda, em referência ao personagem da série."
+   }
+  ],
+  "related": [
+   "gta6-0010",
+   "gta6-0005"
+  ],
+  "tags": [
+   "dexter",
+   "dexter morgan",
+   "trinity apartments",
+   "washington island",
+   "vice beach",
+   "slice of life",
+   "série"
+  ],
+  "seo_title": "Apartamento do Dexter em GTA 6: onde fica",
+  "seo_description": "O easter egg de Dexter em GTA 6 fica em Washington Island, Vice City. Veja o ponto de referência, o que há no telhado e o barco no píer.",
+  "workflow_status": "publicado",
+  "featured": true,
+  "reviewed_by": null,
+  "published_at": "2026-11-25T12:00:00Z",
+  "created_at": "2026-11-25T12:00:00Z",
+  "updated_at": "2026-11-25T12:00:00Z"
+ },
+ {
+  "id": "gta6-0007",
+  "app_ref": null,
+  "game_id": "gta6",
+  "category_id": "gta6-misterios",
+  "region_id": null,
+  "author_id": "redacao",
+  "kind": "descoberta",
+  "slug": "ritual-do-demonio-armazem-de-capri",
+  "title": "O ritual do demônio no armazém de Capri",
+  "direct_answer": "Um armazém sem marcação no mapa, na borda do Tortoise Lake, em Capri, tem um pentagrama no chão. Colocar um NPC desacordado sobre ele inicia uma sequência de terror que só termina com fogo.",
+  "summary": "Três fontes descrevem o mesmo ritual: diário no altar, NPC nocauteado no pentagrama, luzes apagando e uma criatura vulnerável apenas a fogo. Nenhuma descreve recompensa, e elas discordam sobre o condado onde fica Capri.",
+  "body_md": "O armazém não aparece no mapa. Fica no norte de Capri, na borda noroeste do Tortoise Lake. A Middle East Gamer descreve um prédio vermelho e creme com uma porta branca na lateral.\n\nLá dentro há um pentagrama, um altar e um diário. O diário avisa que a única saída é queimar. Guarde essa frase.\n\nPara o ritual começar, você precisa de um NPC desacordado, não morto. As fontes sugerem provocar um operário da obra do outro lado da rua e nocautear com os punhos. Carregue o corpo e solte em cima do pentagrama. As luzes apagam, as velas acendem e a voz do seu parceiro chama do andar de cima. Quem aparece lá é o personagem que você não está controlando.\n\nBala e explosivo não resolvem, segundo o Game Rant, citado pela Middle East Gamer. Só fogo. Há coquetéis Molotov e um galão no próprio armazém.\n\n## O que ainda não se sabe\n\n- **A recompensa.** Nenhuma fonte lida descreve o que você ganha. Pode não haver nada.\n- **O condado.** A Middle East Gamer coloca Capri em South Kelly County. O GTA Side diz que fica em Vice City.\n- **Se o horário importa.** O GTA Side recomenda ir à noite, mas não diz que é obrigatório.\n\nClassificamos como mistério porque ninguém explicou ainda o que o ritual significa nem se ele leva a algo mais.",
+  "location_text": "Armazém no norte de Capri, na borda noroeste do Tortoise Lake. Prédio vermelho e creme com porta branca lateral, segundo a Middle East Gamer.",
+  "landmark": "Tortoise Lake. Canteiro de obras do outro lado da rua.",
+  "coords": null,
+  "character_req": "Jason ou Lucia",
+  "requirements": "Um NPC nocauteado, desacordado e não morto, para carregar até o pentagrama.",
+  "progress_required": null,
+  "conditions": "O GTA Side recomenda ir à noite.",
+  "steps": [
+   "Vá ao armazém na borda do Tortoise Lake e leia o diário no altar.",
+   "Nocauteie um NPC com os punhos, por exemplo um operário da obra em frente.",
+   "Carregue o NPC e solte sobre o pentagrama.",
+   "Pegue os Molotovs que estão na sala.",
+   "Siga a voz do parceiro até o andar de cima e passe pela sequência.",
+   "Use fogo para encerrar o evento."
+  ],
+  "reward": null,
+  "reward_type": null,
+  "repeatable": null,
+  "missable": null,
+  "common_mistakes": [
+   "Matar o NPC em vez de nocautear.",
+   "Tentar resolver com balas ou explosivos. Segundo o Game Rant, não funcionam.",
+   "Não salvar antes."
+  ],
+  "troubleshooting": [],
+  "platform_tested": null,
+  "game_version": null,
+  "last_verified_on": null,
+  "verification_status": "relato",
+  "evidence_type": "relatos",
+  "spoiler_level": "leve",
+  "sources": [
+   {
+    "nome": "GTA Side",
+    "url": "https://gtaside.com/tips/gta6/easter-eggs/",
+    "tipo": "comunidade",
+    "data": "2026-11-25",
+    "nota": "Armazém não marcado no norte de Capri perto do Tortoise Lake; nocautear pedestre e deitar no pentagrama; sequência de terror."
+   },
+   {
+    "nome": "Middle East Gamer",
+    "url": "https://www.middleeastgamer.com/gta-6-demon-ritual/",
+    "tipo": "imprensa",
+    "data": "2026-11-21",
+    "nota": "Passo a passo testado como Jason no PS5; diário 'a única saída é queimar'; fogo encerra o evento."
+   },
+   {
+    "nome": "Pizza Fria (iG)",
+    "url": "https://pizzafria.ig.com.br/listas/gta-vi-melhores-easter-eggs-descobertos/",
+    "tipo": "imprensa",
+    "data": "2026-11-22",
+    "nota": "Edifício em Capri próximo ao Tortoise Lake; NPC inconsciente no círculo; inimigo vulnerável a fogo."
+   }
+  ],
+  "media": [],
+  "faq": [
+   {
+    "q": "Onde fica o ritual do demônio em GTA 6?",
+    "a": "Num armazém sem marcação no mapa, no norte de Capri, na borda noroeste do Tortoise Lake."
+   },
+   {
+    "q": "Como ativar o ritual do armazém de Capri?",
+    "a": "Nocauteie um NPC sem matar, carregue até o armazém e solte sobre o pentagrama no chão."
+   },
+   {
+    "q": "Como derrotar a criatura do ritual?",
+    "a": "Com fogo. As fontes dizem que balas e explosivos não funcionam, e há Molotovs no próprio armazém."
+   }
+  ],
+  "related": [
+   "gta6-0008",
+   "gta6-0013"
+  ],
+  "tags": [
+   "ritual",
+   "demônio",
+   "pentagrama",
+   "capri",
+   "tortoise lake",
+   "armazém",
+   "terror",
+   "demon ritual"
+  ],
+  "seo_title": "Ritual do demônio em GTA 6: armazém de Capri",
+  "seo_description": "Como ativar o ritual do pentagrama no armazém de Capri, em GTA 6, como sobreviver à sequência e o que ainda não foi explicado.",
+  "workflow_status": "publicado",
+  "featured": false,
+  "reviewed_by": null,
+  "published_at": "2026-11-25T12:00:00Z",
+  "created_at": "2026-11-25T12:00:00Z",
+  "updated_at": "2026-11-25T12:00:00Z"
+ },
+ {
+  "id": "gta6-0008",
+  "app_ref": null,
+  "game_id": "gta6",
+  "category_id": "gta6-missoes-secretas",
+  "region_id": "gta6-port-gellhorn",
+  "author_id": "redacao",
+  "kind": "descoberta",
+  "slug": "inferno-luta-contra-sata",
+  "title": "Viagem ao Inferno e luta contra Satã: a escopeta Hellspawn Comshot 12",
+  "direct_answer": "Entre 0h e 4h do jogo, uma casa com a garagem aberta no norte de Port Gellhorn leva a uma luta contra Satã numa arena no Inferno. Vencer rende a escopeta única Hellspawn Comshot 12.",
+  "summary": "Dois metaleiros, Beelzebub e Dave, convidam o personagem para uma fogueira. Encarar o fogo leva a uma arena com ondas de demônios. A escopeta é confirmada por todas as fontes. O bônus permanente de vida é o item menos confirmado.",
+  "body_md": "A casa é conhecida como Circles of Hell House. De madrugada, a garagem fica aberta, iluminada e tocando rock. O GTA Side dá como referência a operação de gangue do tipo stash house, que fica ao sul.\n\nFale com Beelzebub e Dave e aceite o convite respondendo Rock On. Quando o amigo deles chegar, siga a dupla e entre na traseira da van. Ela leva a um acampamento com fogueira. Encare o fogo até o personagem desmaiar. Segundo o GTA Side, é segurar L2 no PS5 ou LT no Xbox.\n\nVocê acorda numa arena, com uma escopeta na mão. Vêm ondas de demônios e, no fim, Satã num trono. O truque da luta: atirar nele com a barra de vida preta não adianta. Mate primeiro os inimigos que explodem. Só aí a barra dele fica vermelha e ele toma dano. Repita o ciclo.\n\nSe morrer, o personagem acorda no acampamento e pode tentar de novo. Ao vencer, acorda num trono de madeira. A Hellspawn Comshot 12 está junto ao trono.\n\n## O que ainda não se sabe\n\n- **O bônus de vida.** O GTA Side afirma que há aumento permanente de vida máxima. Outro guia diz apenas que alguns jogadores relatam isso. É o item menos confirmado da lista de recompensas.\n- **Onde exatamente fica a arma.** O Game Rant diz embaixo do trono. Outras fontes dizem encostada ao lado. Procure em volta.\n- **As outras recompensas.** Camiseta Circles of Hell e desenho de tatuagem são citados por parte das fontes.\n- **A rota alternativa.** Circula que comer a oferenda no trono também leva ao Inferno. Não verificado.",
+  "location_text": "Casa com garagem aberta no norte de Port Gellhorn, conhecida como Circles of Hell House. O acampamento com a fogueira fica em North Kelly County, segundo guias.",
+  "landmark": "Garagem aberta, iluminada e tocando rock, ao norte da operação de gangue stash house.",
+  "coords": null,
+  "character_req": null,
+  "requirements": null,
+  "progress_required": "Assim que for possível chegar a Port Gellhorn, segundo o GTA Side.",
+  "conditions": "Entre 0h e 4h no relógio do jogo.",
+  "steps": [
+   "Vá à casa com garagem aberta no norte de Port Gellhorn entre 0h e 4h.",
+   "Fale com Beelzebub e Dave e responda Rock On ao convite.",
+   "Quando o amigo deles chegar, siga a dupla e entre na traseira da van.",
+   "No acampamento, encare a fogueira até desmaiar.",
+   "No Inferno, avance pelas ondas de demônios até Satã no trono.",
+   "Mate primeiro os inimigos que explodem. Só então a barra de Satã fica vermelha e ele toma dano. Repita.",
+   "Ao acordar no trono de madeira, pegue a Hellspawn Comshot 12 junto a ele."
+  ],
+  "reward": "Escopeta única Hellspawn Comshot 12, confirmada por todas as fontes. Parte delas cita também camiseta Circles of Hell, desenho de tatuagem e aumento permanente de vida máxima.",
+  "reward_type": "arma",
+  "repeatable": "Se morrer na luta, o personagem acorda no acampamento e pode tentar de novo.",
+  "missable": null,
+  "common_mistakes": [
+   "Atirar em Satã com a barra de vida preta. Ele está invulnerável nesse momento.",
+   "Sair sem procurar a arma em volta e embaixo do trono."
+  ],
+  "troubleshooting": [
+   {
+    "problema": "Satã não toma dano.",
+    "solucao": "Mate antes os inimigos que explodem. A barra dele precisa ficar vermelha."
+   }
+  ],
+  "platform_tested": null,
+  "game_version": null,
+  "last_verified_on": null,
+  "verification_status": "relato",
+  "evidence_type": "relatos",
+  "spoiler_level": "leve",
+  "sources": [
+   {
+    "nome": "Game Rant",
+    "url": "https://gamerant.com/gta-6-satan-location-hellspawn-shotgun/",
+    "tipo": "imprensa",
+    "data": null,
+    "nota": "Local, janela 0h–4h, resposta 'Rock On', van, fogueira, mecânica da luta e escopeta embaixo do trono."
+   },
+   {
+    "nome": "GTA Side",
+    "url": "https://gtaside.com/tips/gta6/easter-eggs/",
+    "tipo": "comunidade",
+    "data": "2026-11-25",
+    "nota": "Mesma sequência; lista escopeta, top Circles of Hell, tatuagem e aumento de vida máxima."
+   },
+   {
+    "nome": "Cut.Pro (blog; agrega Game Rant, Hold To Reset, Pro-Gamer e GTABase)",
+    "url": "https://cut.pro/en/blog/gta-6-hell-satan-circles-of-hell-2026",
+    "tipo": "comunidade",
+    "data": "2026-11-22",
+    "nota": "Compara Game Rant, Hold To Reset, Pro-Gamer e GTABase; aponta onde divergem (posição da arma, lista de recompensas, bônus de vida pouco confirmado)."
+   }
+  ],
+  "media": [],
+  "faq": [
+   {
+    "q": "Como ir para o Inferno em GTA 6?",
+    "a": "Vá à casa com garagem aberta no norte de Port Gellhorn entre 0h e 4h, aceite o convite de Beelzebub e Dave, entre na van e encare a fogueira no acampamento."
+   },
+   {
+    "q": "Como derrotar Satã em GTA 6?",
+    "a": "Elimine primeiro os inimigos que explodem. Só depois disso a barra de vida de Satã fica vermelha e ele passa a tomar dano."
+   },
+   {
+    "q": "Onde pegar a Hellspawn Comshot 12?",
+    "a": "Junto ao trono de madeira onde o personagem acorda depois de vencer a luta. As fontes divergem entre embaixo e ao lado do trono."
+   }
+  ],
+  "related": [
+   "gta6-0007",
+   "gta6-0015"
+  ],
+  "tags": [
+   "inferno",
+   "satã",
+   "satan",
+   "hellspawn comshot 12",
+   "escopeta",
+   "circles of hell",
+   "beelzebub",
+   "port gellhorn"
+  ],
+  "seo_title": "Luta contra Satã em GTA 6: escopeta Hellspawn",
+  "seo_description": "Como chegar ao Inferno em GTA 6, vencer Satã e pegar a escopeta única Hellspawn Comshot 12, com o que ainda não está confirmado.",
+  "workflow_status": "publicado",
+  "featured": false,
+  "reviewed_by": null,
+  "published_at": "2026-11-25T12:00:00Z",
+  "created_at": "2026-11-25T12:00:00Z",
+  "updated_at": "2026-11-25T12:00:00Z"
+ },
+ {
+  "id": "gta6-0009",
+  "app_ref": null,
+  "game_id": "gta6",
+  "category_id": "gta6-easter-eggs",
+  "region_id": null,
+  "author_id": "redacao",
+  "kind": "descoberta",
+  "slug": "portal-vice-city-2002",
+  "title": "Portal para a Vice City de 2002: a camisa e a moto de Tommy Vercetti",
+  "direct_answer": "Doze subestações da Leonida Power & Light têm letras pintadas que formam Life is Passing Me By, um cheat de GTA: Vice City. Ativá-las na ordem abre um portal para uma versão antiga de Vice City e rende a camisa havaiana e a moto de Tommy Vercetti.",
+  "summary": "É o enigma mais longo encontrado até agora. Duas fontes concordam no essencial: as doze subestações, o portal e a recompensa. Os detalhes do passo a passo, incluindo a sequência de botões, vêm de uma fonte só, e por isso não a publicamos.",
+  "body_md": "As subestações da LPL, a Leonida Power & Light, estão espalhadas pelo estado inteiro. Do lado de fora de cada uma há letras azuis pintadas: L, iF, Ei, S, P, A, Ss, iN, G, Me, B, y. Juntas, na ordem, formam Life is Passing Me By. Nada no mapa marca as subestações. O GTA Side sugere seguir as linhas de energia.\n\nSegundo o TechTudo, o enigma começa na torre de rádio de Key Lento, com Jason, ativando uma alavanca e um botão na sala de controle. Depois é visitar as doze subestações na ordem das letras e acionar o comando certo em cada uma. Ao terminar, chega no celular uma mensagem que aponta para o Reator 2 da T.H. Power Station, entre 19h e 6h.\n\nO portal leva a uma Vice City em poucos polígonos, no Malibu Club. Um segundo portal traz você de volta, com a camisa havaiana de Tommy Vercetti e a moto dele.\n\nAinda segundo o TechTudo, usar viagem rápida, trocar de personagem ou acionar o comando errado reinicia tudo. O jogador que descobriu levou três dias, diz o GTA Side.\n\n## De onde vem a referência\n\nLife is Passing Me By é um cheat de GTA: Vice City, de 2002, que acelerava o relógio do jogo. O Malibu Club, Tommy Vercetti e Kent Paul são todos de lá.\n\n## O que ainda não se sabe\n\n- **A sequência de botões.** Vem só do TechTudo, baseado em vídeos de terceiros. Não publicamos sequência de fonte única. Quando testarmos, ela entra aqui.\n- **Se precisa ser com Jason.** O TechTudo diz que com Lucia não dá para completar. O GTA Side não menciona essa exigência nem o início na torre de Key Lento.\n- **Kent Paul.** O TechTudo descreve o personagem falando na cena. O GTA Side lista como não confirmado que ele aparece com a voz do ator original.",
+  "location_text": "Doze subestações da LPL espalhadas por Leonida. Segundo o TechTudo, começa na torre de rádio de Key Lento e termina em frente ao Reator 2 da T.H. Power Station.",
+  "landmark": "Subestações com letras azuis pintadas do lado de fora. Não aparecem no mapa: siga as linhas de energia.",
+  "coords": null,
+  "character_req": "Jason, segundo o TechTudo. Fonte única.",
+  "requirements": "Segundo o TechTudo, não usar viagem rápida nem trocar de personagem durante a sequência.",
+  "progress_required": null,
+  "conditions": "O portal aparece entre 19h e 6h no Reator 2, segundo o TechTudo.",
+  "steps": [
+   "Com Jason, suba a torre de rádio de Key Lento e ative a alavanca e o botão da sala de controle, segundo o TechTudo.",
+   "Visite as doze subestações da LPL na ordem das letras que formam Life is Passing Me By.",
+   "Em cada uma, acione o comando correto. A sequência vem de fonte única e não é publicada aqui.",
+   "Espere a mensagem no celular que aponta para o Reator 2.",
+   "Vá ao Reator 2 da T.H. Power Station entre 19h e 6h e interaja com o portal.",
+   "Explore o Malibu Club da Vice City antiga. Um segundo portal devolve você a Leonida."
+  ],
+  "reward": "Camisa havaiana de Tommy Vercetti e a moto dele.",
+  "reward_type": "roupa",
+  "repeatable": null,
+  "missable": null,
+  "common_mistakes": [
+   "Usar viagem rápida, trocar de personagem ou acionar o comando errado. Segundo o TechTudo, qualquer um desses reinicia a sequência inteira."
+  ],
+  "troubleshooting": [],
+  "platform_tested": null,
+  "game_version": null,
+  "last_verified_on": null,
+  "verification_status": "relato",
+  "evidence_type": "relatos",
+  "spoiler_level": "leve",
+  "sources": [
+   {
+    "nome": "TechTudo",
+    "url": "https://www.techtudo.com.br/dicas-e-tutoriais/2026/11/gta-6-easter-egg-vice-city-moto-tommy-edjogos.ghtml",
+    "tipo": "imprensa",
+    "data": "2026-11-25",
+    "nota": "Guia completo: início na torre de Key Lento com Jason, ordem das estações, botões, mensagem, horário do portal, Malibu Club e Kent Paul."
+   },
+   {
+    "nome": "GTA Side",
+    "url": "https://gtaside.com/tips/gta6/easter-eggs/",
+    "tipo": "comunidade",
+    "data": "2026-11-25",
+    "nota": "12 subestações da LPL formam o cheat; portal para a Vice City de 2002; recompensa camisa e moto; o descobridor levou três dias."
+   }
+  ],
+  "media": [],
+  "faq": [
+   {
+    "q": "Como abrir o portal para a Vice City antiga em GTA 6?",
+    "a": "Ativando na ordem certa as doze subestações da LPL, cujas letras formam Life is Passing Me By. Depois, o portal aparece no Reator 2 da T.H. Power Station entre 19h e 6h."
+   },
+   {
+    "q": "Qual é a recompensa do portal de Vice City?",
+    "a": "A camisa havaiana de Tommy Vercetti e a moto dele, segundo TechTudo e GTA Side."
+   },
+   {
+    "q": "Qual é a sequência de botões das subestações?",
+    "a": "Ela foi publicada por uma única fonte, com base em vídeos de terceiros. Só publicamos depois de testar."
+   }
+  ],
+  "related": [
+   "gta6-0001",
+   "gta6-0005"
+  ],
+  "tags": [
+   "vice city",
+   "tommy vercetti",
+   "portal",
+   "life is passing me by",
+   "lpl",
+   "subestações",
+   "malibu club",
+   "kent paul"
+  ],
+  "seo_title": "Portal para Vice City 2002 em GTA 6: como abrir",
+  "seo_description": "O enigma das 12 subestações da LPL em GTA 6 abre um portal para a Vice City de 2002 e rende a camisa e a moto de Tommy Vercetti.",
+  "workflow_status": "publicado",
+  "featured": false,
+  "reviewed_by": null,
+  "published_at": "2026-11-25T12:00:00Z",
+  "created_at": "2026-11-25T12:00:00Z",
+  "updated_at": "2026-11-25T12:00:00Z"
+ },
+ {
+  "id": "gta6-0010",
+  "app_ref": null,
+  "game_id": "gta6",
+  "category_id": "gta6-veiculos",
+  "region_id": "gta6-vice-city",
+  "author_id": "redacao",
+  "kind": "descoberta",
+  "slug": "carro-velozes-e-furiosos-vespucci-island",
+  "title": "O carro verde de Velozes e Furiosos na garagem de Vespucci Island",
+  "direct_answer": "Na garagem de uma mansão em Vespucci Island, entre as ilhas residenciais de Vice City, há um carro tuner verde que copia o Eclipse de Paul Walker no primeiro Velozes e Furiosos. Dá para entrar na garagem e sair dirigindo, sem missão.",
+  "summary": "Cinco fontes confirmam o carro e o lugar. Ele não é cenário: é um veículo que você pode levar. Para não perder, registre ou guarde em garagem.",
+  "body_md": "O carro é verde, com os grafismos laterais e o aerofólio do Mitsubishi Eclipse que Brian O'Conner dirige no filme de 2001. Fica dentro da garagem de uma mansão em Vespucci Island. A Polygon situa a ilha no meio das Rialto Islands, a oeste de Vice Beach.\n\nNão há missão ligada a ele. É invadir a garagem e sair dirigindo. Segundo o GTA Side, dá para ir assim que o mundo livre abre.\n\nUm aviso: carro roubado some se você largar na rua ou sair do jogo sem cuidar dele. Antes de buscar, veja o nosso guia de como manter carros roubados.\n\n## O que ainda não se sabe\n\n- **O nome do modelo no jogo.** A Pizza Fria identifica como Maibatsu Penumbra FF e cita a placa HAD YOU. O Detonated chama de Eclipse 95. Nenhuma outra fonte confirma o nome.\n- **A cobra no porta-malas.** A Pizza Fria afirma que uma cobra sai do porta-malas. O GTA Side lista isso como pista não confirmada.\n- **Se o carro reaparece.** Nenhuma fonte diz se ele volta para a garagem depois de levado ou destruído.",
+  "location_text": "Garagem de uma mansão em Vespucci Island, entre as ilhas residenciais de Vice City. A Polygon situa no meio das Rialto Islands, a oeste de Vice Beach.",
+  "landmark": null,
+  "coords": null,
+  "character_req": null,
+  "requirements": "Invadir a garagem. Para manter o carro, registre ou guarde em garagem.",
+  "progress_required": "Acessível assim que o mundo livre abre, segundo o GTA Side.",
+  "conditions": null,
+  "steps": [
+   "Vá a Vespucci Island e localize a garagem da mansão.",
+   "Arrombe ou entre na garagem.",
+   "Leve o carro e registre ou guarde em garagem para não perder."
+  ],
+  "reward": "Carro tuner verde único. A Pizza Fria identifica o modelo como Maibatsu Penumbra FF.",
+  "reward_type": "veiculo",
+  "repeatable": null,
+  "missable": null,
+  "common_mistakes": [],
+  "troubleshooting": [],
+  "platform_tested": null,
+  "game_version": null,
+  "last_verified_on": null,
+  "verification_status": "relato",
+  "evidence_type": "relatos",
+  "spoiler_level": "nenhum",
+  "sources": [
+   {
+    "nome": "GTA Side",
+    "url": "https://gtaside.com/tips/gta6/easter-eggs/",
+    "tipo": "comunidade",
+    "data": "2026-11-25",
+    "nota": "Carro verde em garagem de Vespucci Island; pode ser levado sem missão."
+   },
+   {
+    "nome": "Red Bull Gaming",
+    "url": "https://www.redbull.com/int-en/gta-6-easter-eggs",
+    "tipo": "imprensa",
+    "data": "2026-11-23",
+    "nota": "Carro modelado no Eclipse de Paul Walker na garagem de uma vila em Vespucci Island; dirigível."
+   },
+   {
+    "nome": "Polygon",
+    "url": "https://www.polygon.com/gta-6-easter-eggs/",
+    "tipo": "imprensa",
+    "data": "2026-11-22",
+    "nota": "Obtido arrombando a garagem em Vespucci Island, no meio das Rialto Islands e a oeste de Vice Beach."
+   },
+   {
+    "nome": "Pizza Fria (iG)",
+    "url": "https://pizzafria.ig.com.br/listas/gta-vi-melhores-easter-eggs-descobertos/",
+    "tipo": "imprensa",
+    "data": "2026-11-22",
+    "nota": "Maibatsu Penumbra FF verde; placa 'HAD YOU'; cobra no porta-malas."
+   },
+   {
+    "nome": "Detonated",
+    "url": "https://detonated.com/gta-6-best-car-locations/",
+    "tipo": "imprensa",
+    "data": "2026-11-24",
+    "nota": "'Eclipse 95' de Paul Walker em garagem de Vespucci Island."
+   }
+  ],
+  "media": [],
+  "faq": [
+   {
+    "q": "Onde fica o carro de Velozes e Furiosos em GTA 6?",
+    "a": "Na garagem de uma mansão em Vespucci Island, uma das ilhas residenciais de Vice City, a oeste de Vice Beach."
+   },
+   {
+    "q": "Dá para pegar o carro ou é só decoração?",
+    "a": "Dá para pegar. As fontes dizem que você entra na garagem e sai dirigindo, sem missão associada."
+   },
+   {
+    "q": "Como não perder o carro depois?",
+    "a": "Registre o veículo em seu nome ou guarde em uma garagem. Carros roubados abandonados somem."
+   }
+  ],
+  "related": [
+   "gta6-0017",
+   "gta6-0014"
+  ],
+  "tags": [
+   "velozes e furiosos",
+   "fast and furious",
+   "paul walker",
+   "eclipse",
+   "vespucci island",
+   "carro verde",
+   "penumbra",
+   "carro raro"
+  ],
+  "seo_title": "Carro de Velozes e Furiosos em GTA 6: localização",
+  "seo_description": "O carro verde inspirado no Eclipse de Velozes e Furiosos fica numa garagem em Vespucci Island, Vice City. Veja como pegar e como não perder.",
+  "workflow_status": "publicado",
+  "featured": false,
+  "reviewed_by": null,
+  "published_at": "2026-11-25T12:00:00Z",
+  "created_at": "2026-11-25T12:00:00Z",
+  "updated_at": "2026-11-25T12:00:00Z"
+ },
+ {
+  "id": "gta6-0011",
+  "app_ref": null,
+  "game_id": "gta6",
+  "category_id": "gta6-missoes-secretas",
+  "region_id": null,
+  "author_id": "redacao",
+  "kind": "descoberta",
+  "slug": "cachorro-de-jet-ski-cool-dog",
+  "title": "Cool Dog: o cachorro de jet ski e a ilha dos cães",
+  "direct_answer": "Se você for longe demais no mar e ficar na água, um cachorro de óculos escuros aparece pilotando um jet ski para dar carona. Ficando no jet ski, ele leva você a uma ilhota com outros cães, onde desenterra dinheiro.",
+  "summary": "Quatro fontes descrevem o encontro. Gambit Bay, perto da casa de Jason, é citada como lugar fácil para tentar. A recompensa fica em torno de US$ 1.200 e um par de óculos de sol.",
+  "body_md": "Parece mentira de colega de escola, mas quatro veículos descrevem a mesma cena. Vá bem longe da costa, nadando ou de barco, e fique na água. Você ouve latidos. Um cachorro de óculos chega num jet ski e oferece carona.\n\nO normal seria descer na praia. Não desça. Se você continuar no jet ski, ele segue até uma ilhota de areia cheia de outros cães. Lá, ele desenterra uma carteira com dinheiro. Segundo a Red Bull, são US$ 1.218, há óculos de sol numa caixa ao lado de um barco virado e um segundo jet ski para você voltar.\n\nA Polygon diz que dá para fazer logo no início do jogo, nadando para longe da casa de Jason.\n\nAs fontes apontam como inspiração um cachorro de verdade, filmado andando de jet ski na Flórida.\n\n## O que ainda não se sabe\n\n- **Se é garantido.** O ComicBook trata como encontro aleatório, mais comum nas Leonida Keys, e diz que acontece só uma vez. As outras fontes não falam em aleatoriedade.\n- **Um suposto cofre.** Um resultado de busca menciona um cofre com código ligado a esse encontro. Não conseguimos ler a página e não publicamos o código.",
+  "location_text": "Mar aberto. Gambit Bay, perto da casa de Jason, é citada como lugar fácil para tentar.",
+  "landmark": "Casa de Jason, em Gambit Bay.",
+  "coords": null,
+  "character_req": "Jason ou Lucia",
+  "requirements": "n/a",
+  "progress_required": "Possível já no início do jogo, com Jason, segundo a Polygon.",
+  "conditions": null,
+  "steps": [
+   "Vá bem longe da costa, nadando ou de barco, e fique na água.",
+   "Espere ouvir os latidos. O cachorro chega de jet ski.",
+   "Suba no jet ski e continue nele. Não desça na praia.",
+   "Na ilha dos cães, ele desenterra uma carteira com dinheiro. Segundo a Red Bull, há óculos de sol numa caixa ao lado de um barco virado e um segundo jet ski para voltar."
+  ],
+  "reward": "Cerca de US$ 1.200 e um par de óculos de sol. A Red Bull registra uma carteira com US$ 1.218.",
+  "reward_type": "dinheiro",
+  "repeatable": "Segundo o ComicBook, o passeio acontece só uma vez.",
+  "missable": null,
+  "common_mistakes": [
+   "Descer do jet ski na praia antes de ele seguir para a ilha."
+  ],
+  "troubleshooting": [],
+  "platform_tested": null,
+  "game_version": null,
+  "last_verified_on": null,
+  "verification_status": "relato",
+  "evidence_type": "relatos",
+  "spoiler_level": "nenhum",
+  "sources": [
+   {
+    "nome": "GTA Side",
+    "url": "https://gtaside.com/tips/gta6/easter-eggs/",
+    "tipo": "comunidade",
+    "data": "2026-11-25",
+    "nota": "Cachorro de óculos resgata quem fica à deriva; ilha com outros cães; ~US$ 1.200."
+   },
+   {
+    "nome": "Red Bull Gaming",
+    "url": "https://www.redbull.com/int-en/gta-6-easter-eggs",
+    "tipo": "imprensa",
+    "data": "2026-11-23",
+    "nota": "Carteira com US$ 1.218 e óculos de sol; segundo jet ski para voltar."
+   },
+   {
+    "nome": "Polygon",
+    "url": "https://www.polygon.com/gta-6-easter-eggs/",
+    "tipo": "imprensa",
+    "data": "2026-11-22",
+    "nota": "Pastor-alemão de jet ski ao nadar longe da casa de Jason no início do jogo."
+   },
+   {
+    "nome": "ComicBook.com",
+    "url": "https://comicbook.com/gaming/list/5-most-exciting-gta-6-easter-eggs-players-have-found-after-launch-day/",
+    "tipo": "imprensa",
+    "data": "2026-11-20",
+    "nota": "Encontro aleatório mais comum nas Leonida Keys; ilha com cães; acontece uma vez."
+   }
+  ],
+  "media": [],
+  "faq": [
+   {
+    "q": "Como encontrar o cachorro de jet ski em GTA 6?",
+    "a": "Vá bem longe da costa e fique na água até ouvir latidos. Gambit Bay, perto da casa de Jason, é citada como um bom lugar para tentar."
+   },
+   {
+    "q": "Como chegar à ilha dos cães?",
+    "a": "Suba no jet ski do cachorro e não desça quando ele passar pela praia. Ele segue até a ilhota."
+   },
+   {
+    "q": "Quanto dinheiro o cachorro desenterra?",
+    "a": "Cerca de US$ 1.200, segundo as fontes. A Red Bull registrou US$ 1.218, mais um par de óculos de sol."
+   }
+  ],
+  "related": [
+   "gta6-0016",
+   "gta6-0019"
+  ],
+  "tags": [
+   "cachorro",
+   "jet ski",
+   "cool dog",
+   "ilha dos cães",
+   "gambit bay",
+   "cão",
+   "dinheiro",
+   "óculos"
+  ],
+  "seo_title": "Cachorro de jet ski em GTA 6: a ilha dos cães",
+  "seo_description": "Como fazer o cachorro de jet ski aparecer em GTA 6 e chegar à ilha dos cães, onde ele desenterra dinheiro e um par de óculos de sol.",
+  "workflow_status": "publicado",
+  "featured": false,
+  "reviewed_by": null,
+  "published_at": "2026-11-25T12:00:00Z",
+  "created_at": "2026-11-25T12:00:00Z",
+  "updated_at": "2026-11-25T12:00:00Z"
+ },
+ {
+  "id": "gta6-0012",
+  "app_ref": null,
+  "game_id": "gta6",
+  "category_id": "gta6-missoes-secretas",
+  "region_id": null,
+  "author_id": "redacao",
+  "kind": "descoberta",
+  "slug": "caranguejo-gigante-gullet-marsh",
+  "title": "O caranguejo gigante de Gullet Marsh",
+  "direct_answer": "Num posto de pesquisa isolado no pântano de Gullet Marsh, religar a energia e ler o diário no computador faz um caranguejo gigante mutante atacar o personagem, com cena própria.",
+  "summary": "Quatro fontes descrevem o encontro, que três delas leem como referência ao meme do giant enemy crab, da E3 de 2006. Nenhuma descreve recompensa.",
+  "body_md": "O lugar é um posto ou estação de pesquisa abandonado no meio do pântano. Do lado de fora há uma caixa de disjuntores. Religue a energia, entre e leia o diário de pesquisa no computador.\n\nQuando você sai da tela, o caranguejo pula em cima. Há uma cutscene própria e é preciso se livrar dele.\n\n## De onde vem a referência\n\nGTA Side, Red Bull e Polygon ligam a cena ao giant enemy crab, piada que nasceu de uma apresentação de console na E3 de 2006. A DualShockers prefere outra leitura e vê homenagem ao filme Island Claws.\n\n## O que ainda não se sabe\n\n- **A recompensa.** Nenhuma fonte descreve.\n- **O nome da área.** A maioria fala em Gullet Marsh. A DualShockers situa em Pelican Valley e descreve um rastro de sangue que leva a um barraco.\n- **Se é missão ou encontro.** A Polygon chama de missão secundária opcional. As outras descrevem como encontro escondido.",
+  "location_text": "Posto ou estação de pesquisa remota em Gullet Marsh. A DualShockers situa em Pelican Valley.",
+  "landmark": "Caixa de disjuntores do lado de fora do prédio.",
+  "coords": null,
+  "character_req": null,
+  "requirements": null,
+  "progress_required": null,
+  "conditions": null,
+  "steps": [
+   "Vá ao posto isolado no pântano.",
+   "Religue a energia na caixa de disjuntores do lado de fora.",
+   "Entre e leia o diário no computador.",
+   "Ao sair da tela, o caranguejo ataca. Livre-se dele."
+  ],
+  "reward": null,
+  "reward_type": null,
+  "repeatable": null,
+  "missable": null,
+  "common_mistakes": [],
+  "troubleshooting": [],
+  "platform_tested": null,
+  "game_version": null,
+  "last_verified_on": null,
+  "verification_status": "relato",
+  "evidence_type": "relatos",
+  "spoiler_level": "leve",
+  "sources": [
+   {
+    "nome": "GTA Side",
+    "url": "https://gtaside.com/tips/gta6/easter-eggs/",
+    "tipo": "comunidade",
+    "data": "2026-11-25",
+    "nota": "Posto isolado em Gullet Marsh; religar energia, ler diário; caranguejo ataca; referência à apresentação de console de 2006."
+   },
+   {
+    "nome": "Red Bull Gaming",
+    "url": "https://www.redbull.com/int-en/gta-6-easter-eggs",
+    "tipo": "imprensa",
+    "data": "2026-11-23",
+    "nota": "Estação de pesquisa remota em Gullet Marsh; cutscene própria; meme 'Giant Enemy Crab'."
+   },
+   {
+    "nome": "Polygon",
+    "url": "https://www.polygon.com/gta-6-easter-eggs/",
+    "tipo": "imprensa",
+    "data": "2026-11-22",
+    "nota": "Missão secundária opcional em Gullet Marsh com o 'giant enemy crab'; referência à E3 2006."
+   },
+   {
+    "nome": "DualShockers",
+    "url": "https://www.dualshockers.com/best-easter-eggs-in-gta-6/",
+    "tipo": "imprensa",
+    "data": "2026-11-20",
+    "nota": "Em Pelican Valley, rastro de sangue leva a um barraco com dados de experimentos; interpreta como homenagem ao filme 'Island Claws'."
+   }
+  ],
+  "media": [],
+  "faq": [
+   {
+    "q": "Onde fica o caranguejo gigante em GTA 6?",
+    "a": "Num posto de pesquisa isolado no pântano de Gullet Marsh, segundo a maioria das fontes. Uma fonte situa em Pelican Valley."
+   },
+   {
+    "q": "Como fazer o caranguejo gigante aparecer?",
+    "a": "Religue a energia na caixa de disjuntores do lado de fora, entre e leia o diário no computador. Ele ataca quando você sai da tela."
+   },
+   {
+    "q": "O caranguejo gigante dá recompensa?",
+    "a": "Nenhuma das fontes que lemos descreve recompensa."
+   }
+  ],
+  "related": [
+   "gta6-0002"
+  ],
+  "tags": [
+   "caranguejo gigante",
+   "giant enemy crab",
+   "gullet marsh",
+   "pântano",
+   "mutante",
+   "pelican valley"
+  ],
+  "seo_title": "Caranguejo gigante em GTA 6: onde fica",
+  "seo_description": "O encontro com o caranguejo gigante mutante de GTA 6 acontece num posto de pesquisa em Gullet Marsh. Veja como ativar e de onde vem a piada.",
+  "workflow_status": "publicado",
+  "featured": false,
+  "reviewed_by": null,
+  "published_at": "2026-11-25T12:00:00Z",
+  "created_at": "2026-11-25T12:00:00Z",
+  "updated_at": "2026-11-25T12:00:00Z"
+ },
+ {
+  "id": "gta6-0013",
+  "app_ref": null,
+  "game_id": "gta6",
+  "category_id": "gta6-misterios",
+  "region_id": null,
+  "author_id": "redacao",
+  "kind": "descoberta",
+  "slug": "monumento-manifest-canyon",
+  "title": "O monumento dos quatro cavalos em Manifest Canyon",
+  "direct_answer": "Em Manifest Canyon, Kelly County, há um monumento com pilar, globo e quatro cavalos. Um jogador relatou vibração no controle e bipes parecidos com código Morse perto dele. Ninguém decifrou nada e pode não haver nada para decifrar.",
+  "summary": "O monumento existe. O mistério em volta dele vem do relato de um único jogador, repetido por duas fontes. Está em investigação e tratamos como caso aberto, não como segredo confirmado.",
+  "body_md": "Vamos separar o que é fato do que é relato.\n\n**Fato:** em Manifest Canyon há um monumento com um pilar, um globo e quatro cavalos. A placa diz que os cavalos representam os quatro pilares da cultura de Leonida. Segundo o GTA Side, eles são vida selvagem, corrupção, humanidade e yeyo.\n\n**Relato:** o primeiro jogador a reportar o local disse que o controle vibra perto da estátua, que ela emite bipes num padrão parecido com código Morse e que cada cavalo tem um símbolo diferente. GTA Side e Red Bull repetem esse relato. Nenhuma das duas diz ter reproduzido.\n\nA Red Bull cita ainda círculos de pedra no topo do Mount Kalaga como possivelmente ligados. É especulação.\n\n## De onde vem a comparação\n\nA comunidade compara o caso ao mural do Monte Chiliad, de GTA V, um enigma que ocupou jogadores por anos. Vale lembrar que aquele mistério nunca teve uma solução única e oficial.\n\n## O que ainda não se sabe\n\n- **Se a vibração e os bipes existem.** O relato tem uma origem só.\n- **Se há solução.** Pode ser uma piada da Rockstar sem nada por trás.\n- **Se os círculos de pedra do Mount Kalaga têm relação.**\n\nSe você esteve lá e gravou alguma coisa, mande para a gente. Este registro muda de status quando houver evidência.",
+  "location_text": "Manifest Canyon, Kelly County.",
+  "landmark": "Estátua com pilar, globo e quatro cavalos.",
+  "coords": null,
+  "character_req": null,
+  "requirements": null,
+  "progress_required": null,
+  "conditions": null,
+  "steps": [],
+  "reward": null,
+  "reward_type": null,
+  "repeatable": null,
+  "missable": null,
+  "common_mistakes": [],
+  "troubleshooting": [],
+  "platform_tested": null,
+  "game_version": null,
+  "last_verified_on": null,
+  "verification_status": "investigacao",
+  "evidence_type": "relatos",
+  "spoiler_level": "nenhum",
+  "sources": [
+   {
+    "nome": "GTA Side",
+    "url": "https://gtaside.com/tips/gta6/easter-eggs/",
+    "tipo": "comunidade",
+    "data": "2026-11-25",
+    "nota": "Monumento em Manifest Canyon; placa com os quatro pilares (vida selvagem, corrupção, humanidade e 'yeyo'); vibração e bipes relatados pelo primeiro jogador; não resolvido."
+   },
+   {
+    "nome": "Red Bull Gaming",
+    "url": "https://www.redbull.com/int-en/gta-6-easter-eggs",
+    "tipo": "imprensa",
+    "data": "2026-11-23",
+    "nota": "Status não resolvido; vibração do controle e bipes tipo Morse; cita círculos de pedra no Mount Kalaga."
+   }
+  ],
+  "media": [],
+  "faq": [
+   {
+    "q": "Onde fica o monumento dos quatro cavalos em GTA 6?",
+    "a": "Em Manifest Canyon, Kelly County."
+   },
+   {
+    "q": "O mistério do monumento de Manifest Canyon foi resolvido?",
+    "a": "Não. Até a última atualização deste registro, ninguém decifrou nada, e a vibração e os bipes relatados vêm de um único jogador."
+   },
+   {
+    "q": "É o novo Monte Chiliad?",
+    "a": "A comunidade faz essa comparação, mas ainda não há evidência de que o monumento esconda um enigma com solução."
+   }
+  ],
+  "related": [
+   "gta6-0007"
+  ],
+  "tags": [
+   "monumento",
+   "manifest canyon",
+   "quatro cavalos",
+   "estátua",
+   "código morse",
+   "mount kalaga",
+   "monte chiliad",
+   "kelly county"
+  ],
+  "seo_title": "Monumento de Manifest Canyon em GTA 6: o mistério",
+  "seo_description": "O monumento dos quatro cavalos em Manifest Canyon, GTA 6: o que existe de fato, o que é relato de um jogador e o que ainda está em investigação.",
+  "workflow_status": "publicado",
+  "featured": false,
+  "reviewed_by": null,
+  "published_at": "2026-11-25T12:00:00Z",
+  "created_at": "2026-11-25T12:00:00Z",
+  "updated_at": "2026-11-25T12:00:00Z"
+ },
+ {
+  "id": "gta6-0014",
+  "app_ref": null,
+  "game_id": "gta6",
+  "category_id": "gta6-veiculos",
+  "region_id": "gta6-leonida-keys",
+  "author_id": "redacao",
+  "kind": "descoberta",
+  "slug": "base-militar-tanque-rhino-e-caca-lazer",
+  "title": "Base militar Mile Zero: como pegar o tanque Rhino e o caça P-996 Lazer",
+  "direct_answer": "A base militar de GTA 6 é a Mile Zero Air Station, em Goose Key, no extremo sudoeste do mapa. Dá para entrar já no Capítulo 1: os tanques Rhino ficam destrancados na parte sul, perto dos hangares, e os caças P-996 Lazer ficam na pista.",
+  "summary": "A fórmula de Fort Zancudo voltou, com direito a salto por cima da cerca. Roubar o tanque libera o troféu de bronze Challenging Tank. A resposta militar é pesada, então salve antes.",
+  "body_md": "A Mile Zero Air Station fica no fim das pontes das Keys, em Goose Key, Mariana County. Não precisa de missão. Marque no GPS e vá.\n\nHá dois jeitos de entrar. Pelo portão principal, o que já rende quatro estrelas, segundo o Military Times. Ou pelo stunt jump do lado sudeste: um monte de terra colado na cerca que, com velocidade, joga o veículo para dentro.\n\n**Para o tanque:** vá para a parte sul, perto dos hangares grandes. Os Rhino estão destrancados.\n\n**Para o caça:** corra até um Lazer estacionado na linha de voo, perto do portão. Segundo o Military Times, entrar na cabine sobe o nível de procurado para cinco estrelas.\n\nO Military Times lista ainda blindado de transporte, helicóptero Buzzard e Patriot na base.\n\nDois avisos. Garagem comum não comporta o Rhino. E, se você perder o tanque, tem que voltar para buscar outro.\n\n## De onde vem a referência\n\nÉ a mesma brincadeira de Fort Zancudo, em GTA V, incluindo o morro junto à cerca para saltar por cima.\n\n## O que ainda não se sabe\n\n- **Os níveis exatos de procurado.** Vêm só do Military Times.\n- **Onde guardar o tanque.** Nenhuma fonte lida indica uma garagem que comporte o Rhino.",
+  "location_text": "Mile Zero Air Station, em Goose Key, Mariana County, no extremo sudoeste do mapa, no fim das pontes das Keys.",
+  "landmark": "Stunt jump do lado sudeste, um monte de terra junto à cerca. Hangares grandes ao sul.",
+  "coords": null,
+  "character_req": null,
+  "requirements": "n/a",
+  "progress_required": "Possível desde o Capítulo 1.",
+  "conditions": null,
+  "steps": [
+   "Marque a Mile Zero Air Station no GPS.",
+   "Entre pelo portão principal ou pelo stunt jump do lado sudeste, pegando o monte de terra em velocidade.",
+   "Para o tanque, vá à parte sul, perto dos hangares. Os Rhino estão destrancados.",
+   "Para o caça, corra até um Lazer estacionado na linha de voo, perto do portão."
+  ],
+  "reward": "Tanque Rhino ou caça P-996 Lazer. Roubar o tanque libera o troféu de bronze Challenging Tank.",
+  "reward_type": "veiculo",
+  "repeatable": "Sim. Se perder o tanque, dá para voltar e pegar outro.",
+  "missable": null,
+  "common_mistakes": [
+   "Tentar guardar o Rhino em garagem comum. Ele não cabe.",
+   "Entrar sem salvar. A resposta militar inclui outros tanques e helicópteros."
+  ],
+  "troubleshooting": [],
+  "platform_tested": null,
+  "game_version": null,
+  "last_verified_on": null,
+  "verification_status": "relato",
+  "evidence_type": "relatos",
+  "spoiler_level": "nenhum",
+  "sources": [
+   {
+    "nome": "Military Times",
+    "url": "https://www.militarytimes.com/off-duty/movies-video-games/2026/11/19/how-to-steal-a-fighter-jet-and-battle-tank-in-gta-6/",
+    "tipo": "imprensa",
+    "data": "2026-11-19",
+    "nota": "Localização em Goose Key, níveis de procurado, posição dos Rhino e Lazer, stunt jump sudeste e troféu."
+   },
+   {
+    "nome": "GTA Side",
+    "url": "https://gtaside.com/tips/gta6/easter-eggs/",
+    "tipo": "comunidade",
+    "data": "2026-11-25",
+    "nota": "Base no extremo sudoeste, Mariana County; entrada pelo stunt jump sudeste; tanques destrancados ao sul; troféu Challenging Tank."
+   },
+   {
+    "nome": "DualShockers",
+    "url": "https://www.dualshockers.com/best-easter-eggs-in-gta-6/",
+    "tipo": "imprensa",
+    "data": "2026-11-20",
+    "nota": "Base Mile Zero Air Station perto do início do jogo, com morro junto à cerca para saltar, como em GTA V."
+   }
+  ],
+  "media": [],
+  "faq": [
+   {
+    "q": "Onde fica a base militar em GTA 6?",
+    "a": "É a Mile Zero Air Station, em Goose Key, Mariana County, no extremo sudoeste do mapa, no fim das pontes das Keys."
+   },
+   {
+    "q": "Como pegar o tanque em GTA 6?",
+    "a": "Entre na base Mile Zero e vá para a parte sul, perto dos hangares. Os tanques Rhino ficam destrancados."
+   },
+   {
+    "q": "Como entrar na base militar sem passar pelo portão?",
+    "a": "Pelo stunt jump do lado sudeste: um monte de terra junto à cerca que lança o veículo para dentro."
+   }
+  ],
+  "related": [
+   "gta6-0010",
+   "gta6-0017"
+  ],
+  "tags": [
+   "base militar",
+   "tanque",
+   "rhino",
+   "caça",
+   "lazer",
+   "p-996",
+   "mile zero",
+   "goose key",
+   "challenging tank",
+   "avião"
+  ],
+  "seo_title": "Tanque e caça em GTA 6: base militar Mile Zero",
+  "seo_description": "Onde fica a base militar de GTA 6 e como roubar o tanque Rhino e o caça P-996 Lazer na Mile Zero Air Station desde o Capítulo 1.",
+  "workflow_status": "publicado",
+  "featured": true,
+  "reviewed_by": null,
+  "published_at": "2026-11-25T12:00:00Z",
+  "created_at": "2026-11-25T12:00:00Z",
+  "updated_at": "2026-11-25T12:00:00Z"
+ },
+ {
+  "id": "gta6-0015",
+  "app_ref": null,
+  "game_id": "gta6",
+  "category_id": "gta6-armas-e-itens",
+  "region_id": null,
+  "author_id": "redacao",
+  "kind": "descoberta",
+  "slug": "sniper-island-poacher-hyde-island",
+  "title": "Sniper Island Poacher FF-50: o sequestro na Hyde Island",
+  "direct_answer": "O rifle de precisão único Island Poacher FF-50 fica com o caçador da Hyde Island, em Lummox County. Ao explorar a ilha, o personagem é sequestrado, perde o equipamento e precisa vencer o caçador para pegar a arma antes de ir embora.",
+  "summary": "Três fontes descrevem a caçada: você acorda num contêiner, sem nada, perseguido por um homem com visão noturna, rifle e um cão. Vencendo, leva o rifle e um prêmio em dinheiro. O valor do prêmio diverge entre as fontes.",
+  "body_md": "A Hyde Island fica em Lummox County. Segundo o PowerPyx, você chega de barco, saindo das docas ao sul, pelo Moreau River. Andando pela ilha, o personagem é sequestrado. Há um gatilho alternativo: em Vice City, um evento aleatório em que uma mulher pede ajuda para colocar um sofá num caminhão.\n\nVocê acorda num contêiner, sem equipamento, com uma voz falando por uma TV. A Polygon descreve um dispositivo no pescoço. Daí em diante é sobreviver. Um homem com óculos de visão noturna, rifle de precisão e um cão caça você pela ilha, e as armas estão espalhadas em pontos iluminados.\n\nO roteiro do PowerPyx: corra até a área iluminada à frente e pegue a pistola, que vem com duas balas. Suba a pilha de contêineres a noroeste para pegar a escopeta. Vá ao sul para munição e uma injeção de adrenalina. Use o Foco para derrubar o cão com um tiro. O caçador é muito blindado: corra, agache, espere ele chegar perto e atire na cabeça com Foco. Os óculos verdes denunciam onde ele está.\n\nO ponto que não pode esquecer: pegue o rifle do corpo antes de sair da ilha. Depois vá à casa de barcos, a oeste, recupere seu equipamento e o dinheiro.\n\nSe morrer, o personagem volta ao continente e pode tentar de novo voltando à ilha.\n\n## O que ainda não se sabe\n\n- **O valor do prêmio.** O PowerPyx fala em US$ 30.000, metade pelo app BuckMe e metade em espécie. O Game Rant fala em US$ 20.000.\n- **Se dá para atirar direto no caçador.** Um título visto na busca, de página que não lemos, diz que caçador e cão não podem ser baleados diretamente. Isso contradiz PowerPyx e Game Rant.",
+  "location_text": "Hyde Island, Lummox County. Acesso de barco pelas docas ao sul, ao longo do Moreau River, segundo o PowerPyx.",
+  "landmark": "Contêiner inicial, pilha de contêineres a noroeste e casa de barcos a oeste.",
+  "coords": null,
+  "character_req": "Jason ou Lucia",
+  "requirements": "n/a",
+  "progress_required": "Qualquer capítulo, segundo o PowerPyx.",
+  "conditions": null,
+  "steps": [
+   "Vá de barco até a Hyde Island e ande pela ilha até ser sequestrado.",
+   "Ao sair do contêiner, corra até a área iluminada à frente e pegue a pistola com duas balas.",
+   "Suba a pilha de contêineres a noroeste para pegar a escopeta e mais munição. Depois vá ao sul buscar munição e uma injeção de adrenalina.",
+   "Derrube o cão com um tiro usando Foco.",
+   "Despiste o caçador correndo e agachando, espere ele se aproximar e atire na cabeça com Foco.",
+   "Pegue o Island Poacher FF-50 do corpo antes de sair da ilha.",
+   "Vá à casa de barcos, recupere o equipamento e o dinheiro e saia."
+  ],
+  "reward": "Rifle de precisão único Island Poacher FF-50 e dinheiro. O valor diverge: US$ 30.000 segundo o PowerPyx, US$ 20.000 segundo o Game Rant.",
+  "reward_type": "arma",
+  "repeatable": "Se morrer, o personagem volta ao continente e pode reiniciar voltando à ilha.",
+  "missable": "Sim. Segundo o PowerPyx, o rifle precisa ser pego antes de deixar a ilha.",
+  "common_mistakes": [
+   "Sair da ilha sem pegar o rifle.",
+   "Gastar as duas balas iniciais sem usar o Foco."
+  ],
+  "troubleshooting": [],
+  "platform_tested": null,
+  "game_version": null,
+  "last_verified_on": null,
+  "verification_status": "relato",
+  "evidence_type": "relatos",
+  "spoiler_level": "leve",
+  "sources": [
+   {
+    "nome": "PowerPyx",
+    "url": "https://www.powerpyx.com/gta-6-hyde-island-kidnapping-easter-egg/",
+    "tipo": "imprensa",
+    "data": "2026-11-23",
+    "nota": "Ficha completa: locais de início, objetivos, recompensa de US$ 30.000 + rifle, estratégia."
+   },
+   {
+    "nome": "Game Rant",
+    "url": "https://gamerant.com/gta-6-island-poacher-location-saw-hunger-games-easter-egg/",
+    "tipo": "imprensa",
+    "data": "2026-11-21",
+    "nota": "Hyde Island a nordeste; dardo tranquilizante; rifle no corpo do caçador; barco/casa a oeste com equipamento e US$ 20.000."
+   },
+   {
+    "nome": "Polygon",
+    "url": "https://www.polygon.com/gta-6-easter-eggs/",
+    "tipo": "imprensa",
+    "data": "2026-11-22",
+    "nota": "Emboscada ao explorar/nadar em Hyde Island; dispositivo no pescoço estilo Saw; caçador com visão noturna, sniper e cão."
+   }
+  ],
+  "media": [],
+  "faq": [
+   {
+    "q": "Onde pegar o sniper Island Poacher FF-50 em GTA 6?",
+    "a": "No corpo do caçador da Hyde Island, em Lummox County, depois de vencer a caçada que começa quando o personagem é sequestrado na ilha."
+   },
+   {
+    "q": "Dá para perder o Island Poacher FF-50?",
+    "a": "Sim. Segundo o PowerPyx, o rifle precisa ser pego do corpo do caçador antes de você sair da ilha."
+   },
+   {
+    "q": "Como chegar à Hyde Island?",
+    "a": "De barco, saindo das docas ao sul e seguindo o Moreau River, segundo o PowerPyx."
+   }
+  ],
+  "related": [
+   "gta6-0008",
+   "gta6-0014"
+  ],
+  "tags": [
+   "island poacher ff-50",
+   "sniper",
+   "rifle",
+   "hyde island",
+   "sequestro",
+   "caçador",
+   "lummox county",
+   "arma única",
+   "arma lendária"
+  ],
+  "seo_title": "Sniper Island Poacher FF-50 em GTA 6: Hyde Island",
+  "seo_description": "Como sobreviver ao sequestro na Hyde Island, em GTA 6, e pegar o rifle único Island Poacher FF-50 antes de deixar a ilha.",
+  "workflow_status": "publicado",
+  "featured": false,
+  "reviewed_by": null,
+  "published_at": "2026-11-25T12:00:00Z",
+  "created_at": "2026-11-25T12:00:00Z",
+  "updated_at": "2026-11-25T12:00:00Z"
+ },
+ {
+  "id": "gta6-0016",
+  "app_ref": null,
+  "game_id": "gta6",
+  "category_id": "gta6-dinheiro",
+  "region_id": "gta6-leonida-keys",
+  "author_id": "redacao",
+  "kind": "descoberta",
+  "slug": "papagaio-dinheiro-escondido-three-sheets-liquor",
+  "title": "O papagaio que entrega o dinheiro escondido atrás da Three Sheets Liquor",
+  "direct_answer": "Atrás da loja de bebidas Three Sheets Liquor, em Key Lento, uma arara grita Generator! depois que você limpa o pátio. Ao lado do gerador há uma grade de ventilação com dinheiro, e o escritório dos fundos tem um cofre. No total, cerca de US$ 2.400.",
+  "summary": "É um dos melhores ganhos do Capítulo 1 e dá para perder: o favor da vizinha Shirley, que libera a pista, some quando você inicia a missão Tourist Trap. Só funciona uma vez.",
+  "body_md": "Primeiro, o aviso que importa: isto é perdível. Para a pista aparecer, você precisa fazer um favor para Shirley, vizinha de Jason. Segundo o GTA Bites, esse favor desaparece quando você começa a missão Tourist Trap, ainda no Capítulo 1. Faça antes.\n\nShirley passa a chamar Jason quando a missão Pipework fica disponível. Ela pede uma garrafa de rum Salty Squid, que está na sala dos fundos da Three Sheets Liquor, um barraco de madeira com bandeira pirata em Key Lento. Entregue o rum e uma nova pista aparece: Strange Noises.\n\nVolte à loja, mas não pela frente. Vá pelo beco lateral e pule o muro com arame farpado. O pátio dos fundos é uma operação ilegal de animais exóticos, com guardas. Limpe o pátio com cuidado.\n\nAgora ouça a arara-vermelha na gaiola. Ela grita dicas, e uma delas é Generator! Vá até o gerador no canto dos fundos. Na parede ao lado há uma grade de ventilação com dinheiro dentro. Antes de sair, arrombe o cofre pequeno ao lado da mesa no escritório.\n\n## De onde vem a referência\n\nJogadores veem na arara uma lembrança de Tony, o papagaio falante de GTA: San Andreas, segundo o GTA Side.\n\n## O que ainda não se sabe\n\n- **Os valores exatos.** US$ 1.387 na ventilação e US$ 1.038 no cofre vêm de uma única gravação, do GTA Bites. Outros jogadores relatam totais entre US$ 2.000 e US$ 2.400.\n- **A cena.** O GTA Side descreve uma briga dentro da loja com vários papagaios. O GTA Bites descreve o pátio dos fundos com guardas e uma arara.",
+  "location_text": "Three Sheets Liquor, em Key Lento. Barraco de madeira com bandeira pirata. O pátio fica atrás, pelo beco lateral e por um muro com arame farpado.",
+  "landmark": "Gerador no canto dos fundos do pátio, com a grade de ventilação na parede ao lado. Cofre ao lado da mesa no escritório dos fundos.",
+  "coords": null,
+  "character_req": "Jason",
+  "requirements": "Fazer o favor da vizinha Shirley, buscando a garrafa de rum Salty Squid. Isso libera a pista Strange Noises.",
+  "progress_required": "Capítulo 1. Shirley passa a chamar Jason quando a missão Pipework fica disponível.",
+  "conditions": null,
+  "steps": [
+   "Avance as primeiras missões de Jason até Pipework ficar disponível e fale com a vizinha Shirley.",
+   "Vá à Three Sheets Liquor, pegue o rum na sala dos fundos e entregue a Shirley.",
+   "Siga a nova pista Strange Noises: volte à loja pelo beco lateral e pule o muro dos fundos.",
+   "Elimine os guardas do pátio.",
+   "Ouça a arara até ela gritar Generator! e abra a grade de ventilação ao lado do gerador.",
+   "Arrombe o cofre pequeno no escritório dos fundos."
+  ],
+  "reward": "Cerca de US$ 2.400 no total. No registro do GTA Bites, US$ 1.387 na ventilação e US$ 1.038 no cofre.",
+  "reward_type": "dinheiro",
+  "repeatable": "Não. Pagamento único.",
+  "missable": "Sim. O favor de Shirley desaparece ao iniciar a missão Tourist Trap, no Capítulo 1.",
+  "common_mistakes": [
+   "Entrar pela porta da frente.",
+   "Ir embora sem abrir o cofre do escritório.",
+   "Deixar o favor de Shirley para depois de Tourist Trap."
+  ],
+  "troubleshooting": [],
+  "platform_tested": null,
+  "game_version": null,
+  "last_verified_on": null,
+  "verification_status": "relato",
+  "evidence_type": "relatos",
+  "spoiler_level": "leve",
+  "sources": [
+   {
+    "nome": "GTA Bites",
+    "url": "https://www.gtabites.com/news/gta-6-talking-parrot-secret-stash",
+    "tipo": "comunidade",
+    "data": "2026-11-20",
+    "nota": "Guia passo a passo com valores, pré-requisito de Shirley e aviso de que é perdível."
+   },
+   {
+    "nome": "GTA Side",
+    "url": "https://gtaside.com/tips/gta6/easter-eggs/",
+    "tipo": "comunidade",
+    "data": "2026-11-25",
+    "nota": "Papagaios falantes em loja de bebidas nas Keys; um diz 'generator'; dinheiro no gerador."
+   },
+   {
+    "nome": "Voxel (TecMundo/Estadão)",
+    "url": "https://www.estadao.com.br/tecmundo/voxel/como-ganhar-dinheiro-rapido-em-gta-6-veja-guia-com-dicas-para-ficar-rico/",
+    "tipo": "imprensa",
+    "data": "2026-11-23",
+    "nota": "Menciona tesouro escondido atrás de uma loja em Key Lento, descoberto ao fazer os favores da vizinha Shirley."
+   }
+  ],
+  "media": [],
+  "faq": [
+   {
+    "q": "Onde fica o dinheiro escondido do papagaio em GTA 6?",
+    "a": "No pátio atrás da loja Three Sheets Liquor, em Key Lento: numa grade de ventilação ao lado do gerador e num cofre no escritório dos fundos."
+   },
+   {
+    "q": "Dá para perder o dinheiro do papagaio?",
+    "a": "Sim. O favor da vizinha Shirley, que libera a pista, desaparece quando você inicia a missão Tourist Trap, no Capítulo 1."
+   },
+   {
+    "q": "Quanto dinheiro tem?",
+    "a": "Cerca de US$ 2.400 no total, segundo o GTA Bites. Outros jogadores relatam entre US$ 2.000 e US$ 2.400."
+   }
+  ],
+  "related": [
+   "gta6-0019",
+   "gta6-0011"
+  ],
+  "tags": [
+   "papagaio",
+   "arara",
+   "dinheiro escondido",
+   "three sheets liquor",
+   "key lento",
+   "shirley",
+   "generator",
+   "cofre",
+   "strange noises",
+   "exotic animals front"
+  ],
+  "seo_title": "Dinheiro escondido em GTA 6: o papagaio de Key Lento",
+  "seo_description": "Onde achar o dinheiro escondido atrás da Three Sheets Liquor, em GTA 6: a dica do papagaio, o cofre e o prazo para não perder no Capítulo 1.",
+  "workflow_status": "publicado",
+  "featured": true,
+  "reviewed_by": null,
+  "published_at": "2026-11-25T12:00:00Z",
+  "created_at": "2026-11-25T12:00:00Z",
+  "updated_at": "2026-11-25T12:00:00Z"
+ },
+ {
+  "id": "gta6-0017",
+  "app_ref": null,
+  "game_id": "gta6",
+  "category_id": "gta6-dicas",
+  "region_id": null,
+  "author_id": "redacao",
+  "kind": "guia",
+  "slug": "como-guardar-carros-roubados",
+  "title": "Como guardar carros roubados em GTA 6: registro e garagem",
+  "direct_answer": "Para ficar com um carro roubado em GTA 6, você precisa registrar o veículo em seu nome, pagando uma taxa. A garagem guarda o carro com segurança, mas não dá a posse: carro sem registro largado fora dela é perdido.",
+  "summary": "O registro é liberado aos poucos: Moses no Capítulo 2, as lojas Pay 'N' Spray no Capítulo 3 e, depois, Randy para os carros de luxo com rastreador. Quatro fontes concordam nas regras.",
+  "body_md": "Carro roubado some em três situações: se você abandonar, se ele for destruído ou se você sair do jogo sem cuidar dele. A única forma de virar dono é o registro.\n\n## Onde registrar\n\n| Quando | Quem registra | O que aceita |\n|---|---|---|\n| Capítulo 2 | Moses, em Port Gellhorn | Veículos sem rastreador |\n| Capítulo 3 | Qualquer Pay 'N' Spray | Carros sem rastreador avançado |\n| Depois de conhecer Randy | Randy, em Vice City | Até os carros de luxo com rastreador |\n\nA taxa depende do valor do carro e vai de alguns milhares a dezenas de milhares de dólares, segundo a Polygon. Não temos tabela de valores verificada. Como exemplo, o Detonated cita um carro registrado por 14 mil no Moses.\n\n## E a garagem?\n\nA garagem é um cofre, não um cartório. Estacionar lá guarda o carro, mas não muda o dono. Se estiver sem dinheiro, deixe o carro na garagem e só tire quando puder pagar o registro.\n\n## Antes de roubar\n\nSegundo o Voxel, o app WAiNK escaneia o carro e mostra se ele tem alarme e rastreador. Carro com ícone vermelho de GPS pode ser rastreado pela polícia quando você reduz a velocidade ou para.\n\n## De onde vem a referência\n\nAs lojas Pay 'N' Spray são velhas conhecidas da série. Antes serviam para despistar a polícia com uma pintura nova.",
+  "location_text": "Oficina de Moses, em Port Gellhorn. Lojas Pay 'N' Spray. Randy, em Vice City.",
+  "landmark": null,
+  "coords": null,
+  "character_req": "n/a",
+  "requirements": "Dinheiro para a taxa de registro. Para Moses e Pay 'N' Spray, o carro não pode ter rastreador avançado.",
+  "progress_required": "Capítulo 2 para Moses. Capítulo 3 para Pay 'N' Spray e Randy.",
+  "conditions": "n/a",
+  "steps": [
+   "Antes de roubar, escaneie o carro com o app WAiNK para ver alarme e rastreador.",
+   "Leve o carro a Moses, a um Pay 'N' Spray ou a Randy, conforme o seu progresso, e pague o registro.",
+   "Sem dinheiro, estacione na sua garagem e só tire o carro quando puder pagar."
+  ],
+  "reward": "Posse permanente do veículo.",
+  "reward_type": "veiculo",
+  "repeatable": "Sim.",
+  "missable": "n/a",
+  "common_mistakes": [
+   "Achar que a garagem dá posse. Carro sem registro abandonado fora dela é perdido.",
+   "Roubar carro com rastreador sem checar antes no WAiNK."
+  ],
+  "troubleshooting": [],
+  "platform_tested": null,
+  "game_version": null,
+  "last_verified_on": null,
+  "verification_status": "relato",
+  "evidence_type": "relatos",
+  "spoiler_level": "leve",
+  "sources": [
+   {
+    "nome": "Polygon",
+    "url": "https://www.polygon.com/gta-6-keep-stolen-vehicles-weapons-register/",
+    "tipo": "imprensa",
+    "data": "2026-11-19",
+    "nota": "Regras de perda, registro, desbloqueio por capítulo, garagem como guarda temporária; também explica armas (porta-malas, Ammu-Nation, ícone azul/branco/dourado)."
+   },
+   {
+    "nome": "Voxel (TecMundo/Estadão)",
+    "url": "https://www.estadao.com.br/tecmundo/voxel/como-ganhar-dinheiro-rapido-em-gta-6-veja-guia-com-dicas-para-ficar-rico/",
+    "tipo": "imprensa",
+    "data": "2026-11-23",
+    "nota": "Moses e Slim Jim no Cap. 2; Pay 'N' Spray; Randy e clonador de chaves no Cap. 3; rastreador avançado e uso do WAiNK."
+   },
+   {
+    "nome": "TechTudo",
+    "url": "https://www.techtudo.com.br/guia/2026/11/como-ganhar-dinheiro-rapido-no-gta-6-veja-melhores-formas-de-ficar-rico-edjogos.ghtml",
+    "tipo": "imprensa",
+    "data": "2026-11-19",
+    "nota": "Moses compra veículos de pequeno/médio valor; Randy lida com carros de alto nível; Pay 'N' Spray não aceita carros com rastreamento."
+   },
+   {
+    "nome": "Detonated",
+    "url": "https://detonated.com/gta-6-best-car-locations/",
+    "tipo": "imprensa",
+    "data": "2026-11-24",
+    "nota": "Exemplo: carro registrado por 14 mil no Moses em Port Gellhorn; alguns carros exigem chave clonada."
+   }
+  ],
+  "media": [],
+  "faq": [
+   {
+    "q": "Como salvar um carro roubado em GTA 6?",
+    "a": "Registrando o veículo em seu nome com Moses, em um Pay 'N' Spray ou com Randy, conforme o capítulo. A garagem guarda o carro, mas não dá a posse."
+   },
+   {
+    "q": "Quanto custa registrar um carro em GTA 6?",
+    "a": "A taxa varia com o valor do carro, de alguns milhares a dezenas de milhares de dólares, segundo a Polygon. Não temos uma tabela verificada."
+   },
+   {
+    "q": "A partir de quando dá para registrar carros?",
+    "a": "A partir do Capítulo 2, com Moses, em Port Gellhorn. No Capítulo 3 entram as lojas Pay 'N' Spray e Randy."
+   }
+  ],
+  "related": [
+   "gta6-0010",
+   "gta6-0019"
+  ],
+  "tags": [
+   "guardar carro",
+   "registrar carro",
+   "carro roubado",
+   "garagem",
+   "pay n spray",
+   "moses",
+   "randy",
+   "waink",
+   "rastreador",
+   "salvar carro"
+  ],
+  "seo_title": "Como guardar carros roubados em GTA 6",
+  "seo_description": "Como registrar e guardar carros roubados em GTA 6: Moses, Pay 'N' Spray, Randy, a diferença entre garagem e registro e quando cada um libera.",
+  "workflow_status": "publicado",
+  "featured": false,
+  "reviewed_by": null,
+  "published_at": "2026-11-25T12:00:00Z",
+  "created_at": "2026-11-25T12:00:00Z",
+  "updated_at": "2026-11-25T12:00:00Z"
+ },
+ {
+  "id": "gta6-0018",
+  "app_ref": null,
+  "game_id": "gta6",
+  "category_id": "gta6-dicas",
+  "region_id": null,
+  "author_id": "redacao",
+  "kind": "guia",
+  "slug": "como-salvar-o-jogo",
+  "title": "Como salvar o jogo em GTA 6",
+  "direct_answer": "Abra o menu de pausa, vá à aba Game e escolha Save Game. Funciona em qualquer lugar do mundo livre, fora de missão. São 15 slots manuais e 1 slot de autosave.",
+  "summary": "Não precisa de cama nem de celular. Não dá para salvar durante missões nem no prólogo, e ativar cheats desliga o salvamento. Como o jogo não tem replay de missões, vale guardar saves separados por capítulo.",
+  "body_md": "Quem veio de GTA V vai procurar a cama ou o celular. Não precisa. O save manual fica no menu de pausa.\n\n## O que você precisa saber\n\n- **15 slots manuais e 1 de autosave**, separado.\n- **Não salva durante missão nem no prólogo.** Segundo o Clarín, o save manual libera quando você termina o primeiro trabalho de Brian e chega à casa de Jason, na marina.\n- **Cheats desligam o salvamento.** GamesRadar e Clarín confirmam.\n- **Não existe replay de missões.** Se quiser rever uma missão ou uma escolha da história, só carregando um save antigo. Guarde um save no começo e outro no fim de cada capítulo.\n- **Para sair do jogo**, feche o aplicativo pelo console. Não há opção de sair dentro do jogo, então salve antes.\n\nAo recarregar, o personagem pode aparecer num local próximo, não exatamente onde você salvou.\n\n## Sobre o autosave\n\nA atualização de 23/11/2026 corrigiu um problema em que o jogo não fazia autosave corretamente, segundo a página de suporte da Rockstar. Se você joga sem atualizar, não confie só no autosave.",
+  "location_text": "Menu de pausa, aba Game, opção Save Game.",
+  "landmark": null,
+  "coords": null,
+  "character_req": "n/a",
+  "requirements": "Estar no mundo livre, fora de missão.",
+  "progress_required": "Depois do prólogo.",
+  "conditions": "n/a",
+  "steps": [
+   "Abra o menu de pausa: botão Options no PS5 ou Menu no Xbox.",
+   "Vá até a aba Game.",
+   "Escolha Save Game.",
+   "Selecione um dos 15 slots, novo ou para sobrescrever, e confirme. Espere o indicador terminar."
+  ],
+  "reward": "n/a",
+  "reward_type": "nenhuma",
+  "repeatable": "Sim.",
+  "missable": "n/a",
+  "common_mistakes": [
+   "Fechar o jogo sem salvar.",
+   "Usar um slot só. Sem replay de missões, saves antigos são o único jeito de voltar atrás.",
+   "Ativar cheats e esperar que o progresso seja salvo."
+  ],
+  "troubleshooting": [
+   {
+    "problema": "A opção de salvar não funciona no mundo livre.",
+    "solucao": "Segundo as fontes, saia do prédio ou do veículo e tente de novo. Durante missões e no prólogo o save manual fica bloqueado."
+   },
+   {
+    "problema": "Carreguei o save e o personagem está em outro lugar.",
+    "solucao": "É o comportamento esperado: ao recarregar, o personagem pode aparecer num local próximo de onde você salvou."
+   }
+  ],
+  "platform_tested": null,
+  "game_version": null,
+  "last_verified_on": null,
+  "verification_status": "relato",
+  "evidence_type": "relatos",
+  "spoiler_level": "nenhum",
+  "sources": [
+   {
+    "nome": "GamesRadar+",
+    "url": "https://www.gamesradar.com/games/grand-theft-auto/gta-6-how-to-save/",
+    "tipo": "imprensa",
+    "data": "2026-11-23",
+    "nota": "15 slots manuais + 1 autosave; passos; cheats desativam o save; não há replay de missões; recarregar pode teleportar para perto."
+   },
+   {
+    "nome": "Clarín (US News)",
+    "url": "https://www.clarin.com/us-news/how-to-save-your-game-in-gta-6-manual-save-and-autosave-guide-for-ps5-and-xbox_0_j3ZurtFP6t.html",
+    "tipo": "imprensa",
+    "data": "2026-11-19",
+    "nota": "Passos no menu de pausa; restrições (prólogo, missões, cheats); 15 slots + autosave."
+   }
+  ],
+  "media": [],
+  "faq": [
+   {
+    "q": "Como salvar o jogo em GTA 6?",
+    "a": "Menu de pausa, aba Game, opção Save Game. Escolha um dos 15 slots e confirme."
+   },
+   {
+    "q": "Quantos saves dá para ter em GTA 6?",
+    "a": "15 slots de save manual e 1 slot separado de autosave."
+   },
+   {
+    "q": "Dá para repetir missões em GTA 6?",
+    "a": "Não há replay de missões. Para rever uma missão, é preciso carregar um save anterior a ela."
+   }
+  ],
+  "related": [
+   "gta6-0017",
+   "gta6-0019"
+  ],
+  "tags": [
+   "salvar",
+   "save",
+   "save game",
+   "autosave",
+   "slots",
+   "gravar",
+   "como salvar",
+   "replay de missões"
+  ],
+  "seo_title": "Como salvar o jogo em GTA 6: passo a passo",
+  "seo_description": "Como salvar em GTA 6: menu de pausa, aba Game, Save Game. São 15 slots manuais e 1 autosave. Veja quando o save fica bloqueado.",
+  "workflow_status": "publicado",
+  "featured": false,
+  "reviewed_by": null,
+  "published_at": "2026-11-25T12:00:00Z",
+  "created_at": "2026-11-25T12:00:00Z",
+  "updated_at": "2026-11-25T12:00:00Z"
+ },
+ {
+  "id": "gta6-0019",
+  "app_ref": null,
+  "game_id": "gta6",
+  "category_id": "gta6-dinheiro",
+  "region_id": null,
+  "author_id": "redacao",
+  "kind": "guia",
+  "slug": "como-ganhar-dinheiro-no-inicio",
+  "title": "Como ganhar dinheiro no começo de GTA 6 (e não perder)",
+  "direct_answer": "No Capítulo 1, o dinheiro vem dos mergulhos de caça ao tesouro de Kenton, dos trabalhos de Brian e Donnie e da venda dos espólios a receptadores. E atenção: dinheiro em espécie é perdido para sempre se você morrer. Deposite num caixa eletrônico ou guarde sob o assoalho do quarto de Jason.",
+  "summary": "Os métodos mudam por capítulo: tesouros e esconderijos no primeiro, roubo de carros e assaltos a lojas no segundo, joalherias e bancos no terceiro. Os valores abaixo são estimativas das fontes, não medições nossas.",
+  "body_md": "Antes de qualquer método, a regra que mais custa caro: o dinheiro que você carrega em espécie some de vez se o personagem morrer, segundo a Polygon. Use o app BuckMe, opção ATM Finder, para achar o caixa eletrônico mais perto, ou guarde sob o assoalho do quarto de Jason.\n\n## Por capítulo\n\n| Capítulo | O que libera |\n|---|---|\n| 1 | Mergulhos de Kenton, trabalhos de Brian e Donnie, venda a receptadores |\n| 2 | Roubo de carros com Moses, receptador Dunk, assaltos a lojas |\n| 3 | Randy, clonador de chaves, joalherias e bancos |\n\n**Capítulo 1.** Siga a história até liberar Kenton, que tem a loja de barcos e mergulho em Key Lento, e os trabalhos de Brian e Donnie: drogas perdidas e esconderijos de gangues, marcados com ícones amarelos. Os receptadores pagam valores diferentes pelo mesmo item, então compare. E faça o favor da vizinha Shirley, que leva ao dinheiro escondido do papagaio.\n\n**Capítulo 2 em diante.** A Polygon recomenda roubar carros estacionados perto de um Pay 'N' Spray e vender. Cita cerca de US$ 7.000 por carro em Ocean Beach, com tempo de espera entre vendas.\n\n**Capítulo 3.** Joalherias pelos fundos rendem cerca de US$ 20.000 cada, segundo a Polygon, desligando o alarme e achando o código do cofre. Ela cita a Victoria Lee Jeweler, em Capri, e a Blanc and Giroux, no Decor District.\n\nColecionáveis rendem pouco: algumas centenas de dólares por item em casas de penhores.\n\n## Erros que custam dinheiro\n\n- Ficar no assalto depois de ouvir sirenes.\n- Assaltar os clientes em vez do caixa ou do cofre.\n- Andar com muito dinheiro no bolso.\n\n## O que ainda não se sabe\n\n- **Os tesouros de Kenton.** TechTudo, Voxel e Polygon citam os mergulhos, mas nenhuma fonte lida traz a localização dos tesouros.\n- **Os métodos virais.** O Omelete reuniu truques que circulam em vídeo, como o saque de um armazém em South Vice-Dale e uma falha que reabre lojas já roubadas. São falhas relatadas por jogadores, com valores não verificados, e podem ser corrigidas por atualização. Não recomendamos contar com elas.\n- **Os valores.** Todos os números aqui são estimativas das fontes.",
+  "location_text": "Loja de barcos e mergulho de Kenton, em Key Lento. Esconderijos marcados com ícones amarelos. Pay 'N' Spray de Ocean Beach. Joalherias em Capri e no Decor District, segundo a Polygon.",
+  "landmark": "App BuckMe, opção ATM Finder, para achar o caixa eletrônico mais próximo.",
+  "coords": null,
+  "character_req": "n/a",
+  "requirements": "n/a",
+  "progress_required": "Capítulo 1 para Kenton, Brian e Donnie. Capítulo 2 para Moses e Dunk. Capítulo 3 para Randy, joalherias e bancos.",
+  "conditions": "n/a",
+  "steps": [
+   "No Capítulo 1, siga a história até liberar Kenton, Brian e Donnie e venda os espólios comparando as ofertas dos receptadores.",
+   "Faça o favor da vizinha Shirley para liberar o dinheiro escondido do papagaio.",
+   "Do Capítulo 2 em diante, roube carros estacionados perto de um Pay 'N' Spray e venda.",
+   "No Capítulo 3, assalte joalherias pelos fundos, desligando o alarme e buscando o código do cofre.",
+   "Deposite o dinheiro num caixa eletrônico ou guarde sob o assoalho do quarto de Jason."
+  ],
+  "reward": "Variável. Exemplos citados pelas fontes: cerca de US$ 20.000 por joalheria e cerca de US$ 7.000 por carro em Ocean Beach.",
+  "reward_type": "dinheiro",
+  "repeatable": "Sim.",
+  "missable": "Dinheiro em espécie carregado é perdido de vez ao morrer, segundo a Polygon.",
+  "common_mistakes": [
+   "Andar com muito dinheiro em espécie.",
+   "Continuar no assalto depois de ouvir sirenes.",
+   "Assaltar clientes em vez do caixa ou do cofre."
+  ],
+  "troubleshooting": [],
+  "platform_tested": null,
+  "game_version": null,
+  "last_verified_on": null,
+  "verification_status": "relato",
+  "evidence_type": "relatos",
+  "spoiler_level": "leve",
+  "sources": [
+   {
+    "nome": "Polygon",
+    "url": "https://www.polygon.com/gta-6-how-to-make-money-become-rich-fast-grand-theft-auto/",
+    "tipo": "imprensa",
+    "data": null,
+    "nota": "Lista de métodos e os três melhores: joalherias pelos fundos, carros perto de Pay 'N' Spray, assaltos rápidos a banco."
+   },
+   {
+    "nome": "Polygon",
+    "url": "https://www.polygon.com/gta-6-grand-theft-auto-beginners-tips-tricks/",
+    "tipo": "imprensa",
+    "data": null,
+    "nota": "Não andar com dinheiro (perde ao morrer), assoalho do quarto de Jason, caixas eletrônicos e BuckMe; modo Foco destaca itens."
+   },
+   {
+    "nome": "TechTudo",
+    "url": "https://www.techtudo.com.br/guia/2026/11/como-ganhar-dinheiro-rapido-no-gta-6-veja-melhores-formas-de-ficar-rico-edjogos.ghtml",
+    "tipo": "imprensa",
+    "data": "2026-11-19",
+    "nota": "Missões, caça ao tesouro de Kenton, esconderijos de gangues, venda de carros, assaltos a bancos e agências de empréstimo."
+   },
+   {
+    "nome": "Voxel (TecMundo/Estadão)",
+    "url": "https://www.estadao.com.br/tecmundo/voxel/como-ganhar-dinheiro-rapido-em-gta-6-veja-guia-com-dicas-para-ficar-rico/",
+    "tipo": "imprensa",
+    "data": "2026-11-23",
+    "nota": "Fontes de renda por capítulo, receptadores (Dunk, Yasmani, Tyrone) e tipos de estabelecimentos assaltáveis."
+   },
+   {
+    "nome": "Omelete",
+    "url": "https://www.omelete.com.br/games/gta-6-jogadores-metodos-ficar-rico-rapido-veja",
+    "tipo": "imprensa",
+    "data": "2026-11-20",
+    "nota": "Métodos virais: saque do armazém Apollo Aggregates (South Vice-Dale, ~US$ 8.000) e um glitch de reinício de missão que reabre lojas roubadas."
+   }
+  ],
+  "media": [],
+  "faq": [
+   {
+    "q": "Como ganhar dinheiro rápido no começo de GTA 6?",
+    "a": "No Capítulo 1, com os mergulhos de Kenton, os trabalhos de Brian e Donnie e a venda dos espólios a receptadores, comparando as ofertas."
+   },
+   {
+    "q": "Perco dinheiro quando morro em GTA 6?",
+    "a": "Sim. Segundo a Polygon, o dinheiro em espécie que você carrega é perdido de vez. Deposite em caixas eletrônicos ou guarde sob o assoalho do quarto de Jason."
+   },
+   {
+    "q": "Existe glitch de dinheiro infinito em GTA 6?",
+    "a": "Circulam falhas relatadas por jogadores, mas os valores não foram verificados e elas podem ser corrigidas por atualização. Não tratamos como método confiável."
+   }
+  ],
+  "related": [
+   "gta6-0016",
+   "gta6-0017",
+   "gta6-0011"
+  ],
+  "tags": [
+   "ganhar dinheiro",
+   "dinheiro rápido",
+   "ficar rico",
+   "kenton",
+   "tesouro",
+   "joalheria",
+   "caixa eletrônico",
+   "buckme",
+   "receptador",
+   "glitch de dinheiro"
+  ],
+  "seo_title": "Como ganhar dinheiro no início de GTA 6",
+  "seo_description": "As formas de ganhar dinheiro em GTA 6 por capítulo, de Kenton às joalherias, e como não perder tudo ao morrer com dinheiro no bolso.",
+  "workflow_status": "publicado",
+  "featured": false,
+  "reviewed_by": null,
+  "published_at": "2026-11-25T12:00:00Z",
+  "created_at": "2026-11-25T12:00:00Z",
+  "updated_at": "2026-11-25T12:00:00Z"
+ },
+ {
+  "id": "gta6-0020",
+  "app_ref": null,
+  "game_id": "gta6",
+  "category_id": "gta6-colecionaveis",
+  "region_id": null,
+  "author_id": "redacao",
+  "kind": "descoberta",
+  "slug": "cartas-colecionaveis",
+  "title": "Cartas colecionáveis de GTA 6: os 18 conjuntos",
+  "direct_answer": "GTA 6 tem 18 conjuntos de cartas colecionáveis, com 12 a 36 cartas cada, segundo o Push Square. As cartas padrão têm local fixo, muitas dentro de casas e trailers acessíveis, e podem ser vendidas em casas de penhores.",
+  "summary": "Os conjuntos incluem times de Vice City, Liberty City e Los Santos. A lista completa de locais ainda não existe em nenhuma fonte confiável: o principal guia está em construção.",
+  "body_md": "As cartas são o colecionável que você mais vai esbarrar sem querer. Segundo o Push Square, são 18 conjuntos, cada um com 12 a 36 cartas, entre eles times de Vice City, Liberty City e Los Santos.\n\nHá dois tipos de ocorrência. As cartas padrão têm lugar fixo. Além delas, cartas aleatórias aparecem em contêineres amarelos e também contam para o progresso.\n\n## Onde procurar\n\nMuitas estão dentro de casas, trailers e prédios onde dá para entrar. Uma dica do The Big Lead: no mapa, os prédios em azul-escuro são os acessíveis. Como exemplo, o mesmo site cita a carta dos Los Santos Panic no trailer a oeste do primeiro esconderijo em Key Lento.\n\n## Onde ver o progresso e onde vender\n\n- Progresso: Touch Pad, Progress, Collections, Collectible Cards.\n- Venda: Touch Pad, Exploration, Collectors, Pawn Shops.\n\nAs cartas também fazem parte da lista de desejos de Randy. Em dinheiro, não espere muito: a Polygon estima algumas centenas de dólares por item colecionável.\n\n## O que ainda não se sabe\n\n- **A lista completa de locais.** O guia do Push Square está marcado como em andamento.\n- **O total de cartas.** Não confirmado.\n- **As cartas shiny.** O Push Square diz que elas podem ter vários pontos de surgimento aleatórios. Ainda em investigação.\n- **Quais cartas são perdíveis.** O Push Square diz que algumas podem ser, sem lista fechada.\n\nOutros colecionáveis citados pelas fontes, como pedaços de meteorito e scans do WAiNK, ainda não têm cobertura confiável e por isso não têm página aqui.",
+  "location_text": "Todo o mapa. Muitas cartas ficam dentro de casas, trailers e prédios acessíveis, que aparecem em azul-escuro no mapa, segundo o The Big Lead.",
+  "landmark": "Menu: Touch Pad, Progress, Collections, Collectible Cards.",
+  "coords": null,
+  "character_req": null,
+  "requirements": null,
+  "progress_required": null,
+  "conditions": null,
+  "steps": [],
+  "reward": "Dinheiro ao vender em casas de penhores. A Polygon estima algumas centenas de dólares por item colecionável.",
+  "reward_type": "dinheiro",
+  "repeatable": null,
+  "missable": "Algumas cartas podem ser perdíveis, segundo o Push Square, que ainda não tem a lista fechada.",
+  "common_mistakes": [],
+  "troubleshooting": [],
+  "platform_tested": null,
+  "game_version": null,
+  "last_verified_on": null,
+  "verification_status": "relato",
+  "evidence_type": "relatos",
+  "spoiler_level": "nenhum",
+  "sources": [
+   {
+    "nome": "Push Square",
+    "url": "https://www.pushsquare.com/guides/gta-6-collectible-card-locations",
+    "tipo": "imprensa",
+    "data": "2026-11-23",
+    "nota": "Lista dos 18 conjuntos com quantidades; locais fixos vs. cartas aleatórias em contêineres amarelos; venda em casas de penhores; guia ainda em construção."
+   },
+   {
+    "nome": "The Big Lead",
+    "url": "https://www.thebiglead.com/gta-6-collectibles-guide-cards-styles-meteorite-chunks-landmark-scans/",
+    "tipo": "imprensa",
+    "data": "2026-11-19",
+    "nota": "Locais de cartas e outros colecionáveis por região (Key Lento, Port Gellhorn etc.); dica dos prédios azul-escuros; pedaços de meteorito brilham à noite."
+   },
+   {
+    "nome": "Polygon",
+    "url": "https://www.polygon.com/gta-6-how-to-make-money-become-rich-fast-grand-theft-auto/",
+    "tipo": "imprensa",
+    "data": null,
+    "nota": "Cartas, dobrões e meteoritos podem ser vendidos em qualquer casa de penhores por poucas centenas de dólares."
+   }
+  ],
+  "media": [],
+  "faq": [
+   {
+    "q": "Quantas cartas colecionáveis tem em GTA 6?",
+    "a": "São 18 conjuntos, com 12 a 36 cartas cada, segundo o Push Square. O total exato ainda não foi confirmado."
+   },
+   {
+    "q": "Onde vender cartas colecionáveis em GTA 6?",
+    "a": "Em casas de penhores. No menu, elas aparecem em Touch Pad, Exploration, Collectors, Pawn Shops."
+   },
+   {
+    "q": "Como ver quantas cartas já peguei?",
+    "a": "No menu, em Touch Pad, Progress, Collections, Collectible Cards."
+   }
+  ],
+  "related": [
+   "gta6-0019"
+  ],
+  "tags": [
+   "cartas",
+   "cartas colecionáveis",
+   "collectible cards",
+   "colecionáveis",
+   "casa de penhores",
+   "pawn shop",
+   "100%",
+   "randy"
+  ],
+  "seo_title": "Cartas colecionáveis de GTA 6: conjuntos e onde vender",
+  "seo_description": "As cartas colecionáveis de GTA 6: 18 conjuntos, onde procurar, como ver o progresso e onde vender. Veja o que ainda não foi mapeado.",
+  "workflow_status": "publicado",
+  "featured": false,
+  "reviewed_by": null,
+  "published_at": "2026-11-25T12:00:00Z",
+  "created_at": "2026-11-25T12:00:00Z",
+  "updated_at": "2026-11-25T12:00:00Z"
+ }
+]

@@ -1,0 +1,10 @@
+[
+  { "key": "padrao", "eyebrow": "Seu companheiro de exploração", "headline": "Menos tempo procurando. Mais tempo descobrindo.", "body": "O aplicativo reúne as descobertas do portal num lugar só, para consultar com o controle na outra mão.", "button_label": "Conhecer o aplicativo" },
+  { "key": "missoes", "eyebrow": "Para a próxima sessão", "headline": "Tenha suas próximas descobertas organizadas enquanto joga.", "body": "Missões e encontros que o jogo não marca no mapa, com os requisitos à vista antes de você sair.", "button_label": "Conhecer o aplicativo" },
+  { "key": "lugares", "eyebrow": "Vá além da estrada", "headline": "Transforme sua próxima sessão de jogo em uma verdadeira expedição.", "body": "Monte seu roteiro por região e marque cada lugar que você já pisou.", "button_label": "Ver como funciona" },
+  { "key": "dinheiro", "eyebrow": "Grana que o jogo não anuncia", "headline": "Descubra outros esconderijos e recompensas sem precisar pesquisar um por um.", "body": "Filtre só o que rende dinheiro e veja o que ainda falta buscar.", "button_label": "Conhecer o aplicativo" },
+  { "key": "veiculos", "eyebrow": "Garagem dos sonhos", "headline": "Quer encontrar outras descobertas como esta?", "body": "Conheça o aplicativo e organize sua próxima exploração por tipo de veículo e região.", "button_label": "Conhecer o aplicativo" },
+  { "key": "colecionaveis", "eyebrow": "Para quem quer os 100%", "headline": "Acompanhe o que você já encontrou e o que ainda falta descobrir.", "body": "Um checklist que acompanha o seu progresso, sem planilha e sem papel.", "button_label": "Ver o checklist" },
+  { "key": "misterios", "eyebrow": "A investigação continua", "headline": "Acompanhe os mistérios enquanto a comunidade investiga.", "body": "Receba as atualizações de status quando um caso for confirmado ou desmentido.", "button_label": "Conhecer o aplicativo" },
+  { "key": "dicas", "eyebrow": "Do básico ao que ninguém conta", "headline": "Você conhece GTA 6. Mas será que conhece tudo que ele esconde?", "body": "Quando as dúvidas do começo acabarem, o aplicativo mostra o que procurar em seguida.", "button_label": "Conhecer o aplicativo" }
+]
