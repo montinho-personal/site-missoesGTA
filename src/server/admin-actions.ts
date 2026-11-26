@@ -194,3 +194,13 @@ export async function revokeLicense(fd: FormData) {
   await q(`update licenses set status = 'revogada', revoked_at = now() where code = $1`, [s(fd, "code")]);
   revalidatePath("/admin/acessos");
 }
+
+export async function savePrice(fd: FormData) {
+  await requireAdmin();
+  const { parsePrice } = await import("./mercadopago");
+  const cents = parsePrice(s(fd, "price"));
+  if (cents > 0) await q(`insert into settings (key, value) values ('app_price_brl', $1) on conflict (key) do update set value = excluded.value, updated_at = now()`, [(cents / 100).toFixed(2)]);
+  else await q(`delete from settings where key = 'app_price_brl'`);
+  revalidatePath("/app");
+  revalidatePath("/admin/acessos");
+}

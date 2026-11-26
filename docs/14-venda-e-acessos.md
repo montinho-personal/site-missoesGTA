@@ -22,9 +22,9 @@ A venda fica **desligada** enquanto faltar qualquer um destes itens, e a página
 | `DATABASE_URL` | Banco Postgres (Neon) |
 | `MP_ACCESS_TOKEN` | Mercado Pago > Suas integrações > sua aplicação > Credenciais de produção |
 | `MP_WEBHOOK_SECRET` | Mesma aplicação > Webhooks > assinatura secreta. URL do webhook: `https://missoessecretasgta.com.br/api/mercadopago/webhook/`, evento "Pagamentos" |
-| `APP_PRICE_BRL` | O preço, por exemplo `19,90` |
+| Preço | Definido pelo dono em `/admin/acessos/`, campo "Preço do aplicativo". Vale na hora, sem novo deploy. (A variável `APP_PRICE_BRL` continua aceita como reserva.) |
 
-Depois de definir, é preciso refazer o deploy: a página `/app/` é gerada no build, então mudar o preço também pede novo deploy.
+Depois de definir as variáveis, é preciso refazer o deploy uma vez. O preço não pede deploy: muda pelo painel.
 
 ## Contrato com o aplicativo
 
@@ -41,7 +41,7 @@ Aceita o código com ou sem hífens, em qualquer caixa. A resposta nunca traz e-
 
 ## O que foi testado, e o que não foi
 
-Testado com um **Mercado Pago simulado** (`tests/pagamento.mjs`, 16 verificações, em PostgreSQL real): preço na página, criação do pedido e da preferência, página sem código antes do pagamento, aviso com assinatura errada recusado, valor menor que o pedido não libera, aviso repetido não gera dois códigos, código exibido e validado, código inventado recusado, pedido inexistente não revela nada, cortesia, revogação e estorno.
+Testado com um **Mercado Pago simulado** (`tests/pagamento.mjs`, 18 verificações, em PostgreSQL real): venda desligada sem preço, preço definido pelo painel, preço na página, criação do pedido e da preferência, página sem código antes do pagamento, aviso com assinatura errada recusado, valor menor que o pedido não libera, aviso repetido não gera dois códigos, código exibido e validado, código inventado recusado, pedido inexistente não revela nada, cortesia, revogação e estorno.
 
 **Não testado:** nenhuma chamada ao Mercado Pago de verdade. A integração segue a documentação pública (preferência de Checkout Pro; assinatura `x-signature` com HMAC-SHA256 do manifesto `id:…;request-id:…;ts:…;`), mas só um pagamento real em modo de teste, com as credenciais do dono, confirma que os campos batem. **Faça uma compra de teste antes de divulgar.**
 

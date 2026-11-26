@@ -1,6 +1,7 @@
 import "server-only";
 import { createHmac } from "node:crypto";
 import { safeEqual } from "./security";
+import { q } from "./db";
 import { site } from "@/lib/site";
 
 /**
@@ -10,16 +11,26 @@ import { site } from "@/lib/site";
  * Variáveis (todas no painel da hospedagem, nunca no repositório):
  *   MP_ACCESS_TOKEN    credencial de produção da aplicação no Mercado Pago
  *   MP_WEBHOOK_SECRET  assinatura secreta do webhook (Suas integrações > Webhooks)
- *   APP_PRICE_BRL      preço em reais, ex.: 19.90
+ *   APP_PRICE_BRL      preço em reais, ex.: 19.90 (opcional: o preço normalmente é definido no painel)
  */
 const API = () => (process.env.MP_API_BASE || "https://api.mercadopago.com").replace(/\/$/, "");
 
-export function saleConfig() {
-  const price = Number((process.env.APP_PRICE_BRL ?? "").replace(",", "."));
-  const cents = Number.isFinite(price) && price > 0 ? Math.round(price * 100) : 0;
+/** Lê "19,90" ou "19.90" e devolve centavos; 0 quando não é um preço válido. */
+export function parsePrice(raw: string | null | undefined): number {
+  const price = Number(String(raw ?? "").trim().replace(/[^\d.,]/g, "").replace(",", "."));
+  return Number.isFinite(price) && price > 0 && price < 10000 ? Math.round(price * 100) : 0;
+}
+
+/** O preço vale primeiro o que o dono gravou no painel; sem isso, a variável APP_PRICE_BRL. */
+export async function saleConfig() {
+  let saved: string | null = null;
+  try { saved = (await q<{ value: string }>(`select value from settings where key = 'app_price_brl'`))[0]?.value ?? null; } catch {}
+  const cents = parsePrice(saved) || parsePrice(process.env.APP_PRICE_BRL);
+  const credentials = Boolean(process.env.MP_ACCESS_TOKEN && process.env.MP_WEBHOOK_SECRET);
   // Sem banco permanente não há onde guardar pedido nem acesso: a venda fica desligada.
-  const enabled = Boolean(process.env.MP_ACCESS_TOKEN && process.env.MP_WEBHOOK_SECRET && cents > 0 && process.env.DATABASE_URL);
-  return { enabled, cents, priceLabel: cents ? new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(cents / 100) : null };
+  const database = Boolean(process.env.DATABASE_URL);
+  const enabled = credentials && database && cents > 0;
+  return { enabled, cents, credentials, database, priceLabel: cents ? new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(cents / 100) : null };
 }
 
 export async function createPreference(order: { id: string; email: string; cents: number }): Promise<string> {

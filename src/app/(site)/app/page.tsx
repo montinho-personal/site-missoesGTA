@@ -25,20 +25,23 @@ const compare = [
   ["Confiar na informação", "Não saber se é boato, mod ou verdade", "O mesmo status de verificação do portal em cada item"],
 ];
 
-const faq = [
+
+
+export const revalidate = 600;
+
+export default async function AppPage() {
+  // A venda liga sozinha quando existirem: credenciais do Mercado Pago, preço e banco permanente.
+  const sale = await saleConfig();
+  const selling = sale.enabled;
+  const faq = [
   { q: "O aplicativo já está disponível?", a: appConfig.stage === "a_venda" ? "Sim. Veja acima as condições e a compatibilidade." : "Ainda não. Estamos preparando o lançamento. Deixe seu e-mail e avisamos quando sair." },
-  { q: "Vai ser pago?", a: saleConfig().enabled ? `Sim: ${saleConfig().priceLabel}, pagamento único. Depois de pagar você recebe um código de acesso.` : "Sim, o aplicativo será pago. O preço ainda não foi definido e vai aparecer nesta página, junto com a política de reembolso, antes de qualquer cobrança. As fichas continuam abertas e gratuitas aqui no portal." },
+  { q: "Vai ser pago?", a: sale.enabled ? `Sim: ${sale.priceLabel}, pagamento único. Depois de pagar você recebe um código de acesso.` : "Sim, o aplicativo será pago. O preço ainda não foi definido e vai aparecer nesta página, junto com a política de reembolso, antes de qualquer cobrança. As fichas continuam abertas e gratuitas aqui no portal." },
   { q: "É aplicativo de loja?", a: "Não. É um aplicativo web: abre pelo navegador do celular e pode ser instalado na tela de início, sem passar pela App Store nem pelo Google Play." },
   { q: "Em quais aparelhos vai funcionar?", a: "Em qualquer celular ou computador com navegador atual. Foi desenhado primeiro para o celular, com o console ligado ao lado." },
   { q: "Preciso do aplicativo para usar o portal?", a: "Não. As respostas continuam completas e gratuitas no portal. O aplicativo é para quem quer organização e acompanhamento durante o jogo." },
   { q: "O aplicativo é oficial da Rockstar?", a: "Não. Assim como o portal, é um projeto independente feito por fãs, sem ligação com a Rockstar Games ou a Take-Two Interactive." },
   { q: "O aplicativo altera o jogo ou acessa meu console?", a: "Não. É um guia de consulta: não modifica o jogo, não é mod e não se conecta ao console." },
 ];
-
-export default function AppPage() {
-  // A venda liga sozinha quando existirem: credenciais do Mercado Pago, preço e banco permanente.
-  const sale = saleConfig();
-  const selling = sale.enabled;
   const crumbs = [{ name: "Início", href: "/" }, { name: "Aplicativo" }];
   const ld: unknown[] = [breadcrumbLd(crumbs, "/app/"), faqLd(faq)];
   // SoftwareApplication só entra com produto real à venda: nada de preço ou nota fictícios.

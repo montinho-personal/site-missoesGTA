@@ -240,4 +240,15 @@ create table licenses (
 );
 `,
   },
+  {
+    // Ajustes que o dono muda pelo painel, sem novo deploy (ex.: preço do aplicativo).
+    id: "004_ajustes",
+    sql: `
+create table settings (
+  key text primary key,
+  value text not null,
+  updated_at timestamptz not null default now()
+);
+`,
+  },
 ];

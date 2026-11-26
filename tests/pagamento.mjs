@@ -2,7 +2,7 @@
 // Sobe um servidor falso da API, o site apontado para ele, e percorre: compra, aviso de pagamento,
 // código de acesso, validação pelo aplicativo, cortesia e revogação.
 // Uso: o build precisa das mesmas variáveis, porque /app/ é gerada no build:
-//   DATABASE_URL=... MP_ACCESS_TOKEN=x MP_WEBHOOK_SECRET=x APP_PRICE_BRL=19,90 npm run build && DATABASE_URL=... node tests/pagamento.mjs
+//   DATABASE_URL=... MP_ACCESS_TOKEN=x MP_WEBHOOK_SECRET=x npm run build && DATABASE_URL=... node tests/pagamento.mjs
 import http from "node:http";
 import { createHmac } from "node:crypto";
 import { spawn } from "node:child_process";
@@ -26,7 +26,7 @@ const fake = http.createServer((req, res) => {
   });
 }).listen(FAKE);
 
-const env = { ...process.env, PORT: String(PORT), MP_API_BASE: `http://localhost:${FAKE}`, MP_ACCESS_TOKEN: "TEST-token", MP_WEBHOOK_SECRET: SECRET, APP_PRICE_BRL: "19,90", ADMIN_PASSWORD: ADMIN, SESSION_SECRET: "0123456789abcdef0123456789abcdef", NEXT_PUBLIC_SITE_URL: BASE };
+const env = { ...process.env, PORT: String(PORT), MP_API_BASE: `http://localhost:${FAKE}`, MP_ACCESS_TOKEN: "TEST-token", MP_WEBHOOK_SECRET: SECRET, ADMIN_PASSWORD: ADMIN, SESSION_SECRET: "0123456789abcdef0123456789abcdef", NEXT_PUBLIC_SITE_URL: BASE };
 const server = spawn("npx", ["next", "start", "-p", String(PORT)], { env, stdio: "ignore" });
 const fim = (code) => { server.kill(); fake.close(); process.exit(code); };
 for (let i = 0; i < 40; i++) { try { if ((await fetch(BASE + "/robots.txt")).ok) break; } catch {} await new Promise((r) => setTimeout(r, 500)); }
@@ -41,6 +41,18 @@ const valida = async (codigo) => (await (await fetch(`${BASE}/api/acesso/validar
 try {
   const browser = await chromium.launch();
   const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
+  // O preço é definido pelo dono no painel, sem variável de ambiente e sem novo deploy.
+  await page.goto(BASE + "/app/", { waitUntil: "networkidle" });
+  ok("sem preço, a venda fica desligada e a página mostra a lista de aviso", (await page.getByRole("button", { name: "Quero ser avisado" }).count()) === 1);
+  await page.goto(BASE + "/admin/login/");
+  await page.getByLabel("Senha").fill(ADMIN);
+  await page.getByRole("button", { name: "Entrar" }).click();
+  await page.waitForURL(/\/admin\/$/);
+  await page.goto(BASE + "/admin/acessos/");
+  await page.getByLabel(/Preço do aplicativo/).fill("19,90");
+  await page.getByRole("button", { name: "Salvar preço" }).click();
+  await page.waitForSelector("text=Venda ligada");
+  ok("dono define o preço no painel e a venda liga", true);
   await page.goto(BASE + "/app/", { waitUntil: "networkidle" });
   ok("página do app mostra o preço configurado", /R\$\s19,90/.test(await page.locator("main").innerText()));
   ok("botão de compra no lugar da lista de aviso", (await page.getByRole("button", { name: /Comprar por/ }).count()) === 1);
@@ -74,10 +86,6 @@ try {
 
   // painel: cortesia e revogação
   await page.setViewportSize({ width: 1280, height: 900 });
-  await page.goto(BASE + "/admin/login/");
-  await page.getByLabel("Senha").fill(ADMIN);
-  await page.getByRole("button", { name: "Entrar" }).click();
-  await page.waitForURL(/\/admin\/$/);
   await page.goto(BASE + "/admin/acessos/");
   const painel = await page.locator("body").innerText();
   ok("painel mostra a venda paga e a receita", /Venda ligada/.test(painel) && /R\$\s19,90/.test(painel) && painel.includes(codigo));

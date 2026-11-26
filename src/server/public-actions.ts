@@ -74,7 +74,7 @@ export async function startCheckout(_prev: FormState, fd: FormData): Promise<For
   const { newOrderId } = await import("./licenses");
   const values = keep(fd);
   if (looksAutomated(fd)) return { ok: false, message: BOT, values };
-  const sale = saleConfig();
+  const sale = await saleConfig();
   if (!sale.enabled) return { ok: false, message: "A venda ainda não está aberta.", values };
   const parsed = buySchema.safeParse(Object.fromEntries(fd));
   if (!parsed.success) return { ok: false, message: parsed.error.issues[0].message, values };

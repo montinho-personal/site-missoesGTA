@@ -1,5 +1,5 @@
 import { q } from "@/server/db";
-import { createCourtesyAction, revokeLicense } from "@/server/admin-actions";
+import { createCourtesyAction, revokeLicense, savePrice } from "@/server/admin-actions";
 import { saleConfig } from "@/server/mercadopago";
 import { formatDate } from "@/lib/labels";
 
@@ -7,7 +7,7 @@ export const metadata = { title: "Acessos e vendas" };
 
 export default async function Acessos({ searchParams }: { searchParams: Promise<Record<string, string | undefined>> }) {
   const novo = (await searchParams).novo;
-  const sale = saleConfig();
+  const sale = await saleConfig();
   const [lic, totals] = await Promise.all([
     q<{ code: string; email: string | null; origin: string; status: string; note: string | null; created_at: string; last_used_at: string | null }>(`select code, email, origin, status, note, created_at::text, last_used_at::text from licenses order by created_at desc limit 300`),
     q<{ pagos: number; pendentes: number; receita: number; cortesias: number }>(`select (select count(*) from orders where status = 'pago')::int as pagos, (select count(*) from orders where status = 'pendente')::int as pendentes, (select coalesce(sum(amount_cents), 0) from orders where status = 'pago')::int as receita, (select count(*) from licenses where origin = 'cortesia' and status = 'ativa')::int as cortesias`),
@@ -16,7 +16,19 @@ export default async function Acessos({ searchParams }: { searchParams: Promise<
   return (
     <div className="flex flex-col gap-6">
       <h1 className="text-3xl font-black">Acessos e vendas</h1>
-      <p className={`card p-4 ${sale.enabled ? "border-ok/60" : "border-orange/60"}`}>{sale.enabled ? `Venda ligada: ${sale.priceLabel}, pagamento único pelo Mercado Pago.` : "Venda desligada. Para ligar, defina MP_ACCESS_TOKEN, MP_WEBHOOK_SECRET, APP_PRICE_BRL e DATABASE_URL nas variáveis de ambiente e refaça o deploy."}</p>
+      <section className={`card p-5 ${sale.enabled ? "border-ok/60" : "border-orange/60"}`}>
+        <h2 className="text-xl font-bold">{sale.enabled ? `Venda ligada: ${sale.priceLabel}, pagamento único` : "Venda desligada"}</h2>
+        <ul className="mt-3 flex flex-col gap-1 text-fg-muted">
+          <li>{sale.cents > 0 ? "✓" : "✗"} Preço definido{sale.cents > 0 ? `: ${sale.priceLabel}` : ""}</li>
+          <li>{sale.credentials ? "✓" : "✗"} Credenciais do Mercado Pago (variáveis MP_ACCESS_TOKEN e MP_WEBHOOK_SECRET na hospedagem)</li>
+          <li>{sale.database ? "✓" : "✗"} Banco de dados permanente (DATABASE_URL)</li>
+        </ul>
+        <form action={savePrice} className="mt-4 flex flex-wrap items-end gap-3">
+          <div><label className="field-label" htmlFor="p-preco">Preço do aplicativo (R$)</label><input id="p-preco" name="price" inputMode="decimal" placeholder="19,90" defaultValue={sale.cents ? (sale.cents / 100).toFixed(2).replace(".", ",") : ""} className="field max-w-40" /></div>
+          <button className="btn btn-ghost">Salvar preço</button>
+        </form>
+        <p className="mt-2 text-sm text-fg-subtle">Vale para as próximas compras, na hora. Deixe vazio para tirar o aplicativo de venda.</p>
+      </section>
       <div className="grid gap-3 grid-cols-2 lg:grid-cols-4">
         {[["Vendas pagas", t.pagos], ["Receita", new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(t.receita / 100)], ["Pedidos pendentes", t.pendentes], ["Cortesias ativas", t.cortesias]].map(([l, v]) => (
           <div key={String(l)} className="card p-4"><p className="label text-fg-subtle">{l}</p><p className="font-display text-3xl font-black mt-1">{v}</p></div>
