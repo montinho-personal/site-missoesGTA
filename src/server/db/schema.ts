@@ -284,4 +284,19 @@ alter table orders add column access_email_at timestamptz;
 alter table orders add column access_email_error text;
 `,
   },
+  {
+    // "Já comprei" no app instalado do iPhone: código de 6 dígitos por e-mail, válido por 15 minutos.
+    id: "008_codigo_de_entrada",
+    sql: `
+create table login_codes (
+  id bigserial primary key,
+  email text not null,
+  code_hash text not null,
+  expires_at timestamptz not null,
+  attempts int not null default 0,
+  used_at timestamptz
+);
+create index login_codes_email on login_codes (email, expires_at);
+`,
+  },
 ];

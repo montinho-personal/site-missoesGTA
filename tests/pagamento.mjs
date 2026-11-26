@@ -118,6 +118,11 @@ try {
   const antes = emails.length;
   const r1 = await link("PIX@example.com"), r2 = await link("ninguem@example.com");
   ok("'Já comprei' manda o link só para quem comprou, com a mesma resposta para todos", (await r1.json()).ok && (await r2.json()).ok && emails.length === antes + 1 && emails.at(-1).to[0] === "pix@example.com" && emails.at(-1).html.includes(abrir) && r1.headers.get("access-control-allow-origin") === "https://app.missoessecretasgta.com.br");
+  const cod6 = /(\d{3}) (\d{3})<\/span>/.exec(emails.at(-1).html);
+  const seis = cod6 ? cod6[1] + cod6[2] : "";
+  const confirma = (codigo, aparelho = "cel-2-bbbbbbbb", key = "chave-app-teste") => fetch(`${BASE}/api/acesso/confirmar-codigo/`, { method: "POST", headers: { "content-type": "application/json", ...(key ? { authorization: `Bearer ${key}` } : {}) }, body: JSON.stringify({ email: "pix@example.com", codigo, aparelho }) }).then((r) => r.status === 401 ? { status: 401 } : r.json());
+  const errado = await confirma(seis === "000000" ? "111111" : "000000"), semChave = await confirma(seis, "cel-2-bbbbbbbb", ""), certo = await confirma(seis), denovo = await confirma(seis);
+  ok("iPhone: código de 6 dígitos do e-mail devolve a chave uma vez só", seis.length === 6 && errado.valido === false && semChave.status === 401 && certo.valido === true && certo.chave === compacto(codigoPix) && denovo.valido === false, JSON.stringify([seis, errado, certo, denovo]));
 
   // Cartão: página do Mercado Pago (Checkout Pro) e liberação pelo aviso
   await page.goto(BASE + "/app/", { waitUntil: "load" });

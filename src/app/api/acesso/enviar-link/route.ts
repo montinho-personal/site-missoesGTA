@@ -1,7 +1,7 @@
 import { createHash } from "node:crypto";
 import { z } from "zod";
 import { q } from "@/server/db";
-import { accessEmail, accessLink, appUrl, DEFAULT_APP_URL } from "@/server/access";
+import { accessEmail, accessLink, appUrl, DEFAULT_APP_URL, newLoginCode } from "@/server/access";
 import { sendEmail } from "@/server/email";
 import { clientKey, rateLimit } from "@/server/security";
 
@@ -27,6 +27,7 @@ export async function POST(req: Request) {
     return Response.json({ ok: false, erro: "Muitos pedidos. Tente de novo daqui a pouco." }, { status: 429, headers: h });
   // O acesso mais recente e ativo desse e-mail (compra ou cortesia).
   const [lic] = await q<{ code: string }>(`select code from licenses where lower(email) = $1 and status = 'ativa' order by (origin = 'compra') desc, created_at desc limit 1`, [email]);
-  if (lic) await sendEmail({ to: email, ...accessEmail({ link: accessLink(await appUrl(), lic.code), kind: "link" }) });
+  // O e-mail leva o link (abre o app) e um código de 6 dígitos, para o app instalado no iPhone, que não recebe o link.
+  if (lic) await sendEmail({ to: email, ...accessEmail({ link: accessLink(await appUrl(), lic.code), kind: "link", loginCode: await newLoginCode(email) }) });
   return Response.json({ ok: true }, { headers: h });
 }
