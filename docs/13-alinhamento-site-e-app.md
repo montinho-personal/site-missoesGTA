@@ -57,6 +57,16 @@ O que essa decisão implica:
 
 Ainda falta decidir: preço e modelo (pagamento único ou assinatura), meio de pagamento, e como a cortesia é concedida.
 
+### O que fica aberto: decisão do fundador em 26/11/2026
+
+**O site é completo e gratuito.** As 125 fichas ficam abertas no site, com passo a passo, local e códigos. O aplicativo pago vende a ferramenta: mapa, progresso, rota e uso com o console ao lado.
+
+Consequências:
+
+- A proposta registrada no aplicativo (D-020, item 1: ficha aberta só com o resumo, e passo a passo, mapa e códigos para quem comprou) **não vale para o site**. As páginas públicas achadas pela busca são as do site; o aplicativo não precisa ter páginas abertas próprias.
+- O motivo para pagar precisa estar na ferramenta. A página `/app/` deve mostrar o mapa, o progresso e a rota funcionando assim que existirem.
+- Os links "abrir no aplicativo" de cada ficha do site passam a ser o principal caminho de venda.
+
 ## Recado para a sessão que cuida do aplicativo
 
 1. O site passou a consumir `conteudo/segredos.json` e `conteudo/meta.json` (regiões, fontes, coleção "comece", `jogo`). Mudança de formato nesses arquivos quebra a importação do site: avisar antes.
