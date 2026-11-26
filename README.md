@@ -35,3 +35,4 @@ Sem `DATABASE_URL`, o projeto usa um Postgres embutido (PGlite) em `.data/`, já
 | [11](docs/11-roadmap.md) | Roteiro de crescimento |
 | [12](docs/12-auditoria-de-narrativa.md) | Auditoria de narrativa e guia de voz |
 | [13](docs/13-alinhamento-site-e-app.md) | Alinhamento entre site e aplicativo |
+| [14](docs/14-venda-e-acessos.md) | Venda pelo Mercado Pago, códigos de acesso e cortesia |

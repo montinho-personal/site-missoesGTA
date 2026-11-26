@@ -1,4 +1,5 @@
 "use server";
+import { redirect } from "next/navigation";
 import { z } from "zod";
 import { canWrite, q } from "./db";
 import { clientKey, rateLimit } from "./security";
@@ -63,4 +64,26 @@ export async function joinWaitlist(_prev: FormState, fd: FormData): Promise<Form
   if (!(await rateLimit("waitlist", key, 5, 3600))) return { ok: false, message: "Muitas tentativas. Tente de novo mais tarde." };
   await q(`insert into waitlist (email, source) values ($1, $2) on conflict (email) do nothing`, [parsed.data.email.toLowerCase(), parsed.data.source || null]);
   return { ok: true, message: "Pronto. Avisaremos você por e-mail quando o aplicativo estiver disponível, e só sobre isso." };
+}
+
+const buySchema = z.object({ email: z.email("Digite um e-mail válido.").max(160), consent: z.literal("on", { error: "É preciso aceitar os termos para comprar." }) });
+
+/** Abre um pedido e manda o comprador para o pagamento no Mercado Pago. */
+export async function startCheckout(_prev: FormState, fd: FormData): Promise<FormState> {
+  const { saleConfig, createPreference } = await import("./mercadopago");
+  const { newOrderId } = await import("./licenses");
+  const values = keep(fd);
+  if (looksAutomated(fd)) return { ok: false, message: BOT, values };
+  const sale = saleConfig();
+  if (!sale.enabled) return { ok: false, message: "A venda ainda não está aberta.", values };
+  const parsed = buySchema.safeParse(Object.fromEntries(fd));
+  if (!parsed.success) return { ok: false, message: parsed.error.issues[0].message, values };
+  if (!(await rateLimit("checkout", await clientKey(), 8, 3600))) return { ok: false, message: "Muitas tentativas. Tente de novo mais tarde.", values };
+  const id = newOrderId();
+  const email = parsed.data.email.toLowerCase();
+  await q(`insert into orders (id, email, amount_cents) values ($1, $2, $3)`, [id, email, sale.cents]);
+  let url: string;
+  try { url = await createPreference({ id, email, cents: sale.cents }); }
+  catch { return { ok: false, message: "Não foi possível abrir o pagamento agora. Nada foi cobrado. Tente de novo em instantes.", values }; }
+  redirect(url);
 }

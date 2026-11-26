@@ -73,3 +73,4 @@ Consequências:
 2. O `id` da ficha virou parte do endereço público do site (`/gta-6/<categoria>/<id>/`). A regra "nunca mude o id" agora protege também os links do site.
 3. A categoria de uma ficha também está no endereço. Trocar `cat` muda a URL do site (ele cria o redirecionamento se a troca for feita pelo painel, mas não na importação).
 4. Vale decidir juntos: a regra de spoiler por capítulo, a voz em duas camadas e o uso de Nina e Bira.
+5. A venda e os códigos de acesso ficam no site. O contrato para o aplicativo validar um código está em `docs/14-venda-e-acessos.md` (um `POST` que responde sim ou não). O bloqueio de quem não comprou é do lado do aplicativo.

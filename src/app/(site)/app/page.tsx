@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { Callout, FaqList, JsonLd } from "@/components/ui";
-import { TrackLink, TrackView } from "@/components/client";
-import { WaitlistForm } from "@/components/Forms";
+import { TrackView } from "@/components/client";
+import { BuyForm, WaitlistForm } from "@/components/Forms";
+import { saleConfig } from "@/server/mercadopago";
 import { Icon } from "@/components/Icon";
 import { Breadcrumbs } from "@/components/ui";
 import { breadcrumbLd, faqLd, pageMeta } from "@/lib/seo";
@@ -26,7 +27,7 @@ const compare = [
 
 const faq = [
   { q: "O aplicativo já está disponível?", a: appConfig.stage === "a_venda" ? "Sim. Veja acima as condições e a compatibilidade." : "Ainda não. Estamos preparando o lançamento. Deixe seu e-mail e avisamos quando sair." },
-  { q: "Vai ser pago?", a: appConfig.price ? "Sim, e o preço está indicado nesta página." : "Sim, o aplicativo será pago. O preço ainda não foi definido e vai aparecer nesta página, junto com a política de reembolso, antes de qualquer cobrança. As fichas continuam abertas e gratuitas aqui no portal." },
+  { q: "Vai ser pago?", a: saleConfig().enabled ? `Sim: ${saleConfig().priceLabel}, pagamento único. Depois de pagar você recebe um código de acesso.` : "Sim, o aplicativo será pago. O preço ainda não foi definido e vai aparecer nesta página, junto com a política de reembolso, antes de qualquer cobrança. As fichas continuam abertas e gratuitas aqui no portal." },
   { q: "É aplicativo de loja?", a: "Não. É um aplicativo web: abre pelo navegador do celular e pode ser instalado na tela de início, sem passar pela App Store nem pelo Google Play." },
   { q: "Em quais aparelhos vai funcionar?", a: "Em qualquer celular ou computador com navegador atual. Foi desenhado primeiro para o celular, com o console ligado ao lado." },
   { q: "Preciso do aplicativo para usar o portal?", a: "Não. As respostas continuam completas e gratuitas no portal. O aplicativo é para quem quer organização e acompanhamento durante o jogo." },
@@ -35,16 +36,18 @@ const faq = [
 ];
 
 export default function AppPage() {
-  const selling = appConfig.stage === "a_venda" && appConfig.purchaseUrl;
+  // A venda liga sozinha quando existirem: credenciais do Mercado Pago, preço e banco permanente.
+  const sale = saleConfig();
+  const selling = sale.enabled;
   const crumbs = [{ name: "Início", href: "/" }, { name: "Aplicativo" }];
   const ld: unknown[] = [breadcrumbLd(crumbs, "/app/"), faqLd(faq)];
   // SoftwareApplication só entra com produto real à venda: nada de preço ou nota fictícios.
-  if (selling && appConfig.name && appConfig.price) {
+  if (selling && appConfig.name) {
     ld.push({ "@type": "SoftwareApplication", name: appConfig.name, applicationCategory: "GameApplication", operatingSystem: appConfig.platforms?.join(", "), url: abs("/app/"),
-      offers: { "@type": "Offer", price: appConfig.price.amount, priceCurrency: appConfig.price.currency, url: appConfig.purchaseUrl } });
+      offers: { "@type": "Offer", price: sale.cents / 100, priceCurrency: "BRL", url: abs("/app/") } });
   }
   const primaryCta = selling
-    ? <TrackLink external href={appConfig.purchaseUrl!} className="btn btn-app" event="begin_checkout" params={{ placement: "app_hero" }}>Comprar o aplicativo<Icon name="arrow" size={18} /></TrackLink>
+    ? <a href="#avise-me" className="btn btn-app">Comprar por {sale.priceLabel}<Icon name="arrow" size={18} /></a>
     : <a href="#avise-me" className="btn btn-app">Quero ser avisado do lançamento<Icon name="arrow" size={18} /></a>;
 
   return (
@@ -127,9 +130,9 @@ export default function AppPage() {
         </section>
 
         <section className="pt-16 sm:pt-24 grid gap-4 md:grid-cols-3" aria-label="Condições">
-          <div className="card p-5"><p className="label text-fg-subtle mb-2">Preço</p><p>{appConfig.price ? new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(appConfig.price.amount) : <span className="text-fg-muted">O aplicativo será pago. Valor a definir; as fichas seguem gratuitas no portal.</span>}</p></div>
+          <div className="card p-5"><p className="label text-fg-subtle mb-2">Preço</p><p>{selling ? <><strong className="text-xl">{sale.priceLabel}</strong> <span className="text-fg-muted">pagamento único, por Pix ou cartão.</span></> : <span className="text-fg-muted">O aplicativo será pago. Valor a definir; as fichas seguem gratuitas no portal.</span>}</p></div>
           <div className="card p-5"><p className="label text-fg-subtle mb-2">Compatibilidade</p><p>{appConfig.platforms ? appConfig.platforms.join(", ") + "." : <span className="text-fg-muted">A anunciar.</span>}</p></div>
-          <div className="card p-5"><p className="label text-fg-subtle mb-2">Reembolso e suporte</p><p className="text-fg-muted">{appConfig.refundPolicy ?? "A política de cancelamento e reembolso será publicada junto com o preço."} {!appConfig.supportContact && <>Enquanto isso, fale com a gente pelo <Link className="link" href="/contato/">contato</Link>.</>}</p></div>
+          <div className="card p-5"><p className="label text-fg-subtle mb-2">Reembolso e suporte</p><p className="text-fg-muted">{selling ? "Você pode desistir em até 7 dias depois da compra e receber o valor de volta, como prevê o Código de Defesa do Consumidor." : "A política de cancelamento e reembolso será publicada junto com o preço."} {!appConfig.supportContact && <>Enquanto isso, fale com a gente pelo <Link className="link" href="/contato/">contato</Link>.</>}</p></div>
         </section>
 
         <section id="avise-me" className="pt-16 sm:pt-24 scroll-mt-24" aria-labelledby="h-avise">
@@ -137,9 +140,9 @@ export default function AppPage() {
             <div>
               <p className="label text-violet mb-3">{selling ? "Pronto para explorar?" : "Lista de aviso"}</p>
               <h2 id="h-avise" className="text-3xl sm:text-4xl font-extrabold">Seu próximo segredo está esperando para ser descoberto.</h2>
-              <p className="mt-3 text-fg-muted">{selling ? "Leve o portal inteiro no bolso e acompanhe seu progresso." : "Deixe seu e-mail e a gente avisa no dia do lançamento. Um aviso só. Quem manda dez e-mails por semana é a seguradora."}</p>
+              <p className="mt-3 text-fg-muted">{selling ? "Pague uma vez, receba seu código de acesso na hora e use no aplicativo." : "Deixe seu e-mail e a gente avisa no dia do lançamento. Um aviso só. Quem manda dez e-mails por semana é a seguradora."}</p>
             </div>
-            {selling ? <div>{primaryCta}</div> : <WaitlistForm source="app_landing" />}
+            {selling ? <BuyForm priceLabel={sale.priceLabel!} /> : <WaitlistForm source="app_landing" />}
           </div>
         </section>
 

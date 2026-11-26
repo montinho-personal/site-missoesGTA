@@ -14,7 +14,7 @@ const csp = [
   "frame-src https://www.youtube-nocookie.com",
   "object-src 'none'",
   "base-uri 'self'",
-  "form-action 'self'",
+  "form-action 'self' https://www.mercadopago.com.br https://sandbox.mercadopago.com.br",
   "frame-ancestors 'none'",
 ].join("; ");
 

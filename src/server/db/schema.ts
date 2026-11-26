@@ -214,4 +214,30 @@ delete from categories c where not exists (select 1 from entries e where e.categ
 delete from ctas;
 `,
   },
+  {
+    // Venda do aplicativo: pedidos (Mercado Pago) e acessos (compra ou cortesia).
+    id: "003_pedidos_e_acessos",
+    sql: `
+create table orders (
+  id text primary key,
+  email text not null,
+  amount_cents int not null,
+  status text not null default 'pendente' check (status in ('pendente','pago','recusado','estornado')),
+  payment_id text,
+  created_at timestamptz not null default now(),
+  paid_at timestamptz
+);
+create table licenses (
+  code text primary key,
+  email text,
+  origin text not null check (origin in ('compra','cortesia')),
+  status text not null default 'ativa' check (status in ('ativa','revogada')),
+  order_id text unique references orders(id),
+  note text,
+  created_at timestamptz not null default now(),
+  revoked_at timestamptz,
+  last_used_at timestamptz
+);
+`,
+  },
 ];

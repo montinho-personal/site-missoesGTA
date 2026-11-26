@@ -1,7 +1,7 @@
 "use client";
 import { useActionState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { joinWaitlist, submitToTeam, type FormState } from "@/server/public-actions";
+import { joinWaitlist, startCheckout, submitToTeam, type FormState } from "@/server/public-actions";
 import { track } from "@/lib/analytics";
 import { Icon } from "./Icon";
 
@@ -96,6 +96,25 @@ export function WaitlistForm({ source }: { source: string }) {
       <label className="flex items-start gap-3 cursor-pointer"><input type="checkbox" name="consent" required defaultChecked={state?.values?.consent === "on"} className="mt-1 size-5 accent-[#a98bff]" />
         <span className="text-sm text-fg-muted">Aceito receber um aviso por e-mail sobre o lançamento do aplicativo. Sem spam; dá para sair quando quiser. <Link href="/privacidade/" className="link">Privacidade</Link>.</span></label>
       {state && !state.ok && <Status state={state} />}
+    </form>
+  );
+}
+
+export function BuyForm({ priceLabel }: { priceLabel: string }) {
+  const [state, action, pending] = useActionState(startCheckout, null);
+  return (
+    <form action={action} className="relative flex flex-col gap-3.5" noValidate onSubmit={() => track("begin_checkout", { placement: "app_landing" })}>
+      <Trap attempt={state} />
+      <div>
+        <label className="field-label" htmlFor="b-email">Seu e-mail</label>
+        <input className="field" id="b-email" name="email" type="email" required autoComplete="email" placeholder="voce@exemplo.com" defaultValue={state?.values?.email} aria-describedby="b-hint" />
+        <span id="b-hint" className="field-hint">Fica ligado ao seu código de acesso, para a gente conseguir te ajudar se você perder.</span>
+      </div>
+      <label className="flex items-start gap-3 cursor-pointer"><input type="checkbox" name="consent" required defaultChecked={state?.values?.consent === "on"} className="mt-1 size-5 accent-[#a98bff]" />
+        <span className="text-sm text-fg-muted">Li e aceito os <Link href="/termos/" className="link">termos de uso</Link> e a <Link href="/privacidade/" className="link">política de privacidade</Link>. Sei que posso desistir da compra em até 7 dias.</span></label>
+      {state && !state.ok && <Status state={state} />}
+      <button className="btn btn-app self-start" disabled={pending}>{pending ? "Abrindo o pagamento…" : `Comprar por ${priceLabel}`}</button>
+      <p className="text-sm text-fg-subtle">O pagamento é feito na página do Mercado Pago (Pix ou cartão). Nenhum dado de cartão passa por este site.</p>
     </form>
   );
 }

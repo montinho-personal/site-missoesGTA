@@ -180,3 +180,17 @@ export async function importKeywords(_p: { message: string } | null, fd: FormDat
   revalidatePath("/admin/palavras-chave");
   return { message: `${rows.length} linhas lidas: ${r.inserted} novas, ${r.merged} somadas a termos existentes, ${r.skipped} ignoradas (vazias).` };
 }
+
+export async function createCourtesyAction(fd: FormData) {
+  await requireAdmin();
+  const { createCourtesy } = await import("./licenses");
+  const email = s(fd, "email").toLowerCase();
+  const code = await createCourtesy(/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email) ? email : null, nul(s(fd, "note").slice(0, 200)));
+  redirect(`/admin/acessos/?novo=${code}`);
+}
+
+export async function revokeLicense(fd: FormData) {
+  await requireAdmin();
+  await q(`update licenses set status = 'revogada', revoked_at = now() where code = $1`, [s(fd, "code")]);
+  revalidatePath("/admin/acessos");
+}
