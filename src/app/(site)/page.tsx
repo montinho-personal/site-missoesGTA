@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { HeroArt } from "@/components/HeroArt";
+import Image from "next/image";
+import { heroArt } from "@/lib/art";
 import { Icon } from "@/components/Icon";
 import { SearchTrigger } from "@/components/Search";
 import { CategoryCard } from "@/components/CategoryCard";
@@ -32,12 +33,12 @@ export default async function Home() {
       {/* 1. Hero */}
       <section className="relative isolate overflow-hidden border-b border-ink-600">
         {/* celular: faixa ilustrada no topo; telas largas: arte à direita do texto */}
-        <div className="absolute inset-x-0 top-0 -z-10 h-52 md:inset-y-0 md:left-auto md:right-0 md:h-auto md:w-[68%]">
-          <HeroArt className="h-full w-full" />
+        <div className="absolute inset-x-0 top-0 -z-10 h-56 md:inset-y-0 md:left-auto md:right-0 md:h-auto md:w-[72%]">
+          <Image src={heroArt.src} alt="" width={heroArt.width} height={heroArt.height} priority sizes="(min-width: 768px) 72vw, 100vw" className="h-full w-full object-cover object-[78%_50%] md:object-[70%_50%]" />
           <div className="absolute inset-0 bg-gradient-to-b from-ink-950/30 via-transparent to-ink-950 md:bg-gradient-to-r md:from-ink-950 md:via-ink-950/50 md:to-transparent" />
           <div className="absolute inset-x-0 bottom-0 hidden h-24 bg-gradient-to-b from-transparent to-ink-950 md:block" />
         </div>
-        <div className="wrap pt-44 pb-12 md:pt-20 md:pb-24">
+        <div className="wrap pt-48 pb-12 md:pt-20 md:pb-24">
           <div className="max-w-2xl">
             <p className="label text-pink mb-4">Para quem vai além do óbvio</p>
             <h1 className="text-[2.35rem] leading-[1.05] sm:text-6xl font-black">O GTA 6 esconde muito mais do que você imagina.</h1>
