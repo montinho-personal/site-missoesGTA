@@ -1,5 +1,5 @@
 {
- "quando": "2026-11-26T21:05:26.739Z",
+ "quando": "2026-11-26T21:15:52.737Z",
  "total": 110,
  "falhas": 0,
  "results": [
@@ -181,7 +181,7 @@
   {
    "name": "JSON-LD válido com Article e BreadcrumbList",
    "pass": true,
-   "detail": "BreadcrumbList,Article"
+   "detail": "BreadcrumbList,Article,FAQPage"
   },
   {
    "name": "sem preço/avaliação fictícios no schema",

@@ -13,8 +13,8 @@ import { appConfig, featureStatusLabel, type FeatureStatus } from "@/lib/app-con
 import { abs, site } from "@/lib/site";
 
 export const metadata = pageMeta({
-  title: "Aplicativo de segredos de GTA 6: seu companheiro de exploração",
-  description: "Um aplicativo para explorar GTA 6 a fundo: descobertas organizadas por região, checklist do que você já achou e controle de spoilers. Veja o que já existe e o que está planejado.",
+  title: "App de segredos de GTA 6: o arquivo inteiro no bolso",
+  description: "App para explorar GTA 6 a fundo: descobertas por região, checklist do que você já achou e controle de spoiler. Revisado todo dia. Veja o que já existe.",
   path: "/app/",
 });
 

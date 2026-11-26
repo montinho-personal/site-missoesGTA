@@ -10,6 +10,7 @@ import { saleConfig } from "@/server/mercadopago";
 import { AppPitch } from "@/components/AppPitch";
 import { notFoundOrRedirect } from "@/server/route-helpers";
 import { breadcrumbLd, faqLd, pageMeta } from "@/lib/seo";
+import { entryFaq, entrySeoDescription, entrySeoTitle, withBrand } from "@/lib/seo-entry";
 import { evidenceLabel, factValue, formatDate, precisionInfo, rewardTypeLabel, statusInfo } from "@/lib/labels";
 import { abs, site } from "@/lib/site";
 import { appConfig } from "@/lib/app-config";
@@ -27,7 +28,7 @@ export async function generateMetadata({ params }: Props) {
   const e = await getEntry(game, categoria, slug);
   if (!e) return {};
   return pageMeta({
-    title: e.seo_title || `${e.title} (GTA 6)`, description: e.seo_description || e.direct_answer || e.summary,
+    title: withBrand(entrySeoTitle(e)), absoluteTitle: true, description: entrySeoDescription(e),
     path: entryUrl(e), type: "article", published: e.published_at, modified: e.updated_at,
   });
 }
@@ -60,6 +61,7 @@ export default async function EntryPage({ params }: Props) {
   const url = abs(path);
   const shareCtx = { kind: "ficha" as const, url, title: entry.title, category: categoria, spoiler: entry.spoiler_level };
 
+  const faq = entryFaq(entry);
   const toc = [
     !isGuide && { id: "ficha", label: "Ficha da descoberta" },
     entry.steps.length > 0 && { id: "passo-a-passo", label: "Passo a passo" },
@@ -67,7 +69,7 @@ export default async function EntryPage({ params }: Props) {
     entry.common_mistakes.length > 0 && { id: "erros-comuns", label: "Erros comuns" },
     entry.troubleshooting.length > 0 && { id: "problemas", label: "Se não funcionar" },
     { id: "verificacao", label: "Como sabemos" },
-    entry.faq.length > 0 && { id: "perguntas", label: "Perguntas frequentes" },
+    faq.length > 0 && { id: "perguntas", label: "Perguntas frequentes" },
   ].filter(Boolean) as { id: string; label: string }[];
 
   const ld = {
@@ -83,7 +85,7 @@ export default async function EntryPage({ params }: Props) {
         ...(entry.media.filter((m) => m.tipo === "imagem").length ? { image: entry.media.filter((m) => m.tipo === "imagem").map((m) => m.url) } : {}),
         citation: entry.sources.map((s) => s.url),
       },
-      ...(entry.faq.length ? [faqLd(entry.faq)] : []),
+      ...(faq.length ? [faqLd(faq)] : []),
     ],
   };
 
@@ -256,10 +258,10 @@ export default async function EntryPage({ params }: Props) {
             {!hasPitch && <div className="max-w-3xl"><AppCta cta={ctas[entry.category_cta ?? "padrao"] ?? ctas.padrao} placement="entry" context={entry.id} /></div>}
             {appConfig.deepLinkBase && entry.app_ref && <p className="max-w-3xl -mt-6"><a className="link" href={`${appConfig.deepLinkBase}${entry.app_ref}`}>Abrir esta descoberta no aplicativo</a></p>}
 
-            {entry.faq.length > 0 && (
+            {faq.length > 0 && (
               <section aria-labelledby="perguntas" className="max-w-3xl">
                 <h2 id="perguntas" className="text-2xl font-extrabold mb-4">Perguntas frequentes</h2>
-                <FaqList items={entry.faq} />
+                <FaqList items={faq} />
               </section>
             )}
           </div>

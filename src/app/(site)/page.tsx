@@ -15,9 +15,9 @@ import { appConfig } from "@/lib/app-config";
 import { narrators, radioSpots } from "@/lib/voice";
 
 export const metadata = pageMeta({
-  title: `${site.name}: segredos, easter eggs e dinheiro escondido`,
+  title: `${site.name}: segredos, easter eggs e dinheiro`,
   absoluteTitle: true,
-  description: "Missões secretas, lugares escondidos, dinheiro, carros raros e mistérios de GTA 6, com fontes e status de verificação. Feito por jogadores, para quem quer ir além da história.",
+  description: "Missões secretas, lugares escondidos, dinheiro, carros raros e mistérios de GTA 6, com fonte e selo de verificação em cada descoberta. Revisado todo dia.",
   path: "/",
 });
 
