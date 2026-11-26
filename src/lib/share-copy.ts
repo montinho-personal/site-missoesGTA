@@ -61,3 +61,24 @@ export const STORY_HOOK: Record<string, string> = {
   "armas-e-itens": "Você já pegou essa arma?",
   dicas: "Você sabia disso?",
 };
+
+/** Mensagem de WhatsApp para quem ganhou um código de cortesia. */
+export function courtesyMessage(code: string, nome?: string | null, site = ""): string {
+  const oi = nome ? `Fala, ${nome.split(" ")[0]}!` : "Fala, parceiro!";
+  return [
+    `${oi} 🕵️ Liberei pra você o acesso ao app *Missões Secretas GTA 6*, na faixa.`,
+    "",
+    `Seu código: *${code}*`,
+    "",
+    `Como ativar (leva 1 minuto): ${site}/app/como-baixar-e-usar/#instalar`,
+    "",
+    "Lá dentro tem o arquivo inteiro: missões secretas, carros raros, dinheiro escondido e lugares que o GPS não mostra, com local e passo a passo. O código é só seu, não espalha. 😉",
+  ].join("\n");
+}
+
+/** Link do WhatsApp: com número abre a conversa com a pessoa; sem número, deixa escolher o contato. */
+export const whatsappLink = (text: string, tel?: string | null) => {
+  const n = (tel ?? "").replace(/\D/g, "");
+  const full = n.length === 10 || n.length === 11 ? `55${n}` : n;
+  return `https://wa.me/${full}?text=${encodeURIComponent(text)}`;
+};

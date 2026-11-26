@@ -109,3 +109,14 @@ export function AutoRefresh({ seconds = 5, until }: { seconds?: number; until?: 
   }, [router, seconds, until]);
   return null;
 }
+
+/** Botão que copia um texto pronto (mensagem, código) e confirma na tela. */
+export function CopyText({ text, label = "Copiar mensagem", done = "Copiado" }: { text: string; label?: string; done?: string }) {
+  const [copied, setCopied] = useState(false);
+  return (
+    <button type="button" className="btn btn-ghost" onClick={async () => { try { await navigator.clipboard.writeText(text); setCopied(true); setTimeout(() => setCopied(false), 2500); } catch {} }}>
+      {copied ? done : label}
+      <span role="status" aria-live="polite" className="sr-only">{copied ? done : ""}</span>
+    </button>
+  );
+}

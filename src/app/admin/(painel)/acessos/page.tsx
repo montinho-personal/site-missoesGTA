@@ -2,11 +2,16 @@ import { q } from "@/server/db";
 import { createCourtesyAction, revokeLicense, savePrice } from "@/server/admin-actions";
 import { saleConfig } from "@/server/mercadopago";
 import { formatDate } from "@/lib/labels";
+import { courtesyMessage, whatsappLink } from "@/lib/share-copy";
+import { site } from "@/lib/site";
+import { CopyText } from "@/components/client";
 
 export const metadata = { title: "Acessos e vendas" };
 
 export default async function Acessos({ searchParams }: { searchParams: Promise<Record<string, string | undefined>> }) {
-  const novo = (await searchParams).novo;
+  const sp = await searchParams;
+  const novo = sp.novo, nome = sp.nome ?? "", tel = sp.tel ?? "", erro = sp.erro;
+  const msg = novo ? courtesyMessage(novo, nome, site.url) : "";
   const sale = await saleConfig();
   const [lic, totals] = await Promise.all([
     q<{ code: string; email: string | null; origin: string; status: string; note: string | null; created_at: string; last_used_at: string | null }>(`select code, email, origin, status, note, created_at::text, last_used_at::text from licenses order by created_at desc limit 300`),
@@ -35,15 +40,29 @@ export default async function Acessos({ searchParams }: { searchParams: Promise<
         ))}
       </div>
 
-      <section className="card p-5">
+      <section id="cortesia" className="card p-5">
         <h2 className="text-xl font-bold">Liberar acesso de graça (cortesia)</h2>
-        <p className="text-fg-muted mt-1 mb-4">Gera um código que você envia para a pessoa. Ela digita o código no aplicativo, sem pagar.</p>
-        <form action={createCourtesyAction} className="flex flex-wrap items-end gap-3">
-          <div className="grow min-w-52"><label className="field-label" htmlFor="c-email">E-mail de quem recebe (opcional)</label><input id="c-email" name="email" type="email" className="field" /></div>
-          <div className="grow min-w-52"><label className="field-label" htmlFor="c-note">Anotação (para quem, por quê)</label><input id="c-note" name="note" maxLength={200} className="field" /></div>
-          <button className="btn btn-primary">Gerar código</button>
+        <p className="text-fg-muted mt-1 mb-4">Gera um código que você manda para a pessoa. Ela digita o código no aplicativo, sem pagar. Dá para escolher o nome do código ou deixar o sistema sortear.</p>
+        <form action={createCourtesyAction} className="grid gap-3 sm:grid-cols-2">
+          <div><label className="field-label" htmlFor="c-nome">Nome de quem recebe</label><input id="c-nome" name="nome" maxLength={60} defaultValue={nome} placeholder="João" className="field" /></div>
+          <div><label className="field-label" htmlFor="c-tel">WhatsApp da pessoa (opcional)</label><input id="c-tel" name="tel" inputMode="tel" defaultValue={tel} placeholder="11 98765-4321" className="field" /><span className="field-hint">Com o número, o WhatsApp já abre a conversa com ela.</span></div>
+          <div><label className="field-label" htmlFor="c-codigo">Nome do código (opcional)</label><input id="c-codigo" name="codigo" maxLength={30} placeholder="JOAO-VIP" autoCapitalize="characters" className="field uppercase" /><span className="field-hint">De 4 a 24 letras ou números. Vazio: o sistema cria um código como MS6-8MCZ-9CM8-MS52.</span></div>
+          <div><label className="field-label" htmlFor="c-email">E-mail (opcional)</label><input id="c-email" name="email" type="email" className="field" /></div>
+          <div className="sm:col-span-2"><label className="field-label" htmlFor="c-note">Anotação (por quê)</label><input id="c-note" name="note" maxLength={140} placeholder="Parceria Instagram, sorteio, amigo" className="field" /></div>
+          <div className="sm:col-span-2"><button className="btn btn-primary">Gerar código</button></div>
         </form>
-        {novo && <p role="status" className="mt-4 card border-ok/60 p-4">Código gerado: <strong className="font-display text-xl tracking-wider select-all">{novo}</strong></p>}
+        {erro && <p role="alert" className="mt-4 rounded-lg border border-red/50 bg-red/10 p-3 text-red">{erro}</p>}
+        {novo && (
+          <div role="status" className="mt-5 card border-ok/60 p-4 sm:p-5">
+            <p>Código gerado{nome ? ` para ${nome}` : ""}: <strong className="font-display text-2xl tracking-wider select-all break-all">{novo}</strong></p>
+            <label className="field-label mt-4" htmlFor="c-msg">Mensagem pronta</label>
+            <textarea id="c-msg" readOnly value={msg} rows={9} className="field text-sm" />
+            <div className="mt-3 flex flex-col sm:flex-row gap-3">
+              <a href={whatsappLink(msg, tel)} target="_blank" rel="noopener" className="btn btn-primary grow">{tel ? `Enviar no WhatsApp para ${nome || "a pessoa"}` : "Enviar no WhatsApp"}</a>
+              <CopyText text={msg} />
+            </div>
+          </div>
+        )}
       </section>
 
       <section>
@@ -59,7 +78,12 @@ export default async function Acessos({ searchParams }: { searchParams: Promise<
                 <td className="p-3">{l.email ?? "sem e-mail"}{l.note && <span className="block text-sm text-fg-subtle">{l.note}</span>}</td>
                 <td className="p-3 whitespace-nowrap">{formatDate(l.created_at, true)}</td>
                 <td className="p-3 whitespace-nowrap">{l.last_used_at ? formatDate(l.last_used_at, true) : "nunca"}</td>
-                <td className="p-3">{l.status === "ativa" ? <form action={revokeLicense}><input type="hidden" name="code" value={l.code} /><button className="link text-sm">Revogar</button></form> : <span className="badge tone-red">Revogado</span>}</td>
+                <td className="p-3">{l.status === "ativa" ? (
+                  <div className="flex flex-col gap-1.5">
+                    {l.origin === "cortesia" && <a className="link text-sm whitespace-nowrap" target="_blank" rel="noopener" href={whatsappLink(courtesyMessage(l.code, /^Para: ([^·]+)/.exec(l.note ?? "")?.[1]?.trim(), site.url))}>Enviar no WhatsApp</a>}
+                    <form action={revokeLicense}><input type="hidden" name="code" value={l.code} /><button className="link text-sm">Revogar</button></form>
+                  </div>
+                ) : <span className="badge tone-red">Revogado</span>}</td>
               </tr>
             ))}
           </tbody>

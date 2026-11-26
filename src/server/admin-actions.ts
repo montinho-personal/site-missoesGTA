@@ -183,10 +183,19 @@ export async function importKeywords(_p: { message: string } | null, fd: FormDat
 
 export async function createCourtesyAction(fd: FormData) {
   await requireAdmin();
-  const { createCourtesy } = await import("./licenses");
+  const { createCourtesy, customCode } = await import("./licenses");
   const email = s(fd, "email").toLowerCase();
-  const code = await createCourtesy(/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email) ? email : null, nul(s(fd, "note").slice(0, 200)));
-  redirect(`/admin/acessos/?novo=${code}`);
+  const nome = s(fd, "nome").slice(0, 60);
+  const tel = s(fd, "tel").replace(/\D/g, "").slice(0, 13);
+  const pedido = s(fd, "codigo");
+  const custom = pedido ? customCode(pedido) : null;
+  const volta = (extra: Record<string, string>) => `/admin/acessos/?${new URLSearchParams({ ...(nome && { nome }), ...(tel && { tel }), ...extra })}#cortesia`;
+  if (pedido && !custom) redirect(volta({ erro: "O código precisa ter de 4 a 24 letras ou números (pode usar hífen). Ex.: NINA-VIP." }));
+  const note = nul([nome && `Para: ${nome}`, s(fd, "note")].filter(Boolean).join(" · ").slice(0, 200));
+  let code: string;
+  try { code = await createCourtesy(/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email) ? email : null, note, custom); }
+  catch { redirect(volta({ erro: `O código ${custom} já existe. Escolha outro nome.` })); }
+  redirect(volta({ novo: code! }));
 }
 
 export async function revokeLicense(fd: FormData) {
