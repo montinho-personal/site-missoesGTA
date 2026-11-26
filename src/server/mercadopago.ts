@@ -3,6 +3,7 @@ import { createHmac } from "node:crypto";
 import { safeEqual } from "./security";
 import { q } from "./db";
 import { site } from "@/lib/site";
+import { LAUNCH_PRICE_CENTS } from "@/lib/app-config";
 
 /**
  * Integração com o Mercado Pago (Checkout Pro): o comprador paga na página do Mercado Pago
@@ -21,16 +22,17 @@ export function parsePrice(raw: string | null | undefined): number {
   return Number.isFinite(price) && price > 0 && price < 10000 ? Math.round(price * 100) : 0;
 }
 
-/** O preço vale primeiro o que o dono gravou no painel; sem isso, a variável APP_PRICE_BRL. */
+/** O preço vale primeiro o que o dono gravou no painel; depois a variável APP_PRICE_BRL; por fim, o preço de lançamento. */
 export async function saleConfig() {
   let saved: string | null = null;
   try { saved = (await q<{ value: string }>(`select value from settings where key = 'app_price_brl'`))[0]?.value ?? null; } catch {}
-  const cents = parsePrice(saved) || parsePrice(process.env.APP_PRICE_BRL);
+  const cents = parsePrice(saved) || parsePrice(process.env.APP_PRICE_BRL) || LAUNCH_PRICE_CENTS;
+  const isLaunchPrice = cents === LAUNCH_PRICE_CENTS;
   const credentials = Boolean(process.env.MP_ACCESS_TOKEN && process.env.MP_WEBHOOK_SECRET);
   // Sem banco permanente não há onde guardar pedido nem acesso: a venda fica desligada.
   const database = Boolean(process.env.DATABASE_URL);
   const enabled = credentials && database && cents > 0;
-  return { enabled, cents, credentials, database, priceLabel: cents ? new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(cents / 100) : null };
+  return { enabled, cents, isLaunchPrice, credentials, database, priceLabel: cents ? new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(cents / 100) : null };
 }
 
 export async function createPreference(order: { id: string; email: string; cents: number }): Promise<string> {

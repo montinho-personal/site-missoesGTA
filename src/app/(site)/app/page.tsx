@@ -3,6 +3,8 @@ import { Callout, FaqList, JsonLd } from "@/components/ui";
 import { TrackView } from "@/components/client";
 import { BuyForm, WaitlistForm } from "@/components/Forms";
 import { saleConfig } from "@/server/mercadopago";
+import { getPublishedEntries } from "@/server/content";
+import { formatDate } from "@/lib/labels";
 import { Icon } from "@/components/Icon";
 import { Breadcrumbs } from "@/components/ui";
 import { breadcrumbLd, faqLd, pageMeta } from "@/lib/seo";
@@ -31,11 +33,16 @@ export const revalidate = 600;
 
 export default async function AppPage() {
   // A venda liga sozinha quando existirem: credenciais do Mercado Pago, preço e banco permanente.
-  const sale = await saleConfig();
+  const [sale, entries] = await Promise.all([saleConfig(), getPublishedEntries()]);
+  // Números reais do arquivo, para o argumento da revisão diária.
+  const fichas = entries.filter((e) => e.app_ref).length;
+  const fontes = new Set(entries.flatMap((e) => e.sources.filter((s) => s.tipo !== "video").map((s) => s.url))).size;
+  const videos = new Set(entries.flatMap((e) => e.sources.filter((s) => s.tipo === "video").map((s) => s.url))).size;
+  const ultimaRevisao = entries.map((e) => e.last_verified_on).filter(Boolean).sort().at(-1) ?? null;
   const selling = sale.enabled;
   const faq = [
   { q: "O aplicativo já está disponível?", a: appConfig.stage === "a_venda" ? "Sim. Veja acima as condições e a compatibilidade." : "Ainda não. Estamos preparando o lançamento. Deixe seu e-mail e avisamos quando sair." },
-  { q: "Vai ser pago?", a: sale.enabled ? `Sim: ${sale.priceLabel}, pagamento único. Depois de pagar você recebe um código de acesso.` : "Sim, o aplicativo será pago. O preço ainda não foi definido e vai aparecer nesta página, junto com a política de reembolso, antes de qualquer cobrança. As fichas continuam abertas e gratuitas aqui no portal." },
+  { q: "Vai ser pago?", a: sale.isLaunchPrice ? `Sim: ${sale.priceLabel}, pagamento único. É o preço de lançamento e pode subir no futuro; quem compra agora paga uma vez só.` : sale.enabled ? `Sim: ${sale.priceLabel}, pagamento único. Depois de pagar você recebe um código de acesso.` : "Sim, o aplicativo será pago. O preço ainda não foi definido e vai aparecer nesta página, junto com a política de reembolso, antes de qualquer cobrança. As fichas continuam abertas e gratuitas aqui no portal." },
   { q: "É aplicativo de loja?", a: "Não. É um aplicativo web: abre pelo navegador do celular e pode ser instalado na tela de início, sem passar pela App Store nem pelo Google Play." },
   { q: "Em quais aparelhos vai funcionar?", a: "Em qualquer celular ou computador com navegador atual. Foi desenhado primeiro para o celular, com o console ligado ao lado." },
   { q: "Preciso do aplicativo para usar o portal?", a: "Não. As respostas continuam completas e gratuitas no portal. O aplicativo é para quem quer organização e acompanhamento durante o jogo." },
@@ -66,6 +73,10 @@ export default async function AppPage() {
               <h1 className="text-[2.3rem] leading-[1.05] sm:text-6xl font-black">Não jogue GTA 6 deixando metade da aventura para trás.</h1>
               <p className="mt-5 text-lg sm:text-xl text-fg-muted max-w-xl">Para quem não quer apenas zerar. Um comparsa de bolso que sabe o que tem por perto, lembra o que você já achou e respeita o seu ritmo na história. Não pede parte do assalto.</p>
               <div className="mt-7 flex flex-wrap gap-3">{primaryCta}<Link href="/app/como-baixar-e-usar/" className="btn btn-ghost">Como baixar e usar</Link></div>
+              <p className="mt-5 inline-flex flex-wrap items-baseline gap-x-2.5 gap-y-1 rounded-xl border border-gold/50 bg-ink-950/60 px-4 py-2.5">
+                <span className="font-display text-3xl font-black text-gold">{sale.priceLabel}</span>
+                <span className="text-sm text-fg-muted">{sale.isLaunchPrice ? "preço de lançamento · pagamento único" : "pagamento único"}</span>
+              </p>
               {!selling && <p className="mt-4 text-sm text-fg-subtle max-w-lg">Transparência: o aplicativo está em construção e ainda não foi lançado. Abaixo, cada função traz o estado real em que se encontra.</p>}
             </div>
             <div aria-hidden="true" className="flex justify-center">
@@ -107,6 +118,31 @@ export default async function AppPage() {
           </div>
         </section>
 
+        <section className="pt-16 sm:pt-24" aria-labelledby="h-revisao">
+          <div className="card grid-paper overflow-hidden p-6 sm:p-10">
+            <p className="label text-cyan inline-flex items-center gap-2"><Icon name="radar" size={16} />Revisado todo dia</p>
+            <h2 id="h-revisao" className="mt-3 text-3xl sm:text-4xl font-extrabold max-w-2xl">Um arquivo que acorda antes de você.</h2>
+            <div className="mt-4 text-lg text-fg-muted flex flex-col gap-3 max-w-2xl">
+              <p>GTA 6 muda toda semana: patch novo, segredo novo, boato que cai. Por isso o arquivo passa por uma revisão todos os dias. Ela confere fichas, pinos no mapa e vídeos, lê o que saiu de novo e cruza com o que publicam os guias, os canais e os jogadores que estão explorando Leonida pelo mundo.</p>
+              <p>O que muda entra no aplicativo com o selo atualizado. O que era boato e caiu, a Nina carimba como desmentido. O que o Bira jurava e três fontes confirmaram, sobe de nível.</p>
+            </div>
+            <dl className="mt-7 grid grid-cols-2 sm:grid-cols-4 gap-3">
+              {[
+                [String(fichas), "segredos no arquivo"],
+                [String(fontes), "fontes acompanhadas"],
+                [String(videos), "vídeos de quem já fez"],
+                [ultimaRevisao ? formatDate(ultimaRevisao, true) : "diária", "última revisão de ficha"],
+              ].map(([v, l]) => (
+                <div key={l} className="rounded-xl border border-ink-600 bg-ink-900/70 p-4 flex flex-col-reverse justify-end">
+                  <dt className="mt-1 text-sm text-fg-muted">{l}</dt>
+                  <dd className="font-display text-3xl font-black">{v}</dd>
+                </div>
+              ))}
+            </dl>
+            <p className="mt-4 text-sm text-fg-subtle">Números do arquivo de hoje. Você paga uma vez e recebe as atualizações sem pagar de novo.</p>
+          </div>
+        </section>
+
         <section id="funcoes" className="pt-16 sm:pt-24 scroll-mt-24" aria-labelledby="h-func">
           <h2 id="h-func" className="text-3xl sm:text-4xl font-extrabold">Funções e em que pé cada uma está</h2>
           <p className="mt-3 text-fg-muted max-w-2xl">Promessa vaga a gente deixa para os políticos de Leonida. Cada função tem uma etiqueta: disponível, em desenvolvimento ou planejada. O passo a passo completo está no <Link href="/app/como-baixar-e-usar/" className="link">manual de como baixar e usar</Link>.</p>
@@ -133,7 +169,12 @@ export default async function AppPage() {
         </section>
 
         <section className="pt-16 sm:pt-24 grid gap-4 md:grid-cols-3" aria-label="Condições">
-          <div className="card p-5"><p className="label text-fg-subtle mb-2">Preço</p><p>{selling ? <><strong className="text-xl">{sale.priceLabel}</strong> <span className="text-fg-muted">pagamento único, por Pix ou cartão.</span></> : <span className="text-fg-muted">O aplicativo será pago. Valor a definir; as fichas seguem gratuitas no portal.</span>}</p></div>
+          <div className="card border-gold/50 p-5">
+            <p className="label text-gold mb-2">Preço</p>
+            <p className="font-display text-4xl font-black text-gold">{sale.priceLabel}</p>
+            {sale.isLaunchPrice && <p className="mt-2 text-[0.97rem]">Sim, quatro e vinte. Entendedores entenderão. Quem não entendeu, pergunta pro Bira.</p>}
+            <p className="mt-2 text-sm text-fg-muted">{sale.isLaunchPrice ? "Preço de lançamento, pagamento único por Pix ou cartão. Ele pode subir no futuro, conforme o arquivo cresce; quem compra agora paga uma vez e não paga a diferença depois." : "Pagamento único, por Pix ou cartão."}</p>
+          </div>
           <div className="card p-5"><p className="label text-fg-subtle mb-2">Compatibilidade</p><p>{appConfig.platforms ? appConfig.platforms.join(", ") + "." : <span className="text-fg-muted">A anunciar.</span>}</p></div>
           <div className="card p-5"><p className="label text-fg-subtle mb-2">Reembolso e suporte</p><p className="text-fg-muted">{selling ? "Você pode desistir em até 7 dias depois da compra e receber o valor de volta, como prevê o Código de Defesa do Consumidor." : "A política de cancelamento e reembolso será publicada junto com o preço."} {!appConfig.supportContact && <>Enquanto isso, fale com a gente pelo <Link className="link" href="/contato/">contato</Link>.</>}</p></div>
         </section>

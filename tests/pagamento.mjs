@@ -43,7 +43,7 @@ try {
   const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
   // O preço é definido pelo dono no painel, sem variável de ambiente e sem novo deploy.
   await page.goto(BASE + "/app/", { waitUntil: "networkidle" });
-  ok("sem preço, a venda fica desligada e a página mostra a lista de aviso", (await page.getByRole("button", { name: "Quero ser avisado" }).count()) === 1);
+  ok("sem preço no painel, vale o preço de lançamento de R$ 4,20", /R\$\s4,20/.test(await page.locator("main").innerText()) && (await page.getByRole("button", { name: /Comprar por R\$\s4,20/ }).count()) === 1);
   await page.goto(BASE + "/admin/login/");
   await page.getByLabel("Senha").fill(ADMIN);
   await page.getByRole("button", { name: "Entrar" }).click();
@@ -52,7 +52,7 @@ try {
   await page.getByLabel(/Preço do aplicativo/).fill("19,90");
   await page.getByRole("button", { name: "Salvar preço" }).click();
   await page.waitForSelector("text=Venda ligada");
-  ok("dono define o preço no painel e a venda liga", true);
+  ok("dono troca o preço no painel e a página acompanha", true);
   await page.goto(BASE + "/app/", { waitUntil: "networkidle" });
   ok("página do app mostra o preço configurado", /R\$\s19,90/.test(await page.locator("main").innerText()));
   ok("botão de compra no lugar da lista de aviso", (await page.getByRole("button", { name: /Comprar por/ }).count()) === 1);

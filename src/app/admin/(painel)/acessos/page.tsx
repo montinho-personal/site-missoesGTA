@@ -27,7 +27,7 @@ export default async function Acessos({ searchParams }: { searchParams: Promise<
           <div><label className="field-label" htmlFor="p-preco">Preço do aplicativo (R$)</label><input id="p-preco" name="price" inputMode="decimal" placeholder="19,90" defaultValue={sale.cents ? (sale.cents / 100).toFixed(2).replace(".", ",") : ""} className="field max-w-40" /></div>
           <button className="btn btn-ghost">Salvar preço</button>
         </form>
-        <p className="mt-2 text-sm text-fg-subtle">Vale para as próximas compras, na hora. Deixe vazio para tirar o aplicativo de venda.</p>
+        <p className="mt-2 text-sm text-fg-subtle">Vale para as próximas compras, na hora. Deixe vazio para voltar ao preço de lançamento (R$ 4,20).</p>
       </section>
       <div className="grid gap-3 grid-cols-2 lg:grid-cols-4">
         {[["Vendas pagas", t.pagos], ["Receita", new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(t.receita / 100)], ["Pedidos pendentes", t.pendentes], ["Cortesias ativas", t.cortesias]].map(([l, v]) => (

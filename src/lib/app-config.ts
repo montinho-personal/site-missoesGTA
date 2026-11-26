@@ -1,6 +1,9 @@
 // Tudo o que o site afirma sobre o aplicativo sai DAQUI. Nada é inventado:
 // enquanto o fundador não confirmar um dado, ele fica null e a interface
 // mostra o estado "em preparação" em vez de preencher com suposições.
+/** Preço de lançamento, decidido pelo fundador em 26/11/2026: R$ 4,20. Pode subir no futuro; o painel sobrepõe. */
+export const LAUNCH_PRICE_CENTS = 420;
+
 export type FeatureStatus = "disponivel" | "em_desenvolvimento" | "planejado";
 
 export const appConfig = {

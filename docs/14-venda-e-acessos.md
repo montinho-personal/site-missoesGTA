@@ -53,3 +53,11 @@ Testado com um **Mercado Pago simulado** (`tests/pagamento.mjs`, 18 verificaçõ
 - **Bloqueio no aplicativo** ainda não existe: é trabalho do repositório do aplicativo.
 - **Direito de arrependimento:** a página informa os 7 dias do Código de Defesa do Consumidor; a devolução é feita pelo dono no painel do Mercado Pago, e o aviso de estorno desativa o código.
 - **Risco de marca:** produto pago com o nome do jogo. Recomenda-se consulta jurídica antes de abrir a venda.
+
+## Preço de lançamento (26/11/2026)
+
+O fundador definiu **R$ 4,20** como preço de lançamento, com a piada "entendedores entenderão" e o aviso de que o valor pode subir no futuro. Está em `LAUNCH_PRICE_CENTS` (`src/lib/app-config.ts`) e vale quando o painel não tem outro preço gravado. Trocar o preço no painel sobrepõe; apagar o campo volta aos R$ 4,20.
+
+O aviso de aumento é verdadeiro e não é urgência falsa: não há prazo nem contador, e quem compra agora paga uma vez só (pagamento único), sem pagar a diferença depois.
+
+A página também passou a vender a **revisão diária** do arquivo, com números calculados do próprio conteúdo (fichas, fontes, vídeos e data da última revisão de ficha).

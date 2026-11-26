@@ -1,6 +1,6 @@
 {
- "quando": "2026-11-26T08:40:09.438Z",
- "total": 105,
+ "quando": "2026-11-26T08:44:51.002Z",
+ "total": 106,
  "falhas": 0,
  "results": [
   {
@@ -449,7 +449,12 @@
    "detail": ""
   },
   {
-   "name": "landing não exibe preço nem avaliação inventados",
+   "name": "landing mostra o preço de lançamento decidido (R$ 4,20) e nenhum outro",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "landing não exibe avaliações inventadas",
    "pass": true,
    "detail": ""
   },

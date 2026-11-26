@@ -169,7 +169,9 @@ for (const [w, hh] of [[360, 740], [390, 844], [768, 1024], [1280, 800]]) {
   await page.getByRole("button", { name: "Quero ser avisado" }).click();
   await page.waitForSelector("#avise-me [role=status]");
   ok("lista de espera do aplicativo funciona", true);
-  ok("landing não exibe preço nem avaliação inventados", !/R\$\s?\d|estrelas|avaliações de usuários/i.test(await page.locator("main").innerText()));
+  const landing = await page.locator("main").innerText();
+  ok("landing mostra o preço de lançamento decidido (R$ 4,20) e nenhum outro", /R\$\s4,20/.test(landing) && !/R\$\s?(?!4,20)\d/.test(landing));
+  ok("landing não exibe avaliações inventadas", !/estrelas|avaliações de usuários/i.test(landing));
   await page.context().close();
 }
 
