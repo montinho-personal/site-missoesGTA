@@ -1,5 +1,5 @@
 import { q } from "@/server/db";
-import { createCourtesyAction, revokeLicense, saveAppUrl, savePrice } from "@/server/admin-actions";
+import { createCourtesyAction, revokeLicense, saveAppUrl, savePrice, setSaleOpen } from "@/server/admin-actions";
 import { saleConfig } from "@/server/mercadopago";
 import { formatDate } from "@/lib/labels";
 import { courtesyMessage, whatsappLink } from "@/lib/share-copy";
@@ -25,12 +25,25 @@ export default async function Acessos({ searchParams }: { searchParams: Promise<
     <div className="flex flex-col gap-6">
       <h1 className="text-3xl font-black">Acessos e vendas</h1>
       <section className={`card p-5 ${sale.enabled ? "border-ok/60" : "border-orange/60"}`}>
-        <h2 className="text-xl font-bold">{sale.enabled ? `Venda ligada: ${sale.priceLabel}, pagamento único` : "Venda desligada"}</h2>
+        <h2 className="text-xl font-bold">{sale.enabled ? `Venda aberta: ${sale.priceLabel}, pagamento único` : sale.ready ? "Venda pausada" : "Venda desligada"}</h2>
         <ul className="mt-3 flex flex-col gap-1 text-fg-muted">
           <li>{sale.cents > 0 ? "✓" : "✗"} Preço definido{sale.cents > 0 ? `: ${sale.priceLabel}` : ""}</li>
-          <li>{sale.credentials ? "✓" : "✗"} Credenciais do Mercado Pago (variáveis MP_ACCESS_TOKEN e MP_WEBHOOK_SECRET na hospedagem)</li>
-          <li>{sale.database ? "✓" : "✗"} Banco de dados permanente (DATABASE_URL)</li>
+          <li>{sale.credentials ? "✓" : "✗"} Mercado Pago {sale.credentials ? "configurado" : "faltando"}</li>
+          <li>{sale.database ? "✓" : "✗"} Banco de dados {sale.database ? "configurado" : "faltando"}</li>
+          <li>{sale.open ? "✓" : "✗"} Venda aberta pelo dono</li>
         </ul>
+        {sale.open ? (
+          <form action={setSaleOpen} className="mt-4"><input type="hidden" name="acao" value="pausar" /><button className="btn btn-ghost">Pausar a venda</button>
+            <p className="mt-2 text-sm text-fg-subtle">Pausada, o botão de compra vira “Quero ser avisado” em todo o site. Quem já comprou não perde nada.</p></form>
+        ) : (
+          <form action={setSaleOpen} className="mt-4 rounded-lg border border-ink-600 p-3">
+            <input type="hidden" name="acao" value="abrir" />
+            <label className="flex items-start gap-3"><input type="checkbox" name="confirmo" className="mt-1 size-5" />
+              <span className="text-sm">Confirmo que o caminho inteiro funciona: quem paga recebe o e-mail de confirmação e abre o app liberado no celular.</span></label>
+            {sp.erro_venda && <p role="alert" className="mt-2 text-sm text-red">Marque a confirmação para abrir a venda.</p>}
+            <button className="btn btn-primary mt-3" disabled={!sale.ready}>Abrir a venda</button>
+          </form>
+        )}
         <form action={savePrice} className="mt-4 flex flex-wrap items-end gap-3">
           <div><label className="field-label" htmlFor="p-preco">Preço do aplicativo (R$)</label><input id="p-preco" name="price" inputMode="decimal" placeholder="19,90" defaultValue={sale.cents ? (sale.cents / 100).toFixed(2).replace(".", ",") : ""} className="field max-w-40" /></div>
           <button className="btn btn-ghost">Salvar preço</button>

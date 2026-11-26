@@ -25,15 +25,21 @@ export function parsePrice(raw: string | null | undefined): number {
 
 /** O preço vale primeiro o que o dono gravou no painel; depois a variável APP_PRICE_BRL; por fim, o preço de lançamento. */
 export async function saleConfig() {
-  let saved: string | null = null;
-  try { saved = (await q<{ value: string }>(`select value from settings where key = 'app_price_brl'`))[0]?.value ?? null; } catch {}
+  let saved: string | null = null, open = false;
+  try {
+    const rows = await q<{ key: string; value: string }>(`select key, value from settings where key in ('app_price_brl', 'venda_aberta')`);
+    saved = rows.find((r) => r.key === "app_price_brl")?.value ?? null;
+    // A venda só abre quando o dono abre no painel: comprar tem de dar acesso ao app na hora.
+    open = rows.find((r) => r.key === "venda_aberta")?.value === "1";
+  } catch {}
   const cents = parsePrice(saved) || parsePrice(process.env.APP_PRICE_BRL) || LAUNCH_PRICE_CENTS;
   const isLaunchPrice = cents === LAUNCH_PRICE_CENTS;
   const credentials = Boolean(process.env.MP_ACCESS_TOKEN && process.env.MP_WEBHOOK_SECRET);
   // Sem banco permanente não há onde guardar pedido nem acesso: a venda fica desligada.
   const database = Boolean(process.env.DATABASE_URL);
-  const enabled = credentials && database && cents > 0;
-  return { enabled, cents, isLaunchPrice, credentials, database, priceLabel: cents ? new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(cents / 100) : null };
+  const ready = credentials && database && cents > 0;
+  const enabled = ready && open;
+  return { enabled, ready, open, cents, isLaunchPrice, credentials, database, priceLabel: cents ? new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(cents / 100) : null };
 }
 
 export async function createPreference(order: { id: string; email: string; cents: number }): Promise<string> {

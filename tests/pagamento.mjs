@@ -58,17 +58,26 @@ const valida = async (codigo) => (await (await fetch(`${BASE}/api/acesso/validar
 try {
   const browser = await chromium.launch();
   page = await browser.newPage({ viewport: { width: 390, height: 844 } });
-  // O preço é definido pelo dono no painel, sem variável de ambiente e sem novo deploy.
+  // Venda pausada por padrão: ninguém compra antes de o dono abrir.
   await page.goto(BASE + "/app/", { waitUntil: "networkidle" });
-  ok("sem preço no painel, vale o preço de lançamento de R$ 4,20", /R\$\s4,20/.test(await page.locator("main").innerText()) && (await page.getByRole("button", { name: /Comprar por R\$\s4,20/ }).count()) === 1);
+  ok("venda começa pausada: sem botão de compra", (await page.getByRole("button", { name: /Comprar por/ }).count()) === 0 && /Quero ser avisado/.test(await page.locator("main").innerText()));
   await page.goto(BASE + "/admin/login/");
   await page.getByLabel("Senha").fill(ADMIN);
   await page.getByRole("button", { name: "Entrar" }).click();
   await page.waitForURL(/\/admin\/$/);
   await page.goto(BASE + "/admin/acessos/");
+  ok("painel mostra a venda pausada", /Venda pausada/.test(await page.locator("body").innerText()));
+  await page.getByRole("button", { name: "Abrir a venda" }).click();
+  await page.waitForURL(/erro_venda=1/);
+  await page.getByLabel(/Confirmo que o caminho inteiro funciona/).check();
+  await page.getByRole("button", { name: "Abrir a venda" }).click();
+  await page.waitForSelector("text=Venda aberta");
+  await page.goto(BASE + "/app/", { waitUntil: "networkidle" });
+  ok("sem preço no painel, vale o preço de lançamento de R$ 4,20", /R\$\s4,20/.test(await page.locator("main").innerText()) && (await page.getByRole("button", { name: /Comprar por R\$\s4,20/ }).count()) === 1);
+  await page.goto(BASE + "/admin/acessos/");
   await page.getByLabel(/Preço do aplicativo/).fill("19,90");
   await page.getByRole("button", { name: "Salvar preço" }).click();
-  await page.waitForSelector("text=Venda ligada");
+  await page.waitForSelector("text=Venda aberta: R$");
   ok("dono troca o preço no painel e a página acompanha", true);
   await page.goto(BASE + "/app/", { waitUntil: "networkidle" });
   ok("página do app mostra o preço configurado", /R\$\s19,90/.test(await page.locator("main").innerText()));
@@ -130,7 +139,7 @@ try {
   await page.setViewportSize({ width: 1280, height: 900 });
   await page.goto(BASE + "/admin/acessos/");
   const painel = await page.locator("body").innerText();
-  ok("painel mostra a venda paga e a receita", /Venda ligada/.test(painel) && /R\$\s19,90/.test(painel) && painel.includes(codigo));
+  ok("painel mostra a venda paga e a receita", /Venda aberta/.test(painel) && /R\$\s19,90/.test(painel) && painel.includes(codigo));
   await page.getByLabel(/Endereço do aplicativo/).fill("https://app.exemplo.com.br/");
   await page.getByRole("button", { name: "Salvar endereço" }).click();
   await page.waitForTimeout(800);

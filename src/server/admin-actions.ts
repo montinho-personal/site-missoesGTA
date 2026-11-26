@@ -218,6 +218,16 @@ export async function saveAppUrl(fd: FormData) {
   revalidatePath("/admin/acessos");
 }
 
+/** Abre ou pausa a venda. Abrir pede a confirmação de que quem paga recebe o acesso ao app. */
+export async function setSaleOpen(fd: FormData) {
+  await requireAdmin();
+  const abrir = s(fd, "acao") === "abrir";
+  if (abrir && s(fd, "confirmo") !== "on") redirect("/admin/acessos/?erro_venda=1");
+  await q(`insert into settings (key, value) values ('venda_aberta', $1) on conflict (key) do update set value = excluded.value, updated_at = now()`, [abrir ? "1" : "0"]);
+  for (const p of ["/", "/app", "/app/como-baixar-e-usar", "/admin/acessos"]) revalidatePath(p);
+  revalidatePath("/", "layout");
+}
+
 export async function savePrice(fd: FormData) {
   await requireAdmin();
   const { parsePrice } = await import("./mercadopago");
