@@ -10,4 +10,5 @@ export const categoryArt: Record<string, { src: string; position?: string }> = {
   dicas: { src: "/arte/dicas.webp", position: "50% 40%" },
   "easter-eggs": { src: "/arte/easter-eggs.webp", position: "55% 35%" },
   "armas-e-itens": { src: "/arte/armas-e-itens.webp", position: "50% 55%" },
+  "lugares-secretos": { src: "/arte/lugares-secretos.webp", position: "50% 50%" },
 };
