@@ -74,3 +74,13 @@ Só depois de haver tráfego suficiente; um teste por vez; métrica de guarda: r
 1. Texto do CTA de dinheiro: "sem precisar pesquisar um por um" × "veja o que ainda falta buscar".
 2. CTA depois das relacionadas × antes delas.
 3. Landing: lista de aviso no topo × só no fim.
+
+## Argumento do aplicativo dentro da ficha (26/11/2026)
+
+A pedido do fundador, cada ficha de segredo traz, logo depois do passo a passo, um bloco "No aplicativo" com três argumentos montados com os dados da própria ficha (`src/components/AppPitch.tsx`):
+
+1. **O pino no mapa**, dizendo a precisão real daquela ficha (exato, perto ou só a região).
+2. **Os vídeos de quem já fez**, com a contagem real de vídeos da ficha, para assistir dentro do aplicativo.
+3. **O que dá para fazer na mesma viagem:** os segredos a até 2 km, com nome, distância e link para as três mais próximas. A distância só é calculada entre pontos conhecidos (precisão exata ou perto). Quando o pino marca só a região, o bloco fala dos outros segredos da mesma região, sem inventar distância.
+
+O bloco substitui o CTA genérico nas fichas (um CTA por página). Enquanto o aplicativo não for lançado, ele diz "em construção" e o botão leva à lista de aviso; com a venda ligada, o botão mostra o preço. Evento: `cta_click` com `cta_key = ficha_mapa`.

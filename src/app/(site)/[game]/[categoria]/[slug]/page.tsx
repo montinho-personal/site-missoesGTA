@@ -4,7 +4,9 @@ import remarkGfm from "remark-gfm";
 import { AppCta, Breadcrumbs, EntryGrid, FaqList, JsonLd, SpoilerBadge, StatusBadge } from "@/components/ui";
 import { FavButton, RevealButton, ShareButton, TrackView } from "@/components/client";
 import { Icon } from "@/components/Icon";
-import { entryUrl, getCtas, getEntry, getEntryChanges, getPublishedEntries, relatedEntries, toCard } from "@/server/content";
+import { entryUrl, getCtas, getEntry, getEntryChanges, getPublishedEntries, nearbyEntries, relatedEntries, toCard } from "@/server/content";
+import { saleConfig } from "@/server/mercadopago";
+import { AppPitch } from "@/components/AppPitch";
 import { notFoundOrRedirect } from "@/server/route-helpers";
 import { breadcrumbLd, faqLd, pageMeta } from "@/lib/seo";
 import { evidenceLabel, factValue, formatDate, precisionInfo, rewardTypeLabel, statusInfo } from "@/lib/labels";
@@ -17,6 +19,7 @@ export async function generateStaticParams() {
 }
 
 type Props = PageProps<"/[game]/[categoria]/[slug]">;
+const isGuideKind = (e: { kind: string }) => e.kind === "guia";
 
 export async function generateMetadata({ params }: Props) {
   const { game, categoria, slug } = await params;
@@ -44,7 +47,11 @@ export default async function EntryPage({ params }: Props) {
   const e = await getEntry(game, categoria, slug);
   if (!e) await notFoundOrRedirect(path);
   const entry = e!;
-  const [all, ctas, changes] = await Promise.all([getPublishedEntries(game), getCtas(), getEntryChanges(entry.id)]);
+  const [all, ctas, changes, sale] = await Promise.all([getPublishedEntries(game), getCtas(), getEntryChanges(entry.id), saleConfig()]);
+  const nearby = nearbyEntries(entry, all);
+  // O argumento do aplicativo usa os dados desta ficha; sem pino, vídeo ou vizinho, fica o CTA comum.
+  const sameRegion = entry.region_id ? all.filter((x) => x.id !== entry.id && x.region_id === entry.region_id).length : 0;
+  const hasPitch = !isGuideKind(entry) && (Boolean(entry.coords) || nearby.length > 0 || sameRegion > 0 || entry.sources.some((s) => s.tipo === "video"));
   const related = relatedEntries(entry, all);
   const st = statusInfo[entry.verification_status];
   const isGuide = entry.kind === "guia";
@@ -153,6 +160,8 @@ export default async function EntryPage({ params }: Props) {
               </section>
             )}
 
+            {hasPitch && <AppPitch entry={entry} nearby={nearby} sameRegion={sameRegion} sale={sale} />}
+
             {entry.media.length > 0 && (
               <section aria-label="Imagens e vídeos" className="max-w-3xl flex flex-col gap-4">
                 {entry.media.map((m, i) => m.tipo === "imagem" ? (
@@ -232,7 +241,7 @@ export default async function EntryPage({ params }: Props) {
               <p className="mt-4 text-sm"><Link className="link" href={`/enviar-descoberta/?tipo=correcao&ref=${entry.id}`}>Encontrou um erro ou tem uma prova? Envie uma correção.</Link></p>
             </section>
 
-            <div className="max-w-3xl"><AppCta cta={ctas[entry.category_cta ?? "padrao"] ?? ctas.padrao} placement="entry" context={entry.id} /></div>
+            {!hasPitch && <div className="max-w-3xl"><AppCta cta={ctas[entry.category_cta ?? "padrao"] ?? ctas.padrao} placement="entry" context={entry.id} /></div>}
             {appConfig.deepLinkBase && entry.app_ref && <p className="max-w-3xl -mt-6"><a className="link" href={`${appConfig.deepLinkBase}${entry.app_ref}`}>Abrir esta descoberta no aplicativo</a></p>}
 
             {entry.faq.length > 0 && (

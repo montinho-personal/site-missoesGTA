@@ -127,3 +127,15 @@ export function relatedEntries(e: Entry, all: Entry[], limit = 3): Entry[] {
     .map((s) => s.x);
   return [...picked, ...rest].slice(0, limit);
 }
+
+/** Fichas com ponto no mapa a até `radius` metros desta, da mais perto para a mais longe. */
+export function nearbyEntries(e: Entry, all: Entry[], radius = 2000): { entry: Entry; meters: number }[] {
+  // Distância só faz sentido entre pontos conhecidos: pino que marca "só a região" não entra na conta.
+  const precise = (x: Entry) => Boolean(x.coords) && (x.pin_precision === "exato" || x.pin_precision === "perto");
+  if (!precise(e)) return [];
+  return all
+    .filter((x) => x.id !== e.id && precise(x))
+    .map((x) => ({ entry: x, meters: Math.round(Math.hypot(x.coords!.x - e.coords!.x, x.coords!.y - e.coords!.y)) }))
+    .filter((x) => x.meters <= radius)
+    .sort((a, b) => a.meters - b.meters);
+}
