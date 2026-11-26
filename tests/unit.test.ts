@@ -24,7 +24,7 @@ describe("banco de palavras-chave", () => {
 describe("busca", () => {
   const docs: SearchDoc[] = (entries as { id: string; title: string; direct_answer: string; tags: string[]; category_id: string }[]).map((e) => ({
     id: e.id, url: `/x/${e.id}/`, title: e.title, answer: e.direct_answer, kind: "descoberta", cat: e.category_id, catName: categories.find((c) => c.id === e.category_id)!.name,
-    icon: "x", region: null, regionName: null, status: "relato", spoiler: "nenhum", rewardType: null, character: null, updated: "", tags: e.tags, text: "",
+    icon: "x", region: null, regionName: null, status: "provavel", spoiler: "nenhum", rewardType: null, character: null, updated: "", tags: e.tags, text: "",
   }));
   const ms = buildIndex(docs);
   const top = (qy: string) => runSearch(ms, qy)[0]?.title ?? "";
@@ -33,15 +33,20 @@ describe("busca", () => {
   it("reconhece sinônimos", () => {
     expect(expandQuery("grana")).toContain("dinheiro");
     expect(runSearch(ms, "grana").length).toBeGreaterThan(0);
-    expect(top("pé grande")).toMatch(/Pé Grande/i);
+    expect(top("pé grande")).toMatch(/Pé.Grande/i);
   });
   it("não inventa resultado", () => expect(runSearch(ms, "xyzqwk")).toHaveLength(0));
 });
 
 describe("integridade editorial do conteúdo-semente", () => {
   const es = entries as Record<string, unknown>[];
-  it("nenhum registro é 'confirmado' sem teste direto ou fonte oficial", () => {
-    for (const e of es) if (e.verification_status === "confirmado") expect(["oficial", "teste_direto"]).toContain(e.evidence_type);
+  it("os selos seguem a régua do aplicativo: fontes mínimas por nível", () => {
+    for (const e of es) {
+      const n = (e.sources as unknown[]).length;
+      if (e.verification_status === "testado") expect(e.evidence_type, String(e.id)).toBe("teste_direto");
+      if (e.verification_status === "confirmado") expect(n, String(e.id)).toBeGreaterThanOrEqual(3);
+      if (e.verification_status === "provavel") expect(n, String(e.id)).toBeGreaterThanOrEqual(1);
+    }
   });
   it("todo registro publicado tem resposta rápida e fonte com URL", () => {
     for (const e of es.filter((x) => x.workflow_status === "publicado")) {

@@ -15,7 +15,7 @@ export const metadata = pageMeta({
 });
 
 const tone: Record<FeatureStatus, string> = { disponivel: "tone-ok", em_desenvolvimento: "tone-gold", planejado: "tone-violet" };
-const icons: Record<string, string> = { mapa: "pin", checklist: "check", filtros: "grid", spoilers: "shield", requisitos: "file", atualizacoes: "radar" };
+const icons: Record<string, string> = { fichas: "file", mapa: "pin", checklist: "check", filtros: "grid", spoilers: "shield", requisitos: "file", atualizacoes: "radar" };
 
 const compare = [
   ["Achar o que fazer por perto", "Abrir vários vídeos e torcer para o ponto estar certo", "Descobertas da região onde você está, numa tela só"],
@@ -26,8 +26,9 @@ const compare = [
 
 const faq = [
   { q: "O aplicativo já está disponível?", a: appConfig.stage === "a_venda" ? "Sim. Veja acima as condições e a compatibilidade." : "Ainda não. Estamos preparando o lançamento. Deixe seu e-mail e avisamos quando sair." },
-  { q: "Quanto vai custar?", a: appConfig.price ? "O preço está indicado nesta página." : "O preço ainda não foi definido. Vamos publicá-lo aqui antes de abrir as vendas, junto com a política de reembolso." },
-  { q: "Em quais aparelhos vai funcionar?", a: appConfig.platforms ? `Em ${appConfig.platforms.join(", ")}.` : "A compatibilidade ainda será anunciada." },
+  { q: "Vai ser pago?", a: appConfig.price ? "O preço está indicado nesta página." : "Ainda não está decidido. O que já está decidido: as fichas continuam abertas e gratuitas aqui no portal. Se houver algo pago no aplicativo, o preço e a política de reembolso aparecem nesta página antes de qualquer cobrança." },
+  { q: "É aplicativo de loja?", a: "Não. É um aplicativo web: abre pelo navegador do celular e pode ser instalado na tela de início, sem passar pela App Store nem pelo Google Play." },
+  { q: "Em quais aparelhos vai funcionar?", a: "Em qualquer celular ou computador com navegador atual. Foi desenhado primeiro para o celular, com o console ligado ao lado." },
   { q: "Preciso do aplicativo para usar o portal?", a: "Não. As respostas continuam completas e gratuitas no portal. O aplicativo é para quem quer organização e acompanhamento durante o jogo." },
   { q: "O aplicativo é oficial da Rockstar?", a: "Não. Assim como o portal, é um projeto independente feito por fãs, sem ligação com a Rockstar Games ou a Take-Two Interactive." },
   { q: "O aplicativo altera o jogo ou acessa meu console?", a: "Não. É um guia de consulta: não modifica o jogo, não é mod e não se conecta ao console." },
@@ -59,7 +60,7 @@ export default function AppPage() {
               <h1 className="text-[2.3rem] leading-[1.05] sm:text-6xl font-black">Não jogue GTA 6 deixando metade da aventura para trás.</h1>
               <p className="mt-5 text-lg sm:text-xl text-fg-muted max-w-xl">Para quem não quer apenas zerar. Um comparsa de bolso que sabe o que tem por perto, lembra o que você já achou e respeita o seu ritmo na história. Não pede parte do assalto.</p>
               <div className="mt-7 flex flex-wrap gap-3">{primaryCta}<a href="#funcoes" className="btn btn-ghost">Ver as funções</a></div>
-              {!selling && <p className="mt-4 text-sm text-fg-subtle max-w-lg">Transparência: o aplicativo ainda não está à venda. Abaixo, cada função traz o estado real em que se encontra.</p>}
+              {!selling && <p className="mt-4 text-sm text-fg-subtle max-w-lg">Transparência: o aplicativo está em construção e ainda não foi lançado. Abaixo, cada função traz o estado real em que se encontra.</p>}
             </div>
             <div aria-hidden="true" className="flex justify-center">
               <div className="w-60 rounded-[2.2rem] border-2 border-ink-500 bg-ink-900 p-4 shadow-2xl">
@@ -126,8 +127,8 @@ export default function AppPage() {
         </section>
 
         <section className="pt-16 sm:pt-24 grid gap-4 md:grid-cols-3" aria-label="Condições">
-          <div className="card p-5"><p className="label text-fg-subtle mb-2">Preço</p><p>{appConfig.price ? new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(appConfig.price.amount) : <span className="text-fg-muted">A definir. Será publicado aqui antes da abertura das vendas.</span>}</p></div>
-          <div className="card p-5"><p className="label text-fg-subtle mb-2">Compatibilidade</p><p>{appConfig.platforms ? appConfig.platforms.join(", ") : <span className="text-fg-muted">A anunciar.</span>}</p></div>
+          <div className="card p-5"><p className="label text-fg-subtle mb-2">Preço</p><p>{appConfig.price ? new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(appConfig.price.amount) : <span className="text-fg-muted">Ainda não decidido. As fichas seguem gratuitas no portal.</span>}</p></div>
+          <div className="card p-5"><p className="label text-fg-subtle mb-2">Compatibilidade</p><p>{appConfig.platforms ? appConfig.platforms.join(", ") + "." : <span className="text-fg-muted">A anunciar.</span>}</p></div>
           <div className="card p-5"><p className="label text-fg-subtle mb-2">Reembolso e suporte</p><p className="text-fg-muted">{appConfig.refundPolicy ?? "A política de cancelamento e reembolso será publicada junto com o preço."} {!appConfig.supportContact && <>Enquanto isso, fale com a gente pelo <Link className="link" href="/contato/">contato</Link>.</>}</p></div>
         </section>
 

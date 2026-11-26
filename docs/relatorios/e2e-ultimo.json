@@ -1,6 +1,6 @@
 {
- "quando": "2026-11-26T00:10:10.426Z",
- "total": 94,
+ "quando": "2026-11-26T00:51:29.843Z",
+ "total": 95,
  "falhas": 0,
  "results": [
   {
@@ -34,7 +34,7 @@
    "detail": ""
   },
   {
-   "name": "200 /gta-6/missoes-secretas/pe-grande-skunk-ape/",
+   "name": "200 /gta-6/easter-eggs/skunk-ape/",
    "pass": true,
    "detail": ""
   },
@@ -119,6 +119,11 @@
    "detail": ""
   },
   {
+   "name": "404 real em /gta-6/misterios/",
+   "pass": true,
+   "detail": ""
+  },
+  {
    "name": "404 real em /gta-6/categoria-falsa/",
    "pass": true,
    "detail": ""
@@ -161,7 +166,7 @@
   {
    "name": "JSON-LD válido com Article e BreadcrumbList",
    "pass": true,
-   "detail": "BreadcrumbList,Article,FAQPage"
+   "detail": "BreadcrumbList,Article"
   },
   {
    "name": "sem preço/avaliação fictícios no schema",
@@ -194,7 +199,7 @@
    "detail": "excesso 0px"
   },
   {
-   "name": "sem rolagem horizontal 360px /gta-6/missoes-secretas/pe-grande-skunk-ape/",
+   "name": "sem rolagem horizontal 360px /gta-6/easter-eggs/skunk-ape/",
    "pass": true,
    "detail": "excesso 0px"
   },
@@ -214,7 +219,7 @@
    "detail": "excesso 0px"
   },
   {
-   "name": "sem rolagem horizontal 390px /gta-6/missoes-secretas/pe-grande-skunk-ape/",
+   "name": "sem rolagem horizontal 390px /gta-6/easter-eggs/skunk-ape/",
    "pass": true,
    "detail": "excesso 0px"
   },
@@ -239,7 +244,7 @@
    "detail": "excesso 0px"
   },
   {
-   "name": "sem rolagem horizontal 768px /gta-6/missoes-secretas/pe-grande-skunk-ape/",
+   "name": "sem rolagem horizontal 768px /gta-6/easter-eggs/skunk-ape/",
    "pass": true,
    "detail": "excesso 0px"
   },
@@ -259,7 +264,7 @@
    "detail": "excesso 0px"
   },
   {
-   "name": "sem rolagem horizontal 1280px /gta-6/missoes-secretas/pe-grande-skunk-ape/",
+   "name": "sem rolagem horizontal 1280px /gta-6/easter-eggs/skunk-ape/",
    "pass": true,
    "detail": "excesso 0px"
   },
@@ -279,7 +284,7 @@
    "detail": ""
   },
   {
-   "name": "axe sem violações /gta-6/missoes-secretas/pe-grande-skunk-ape/",
+   "name": "axe sem violações /gta-6/easter-eggs/skunk-ape/",
    "pass": true,
    "detail": ""
   },
@@ -346,7 +351,7 @@
   {
    "name": "filtro por tipo reduz a lista",
    "pass": true,
-   "detail": "20 → 4"
+   "detail": "128 → 16"
   },
   {
    "name": "filtro não muda a URL (nada de combinações indexáveis)",
@@ -434,7 +439,7 @@
    "detail": ""
   },
   {
-   "name": "painel bloqueia 'Confirmado' sem teste direto ou fonte oficial",
+   "name": "painel bloqueia 'Confirmado' com menos de três fontes",
    "pass": true,
    "detail": ""
   },

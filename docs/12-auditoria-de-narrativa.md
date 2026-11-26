@@ -20,7 +20,7 @@ O site passa a ser **um arquivo de casos de Leonida**, tocado por dois personage
 - **Nina Valdez**, ex-repórter de rádio pirata. Só publica com fonte. Fala curto e seco. Frase: "Boato não paga gasolina."
 - **Bira** (Ubirajara Monteiro), brasileiro, ex-taxista, vinte anos de Leonida. Conhece tudo, exagera metade. Frase: "Eu já tinha visto isso antes de ter nome."
 
-Por que funciona: a dupla **é o sistema de verificação com rosto**. "Relato da comunidade" é o Bira contando. "Confirmado" é a Nina carimbando. "Em investigação" é a briga dos dois. O jogador entende o selo sem ler a metodologia. São os mesmos dois da capa do site.
+Por que funciona: a dupla **é o sistema de verificação com rosto**. "Não verificado" é o Bira contando o que ouviu de uma fonte só. "Muito provável" é quando duas fontes batem. "Confirmado" pede três. "Testado por nós" é a Nina voltando do jogo com a prova. (Atualizado em 26/11: os selos passaram a ser os do aplicativo; ver doc 13.) O jogador entende o selo sem ler a metodologia. São os mesmos dois da capa do site.
 
 O aplicativo entra como **o comparsa de bolso**: o arquivo da Nina com a memória do Bira, no banco do carona.
 
@@ -55,8 +55,7 @@ A série fala com sátira de consumo, cinismo bem-humorado, autoridade ridicular
 | Uma descoberta | arquivo nº / registro / pasta | post, artigo |
 | O aplicativo | o comparsa de bolso (na 1ª menção) / o aplicativo | ferramenta, solução, plataforma |
 | Favoritos | porta-luvas | lista de desejos |
-| Status "Relato" | relato da comunidade ("o Bira contou") | não confirmado |
-| Status "Confirmado" | confirmado ("a Nina testou") | verificado, oficial |
+| Selos | Testado por nós, Confirmado, Muito provável, Não verificado, Desmentido ou corrigido | qualquer outro nome |
 | Categoria vazia | pasta vazia | sem resultados |
 | Dinheiro | grana (nos textos de moldura), dinheiro (na ficha) | |
 | O lugar | Leonida, Vice City (nomes do jogo, uso nominativo) | |

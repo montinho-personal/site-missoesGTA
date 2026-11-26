@@ -192,4 +192,26 @@ create table rate_events (
 create index rate_events_idx on rate_events (bucket, key, at);
 `,
   },
+  {
+    // Alinhamento com o aplicativo: mesma regra de selos e as fichas dele como fonte única.
+    id: "002_selos_e_fichas_do_app",
+    sql: `
+alter table entries add column if not exists pin_precision text;
+alter table entries add column if not exists pin_evidence text;
+alter table entries add column if not exists chapter int not null default 0;
+alter table entries add column if not exists reward_value int;
+alter table entries drop constraint if exists entries_verification_status_check;
+update entries set verification_status = case verification_status
+  when 'relato' then 'provavel' when 'investigacao' then 'nao_verificado'
+  when 'desatualizado' then 'desmentido' when 'mod' then 'desmentido' else verification_status end;
+alter table entries alter column verification_status set default 'nao_verificado';
+alter table entries add constraint entries_verification_status_check
+  check (verification_status in ('testado','confirmado','provavel','nao_verificado','desmentido'));
+delete from entries where reviewed_by is null;
+update entries set region_id = null;
+delete from regions;
+delete from categories c where not exists (select 1 from entries e where e.category_id = c.id);
+delete from ctas;
+`,
+  },
 ];

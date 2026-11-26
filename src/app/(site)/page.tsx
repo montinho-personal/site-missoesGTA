@@ -15,7 +15,7 @@ import { appConfig } from "@/lib/app-config";
 import { radioSpots } from "@/lib/voice";
 
 export const metadata = pageMeta({
-  title: `${site.name}: segredos, easter eggs e descobertas de GTA 6`,
+  title: `${site.name}: segredos, easter eggs e dinheiro escondido`,
   absoluteTitle: true,
   description: "Missões secretas, lugares escondidos, dinheiro, carros raros e mistérios de GTA 6, com fontes e status de verificação. Feito por jogadores, para quem quer ir além da história.",
   path: "/",
@@ -24,7 +24,7 @@ export const metadata = pageMeta({
 export default async function Home() {
   const [entries, categories, changes, ctas] = await Promise.all([getPublishedEntries(), getCategories(), getPublicChanges(6), getCtas()]);
   const featured = entries.filter((e) => e.featured && e.spoiler_level !== "historia").slice(0, 6);
-  const investigating = entries.filter((e) => e.verification_status === "investigacao").slice(0, 3);
+  const investigating = entries.filter((e) => e.verification_status === "nao_verificado").slice(0, 3);
 
   return (
     <>
@@ -87,8 +87,8 @@ export default async function Home() {
             ))}
           </ol>
           <div className="card grid-paper p-5 sm:p-6">
-            <p className="label text-violet inline-flex items-center gap-2"><Icon name="radar" size={16} />Em investigação</p>
-            {investigating.length === 0 ? <p className="mt-3 text-fg-muted">Nenhum caso aberto no momento.</p> : (
+            <p className="label text-violet inline-flex items-center gap-2"><Icon name="radar" size={16} />O Bira jura, a Nina duvida</p>
+            {investigating.length === 0 ? <p className="mt-3 text-fg-muted">Nenhum caso sem confirmação no momento.</p> : (
               <ul className="mt-4 flex flex-col gap-4">
                 {investigating.map((e) => (
                   <li key={e.id}>

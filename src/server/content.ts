@@ -30,7 +30,7 @@ function mapEntry(r: Record<string, unknown>): Entry {
     coords: obj(r.coords),
     steps: arr(r.steps), common_mistakes: arr(r.common_mistakes), troubleshooting: arr(r.troubleshooting),
     sources: arr(r.sources), media: arr(r.media), faq: arr(r.faq), related: arr(r.related), tags: arr(r.tags),
-    last_verified_on: day(r.last_verified_on),
+    last_verified_on: day(r.last_verified_on), chapter: Number(r.chapter ?? 0),
     published_at: iso(r.published_at), created_at: iso(r.created_at)!, updated_at: iso(r.updated_at)!,
   };
 }

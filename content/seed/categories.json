@@ -18,15 +18,15 @@
   "id": "gta6-lugares-secretos",
   "game_id": "gta6",
   "slug": "lugares-secretos",
-  "name": "Lugares secretos",
+  "name": "Bunkers e lugares secretos",
   "tagline": "Onde o GPS desiste",
   "icon": "door",
   "cta_key": "lugares",
   "sort": 2,
-  "description": "Bunkers, interiores escondidos, topos de torre e cantos do mapa de GTA 6 que o jogo não manda você visitar.",
+  "description": "Bunkers, esconderijos e lugares secretos de GTA 6 que o jogo não manda você visitar, com o que existe em cada um.",
   "intro_md": "Todo GTA tem aquele lugar que alguém jurava existir. Em Leonida eles existem mesmo, e a diferença é saber quais. Reunimos os locais escondidos já relatados, sempre com o ponto de referência mais fácil para chegar.",
-  "seo_title": "Lugares secretos de GTA 6: localizações escondidas no mapa",
-  "seo_description": "Lugares secretos e áreas escondidas de GTA 6: onde ficam, como entrar e o que existe em cada um, com fontes.",
+  "seo_title": "Bunkers e lugares secretos de GTA 6: onde ficam",
+  "seo_description": "Bunkers, esconderijos e lugares secretos de GTA 6: onde ficam, como entrar e o que há em cada um, com selo de confiança.",
   "faq": []
  },
  {
@@ -42,21 +42,6 @@
   "intro_md": "Easter egg é a parte do jogo feita para quem presta atenção. Aqui entram as referências escondidas em GTA 6 e, quando faz sentido, a origem de cada uma nos jogos antigos da série.",
   "seo_title": "Easter eggs de GTA 6: lista com localização e referências",
   "seo_description": "Os easter eggs de GTA 6 já encontrados, com localização, o que cada um referencia e status de verificação.",
-  "faq": []
- },
- {
-  "id": "gta6-misterios",
-  "game_id": "gta6",
-  "slug": "misterios",
-  "name": "Mistérios",
-  "tagline": "Casos que tiram o sono",
-  "icon": "eye",
-  "cta_key": "misterios",
-  "sort": 4,
-  "description": "Os mistérios de GTA 6 que a comunidade ainda investiga: criaturas, símbolos e pistas sem resposta, separados do que já foi confirmado.",
-  "intro_md": "Mistério bom é o que ainda não foi resolvido, e é exatamente por isso que essa é a categoria onde mais circula boato. Tratamos cada caso como um arquivo aberto: o que foi visto, o que é só teoria e o que ainda falta provar.",
-  "seo_title": "Mistérios de GTA 6: o que já se sabe e o que é só teoria",
-  "seo_description": "Mistérios de GTA 6 em investigação: o que foi encontrado, o que é teoria e o que já foi desmentido, com fontes.",
   "faq": []
  },
  {
@@ -93,7 +78,7 @@
   "id": "gta6-armas-e-itens",
   "game_id": "gta6",
   "slug": "armas-e-itens",
-  "name": "Armas e itens raros",
+  "name": "Armas únicas e itens raros",
   "tagline": "Tudo que não está na vitrine",
   "icon": "crate",
   "cta_key": "padrao",
@@ -102,21 +87,6 @@
   "intro_md": "Nem tudo que vale a pena carregar está na vitrine. Esta categoria reúne armas, equipamentos e itens raros encontrados pelo mapa.",
   "seo_title": "Armas escondidas e itens raros de GTA 6: onde encontrar",
   "seo_description": "Localização de armas escondidas, equipamentos e itens raros em GTA 6, com requisitos e status de verificação.",
-  "faq": []
- },
- {
-  "id": "gta6-colecionaveis",
-  "game_id": "gta6",
-  "slug": "colecionaveis",
-  "name": "Colecionáveis",
-  "tagline": "Para os obcecados pelos 100%",
-  "icon": "grid",
-  "cta_key": "colecionaveis",
-  "sort": 8,
-  "description": "Colecionáveis de GTA 6 dentro do jogo: o que existe para coletar, onde fica e o que você ganha ao completar cada conjunto.",
-  "intro_md": "Colecionável é promessa de longo prazo: dá trabalho, mas é o tipo de coisa que faz você conhecer o mapa inteiro. Aqui tratamos dos colecionáveis de dentro do jogo. A edição de colecionador vendida em loja é outro assunto.",
-  "seo_title": "Colecionáveis de GTA 6: localização e recompensas",
-  "seo_description": "Colecionáveis de GTA 6 dentro do jogo: tipos, localizações e recompensas por completar cada conjunto.",
   "faq": []
  },
  {

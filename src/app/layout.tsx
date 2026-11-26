@@ -8,7 +8,7 @@ const inter = localFont({ src: "../fonts/inter.woff2", variable: "--font-inter",
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
-  title: { default: `${site.name}: segredos, easter eggs e descobertas de GTA 6`, template: `%s | ${site.name}` },
+  title: { default: `${site.name}: segredos, easter eggs e dinheiro escondido`, template: `%s | ${site.name}` },
   description: site.description,
   applicationName: site.name,
   // Chave de publicação: sem SITE_INDEXABLE=true nada é indexado.

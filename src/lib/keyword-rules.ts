@@ -19,7 +19,7 @@ type Rule = { cluster: string; sub?: string; re: RegExp; url: string | null; pri
 const RULES: Rule[] = [
   { cluster: "comercial-app", re: /\b(app|aplicativo|apk)\b|mapa interativo|interactive map|mapgenie|map genie/, url: "/app/", priority: "alta", app: "alto" },
   { cluster: "cheats-e-codigos", re: /codigo|cheat|manha|infinit|trapaca|glitch/, url: "/gta-6/dicas/", priority: "media", app: "baixo" },
-  { cluster: "exploracao-e-segredos", sub: "misterios", re: /misterio|bigfoot|pe grande|skunk|ovni|ufo|alien|esfinge|fantasma|ritual|sata|demonio|monumento/, url: "/gta-6/misterios/", priority: "alta", app: "alto" },
+  { cluster: "exploracao-e-segredos", sub: "misterios", re: /misterio|bigfoot|pe grande|skunk|ovni|ufo|alien|esfinge|fantasma|ritual|sata|demonio|monumento/, url: "/gta-6/easter-eggs/", priority: "alta", app: "alto" },
   { cluster: "exploracao-e-segredos", sub: "easter-eggs", re: /easter|dexter|referencia|\bcj\b|tommy|portal/, url: "/gta-6/easter-eggs/", priority: "alta", app: "medio" },
   { cluster: "exploracao-e-segredos", sub: "missoes-secretas", re: /miss(ao|oes) secret|secret mission|missoes? secundaria|side mission|estranhos|strangers|evento|encontro/, url: "/gta-6/missoes-secretas/", priority: "alta", app: "alto" },
   { cluster: "exploracao-e-segredos", sub: "lugares-secretos", re: /lugar|bunker|local secreto|secret location|naufragio|interior/, url: "/gta-6/lugares-secretos/", priority: "alta", app: "alto" },
@@ -27,7 +27,7 @@ const RULES: Rule[] = [
   { cluster: "dinheiro-e-recompensas", re: /dinheiro|money|grana|tesouro|treasure|cofre|safe\b|cripto|cassino|rico|recompensa|reward/, url: "/gta-6/dinheiro/", priority: "alta", app: "alto" },
   { cluster: "veiculos", re: /carro|\bcars?\b|veiculo|vehicle|moto\b|motos|bugatti|garagem|garage|\bbike|helicoptero|aviao|barco|tanque|registrar/, url: "/gta-6/veiculos/", priority: "alta", app: "medio" },
   { cluster: "armas-e-itens", re: /\barmas?\b|weapon|municao|\bitens?\b|\bitems?\b|roupa|outfit|equipamento/, url: "/gta-6/armas-e-itens/", priority: "media", app: "medio" },
-  { cluster: "colecionaveis-e-100", re: /colecionav|collectible|100 ?%|\b100\b.*(checklist|percent|por cento)|checklist|platina|trofe|trophy|conquista/, url: "/gta-6/colecionaveis/", priority: "alta", app: "alto" },
+  { cluster: "colecionaveis-e-100", re: /colecionav|collectible|100 ?%|\b100\b.*(checklist|percent|por cento)|checklist|platina|trofe|trophy|conquista/, url: "/gta-6/segredos/", priority: "alta", app: "alto" },
   { cluster: "historia-e-missoes", re: /miss(ao|oes)|mission|capitulo|chapter|final\b|finais|ending|detonado|walkthrough|historia|story/, url: null, priority: "media", app: "medio" },
   { cluster: "mapa", re: /\bmapa\b|\bmap\b|localiza|location|regi(ao|oes)|leonida|vice city|keys|gellhorn/, url: "/gta-6/mapa/", priority: "media", app: "alto" },
   { cluster: "dicas-e-mecanicas", re: /^gta 6 como |\bcomo\b|how to|dica|\btips\b|salvar|trocar|guardar|vender|comprar|iniciante|beginner|guia|guide|por que|o que acontece/, url: "/gta-6/dicas/", priority: "alta", app: "medio" },

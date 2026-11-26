@@ -11,19 +11,19 @@ const results = [];
 const ok = (name, pass, detail = "") => { results.push({ name, pass, detail }); console.log(`${pass ? "PASS" : "FAIL"}  ${name}${detail ? "  — " + detail : ""}`); };
 
 const status = async (p, opts) => (await fetch(BASE + p, { redirect: "manual", ...opts })).status;
-const ENTRY = "/gta-6/missoes-secretas/pe-grande-skunk-ape/";
+const ENTRY = "/gta-6/easter-eggs/skunk-ape/";
 
 // 1. Rotas e códigos HTTP
 for (const p of ["/", "/gta-6/", "/gta-6/segredos/", "/gta-6/dinheiro/", "/gta-6/mapa/", "/gta-6/mapa/vice-city/", ENTRY, "/app/", "/sobre/", "/metodologia/", "/radar/", "/ajuda/", "/contato/", "/enviar-descoberta/", "/privacidade/", "/termos/", "/busca/", "/favoritos/", "/robots.txt", "/sitemap.xml", "/llms.txt", "/search-index.json"])
   ok(`200 ${p}`, (await status(p)) === 200);
-for (const p of ["/gta-6/missoes-secretas/nao-existe/", "/gta-6/categoria-falsa/", "/gta-5/", "/qualquer/coisa/muito/funda/"]) ok(`404 real em ${p}`, (await status(p)) === 404);
+for (const p of ["/gta-6/missoes-secretas/nao-existe/", "/gta-6/misterios/", "/gta-6/categoria-falsa/", "/gta-5/", "/qualquer/coisa/muito/funda/"]) ok(`404 real em ${p}`, (await status(p)) === 404);
 ok("admin exige login", [302, 303, 307].includes(await status("/admin/")));
 ok("admin/entradas exige login", [302, 303, 307].includes(await status("/admin/entradas/")));
 
 // 2. HTML: SEO técnico
 const html = await (await fetch(BASE + ENTRY)).text();
 ok("um único H1", (html.match(/<h1[\s>]/g) || []).length === 1);
-ok("canonical presente", /<link rel="canonical" href="[^"]+pe-grande-skunk-ape\/"/.test(html));
+ok("canonical presente", /<link rel="canonical" href="[^"]+skunk-ape\/"/.test(html));
 ok("resposta rápida no HTML do servidor", html.includes("Resposta rápida"));
 const lds = [...html.matchAll(/<script type="application\/ld\+json">(.*?)<\/script>/gs)].map((m) => JSON.parse(m[1]));
 const types = lds.flatMap((l) => (l["@graph"] ?? [l]).map((n) => n["@type"]));
@@ -34,7 +34,7 @@ ok("robots.txt bloqueia tudo antes do lançamento", /Disallow: \/\s*$/m.test(awa
 const h = (await fetch(BASE + "/")).headers;
 ok("cabeçalhos de segurança", Boolean(h.get("content-security-policy") && h.get("x-content-type-options") && h.get("strict-transport-security") && h.get("x-frame-options")));
 const sm = await (await fetch(BASE + "/sitemap.xml")).text();
-ok("sitemap lista descobertas e exclui admin/busca", sm.includes("pe-grande-skunk-ape") && !sm.includes("/admin") && !sm.includes("/busca"));
+ok("sitemap lista descobertas e exclui admin/busca", sm.includes("/skunk-ape/") && !sm.includes("/admin") && !sm.includes("/busca"));
 
 const browser = await chromium.launch();
 const errors = [];
@@ -82,7 +82,7 @@ for (const [w, hh] of [[360, 740], [390, 844], [768, 1024], [1280, 800]]) {
   const input = page.getByRole("searchbox");
   await input.fill("bigfot");
   await page.waitForSelector("dialog[aria-label=Busca] a.card");
-  ok("busca tolera erro de digitação (bigfot)", /Pé Grande/i.test(await page.locator("dialog[aria-label=Busca] a.card").first().innerText()));
+  ok("busca tolera erro de digitação (bigfot)", /Pé-Grande|Skunk/i.test(await page.locator("dialog[aria-label=Busca] a.card").first().innerText()));
   await input.fill("grana");
   await page.waitForTimeout(500);
   ok("busca entende sinônimo (grana → dinheiro)", (await page.locator("dialog[aria-label=Busca] a.card").count()) > 0);
@@ -92,8 +92,8 @@ for (const [w, hh] of [[360, 740], [390, 844], [768, 1024], [1280, 800]]) {
   await input.fill("pé grande");
   await page.waitForSelector("dialog[aria-label=Busca] a.card");
   await page.locator("dialog[aria-label=Busca] a.card").first().click();
-  await page.waitForURL(/pe-grande/);
-  ok("da home à resposta em 2 toques + digitação", page.url().includes("pe-grande-skunk-ape"));
+  await page.waitForURL(/skunk-ape/);
+  ok("da home à resposta em 2 toques + digitação", page.url().includes("skunk-ape"));
   ok("resposta visível sem rolar", await page.locator("#h-resposta").evaluate((el) => el.getBoundingClientRect().top < window.innerHeight));
 
   // favoritos
@@ -188,8 +188,8 @@ if (PW) {
   await page.getByLabel("Revisado por").fill("Teste e2e");
   await page.getByLabel("Status de confirmação").selectOption("confirmado");
   await page.getByRole("button", { name: "Salvar" }).click();
-  await page.waitForSelector("text=exige fonte oficial ou teste direto");
-  ok("painel bloqueia 'Confirmado' sem teste direto ou fonte oficial", true);
+  await page.waitForSelector("text=exige três ou mais fontes");
+  ok("painel bloqueia 'Confirmado' com menos de três fontes", true);
 
   // mudança de slug gera 301
   await page.goto(BASE + "/admin/entradas/gta6-0018/");

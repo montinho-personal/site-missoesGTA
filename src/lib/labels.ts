@@ -1,12 +1,18 @@
 import type { EvidenceType, SpoilerLevel, VerificationStatus, WorkflowStatus } from "./types";
 
+// A MESMA regra de selos do aplicativo (C, P, N, X), mais um nível acima: "Testado por nós".
 export const statusInfo: Record<VerificationStatus, { label: string; short: string; tone: string; meaning: string }> = {
-  confirmado: { label: "Confirmado", short: "Confirmado", tone: "ok", meaning: "Testado diretamente pela nossa equipe ou confirmado por fonte oficial." },
-  relato: { label: "Relato da comunidade", short: "Relato", tone: "gold", meaning: "Publicado por jogadores ou veículos que citamos, mas ainda não reproduzido por nós dentro do jogo." },
-  investigacao: { label: "Em investigação", short: "Investigando", tone: "violet", meaning: "Há indícios, mas falta evidência suficiente ou as fontes divergem." },
-  desmentido: { label: "Desmentido", short: "Desmentido", tone: "red", meaning: "Circulou como verdade e foi comprovado falso." },
-  desatualizado: { label: "Desatualizado", short: "Desatualizado", tone: "gray", meaning: "Funcionava em versão anterior do jogo e deixou de funcionar." },
-  mod: { label: "Somente com modificação", short: "Mod", tone: "orange", meaning: "Não existe no jogo original; depende de mod." },
+  testado: { label: "Testado por nós", short: "Testado", tone: "cyan", meaning: "Alguém da equipe reproduziu dentro do jogo. A página registra plataforma, versão e data." },
+  confirmado: { label: "Confirmado", short: "Confirmado", tone: "ok", meaning: "O mesmo local, passos e prêmio em três ou mais fontes independentes, com gameplay." },
+  provavel: { label: "Muito provável", short: "Provável", tone: "gold", meaning: "Duas fontes independentes, ou uma que afirma ter testado." },
+  nao_verificado: { label: "Não verificado", short: "Não verificado", tone: "violet", meaning: "Uma fonte só, ou fontes que se contradizem." },
+  desmentido: { label: "Desmentido ou corrigido", short: "Desmentido", tone: "red", meaning: "Deixou de funcionar depois de um patch, ou foi desmentido." },
+};
+
+export const precisionInfo: Record<string, { label: string; text: string }> = {
+  exato: { label: "Ponto exato", text: "A localização é a do próprio lugar." },
+  perto: { label: "Perto daqui", text: "O lugar vizinho é conhecido, o ponto certo ainda não: procure em volta, a até uns 300 m." },
+  regiao: { label: "Só a região", text: "Só a região é conhecida: o ponto certo pode estar a mais de 1 km." },
 };
 
 export const evidenceLabel: Record<EvidenceType, string> = {

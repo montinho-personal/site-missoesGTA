@@ -1,4 +1,5 @@
-export type VerificationStatus = "confirmado" | "relato" | "investigacao" | "desmentido" | "desatualizado" | "mod";
+export type VerificationStatus = "testado" | "confirmado" | "provavel" | "nao_verificado" | "desmentido";
+export type PinPrecision = "exato" | "perto" | "regiao";
 export type EvidenceType = "oficial" | "teste_direto" | "relatos" | "teoria" | "vazamento" | "mod" | "outra_versao";
 export type SpoilerLevel = "nenhum" | "leve" | "historia";
 export type WorkflowStatus = "rascunho" | "revisao" | "aprovado" | "publicado" | "arquivado";
@@ -22,6 +23,7 @@ export interface Entry {
   id: string; app_ref: string | null; game_id: string; category_id: string; region_id: string | null; author_id: string | null;
   kind: EntryKind; slug: string; title: string; direct_answer: string; summary: string; body_md: string;
   location_text: string | null; landmark: string | null; coords: { x: number; y: number } | null;
+  pin_precision: PinPrecision | null; pin_evidence: string | null; chapter: number; reward_value: number | null;
   character_req: string | null; requirements: string | null; progress_required: string | null; conditions: string | null;
   steps: string[]; reward: string | null; reward_type: string | null; repeatable: string | null; missable: string | null;
   common_mistakes: string[]; troubleshooting: Fix[]; platform_tested: string | null; game_version: string | null;

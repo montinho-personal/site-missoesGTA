@@ -12,7 +12,8 @@
     "keywords": "tsx scripts/keywords.ts",
     "db:migrate": "tsx --conditions=react-server scripts/db.ts migrate",
     "db:seed": "tsx --conditions=react-server scripts/db.ts seed",
-    "db:keywords": "tsx --conditions=react-server scripts/db.ts keywords"
+    "db:keywords": "tsx --conditions=react-server scripts/db.ts keywords",
+    "importar:app": "tsx scripts/importar-app.ts"
   },
   "dependencies": {
     "@electric-sql/pglite": "^0.6.0",

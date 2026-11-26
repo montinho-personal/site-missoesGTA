@@ -41,6 +41,7 @@ export async function seed(db: Db) {
 }
 
 export async function seedIfEmpty(db: Db) {
-  const [{ n }] = await db.query<{ n: number }>(`select count(*)::int as n from games`);
+  // "Vazio" = sem fichas: assim uma migração que troca o conteúdo-semente recarrega tudo.
+  const [{ n }] = await db.query<{ n: number }>(`select count(*)::int as n from entries`);
   if (n === 0) await seed(db);
 }

@@ -1,11 +1,11 @@
 // Fonte única de identidade do site. Domínio definido pelo fundador:
-// missoessecretasgta.com.br. Nome exibido: Missões Secretas GTA.
+// missoessecretasgta.com.br. Nome exibido: Missões Secretas GTA 6, o mesmo do aplicativo.
 export const DOMAIN = "missoessecretasgta.com.br";
 const defaultUrl = process.env.NODE_ENV === "production" ? `https://${DOMAIN}` : "http://localhost:3000";
 
 export const site = {
-  name: "Missões Secretas GTA",
-  wordmark: ["MISSÕES SECRETAS", "GTA"] as const,
+  name: "Missões Secretas GTA 6",
+  wordmark: ["MISSÕES SECRETAS", "GTA 6"] as const,
   tagline: "A paixão de descobrir aquilo que o jogo não te conta.",
   description:
     "Portal independente de fãs sobre os segredos de GTA 6: missões secretas, lugares escondidos, easter eggs, mistérios e recompensas, com fontes e status de verificação em cada descoberta.",

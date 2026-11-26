@@ -17,13 +17,16 @@ const g = globalThis as G;
 async function runMigrations(db: Db) {
   await db.query(`create table if not exists _migrations (id text primary key, applied_at timestamptz not null default now())`);
   const done = new Set((await db.query<{ id: string }>(`select id from _migrations`)).map((r) => r.id));
+  let applied = 0;
   for (const m of migrations) {
     if (done.has(m.id)) continue;
     for (const stmt of m.sql.split(/;\s*\n/).map((s) => s.trim()).filter(Boolean)) {
       await db.query(stmt);
     }
     await db.query(`insert into _migrations (id) values ($1)`, [m.id]);
+    applied++;
   }
+  return applied;
 }
 
 async function createPostgres(url: string): Promise<Db> {
@@ -35,9 +38,10 @@ async function createPostgres(url: string): Promise<Db> {
   await sql.begin(async (tx) => {
     await tx`select pg_advisory_xact_lock(72727401)`;
     const inTx: Db = { driver: "postgres", persistent: true, async query<T>(text: string, params: unknown[] = []) { return (await tx.unsafe(text, params as never[])) as unknown as T[]; } };
-    await runMigrations(inTx);
-    const { seedIfEmpty } = await import("./seed");
-    await seedIfEmpty(inTx);
+    const applied = await runMigrations(inTx);
+    const { seed, seedIfEmpty } = await import("./seed");
+    // Migração nova pode ter trocado o conteúdo-semente: recarrega (o seed nunca sobrescreve o que existe).
+    if (applied > 0) await seed(inTx); else await seedIfEmpty(inTx);
   });
   return {
     driver: "postgres",
@@ -64,9 +68,9 @@ async function createPglite(): Promise<Db> {
       return res.rows as T[];
     },
   };
-  await runMigrations(db);
-  const { seedIfEmpty } = await import("./seed");
-  await seedIfEmpty(db);
+  const applied = await runMigrations(db);
+  const { seed, seedIfEmpty } = await import("./seed");
+  if (applied > 0) await seed(db); else await seedIfEmpty(db);
   return db;
 }
 

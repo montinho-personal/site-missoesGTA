@@ -7,7 +7,7 @@ import { Icon } from "@/components/Icon";
 import { entryUrl, getCtas, getEntry, getEntryChanges, getPublishedEntries, relatedEntries, toCard } from "@/server/content";
 import { notFoundOrRedirect } from "@/server/route-helpers";
 import { breadcrumbLd, faqLd, pageMeta } from "@/lib/seo";
-import { evidenceLabel, factValue, formatDate, rewardTypeLabel, statusInfo } from "@/lib/labels";
+import { evidenceLabel, factValue, formatDate, precisionInfo, rewardTypeLabel, statusInfo } from "@/lib/labels";
 import { abs, site } from "@/lib/site";
 import { appConfig } from "@/lib/app-config";
 
@@ -125,10 +125,11 @@ export default async function EntryPage({ params }: Props) {
                 <dl className="card grid sm:grid-cols-2 [&>div]:border-b [&>div]:border-ink-600 sm:[&>div:nth-child(odd)]:border-r overflow-hidden">
                   <Fact icon="pin" label="Onde fica" value={entry.location_text} />
                   {entry.region_name && <Fact icon="compass" label="Região" value={entry.region_name} />}
-                  <Fact icon="flag" label="Ponto de referência" value={entry.landmark} />
+                  {entry.pin_precision && <Fact icon="target" label="Precisão do local" value={`${precisionInfo[entry.pin_precision].label}. ${precisionInfo[entry.pin_precision].text}`} />}
+                  <Fact icon="flag" label="Como reconhecer o lugar" value={entry.landmark} />
                   <Fact icon="users" label="Personagem necessário" value={entry.character_req} />
-                  <Fact icon="shield" label="Requisitos" value={entry.requirements} />
-                  <Fact icon="file" label="Progresso necessário" value={entry.progress_required} />
+                  {entry.requirements && <Fact icon="shield" label="O que levar e fazer antes" value={entry.requirements} />}
+                  <Fact icon="file" label="Capítulo" value={entry.progress_required} />
                   <Fact icon="clock" label="Horário ou condições" value={entry.conditions} />
                   <Fact icon="cash" label="Recompensa" value={entry.reward ?? (entry.reward_type === "nenhuma" ? "n/a" : null)} />
                   <Fact icon="radar" label="Dá para repetir?" value={entry.repeatable} />
@@ -197,12 +198,18 @@ export default async function EntryPage({ params }: Props) {
                 </div>
                 <dl className="grid sm:grid-cols-2 [&>div]:p-4 [&>div]:border-b [&>div]:border-ink-600 sm:[&>div:nth-child(odd)]:border-r">
                   <div><dt className="label text-fg-subtle">Tipo de evidência</dt><dd className="mt-1">{evidenceLabel[entry.evidence_type]}</dd></div>
-                  <div><dt className="label text-fg-subtle">Última verificação nossa</dt><dd className="mt-1">{entry.last_verified_on ? formatDate(entry.last_verified_on) : <span className="text-fg-subtle italic">Ainda não testamos no jogo</span>}</dd></div>
-                  <div><dt className="label text-fg-subtle">Plataforma testada</dt><dd className="mt-1">{entry.platform_tested ?? <span className="text-fg-subtle italic">Não se aplica ainda</span>}</dd></div>
+                  <div><dt className="label text-fg-subtle">Última conferência da ficha</dt><dd className="mt-1">{entry.last_verified_on ? formatDate(entry.last_verified_on) : <span className="text-fg-subtle italic">Ainda não conferida</span>}</dd></div>
+                  <div><dt className="label text-fg-subtle">Plataforma de referência</dt><dd className="mt-1">{entry.platform_tested ?? <span className="text-fg-subtle italic">Não registrada</span>}</dd></div>
                   <div><dt className="label text-fg-subtle">Versão do jogo</dt><dd className="mt-1">{entry.game_version ?? <span className="text-fg-subtle italic">Não registrada</span>}</dd></div>
                 </dl>
+                {entry.pin_evidence && (
+                  <div className="p-5 border-b border-ink-600">
+                    <h3 className="label text-fg-subtle mb-1.5">Em que o local se apoia</h3>
+                    <p className="text-fg-muted">{entry.pin_evidence}</p>
+                  </div>
+                )}
                 <div className="p-5">
-                  <h3 className="label text-fg-subtle mb-2.5">Fontes</h3>
+                  <h3 className="label text-fg-subtle mb-2.5">Fontes e vídeos</h3>
                   {entry.sources.length === 0 ? <p className="text-fg-subtle italic">Sem fontes externas registradas.</p> : (
                     <ul className="flex flex-col gap-2.5">
                       {entry.sources.map((s, i) => (

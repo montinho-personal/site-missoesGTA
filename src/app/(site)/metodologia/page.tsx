@@ -31,11 +31,14 @@ export default function Metodologia() {
       <div className="prose text-fg-muted mt-10">
         <h2>Regras que seguimos</h2>
         <ul>
-          <li><strong>“Confirmado” exige teste nosso ou fonte oficial.</strong> Dez sites repetindo a mesma coisa ainda são um relato, porque podem estar copiando uns dos outros.</li>
+          <li><strong>O selo conta fontes independentes.</strong> “Confirmado” pede três ou mais mostrando o mesmo local, passos e prêmio em gameplay. Dez sites copiando o mesmo texto contam como uma fonte só.</li>
+          <li><strong>“Testado por nós” é outro degrau.</strong> Só aparece quando alguém da equipe refez o caminho dentro do jogo, e a página diz plataforma, versão e data.</li>
+          <li><strong>O site e o aplicativo usam a mesma régua.</strong> As fichas são as mesmas nos dois, com o mesmo selo.</li>
+          <li><strong>O local também tem selo.</strong> Cada ficha diz se o ponto é exato, se fica perto ou se só a região é conhecida.</li>
           <li><strong>Divergência entre fontes aparece na página.</strong> Se um veículo diz um lugar e outro diz outro, mostramos os dois e não escolhemos no palpite.</li>
-          <li><strong>Código, senha e sequência de botões só entram quando conferidos.</strong> Publicar um código errado faz você perder tempo.</li>
+          <li><strong>Código vale o que vale o selo.</strong> Um código numa ficha “Não verificado” pode estar errado. Confira o selo antes de atravessar o mapa.</li>
           <li><strong>Vazamentos não são fonte.</strong> Não usamos material obtido de forma ilegal.</li>
-          <li><strong>Atualizações do jogo mudam as coisas.</strong> Quando um patch quebra um método, o status vira “Desatualizado” e a página explica.</li>
+          <li><strong>Atualizações do jogo mudam as coisas.</strong> Quando um patch quebra um método, o selo vira “Desmentido ou corrigido” e a página explica.</li>
         </ul>
         <h2>Tipos de evidência</h2>
       </div>
@@ -46,7 +49,7 @@ export default function Metodologia() {
         <h2>Correções</h2>
         <p>Erramos? <Link href="/enviar-descoberta/?tipo=correcao">Envie uma correção</Link>. Toda mudança relevante fica registrada no histórico da própria página e no <Link href="/radar/">Radar de descobertas</Link>.</p>
         <h2>Uso de inteligência artificial</h2>
-        <p>Usamos ferramentas de IA para organizar pesquisa e rascunhar textos. Nenhuma página é publicada sem fontes identificadas, e nenhuma descoberta recebe o status “Confirmado” sem teste humano dentro do jogo.</p>
+        <p>Usamos ferramentas de IA para organizar pesquisa e rascunhar textos. Nenhuma página é publicada sem fontes identificadas, e nenhum selo sobe de nível sem as fontes que a regra exige.</p>
       </div>
     </Shell>
   );

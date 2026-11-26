@@ -22,7 +22,7 @@ export async function login(_p: { error: string } | null, fd: FormData) {
 }
 export async function logout() { await endSession(); redirect("/admin/login/"); }
 
-const STATUS = ["confirmado", "relato", "investigacao", "desmentido", "desatualizado", "mod"] as const;
+const STATUS = ["testado", "confirmado", "provavel", "nao_verificado", "desmentido"] as const;
 const WORKFLOW = ["rascunho", "revisao", "aprovado", "publicado", "arquivado"] as const;
 
 const entrySchema = z.object({
@@ -59,10 +59,13 @@ export async function saveEntry(_p: { error: string } | null, fd: FormData): Pro
     if (sources.length === 0 && d.evidence_type !== "teste_direto") return { error: "Para publicar, informe ao menos uma fonte ou registre teste direto." };
     if (!s(fd, "reviewed_by")) return { error: "Para publicar, informe quem revisou." };
   }
-  if (d.verification_status === "confirmado") {
-    const direct = d.evidence_type === "teste_direto" && s(fd, "last_verified_on") && s(fd, "platform_tested");
-    if (!direct && d.evidence_type !== "oficial") return { error: "“Confirmado” exige fonte oficial ou teste direto com plataforma e data de verificação." };
-  }
+  // Mesma régua do aplicativo, sem atalho.
+  if (d.verification_status === "testado" && !(d.evidence_type === "teste_direto" && s(fd, "last_verified_on") && s(fd, "platform_tested")))
+    return { error: "“Testado por nós” exige evidência de teste direto, com plataforma e data." };
+  if (d.verification_status === "confirmado" && sources.length < 3 && d.evidence_type !== "oficial")
+    return { error: "“Confirmado” exige três ou mais fontes independentes (ou fonte oficial)." };
+  if (d.verification_status === "provavel" && sources.length < 2 && d.evidence_type !== "teste_direto")
+    return { error: "“Muito provável” exige duas fontes independentes, ou uma que testou." };
 
   const [cat] = await q<{ game_id: string; slug: string }>(`select c.game_id, c.slug from categories c where c.id = $1`, [d.category_id]);
   if (!cat) return { error: "Categoria inválida." };

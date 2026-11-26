@@ -1,56 +1,92 @@
 [
  {
-  "id": "gta6-vice-city",
-  "game_id": "gta6",
-  "slug": "vice-city",
-  "name": "Vice City",
-  "description": "Cidade principal do estado de Leonida, listada na página oficial Only in Leonida.",
-  "source_url": "https://www.rockstargames.com/VI/only-in-leonida",
-  "sort": 1
- },
- {
   "id": "gta6-leonida-keys",
   "game_id": "gta6",
   "slug": "leonida-keys",
   "name": "Leonida Keys",
-  "description": "Arquipélago no sul de Leonida, listado na página oficial Only in Leonida. É onde ficam Key Lento e a base Mile Zero, segundo os guias.",
-  "source_url": "https://www.rockstargames.com/VI/only-in-leonida",
-  "sort": 2
+  "description": "Segredos de GTA 6 registrados em Leonida Keys, com o lugar, o passo a passo e o selo de confiança de cada um.",
+  "source_url": null,
+  "sort": 1
  },
  {
   "id": "gta6-grassrivers",
   "game_id": "gta6",
   "slug": "grassrivers",
   "name": "Grassrivers",
-  "description": "Região de pântanos citada pela Wikipedia e por guias. Ainda não conferimos o nome em fonte oficial.",
-  "source_url": "https://en.wikipedia.org/wiki/Grand_Theft_Auto_VI",
+  "description": "Segredos de GTA 6 registrados em Grassrivers, com o lugar, o passo a passo e o selo de confiança de cada um.",
+  "source_url": null,
+  "sort": 2
+ },
+ {
+  "id": "gta6-hamlet",
+  "game_id": "gta6",
+  "slug": "hamlet",
+  "name": "Hamlet",
+  "description": "Segredos de GTA 6 registrados em Hamlet, com o lugar, o passo a passo e o selo de confiança de cada um.",
+  "source_url": null,
   "sort": 3
  },
  {
-  "id": "gta6-port-gellhorn",
+  "id": "gta6-watson-bay-e-big-pine",
   "game_id": "gta6",
-  "slug": "port-gellhorn",
-  "name": "Port Gellhorn",
-  "description": "Cidade costeira listada na página oficial Only in Leonida.",
-  "source_url": "https://www.rockstargames.com/VI/only-in-leonida",
+  "slug": "watson-bay-e-big-pine",
+  "name": "Watson Bay e Big Pine",
+  "description": "Segredos de GTA 6 registrados em Watson Bay e Big Pine, com o lugar, o passo a passo e o selo de confiança de cada um.",
+  "source_url": null,
   "sort": 4
  },
  {
-  "id": "gta6-ambrosia",
+  "id": "gta6-capri",
   "game_id": "gta6",
-  "slug": "ambrosia",
-  "name": "Ambrosia",
-  "description": "Região citada pela Wikipedia e por guias. Ainda não conferimos o nome em fonte oficial.",
-  "source_url": "https://en.wikipedia.org/wiki/Grand_Theft_Auto_VI",
+  "slug": "capri",
+  "name": "Capri",
+  "description": "Segredos de GTA 6 registrados em Capri, com o lugar, o passo a passo e o selo de confiança de cada um.",
+  "source_url": null,
   "sort": 5
  },
  {
-  "id": "gta6-mount-kalaga",
+  "id": "gta6-port-gellhorn-e-kelly",
   "game_id": "gta6",
-  "slug": "mount-kalaga",
-  "name": "Mount Kalaga",
-  "description": "Área do Mount Kalaga National Park, listada na página oficial Only in Leonida.",
-  "source_url": "https://www.rockstargames.com/VI/only-in-leonida",
+  "slug": "port-gellhorn-e-kelly",
+  "name": "Port Gellhorn e Kelly",
+  "description": "Segredos de GTA 6 registrados em Port Gellhorn e Kelly, com o lugar, o passo a passo e o selo de confiança de cada um.",
+  "source_url": null,
   "sort": 6
+ },
+ {
+  "id": "gta6-ambrosia-e-leonard",
+  "game_id": "gta6",
+  "slug": "ambrosia-e-leonard",
+  "name": "Ambrosia e Leonard",
+  "description": "Segredos de GTA 6 registrados em Ambrosia e Leonard, com o lugar, o passo a passo e o selo de confiança de cada um.",
+  "source_url": null,
+  "sort": 7
+ },
+ {
+  "id": "gta6-vice-city",
+  "game_id": "gta6",
+  "slug": "vice-city",
+  "name": "Vice City",
+  "description": "Segredos de GTA 6 registrados em Vice City, com o lugar, o passo a passo e o selo de confiança de cada um.",
+  "source_url": null,
+  "sort": 8
+ },
+ {
+  "id": "gta6-vice-beach",
+  "game_id": "gta6",
+  "slug": "vice-beach",
+  "name": "Vice Beach",
+  "description": "Segredos de GTA 6 registrados em Vice Beach, com o lugar, o passo a passo e o selo de confiança de cada um.",
+  "source_url": null,
+  "sort": 9
+ },
+ {
+  "id": "gta6-mount-kalaga-e-lummox",
+  "game_id": "gta6",
+  "slug": "mount-kalaga-e-lummox",
+  "name": "Mount Kalaga e Lummox",
+  "description": "Segredos de GTA 6 registrados em Mount Kalaga e Lummox, com o lugar, o passo a passo e o selo de confiança de cada um.",
+  "source_url": null,
+  "sort": 10
  }
 ]

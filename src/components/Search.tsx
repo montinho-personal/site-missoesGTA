@@ -12,7 +12,8 @@ const QUICK = [
   { href: "/gta-6/missoes-secretas/", label: "Missões secretas" },
   { href: "/gta-6/dinheiro/", label: "Dinheiro escondido" },
   { href: "/gta-6/veiculos/", label: "Carros raros" },
-  { href: "/gta-6/misterios/", label: "Mistérios" },
+  { href: "/gta-6/lugares-secretos/", label: "Bunkers" },
+  { href: "/gta-6/easter-eggs/", label: "Easter eggs" },
   { href: "/gta-6/dicas/", label: "Dicas" },
 ];
 

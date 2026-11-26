@@ -73,8 +73,8 @@ export default async function EditEntry({ params, searchParams }: { params: Prom
           <F label="Erros comuns (um por linha)" name="common_mistakes" value={arr(e.common_mistakes).join("\n")} rows={3} />
           <F label="Solução de problemas (problema => solução, um por linha)" name="troubleshooting" value={(arr(e.troubleshooting) as { problema: string; solucao: string }[]).map((t) => `${t.problema} => ${t.solucao}`).join("\n")} rows={3} />
         </Group>
-        <Group title="Verificação e fontes" hint="“Confirmado” só é aceito com fonte oficial, ou com teste direto + plataforma + data.">
-          <S label="Status de confirmação" name="verification_status" value={e.verification_status ?? "investigacao"} options={Object.entries(statusInfo).map(([k, v]) => [k, v.label])} />
+        <Group title="Verificação e fontes" hint="Mesma régua do aplicativo: Confirmado = 3+ fontes; Muito provável = 2 fontes; Testado por nós = teste direto + plataforma + data. Fichas com identificador do aplicativo devem ser corrigidas lá e importadas de novo.">
+          <S label="Status de confirmação" name="verification_status" value={e.verification_status ?? "nao_verificado"} options={Object.entries(statusInfo).map(([k, v]) => [k, v.label])} />
           <S label="Tipo de evidência" name="evidence_type" value={e.evidence_type ?? "relatos"} options={Object.entries(evidenceLabel)} />
           <F label="Plataforma testada" name="platform_tested" value={e.platform_tested} />
           <F label="Versão do jogo" name="game_version" value={e.game_version} />

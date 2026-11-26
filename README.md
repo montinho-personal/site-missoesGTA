@@ -15,7 +15,7 @@ Sem `DATABASE_URL`, o projeto usa um Postgres embutido (PGlite) em `.data/`, já
 ## Estado
 
 - O site sobe com `noindex` em tudo. A indexação só é liberada com `SITE_INDEXABLE=true`, depois da revisão humana do conteúdo.
-- As 20 fichas iniciais vêm de relatos publicados, com fontes; **nenhuma foi testada no jogo** e nenhuma está marcada como "Confirmado".
+- As 125 fichas vêm do repositório do aplicativo, que é a fonte única dos fatos (`npm run importar:app -- caminho/do/app/conteudo`). Site e aplicativo usam a mesma régua de selos. Nenhuma ficha é "Testado por nós" ainda.
 - A landing do aplicativo está em modo "em preparação": os dados reais do produto entram em `src/lib/app-config.ts`.
 
 ## Documentação
@@ -33,3 +33,5 @@ Sem `DATABASE_URL`, o projeto usa um Postgres embutido (PGlite) em `.data/`, já
 | [09](docs/09-seguranca-privacidade-e-propriedade-intelectual.md) | Segurança, LGPD, acessibilidade, propriedade intelectual |
 | [10](docs/10-relatorio-de-testes.md) | Relatório de testes |
 | [11](docs/11-roadmap.md) | Roteiro de crescimento |
+| [12](docs/12-auditoria-de-narrativa.md) | Auditoria de narrativa e guia de voz |
+| [13](docs/13-alinhamento-site-e-app.md) | Alinhamento entre site e aplicativo |

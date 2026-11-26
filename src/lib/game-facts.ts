@@ -18,5 +18,5 @@ export const homeFaq = [
   { q: "Quantas missões e capítulos GTA 6 tem?", a: "A história é dividida em cinco capítulos. A contagem de missões mais citada é 91 (Red Bull e PC Gamer), mas há veículos que falam em cerca de 93, contando o prólogo. Enquanto as fontes divergirem, tratamos o número como não fechado." },
   { q: "Quantos saves dá para ter em GTA 6?", a: "São 15 espaços de save manual e mais 1 de autosave, segundo o GamesRadar." },
   { q: "GTA 6 já saiu para PC?", a: "Não. Até 25 de novembro de 2026 a Rockstar não anunciou data para PC. O jogo está disponível no PlayStation 5 e no Xbox Series X|S." },
-  { q: "As descobertas deste site são confirmadas?", a: "Cada página mostra um status. “Confirmado” só é usado quando testamos dentro do jogo ou quando a fonte é oficial. O que veio de relatos de jogadores e da imprensa aparece como “Relato da comunidade”, com as fontes listadas, e o que ainda tem versões conflitantes fica “Em investigação”." },
+  { q: "As descobertas deste site são confirmadas?", a: "Cada página mostra um selo. “Confirmado” exige três ou mais fontes independentes com gameplay; “Muito provável”, duas; “Não verificado” é uma fonte só ou fontes que se contradizem. “Testado por nós” só aparece quando a equipe refez dentro do jogo. É a mesma régua do aplicativo." },
 ];

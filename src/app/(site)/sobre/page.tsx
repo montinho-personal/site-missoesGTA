@@ -30,11 +30,11 @@ export default function Sobre() {
         ))}
       </ul>
       <div className="prose text-fg-muted mt-8">
-        <p>A divisão de trabalho é simples: o Bira traz a história, a Nina pede a prova. É por isso que cada página tem um selo. Quando você lê “Relato da comunidade”, é o Bira falando. Quando lê “Confirmado”, a Nina foi lá e testou.</p>
+        <p>A divisão de trabalho é simples: o Bira traz a história, a Nina pede a prova. É por isso que cada página tem um selo. Quando você lê “Não verificado”, é o Bira contando o que ouviu de uma fonte só. “Muito provável” é quando duas fontes batem. “Confirmado” é quando três ou mais mostram a mesma coisa em vídeo. E “Testado por nós” é a Nina voltando do jogo com a prova na mão.</p>
         <h2>O que a gente promete</h2>
         <ul>
           <li><strong>Resposta primeiro.</strong> Você está com o controle numa mão e o celular na outra. A resposta vem na primeira linha.</li>
-          <li><strong>Selo em tudo.</strong> Cada descoberta diz se foi testada por nós, se é relato ou se ainda está em investigação. Veja <Link href="/metodologia/">como verificamos</Link>.</li>
+          <li><strong>Selo em tudo.</strong> Cada descoberta diz se está confirmada, se é muito provável ou se ainda não foi verificada. Veja <Link href="/metodologia/">como verificamos</Link>.</li>
           <li><strong>Fontes à mostra.</strong> De onde veio a informação fica na página, com link.</li>
           <li><strong>Spoiler só se você quiser.</strong> A proteção vem ligada por padrão.</li>
           <li><strong>Quando não sabemos, dizemos.</strong> Campo sem confirmação aparece como “ainda não confirmado”, nunca preenchido no chute.</li>
