@@ -25,12 +25,24 @@ export function customCode(raw: string): string | null {
 
 export interface License { code: string; email: string | null; origin: "compra" | "cortesia"; status: "ativa" | "revogada"; order_id: string | null; note: string | null; created_at: string; last_used_at: string | null }
 
-export async function createCourtesy(email: string | null, note: string | null, custom?: string | null): Promise<string> {
-  const code = custom || newCode();
-  const [dup] = await q(`select 1 from licenses where regexp_replace(code, '[^A-Z0-9]', '', 'g') = $1`, [compactCode(code)]);
-  if (dup) throw new Error("codigo-repetido");
-  await q(`insert into licenses (code, email, origin, note) values ($1, $2, 'cortesia', $3)`, [code, email, note]);
-  return code;
+export interface CourtesyOptions { email: string | null; note: string | null; custom?: string | null; vagas?: number; quantidade?: number }
+
+/**
+ * Gera cortesias. Com nome escolhido e mais de um código, os códigos saem numerados (NINA-01, NINA-02...).
+ * "vagas" é quantos aparelhos cada código libera (1 = individual). Devolve o lote e os códigos.
+ */
+export async function createCourtesy(o: CourtesyOptions): Promise<{ batch: string; codes: string[] }> {
+  const qtd = Math.min(Math.max(o.quantidade ?? 1, 1), 200);
+  const vagas = Math.min(Math.max(o.vagas ?? 1, 1), 10000);
+  const width = String(qtd).length < 2 ? 2 : String(qtd).length;
+  const wanted = Array.from({ length: qtd }, (_, i) => (o.custom ? (qtd === 1 ? o.custom : `${o.custom}-${String(i + 1).padStart(width, "0")}`) : newCode()));
+  if (o.custom) {
+    const dup = await q<{ code: string }>(`select code from licenses where regexp_replace(code, '[^A-Z0-9]', '', 'g') = any($1)`, [wanted.map(compactCode)]);
+    if (dup.length) throw new Error(`codigo-repetido:${dup[0].code}`);
+  }
+  const batch = randomBytes(8).toString("hex");
+  for (const code of wanted) await q(`insert into licenses (code, email, origin, note, max_uses, batch) values ($1, $2, 'cortesia', $3, $4, $5)`, [code, o.email, o.note, vagas > 1 ? vagas : null, batch]);
+  return { batch, codes: wanted };
 }
 
 /** Chamado quando o pagamento é aprovado. Repetir a chamada devolve o mesmo código (o aviso do Mercado Pago chega mais de uma vez). */
@@ -40,10 +52,31 @@ export async function licenseForPaidOrder(orderId: string, email: string): Promi
   return row.code;
 }
 
-export async function isCodeValid(raw: string): Promise<boolean> {
-  // Vale com ou sem hífen, em qualquer caixa: "ms6abcd..." e "nina vip" acham "MS6-ABCD-..." e "NINA-VIP".
+export type Validation = { valido: boolean; motivo?: "esgotado" | "aparelho" };
+
+/**
+ * Vale com ou sem hífen, em qualquer caixa. Código com vagas (max_uses) precisa do identificador do aparelho:
+ * o mesmo aparelho continua valendo sempre; um aparelho novo ocupa uma vaga, até acabar.
+ */
+export async function checkCode(raw: string, device?: string | null): Promise<Validation> {
   const c = compactCode(raw);
-  if (c.length < 4 || c.length > 24) return false;
-  const rows = await q(`update licenses set last_used_at = now() where regexp_replace(code, '[^A-Z0-9]', '', 'g') = $1 and status = 'ativa' returning code`, [c]);
-  return rows.length === 1;
+  if (c.length < 4 || c.length > 24) return { valido: false };
+  const [lic] = await q<{ code: string; max_uses: number | null }>(`select code, max_uses from licenses where regexp_replace(code, '[^A-Z0-9]', '', 'g') = $1 and status = 'ativa'`, [c]);
+  if (!lic) return { valido: false };
+  if (lic.max_uses) {
+    const dev = (device ?? "").replace(/[^A-Za-z0-9_-]/g, "").slice(0, 64);
+    if (dev.length < 8) return { valido: false, motivo: "aparelho" };
+    const again = await q(`update license_uses set last_at = now() where code = $1 and device = $2 returning code`, [lic.code, dev]);
+    if (!again.length) {
+      // Ocupa a vaga só se ainda houver: a contagem e a inserção vão na mesma instrução.
+      const took = await q(`insert into license_uses (code, device) select $1, $2 where (select count(*) from license_uses where code = $1) < $3 on conflict do nothing returning code`, [lic.code, dev, lic.max_uses]);
+      if (!took.length) return { valido: false, motivo: "esgotado" };
+    }
+  }
+  await q(`update licenses set last_used_at = now() where code = $1`, [lic.code]);
+  return { valido: true };
+}
+
+export async function isCodeValid(raw: string, device?: string | null): Promise<boolean> {
+  return (await checkCode(raw, device)).valido;
 }

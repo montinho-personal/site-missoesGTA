@@ -134,8 +134,8 @@ try {
   await page.getByLabel(/E-mail/).fill("amigo@example.com");
   await page.getByLabel(/Anotação/).fill("Cortesia de teste");
   await page.getByRole("button", { name: "Gerar código" }).click();
-  await page.waitForURL(/novo=MS6-/);
-  const cortesia = new URL(page.url()).searchParams.get("novo");
+  await page.waitForURL(/lote=/);
+  const cortesia = (await page.locator("#cortesia [role=status] strong").first().innerText()).trim();
   ok("cortesia gera código que vale sem pagamento", (await valida(cortesia)) === true, cortesia);
   const zap = await page.getByRole("link", { name: /Enviar no WhatsApp para João/ }).getAttribute("href");
   ok("mensagem pronta para o WhatsApp, já com o número e o código", zap.startsWith("https://wa.me/5511987654321?text=") && decodeURIComponent(zap).includes(cortesia) && decodeURIComponent(zap).includes("Fala, João!") && (await page.locator("#c-msg").inputValue()).includes("/app/como-baixar-e-usar/#instalar"));
@@ -143,8 +143,25 @@ try {
   await page.getByLabel(/WhatsApp da pessoa/).fill("");
   await page.getByLabel(/Nome do código/).fill("nina vip");
   await page.getByRole("button", { name: "Gerar código" }).click();
-  await page.waitForURL(/novo=NINA-VIP/);
+  await page.waitForURL(/lote=/);
   ok("dono escolhe o nome do código, e ele vale com ou sem hífen", (await valida("NINA-VIP")) === true && (await valida("ninavip")) === true && (await page.getByRole("link", { name: "Enviar no WhatsApp" }).first().getAttribute("href")).startsWith("https://wa.me/?text="));
+  // um código, várias pessoas: cada aparelho ocupa uma vaga
+  await page.getByLabel(/Nome do código/).fill("GRUPO-VIP");
+  await page.getByLabel(/Quantas pessoas podem usar/).fill("2");
+  await page.getByRole("button", { name: "Gerar código" }).click();
+  await page.waitForURL(/lote=/);
+  const ap = async (codigo, aparelho) => (await fetch(`${BASE}/api/acesso/validar/`, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ codigo, aparelho }) })).json();
+  const a1 = await ap("GRUPO-VIP", "aparelho-aaaa"), a2 = await ap("grupovip", "aparelho-bbbb"), a3 = await ap("GRUPO-VIP", "aparelho-cccc"), a1b = await ap("GRUPO-VIP", "aparelho-aaaa"), semAp = await ap("GRUPO-VIP", "");
+  ok("código com 2 vagas: libera 2 aparelhos, recusa o 3º e continua valendo para quem já entrou", a1.valido && a2.valido && !a3.valido && a3.motivo === "esgotado" && a1b.valido && !semAp.valido && semAp.motivo === "aparelho", JSON.stringify([a1, a2, a3, a1b, semAp]));
+  await page.goto(BASE + "/admin/acessos/");
+  ok("painel mostra quantas pessoas já usaram e que esgotou", /2 de 2 · esgotado/.test(await page.locator("tr", { hasText: "GRUPO-VIP" }).innerText()));
+  // vários códigos de uma vez, numerados
+  await page.getByLabel(/Nome do código/).fill("SORTEIO");
+  await page.getByLabel(/Quantos códigos gerar/).fill("3");
+  await page.getByRole("button", { name: "Gerar código" }).click();
+  await page.waitForURL(/lote=/);
+  const lista = await page.locator("#c-lista").inputValue();
+  ok("gera vários códigos numerados, cada um valendo para uma pessoa", lista === "SORTEIO-01\nSORTEIO-02\nSORTEIO-03" && (await valida("SORTEIO-02")) === true && (await page.getByRole("link", { name: "Enviar no WhatsApp" }).count()) >= 3, lista.replace(/\n/g, ","));
   await page.getByLabel(/Nome do código/).fill("NINA-VIP");
   await page.getByRole("button", { name: "Gerar código" }).click();
   await page.waitForURL(/erro=/);

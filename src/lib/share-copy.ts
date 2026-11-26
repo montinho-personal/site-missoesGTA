@@ -62,17 +62,20 @@ export const STORY_HOOK: Record<string, string> = {
   dicas: "Você sabia disso?",
 };
 
-/** Mensagem de WhatsApp para quem ganhou um código de cortesia. */
-export function courtesyMessage(code: string, nome?: string | null, site = ""): string {
-  const oi = nome ? `Fala, ${nome.split(" ")[0]}!` : "Fala, parceiro!";
+/** Mensagem de WhatsApp para quem ganhou um código de cortesia. Com vagas, serve para divulgar a um grupo. */
+export function courtesyMessage(code: string, nome?: string | null, site = "", vagas?: number | null): string {
+  const oi = nome ? `Fala, ${nome.split(" ")[0]}!` : vagas && vagas > 1 ? "Fala, galera!" : "Fala, parceiro!";
+  const abre = vagas && vagas > 1
+    ? `${oi} 🕵️ Liberei o app *Missões Secretas GTA 6* de graça para as primeiras ${vagas.toLocaleString("pt-BR")} pessoas que usarem este código:`
+    : `${oi} 🕵️ Liberei pra você o acesso ao app *Missões Secretas GTA 6*, na faixa.`;
   return [
-    `${oi} 🕵️ Liberei pra você o acesso ao app *Missões Secretas GTA 6*, na faixa.`,
+    abre,
     "",
-    `Seu código: *${code}*`,
+    `${vagas && vagas > 1 ? "Código" : "Seu código"}: *${code}*`,
     "",
     `Como ativar (leva 1 minuto): ${site}/app/como-baixar-e-usar/#instalar`,
     "",
-    "Lá dentro tem o arquivo inteiro: missões secretas, carros raros, dinheiro escondido e lugares que o GPS não mostra, com local e passo a passo. O código é só seu, não espalha. 😉",
+    `Lá dentro tem o arquivo inteiro: missões secretas, carros raros, dinheiro escondido e lugares que o GPS não mostra, com local e passo a passo. ${vagas && vagas > 1 ? "Quando acabarem as vagas, o código para de funcionar. Corre. 🏃" : "O código é só seu, não espalha. 😉"}`,
   ].join("\n");
 }
 

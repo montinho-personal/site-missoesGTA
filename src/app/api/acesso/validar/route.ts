@@ -1,4 +1,4 @@
-import { isCodeValid } from "@/server/licenses";
+import { checkCode } from "@/server/licenses";
 import { clientKey, rateLimit } from "@/server/security";
 
 export const dynamic = "force-dynamic";
@@ -12,7 +12,8 @@ export function OPTIONS() { return new Response(null, { status: 204, headers: CO
 export async function POST(req: Request) {
   // Limite por origem, para ninguém testar códigos em massa.
   if (!(await rateLimit("acesso", await clientKey(), 20, 600))) return Response.json({ valido: false, motivo: "muitas_tentativas" }, { status: 429, headers: CORS });
-  let codigo = "";
-  try { codigo = String(((await req.json()) as { codigo?: unknown }).codigo ?? "").slice(0, 40); } catch {}
-  return Response.json({ valido: await isCodeValid(codigo) }, { headers: CORS });
+  let codigo = "", aparelho = "";
+  try { const b = (await req.json()) as { codigo?: unknown; aparelho?: unknown }; codigo = String(b.codigo ?? "").slice(0, 40); aparelho = String(b.aparelho ?? "").slice(0, 80); } catch {}
+  // Códigos com vagas usam "aparelho" (um identificador aleatório que o aplicativo cria e guarda) para contar quem já entrou.
+  return Response.json(await checkCode(codigo, aparelho), { headers: CORS });
 }

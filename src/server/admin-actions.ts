@@ -189,13 +189,16 @@ export async function createCourtesyAction(fd: FormData) {
   const tel = s(fd, "tel").replace(/\D/g, "").slice(0, 13);
   const pedido = s(fd, "codigo");
   const custom = pedido ? customCode(pedido) : null;
+  const num = (k: string) => Math.trunc(Number(s(fd, k).replace(/\D/g, "")) || 1);
+  const vagas = num("vagas"), quantidade = num("quantidade");
   const volta = (extra: Record<string, string>) => `/admin/acessos/?${new URLSearchParams({ ...(nome && { nome }), ...(tel && { tel }), ...extra })}#cortesia`;
-  if (pedido && !custom) redirect(volta({ erro: "O código precisa ter de 4 a 24 letras ou números (pode usar hífen). Ex.: NINA-VIP." }));
+  if (pedido && !custom) redirect(volta({ erro: "O nome do código precisa ter de 4 a 24 letras ou números (pode usar hífen). Ex.: NINA-VIP." }));
+  if (vagas > 10000 || quantidade > 200) redirect(volta({ erro: "Limite: até 200 códigos por vez e até 10.000 pessoas por código." }));
   const note = nul([nome && `Para: ${nome}`, s(fd, "note")].filter(Boolean).join(" · ").slice(0, 200));
-  let code: string;
-  try { code = await createCourtesy(/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email) ? email : null, note, custom); }
-  catch { redirect(volta({ erro: `O código ${custom} já existe. Escolha outro nome.` })); }
-  redirect(volta({ novo: code! }));
+  let batch: string;
+  try { batch = (await createCourtesy({ email: /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email) ? email : null, note, custom, vagas, quantidade })).batch; }
+  catch (e) { redirect(volta({ erro: `O código ${String((e as Error).message).split(":")[1] ?? custom} já existe. Escolha outro nome.` })); }
+  redirect(volta({ lote: batch! }));
 }
 
 export async function revokeLicense(fd: FormData) {

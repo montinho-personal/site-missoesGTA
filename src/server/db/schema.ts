@@ -260,4 +260,20 @@ alter table orders add column pix_qr_b64 text;
 alter table orders add column pix_expires_at timestamptz;
 `,
   },
+  {
+    // Cortesias em quantidade: um código com várias vagas (cada aparelho ocupa uma) e lotes de códigos.
+    id: "006_vagas_e_lotes",
+    sql: `
+alter table licenses add column max_uses int;
+alter table licenses add column batch text;
+create index licenses_batch on licenses (batch);
+create table license_uses (
+  code text not null references licenses(code) on delete cascade,
+  device text not null,
+  first_at timestamptz not null default now(),
+  last_at timestamptz not null default now(),
+  primary key (code, device)
+);
+`,
+  },
 ];
