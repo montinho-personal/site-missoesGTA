@@ -21,11 +21,11 @@ export const appConfig = {
    */
   featuresConfirmed: false,
   features: [
-    { key: "mapa", title: "Mapa de descobertas", text: "Cada descoberta marcada na região onde acontece, para você planejar o caminho antes de sair dirigindo.", status: "planejado" },
-    { key: "checklist", title: "Checklist do que você já achou", text: "Marque o que encontrou e veja o que ainda falta, por categoria e por região.", status: "planejado" },
-    { key: "filtros", title: "Filtros por tipo e recompensa", text: "Só dinheiro, só carros, só mistérios: você escolhe o que quer caçar hoje.", status: "planejado" },
+    { key: "mapa", title: "Mapa de descobertas", text: "Cada descoberta marcada na região onde acontece, para você planejar a rota antes de sair cantando pneu.", status: "planejado" },
+    { key: "checklist", title: "Checklist do que você já achou", text: "Marque o que encontrou e veja o que ainda falta, por categoria e por região. Adeus, caderninho.", status: "planejado" },
+    { key: "filtros", title: "Filtros por tipo e recompensa", text: "Só dinheiro, só carros, só mistérios: você escolhe o problema de hoje.", status: "planejado" },
     { key: "spoilers", title: "Controle de spoilers", text: "Esconde o que depende de partes da história que você ainda não jogou.", status: "planejado" },
-    { key: "requisitos", title: "Requisitos à vista", text: "Personagem, horário e progresso necessários aparecem antes de você atravessar o mapa à toa.", status: "planejado" },
+    { key: "requisitos", title: "Requisitos à vista", text: "Personagem, horário e progresso necessários aparecem antes de você atravessar o mapa à toa e voltar xingando.", status: "planejado" },
     { key: "atualizacoes", title: "Descobertas novas", text: "O que a comunidade encontra entra no aplicativo com o mesmo status de verificação do portal.", status: "planejado" },
   ] as { key: string; title: string; text: string; status: FeatureStatus }[],
 };

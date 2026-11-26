@@ -57,7 +57,7 @@ export default function AppPage() {
             <div>
               <p className="label text-violet mb-4">{appConfig.stage === "a_venda" ? "Aplicativo" : "Aplicativo · em preparação"}</p>
               <h1 className="text-[2.3rem] leading-[1.05] sm:text-6xl font-black">Não jogue GTA 6 deixando metade da aventura para trás.</h1>
-              <p className="mt-5 text-lg sm:text-xl text-fg-muted max-w-xl">Para quem não quer apenas zerar. Um companheiro de exploração que mostra o que existe por perto, guarda o que você já achou e respeita o seu ritmo na história.</p>
+              <p className="mt-5 text-lg sm:text-xl text-fg-muted max-w-xl">Para quem não quer apenas zerar. Um comparsa de bolso que sabe o que tem por perto, lembra o que você já achou e respeita o seu ritmo na história. Não pede parte do assalto.</p>
               <div className="mt-7 flex flex-wrap gap-3">{primaryCta}<a href="#funcoes" className="btn btn-ghost">Ver as funções</a></div>
               {!selling && <p className="mt-4 text-sm text-fg-subtle max-w-lg">Transparência: o aplicativo ainda não está à venda. Abaixo, cada função traz o estado real em que se encontra.</p>}
             </div>
@@ -94,15 +94,15 @@ export default function AppPage() {
             <div className="deco-rule mb-4" aria-hidden="true"><i /></div>
             <h2 id="h-porque" className="text-3xl sm:text-4xl font-extrabold">Menos tempo procurando. Mais tempo descobrindo.</h2>
             <div className="mt-4 text-lg text-fg-muted flex flex-col gap-4">
-              <p>Você conhece a cena: jogo pausado, celular na mão, três abas abertas, um vídeo de doze minutos para descobrir uma coisa que cabia em uma frase. Quando acha, já perdeu a vontade.</p>
-              <p>O portal resolve a pergunta de agora. O aplicativo cuida do resto da sessão: o que mais existe naquela região, o que você já riscou da lista e o que ainda está te esperando.</p>
+              <p>Você conhece a cena: jogo pausado, celular na mão, três abas abertas e um vídeo de doze minutos, com patrocínio no meio, para explicar uma coisa que cabia em uma frase. Quando você acha, a polícia já chegou.</p>
+              <p>O portal resolve a pergunta de agora. O aplicativo fica com o resto do serviço: o que mais existe naquela região, o que você já riscou da lista e o que ainda está te esperando. É o arquivo da Nina com a memória do Bira, só que no seu bolso e sem as histórias repetidas.</p>
             </div>
           </div>
         </section>
 
         <section id="funcoes" className="pt-16 sm:pt-24 scroll-mt-24" aria-labelledby="h-func">
           <h2 id="h-func" className="text-3xl sm:text-4xl font-extrabold">Funções e em que pé cada uma está</h2>
-          <p className="mt-3 text-fg-muted max-w-2xl">Nada de promessa vaga. Cada função tem uma etiqueta: disponível, em desenvolvimento ou planejada.</p>
+          <p className="mt-3 text-fg-muted max-w-2xl">Promessa vaga a gente deixa para os políticos de Leonida. Cada função tem uma etiqueta: disponível, em desenvolvimento ou planejada.</p>
           <ul className="mt-7 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {appConfig.features.map((f) => (
               <li key={f.key} className="card p-5 flex flex-col gap-2.5">
@@ -115,7 +115,7 @@ export default function AppPage() {
         </section>
 
         <section className="pt-16 sm:pt-24" aria-labelledby="h-comp">
-          <h2 id="h-comp" className="text-3xl sm:text-4xl font-extrabold mb-7">Explorar no improviso ou com o aplicativo</h2>
+          <h2 id="h-comp" className="text-3xl sm:text-4xl font-extrabold mb-7">Explorar no improviso ou com um comparsa</h2>
           <div className="card overflow-x-auto" tabIndex={0} role="region" aria-labelledby="h-comp">
             <table className="w-full text-left text-[0.97rem] min-w-[36rem]">
               <thead><tr className="border-b border-ink-600"><th scope="col" className="p-4 label text-fg-subtle">Situação</th><th scope="col" className="p-4 label text-fg-subtle">No improviso</th><th scope="col" className="p-4 label text-violet">Com o aplicativo</th></tr></thead>
@@ -136,7 +136,7 @@ export default function AppPage() {
             <div>
               <p className="label text-violet mb-3">{selling ? "Pronto para explorar?" : "Lista de aviso"}</p>
               <h2 id="h-avise" className="text-3xl sm:text-4xl font-extrabold">Seu próximo segredo está esperando para ser descoberto.</h2>
-              <p className="mt-3 text-fg-muted">{selling ? "Leve o portal inteiro no bolso e acompanhe seu progresso." : "Deixe seu e-mail e a gente avisa no dia do lançamento. Um aviso, sem enxurrada de mensagens."}</p>
+              <p className="mt-3 text-fg-muted">{selling ? "Leve o portal inteiro no bolso e acompanhe seu progresso." : "Deixe seu e-mail e a gente avisa no dia do lançamento. Um aviso só. Quem manda dez e-mails por semana é a seguradora."}</p>
             </div>
             {selling ? <div>{primaryCta}</div> : <WaitlistForm source="app_landing" />}
           </div>

@@ -1,3 +1,9 @@
 [
-  { "id": "redacao", "slug": "redacao", "name": "Redação Missões Secretas GTA", "role": "Equipe editorial", "bio": "Jogadores que cresceram explorando os mapas da série e hoje cuidam da apuração, das fontes e do status de verificação de cada descoberta publicada aqui." }
+ {
+  "id": "redacao",
+  "slug": "redacao",
+  "name": "Redação Missões Secretas GTA",
+  "role": "Equipe editorial",
+  "bio": "O arquivo é tocado por jogadores que cresceram explorando os mapas da série. Na tela, quem fala por ele são dois personagens próprios: Nina Valdez, que só publica o que tem fonte, e Bira, que conhece cada esquina de Leonida e jura que já tinha visto tudo antes."
+ }
 ]

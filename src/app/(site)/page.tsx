@@ -12,6 +12,7 @@ import { homeFaq } from "@/lib/game-facts";
 import { formatDate } from "@/lib/labels";
 import { site } from "@/lib/site";
 import { appConfig } from "@/lib/app-config";
+import { radioSpots } from "@/lib/voice";
 
 export const metadata = pageMeta({
   title: `${site.name}: segredos, easter eggs e descobertas de GTA 6`,
@@ -42,20 +43,20 @@ export default async function Home() {
           <div className="max-w-2xl">
             <p className="label text-pink mb-4">Para quem vai além do óbvio</p>
             <h1 className="text-[2.35rem] leading-[1.05] sm:text-6xl font-black">O GTA 6 esconde muito mais do que você imagina.</h1>
-            <p className="mt-5 text-lg sm:text-xl text-fg-muted max-w-xl">Missões secretas, carros raros, dinheiro escondido, lugares misteriosos e tudo aquilo que o jogo não te conta.</p>
+            <p className="mt-5 text-lg sm:text-xl text-fg-muted max-w-xl">Missões secretas, carros raros, dinheiro escondido e lugares que não aparecem no GPS. A gente conta o que o jogo esconde. O resto é entre você e a polícia de Leonida.</p>
             <div className="mt-7 max-w-xl"><SearchTrigger variant="hero" /></div>
             <div className="mt-4 flex flex-col sm:flex-row gap-3 max-w-xl">
               <Link href="/gta-6/segredos/" className="btn btn-primary grow">Explorar os segredos<Icon name="arrow" size={18} /></Link>
               <TrackLink href="/app/" className="btn btn-ghost" event="cta_click" params={{ cta_key: "hero", placement: "home_hero" }}>Conhecer o aplicativo</TrackLink>
             </div>
-            <p className="mt-5 text-sm text-fg-subtle inline-flex items-center gap-2"><Icon name="shield" size={16} className="text-ok" />Proteção contra spoilers ligada por padrão.</p>
+            <p className="mt-5 text-sm text-fg-subtle inline-flex items-center gap-2"><Icon name="shield" size={16} className="text-ok" />Proteção contra spoilers ligada. Aqui ninguém estraga o final de ninguém.</p>
           </div>
         </div>
       </section>
 
       {/* 2. Categorias */}
       <section className="wrap pt-14 sm:pt-20" aria-labelledby="h-cat">
-        <SectionHead id="h-cat" eyebrow="Escolha sua próxima descoberta" title="O que você quer descobrir?" />
+        <SectionHead id="h-cat" eyebrow="Escolha o seu problema de hoje" title="O que você quer descobrir?" />
         <ul className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
           {categories.map((c) => <li key={c.id}><CategoryCard c={c} /></li>)}
         </ul>
@@ -64,14 +65,14 @@ export default async function Home() {
       {/* 3. Destaques */}
       {featured.length > 0 && (
         <section className="wrap pt-16 sm:pt-24" aria-labelledby="h-dest">
-          <SectionHead id="h-dest" eyebrow="Descobertas em destaque" title="Comece por aqui" text="Uma seleção da redação. O selo de cada card diz o quanto aquilo já foi verificado." href="/gta-6/segredos/" linkLabel="Ver todos" />
+          <SectionHead id="h-dest" eyebrow="Descobertas em destaque" title="Comece por aqui" text="Seleção da Nina. O selo de cada card diz se aquilo é fato, relato ou conversa de bar." href="/gta-6/segredos/" linkLabel="Ver todos" />
           <EntryGrid entries={featured.map(toCard)} />
         </section>
       )}
 
       {/* 4. Radar */}
       <section className="wrap pt-16 sm:pt-24" aria-labelledby="h-radar">
-        <SectionHead id="h-radar" eyebrow="Radar de descobertas" title="O que mudou por último" text="Registros novos, mudanças de status e casos que ainda estamos investigando." href="/radar/" linkLabel="Abrir o radar" />
+        <SectionHead id="h-radar" eyebrow="Radar de descobertas" title="O que mudou por último" text="Registro novo, boato desmentido, caso reaberto. Leonida não para, e o arquivo também não." href="/radar/" linkLabel="Abrir o radar" />
         <div className="grid gap-4 lg:grid-cols-[1.3fr_1fr]">
           <ol className="card divide-y divide-ink-600">
             {changes.length === 0 && <li className="p-5 text-fg-muted">Nenhuma atualização registrada ainda.</li>}
@@ -107,9 +108,9 @@ export default async function Home() {
         <div className="card overflow-hidden border-violet/40">
           <div className="grid md:grid-cols-[1.1fr_1fr]">
             <div className="p-6 sm:p-10">
-              <p className="label text-violet mb-3">Seu companheiro de jogo</p>
+              <p className="label text-violet mb-3">Seu comparsa de bolso</p>
               <h2 id="h-app" className="text-3xl sm:text-4xl font-extrabold">Cada segredo. Cada descoberta. Uma nova aventura.</h2>
-              <p className="mt-4 text-fg-muted">O portal responde a dúvida de agora. O aplicativo foi pensado para a sessão inteira: o que tem perto de você, o que você já achou e o que ainda falta.</p>
+              <p className="mt-4 text-fg-muted">O portal resolve a dúvida de agora. O aplicativo é o parceiro que vai no banco do carona: sabe o que tem por perto, lembra o que você já achou e não conta o final do filme.</p>
               <ul className="mt-5 flex flex-col gap-2.5">
                 {appConfig.features.slice(0, 3).map((f) => (
                   <li key={f.key} className="flex gap-3"><Icon name="check" size={20} className="text-violet shrink-0 mt-1" /><span><strong className="font-semibold">{f.title}.</strong> <span className="text-fg-muted">{f.text}</span></span></li>
@@ -133,6 +134,17 @@ export default async function Home() {
         </div>
       </section>
 
+      {/* Intervalo: sátira no espírito das rádios do jogo, sempre identificada como humor */}
+      <section className="wrap pt-16 sm:pt-24" aria-labelledby="h-radio">
+        <div className="card grid-paper p-6 sm:p-8">
+          <p className="label text-orange inline-flex items-center gap-2"><Icon name="radar" size={16} />Rádio Arquivo FM · intervalo comercial (é piada)</p>
+          <h2 id="h-radio" className="sr-only">Intervalo comercial da Rádio Arquivo FM</h2>
+          <ul className="mt-4 grid gap-5 md:grid-cols-3 text-fg-muted">
+            {radioSpots.map((r) => <li key={r.brand}><p className="font-display font-bold text-lg text-fg">{r.brand}</p><p className="mt-1">{r.line}</p></li>)}
+          </ul>
+        </div>
+      </section>
+
       {/* 6. Dúvidas */}
       <section className="wrap pt-16 sm:pt-24" aria-labelledby="h-faq">
         <SectionHead id="h-faq" eyebrow="Dúvidas frequentes dos jogadores" title="Respostas rápidas" href="/ajuda/" linkLabel="Central de ajuda" />
@@ -150,8 +162,8 @@ export default async function Home() {
           <div className="text-lg text-fg-muted flex flex-col gap-4">
             <p>De explorar o mapa sem saber o que ia encontrar. De ouvir um amigo jurar que existia um carro escondido, uma missão que ninguém tinha feito, um lugar que não estava em revista nenhuma.</p>
             <p>A gente cresceu, os gráficos mudaram, os mapas ficaram enormes. A vontade de descobrir o que existe além do óbvio continua a mesma.</p>
-            <p className="text-fg">Este projeto é para quem não quer só terminar GTA 6. É para quem quer descobrir o que ele esconde.</p>
-            <Link href="/sobre/" className="link self-start font-semibold">Conheça o projeto</Link>
+            <p className="text-fg">Este arquivo é para quem não quer só terminar GTA 6. É para quem quer descobrir o que ele esconde, e contar para os amigos antes que eles descubram sozinhos.</p>
+            <Link href="/sobre/" className="link self-start font-semibold">Conheça a Nina e o Bira</Link>
           </div>
         </div>
       </section>
@@ -161,8 +173,8 @@ export default async function Home() {
         <div className="card p-6 sm:p-10 grid gap-6 md:grid-cols-[1.4fr_1fr] md:items-center">
           <div>
             <p className="label text-cyan mb-3 inline-flex items-center gap-2"><Icon name="users" size={16} />Comunidade</p>
-            <h2 id="h-com" className="text-2xl sm:text-3xl font-extrabold">Achou algo que não está aqui?</h2>
-            <p className="mt-3 text-fg-muted">Mande o que você encontrou, de preferência com print ou vídeo. A gente apura, publica com o status certo e corrige quando errar.</p>
+            <h2 id="h-com" className="text-2xl sm:text-3xl font-extrabold">Viu alguma coisa estranha em Leonida?</h2>
+            <p className="mt-3 text-fg-muted">Manda para a gente, de preferência com print ou vídeo. A Nina apura, o Bira jura que já sabia, e o crédito fica com você.</p>
           </div>
           <div className="flex flex-col gap-3">
             <Link href="/enviar-descoberta/" className="btn btn-primary">Enviar uma descoberta</Link>

@@ -94,8 +94,8 @@ export function Explorer({ entries, show }: { entries: EntryCardData[]; show: Ke
           <p>Tire um filtro ou <button type="button" className="link" onClick={() => { setSel({}); setNoSpoilers(false); }}>limpe todos</button>.</p>
         </EmptyState>
       ) : (
-        <EmptyState title="Ainda estamos apurando esta categoria">
-          <p>Não publicamos nada sem fonte. Assim que houver registros verificáveis, eles aparecem aqui. Encontrou algo? <Link className="link" href="/enviar-descoberta/">Envie para a gente</Link>.</p>
+        <EmptyState title="Esta pasta do arquivo ainda está vazia">
+          <p>A Nina não deixa entrar nada sem fonte, nem quando o Bira insiste. Assim que houver registro verificável, ele aparece aqui. Encontrou algo? <Link className="link" href="/enviar-descoberta/">Envie para a gente</Link>.</p>
         </EmptyState>
       )}
     </div>

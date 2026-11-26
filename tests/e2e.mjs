@@ -87,7 +87,7 @@ for (const [w, hh] of [[360, 740], [390, 844], [768, 1024], [1280, 800]]) {
   await page.waitForTimeout(500);
   ok("busca entende sinônimo (grana → dinheiro)", (await page.locator("dialog[aria-label=Busca] a.card").count()) > 0);
   await input.fill("zzqqxx");
-  await page.waitForSelector("text=Ainda não temos nada");
+  await page.waitForSelector("text=ouviu falar de");
   ok("busca sem resultado é honesta e oferece saída", (await page.locator("dialog[aria-label=Busca] a", { hasText: "Enviar uma descoberta" }).count()) === 1);
   await input.fill("pé grande");
   await page.waitForSelector("dialog[aria-label=Busca] a.card");
