@@ -11,4 +11,4 @@ Um agente roda **todo dia às 05:37 (horário de Brasília)** e procura o que sa
 Depois de 14 dias de contagem, o próprio relatório traz uma recomendação: manter diário, passar a dias alternados ou subir para duas vezes por dia, conforme o volume.
 
 ## Custo
-Cada execução usa uma sessão do Claude e até 15 consultas pagas à SerpAPI. A busca comum (WebSearch) vem primeiro.
+Cada execução usa uma sessão do Claude e no máximo 3 consultas pagas à SerpAPI por dia (cota única de todos os sites do Renato, 1.000 por mês; decisão de 26/11/2026). A busca comum (WebSearch) vem primeiro. Com cota esgotada ou limite de requisições, segue só com o WebSearch e avisa no resumo.
