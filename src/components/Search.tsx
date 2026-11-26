@@ -110,7 +110,7 @@ export function SearchPanel({ initial = "", autoFocus, onNavigate }: { initial?:
 
         {hits && hits.length === 0 && (
           <div className="card p-5">
-            <p className="font-display text-lg font-bold">Nem o Bira ouviu falar de “{query.trim()}”.</p>
+            <p className="font-display text-lg font-bold">Nem o Brian ouviu falar de “{query.trim()}”.</p>
             <p className="text-fg-muted mt-1.5">E olha que ele ouve de tudo. Ainda não temos nada sobre isso, e preferimos dizer a inventar. Achou algo no jogo? Conta para a gente que a Nina investiga.</p>
             <div className="mt-4 flex flex-wrap gap-2.5">
               <Link href="/enviar-descoberta/" className="btn btn-primary btn-sm" onClick={() => onNavigate?.()}>Enviar uma descoberta</Link>

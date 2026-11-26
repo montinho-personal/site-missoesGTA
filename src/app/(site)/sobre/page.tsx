@@ -30,7 +30,7 @@ export default function Sobre() {
         ))}
       </ul>
       <div className="prose text-fg-muted mt-8">
-        <p>A divisão de trabalho é simples: o Bira traz a história, a Nina pede a prova. É por isso que cada página tem um selo. Quando você lê “Não verificado”, é o Bira contando o que ouviu de uma fonte só. “Muito provável” é quando duas fontes batem. “Confirmado” é quando três ou mais mostram a mesma coisa em vídeo. E “Testado por nós” é a Nina voltando do jogo com a prova na mão.</p>
+        <p>A divisão de trabalho é simples: o Brian traz a história, a Nina pede a prova. É por isso que cada página tem um selo. Quando você lê “Não verificado”, é o Brian contando o que ouviu de uma fonte só. “Muito provável” é quando duas fontes batem. “Confirmado” é quando três ou mais mostram a mesma coisa em vídeo. E “Testado por nós” é a Nina voltando do jogo com a prova na mão.</p>
         <h2>O que a gente promete</h2>
         <ul>
           <li><strong>Resposta primeiro.</strong> Você está com o controle numa mão e o celular na outra. A resposta vem na primeira linha.</li>

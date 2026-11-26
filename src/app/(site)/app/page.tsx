@@ -113,7 +113,7 @@ export default async function AppPage() {
             <h2 id="h-porque" className="text-3xl sm:text-4xl font-extrabold">Menos tempo procurando. Mais tempo descobrindo.</h2>
             <div className="mt-4 text-lg text-fg-muted flex flex-col gap-4">
               <p>Você conhece a cena: jogo pausado, celular na mão, três abas abertas e um vídeo de doze minutos, com patrocínio no meio, para explicar uma coisa que cabia em uma frase. Quando você acha, a polícia já chegou.</p>
-              <p>O portal resolve a pergunta de agora. O aplicativo fica com o resto do serviço: o que mais existe naquela região, o que você já riscou da lista e o que ainda está te esperando. É o arquivo da Nina com a memória do Bira, só que no seu bolso e sem as histórias repetidas.</p>
+              <p>O portal resolve a pergunta de agora. O aplicativo fica com o resto do serviço: o que mais existe naquela região, o que você já riscou da lista e o que ainda está te esperando. É o arquivo da Nina com a memória do Brian, só que no seu bolso e sem as histórias repetidas.</p>
             </div>
           </div>
         </section>
@@ -124,7 +124,7 @@ export default async function AppPage() {
             <h2 id="h-revisao" className="mt-3 text-3xl sm:text-4xl font-extrabold max-w-2xl">Um arquivo que acorda antes de você.</h2>
             <div className="mt-4 text-lg text-fg-muted flex flex-col gap-3 max-w-2xl">
               <p>GTA 6 muda toda semana: patch novo, segredo novo, boato que cai. Por isso o arquivo passa por uma revisão todos os dias. Ela confere fichas, pinos no mapa e vídeos, lê o que saiu de novo e cruza com o que publicam os guias, os canais e os jogadores que estão explorando Leonida pelo mundo.</p>
-              <p>O que muda entra no aplicativo com o selo atualizado. O que era boato e caiu, a Nina carimba como desmentido. O que o Bira jurava e três fontes confirmaram, sobe de nível.</p>
+              <p>O que muda entra no aplicativo com o selo atualizado. O que era boato e caiu, a Nina carimba como desmentido. O que o Brian jurava e três fontes confirmaram, sobe de nível.</p>
             </div>
             <dl className="mt-7 grid grid-cols-2 sm:grid-cols-4 gap-3">
               {[
@@ -172,7 +172,7 @@ export default async function AppPage() {
           <div className="card border-gold/50 p-5">
             <p className="label text-gold mb-2">Preço</p>
             <p className="font-display text-4xl font-black text-gold">{sale.priceLabel}</p>
-            {sale.isLaunchPrice && <p className="mt-2 text-[0.97rem]">Sim, quatro e vinte. Entendedores entenderão. Quem não entendeu, pergunta pro Bira.</p>}
+            {sale.isLaunchPrice && <p className="mt-2 text-[0.97rem]">Sim, quatro e vinte. Entendedores entenderão. Quem não entendeu, pergunta pro Brian.</p>}
             <p className="mt-2 text-sm text-fg-muted">{sale.isLaunchPrice ? "Preço de lançamento, pagamento único por Pix ou cartão. Ele pode subir no futuro, conforme o arquivo cresce; quem compra agora paga uma vez e não paga a diferença depois." : "Pagamento único, por Pix ou cartão."}</p>
           </div>
           <div className="card p-5"><p className="label text-fg-subtle mb-2">Compatibilidade</p><p>{appConfig.platforms ? appConfig.platforms.join(", ") + "." : <span className="text-fg-muted">A anunciar.</span>}</p></div>

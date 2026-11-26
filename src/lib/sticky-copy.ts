@@ -42,7 +42,7 @@ const PAGES: Record<string, StickyCopy> = {
   jogo: { title: "Leonida é grande. O mapa ajuda.", line: "Cada segredo com pino, vídeo e a sua lista do que falta.", context: "hub" },
   mapa: { title: "As regiões viram pinos no aplicativo.", line: "O mapa que este site não tem: ponto por ponto, com precisão.", context: "mapa" },
   regiao: { title: "Essa região inteira, pino por pino.", line: "No aplicativo você monta a rota e faz tudo na mesma viagem.", context: "regiao" },
-  sobre: { title: "A Nina e o Bira cabem no seu bolso.", line: "O mesmo arquivo, com mapa e a lista do que você já achou.", context: "sobre" },
+  sobre: { title: "A Nina e o Brian cabem no seu bolso.", line: "O mesmo arquivo, com mapa e a lista do que você já achou.", context: "sobre" },
   metodologia: { title: "Mesma régua. Agora com mapa.", line: "O selo de cada ficha vai junto para o aplicativo.", context: "metodologia" },
   radar: { title: "O arquivo cresce. Seu mapa também.", line: "No aplicativo, as fichas novas aparecem no mapa.", context: "radar" },
   favoritos: { title: "Porta-luvas é bom. Mapa é melhor.", line: "No aplicativo, o que você salvou vira pino e checklist.", context: "favoritos" },

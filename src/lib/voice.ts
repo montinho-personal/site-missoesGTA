@@ -10,10 +10,10 @@ export const narrators = [
     bio: "Ex-repórter de uma rádio pirata de Vice City que foi fechada três vezes, duas pela prefeitura. Aprendeu do jeito difícil que uma história sem fonte custa caro. Hoje é ela quem carimba cada pasta: confirmado, relato ou em investigação. Não publica código que não testou e não tem paciência para vídeo com seta vermelha na miniatura.",
   },
   {
-    name: "Bira",
+    name: "Brian Heder",
     role: "Conhece cada esquina",
     line: "“Eu já tinha visto isso antes de ter nome.”",
-    bio: "Ubirajara Monteiro, brasileiro, ex-taxista. Chegou a Leonida para passar duas semanas e ficou vinte anos. Conhece atalho, beco, píer e o horário em que o carro raro aparece. Metade do que ele conta é verdade. A outra metade a Nina manda para a pasta “em investigação”, e ele reclama até hoje.",
+    bio: "Brian Heder, ex-taxista. Chegou a Leonida para passar duas semanas e ficou vinte anos. Conhece atalho, beco, píer e o horário em que o carro raro aparece. Metade do que ele conta é verdade. A outra metade a Nina manda para a pasta “em investigação”, e ele reclama até hoje.",
   },
 ];
 

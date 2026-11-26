@@ -95,7 +95,7 @@ export function Explorer({ entries, show }: { entries: EntryCardData[]; show: Ke
         </EmptyState>
       ) : (
         <EmptyState title="Esta pasta do arquivo ainda está vazia">
-          <p>A Nina não deixa entrar nada sem fonte, nem quando o Bira insiste. Assim que houver registro verificável, ele aparece aqui. Encontrou algo? <Link className="link" href="/enviar-descoberta/">Envie para a gente</Link>.</p>
+          <p>A Nina não deixa entrar nada sem fonte, nem quando o Brian insiste. Assim que houver registro verificável, ele aparece aqui. Encontrou algo? <Link className="link" href="/enviar-descoberta/">Envie para a gente</Link>.</p>
         </EmptyState>
       )}
     </div>

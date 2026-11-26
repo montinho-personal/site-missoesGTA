@@ -39,7 +39,7 @@ A frase de cima vende o benefício, na voz do arquivo. A de baixo (visível no c
 | Armas | Arma única não fica na vitrine. / Sabe o que é. Falta saber onde. |
 | Dicas | Aprendeu o básico? Hora de explorar. / Resolvido. E agora, o que fazer? |
 | Mapa / região | As regiões viram pinos no aplicativo. / Essa região inteira, pino por pino. |
-| Sobre | A Nina e o Bira cabem no seu bolso. |
+| Sobre | A Nina e o Brian cabem no seu bolso. |
 | Como verificamos | Mesma régua. Agora com mapa. |
 | Radar | O arquivo cresce. Seu mapa também. |
 | Favoritos | Porta-luvas é bom. Mapa é melhor. |

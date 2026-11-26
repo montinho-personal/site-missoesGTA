@@ -87,7 +87,7 @@ export default async function Home() {
             ))}
           </ol>
           <div className="card grid-paper p-5 sm:p-6">
-            <p className="label text-violet inline-flex items-center gap-2"><Icon name="radar" size={16} />O Bira jura, a Nina duvida</p>
+            <p className="label text-violet inline-flex items-center gap-2"><Icon name="radar" size={16} />O Brian jura, a Nina duvida</p>
             {investigating.length === 0 ? <p className="mt-3 text-fg-muted">Nenhum caso sem confirmação no momento.</p> : (
               <ul className="mt-4 flex flex-col gap-4">
                 {investigating.map((e) => (
@@ -163,7 +163,7 @@ export default async function Home() {
             <p>De explorar o mapa sem saber o que ia encontrar. De ouvir um amigo jurar que existia um carro escondido, uma missão que ninguém tinha feito, um lugar que não estava em revista nenhuma.</p>
             <p>A gente cresceu, os gráficos mudaram, os mapas ficaram enormes. A vontade de descobrir o que existe além do óbvio continua a mesma.</p>
             <p className="text-fg">Este arquivo é para quem não quer só terminar GTA 6. É para quem quer descobrir o que ele esconde, e contar para os amigos antes que eles descubram sozinhos.</p>
-            <Link href="/sobre/" className="link self-start font-semibold">Conheça a Nina e o Bira</Link>
+            <Link href="/sobre/" className="link self-start font-semibold">Conheça a Nina e o Brian</Link>
           </div>
         </div>
       </section>
@@ -174,7 +174,7 @@ export default async function Home() {
           <div>
             <p className="label text-cyan mb-3 inline-flex items-center gap-2"><Icon name="users" size={16} />Comunidade</p>
             <h2 id="h-com" className="text-2xl sm:text-3xl font-extrabold">Viu alguma coisa estranha em Leonida?</h2>
-            <p className="mt-3 text-fg-muted">Manda para a gente, de preferência com print ou vídeo. A Nina apura, o Bira jura que já sabia, e o crédito fica com você.</p>
+            <p className="mt-3 text-fg-muted">Manda para a gente, de preferência com print ou vídeo. A Nina apura, o Brian jura que já sabia, e o crédito fica com você.</p>
           </div>
           <div className="flex flex-col gap-3">
             <Link href="/enviar-descoberta/" className="btn btn-primary">Enviar uma descoberta</Link>

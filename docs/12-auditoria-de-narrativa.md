@@ -13,16 +13,16 @@ Data: 26/11/2026. Escopo: todos os textos do portal e da página do aplicativo. 
 | Estados vazios, 404, busca sem resultado | Mensagens de sistema. Eram a melhor oportunidade de humor e estavam desperdiçadas. |
 | Sistema de verificação | O maior diferencial do projeto era explicado só em linguagem técnica. |
 
-## 2. O conceito: o Arquivo, a Nina e o Bira
+## 2. O conceito: o Arquivo, a Nina e o Brian
 
 O site passa a ser **um arquivo de casos de Leonida**, tocado por dois personagens **originais nossos** (não existem no jogo e não imitam ninguém dele):
 
 - **Nina Valdez**, ex-repórter de rádio pirata. Só publica com fonte. Fala curto e seco. Frase: "Boato não paga gasolina."
-- **Bira** (Ubirajara Monteiro), brasileiro, ex-taxista, vinte anos de Leonida. Conhece tudo, exagera metade. Frase: "Eu já tinha visto isso antes de ter nome."
+- **Brian Heder**, ex-taxista, vinte anos de Leonida. Conhece tudo, exagera metade. Frase: "Eu já tinha visto isso antes de ter nome."
 
-Por que funciona: a dupla **é o sistema de verificação com rosto**. "Não verificado" é o Bira contando o que ouviu de uma fonte só. "Muito provável" é quando duas fontes batem. "Confirmado" pede três. "Testado por nós" é a Nina voltando do jogo com a prova. (Atualizado em 26/11: os selos passaram a ser os do aplicativo; ver doc 13.) O jogador entende o selo sem ler a metodologia. São os mesmos dois da capa do site.
+Por que funciona: a dupla **é o sistema de verificação com rosto**. "Não verificado" é o Brian contando o que ouviu de uma fonte só. "Muito provável" é quando duas fontes batem. "Confirmado" pede três. "Testado por nós" é a Nina voltando do jogo com a prova. (Atualizado em 26/11: os selos passaram a ser os do aplicativo; ver doc 13.) O jogador entende o selo sem ler a metodologia. São os mesmos dois da capa do site.
 
-O aplicativo entra como **o comparsa de bolso**: o arquivo da Nina com a memória do Bira, no banco do carona.
+O aplicativo entra como **o comparsa de bolso**: o arquivo da Nina com a memória do Brian, no banco do carona.
 
 ## 3. Como é a voz
 
@@ -67,14 +67,14 @@ A série fala com sátira de consumo, cinismo bem-humorado, autoridade ridicular
 | Subtítulo do hero | "…e tudo aquilo que o jogo não te conta." | "…A gente conta o que o jogo esconde. O resto é entre você e a polícia de Leonida." |
 | Aviso de spoiler | "Proteção contra spoilers ligada por padrão." | "…ligada. Aqui ninguém estraga o final de ninguém." |
 | Destaques | "Uma seleção da redação…" | "Seleção da Nina. O selo de cada card diz se aquilo é fato, relato ou conversa de bar." |
-| Comunidade | "Achou algo que não está aqui?" | "Viu alguma coisa estranha em Leonida? … A Nina apura, o Bira jura que já sabia, e o crédito fica com você." |
-| Busca sem resultado | "Ainda não temos nada sobre X." | "Nem o Bira ouviu falar de X." (e a explicação honesta continua) |
+| Comunidade | "Achou algo que não está aqui?" | "Viu alguma coisa estranha em Leonida? … A Nina apura, o Brian jura que já sabia, e o crédito fica com você." |
+| Busca sem resultado | "Ainda não temos nada sobre X." | "Nem o Brian ouviu falar de X." (e a explicação honesta continua) |
 | Categoria vazia | "Ainda estamos apurando esta categoria" | "Esta pasta do arquivo ainda está vazia" |
 | Favoritos vazios | "Você ainda não salvou nada" | "Seu porta-luvas está vazio" |
 | 404 | "A página pode ter mudado de endereço…" | "Ou a página mudou de endereço, ou alguém sumiu com ela. Em Leonida as duas coisas acontecem." |
 | Chamadas das categorias | "Além da história principal" etc. | "O que não está na lista de objetivos", "Onde o GPS desiste", "Grana que ninguém declarou"… |
 | CTAs do app (8) | Tom de produto | Mesmo vocabulário do arquivo, com a dupla |
-| Sobre | Texto institucional | Apresenta a Nina e o Bira e liga os dois aos selos |
+| Sobre | Texto institucional | Apresenta a Nina e o Brian e liga os dois aos selos |
 | Landing do app | "companheiro de exploração" | "comparsa de bolso"; comparação "no improviso × com um comparsa" |
 | Home | | Bloco novo "Rádio Arquivo FM · intervalo comercial (é piada)", com três anúncios fictícios |
 
@@ -84,11 +84,11 @@ Não mudou, de propósito: as 20 fichas, a metodologia, privacidade, termos, for
 
 Como não vi o app, isto é uma especificação, e não uma auditoria:
 
-1. **Mesmos dois personagens.** A Nina dá os avisos de status ("Confirmei esse. Pode ir."), o Bira dá as dicas de caminho ("Corta pelo píer, confia.").
+1. **Mesmos dois personagens.** A Nina dá os avisos de status ("Confirmei esse. Pode ir."), o Brian dá as dicas de caminho ("Corta pelo píer, confia.").
 2. **Mesmo glossário** da seção 4: arquivo, pasta, porta-luvas, comparsa.
 3. **Microtextos sugeridos:**
    - Tela inicial: "E aí, o que vai ser hoje?"
-   - Checklist completo numa região: "Região limpa. O Bira está impressionado. A Nina quer ver as provas."
+   - Checklist completo numa região: "Região limpa. O Brian está impressionado. A Nina quer ver as provas."
    - Marcar como encontrado: "Anotado no arquivo."
    - Spoiler bloqueado: "Essa pasta é de depois. A Nina trancou."
    - Sem conexão: "Sem sinal. Até em Leonida tem área de sombra."
@@ -100,7 +100,7 @@ Como não vi o app, isto é uma especificação, e não uma auditoria:
 
 Há duas leituras do pedido, e tratei as duas de forma diferente:
 
-- **Nossos personagens (feito):** Nina e Bira têm biografia, fala e função. Estão em `/sobre/` e em `src/lib/voice.ts`.
+- **Nossos personagens (feito):** Nina e Brian têm biografia, fala e função. Estão em `/sobre/` e em `src/lib/voice.ts`.
 - **Personagens do jogo, Jason e Lucia (não feito):** contar a história deles é conteúdo editorial com spoiler pesado, e precisa de fontes como qualquer ficha. Não escrevi de memória. Fica como pauta: perfis de Jason Duval e Lucia Caminos, sem spoiler até o capítulo que o leitor escolher, publicados só com apuração.
 
 ## 8. Riscos e limites

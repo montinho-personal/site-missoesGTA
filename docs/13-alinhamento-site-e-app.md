@@ -30,8 +30,8 @@ O aplicativo guarda o capítulo de cada ficha. O site derivou o nível assim: ca
 | Tema | Site | Aplicativo | Sugestão |
 |---|---|---|---|
 | Visual | Archivo + Inter, fundo #07060F | Big Shoulders + Barlow, fundo #150D2B | Tratar como dois produtos da mesma família: mesmo sol, mesmas cores de categoria. Levar as cores de categoria do aplicativo para o site numa próxima rodada |
-| Voz | Sátira na moldura, com Nina e Bira | Sóbria | Adotar as duas camadas do doc 12 também no aplicativo: humor só em início, avisos e estados vazios; ficha seca |
-| Personagens | Nina e Bira (originais) | A especificação desaconselhava personagens; a capa já usa personagens originais (D-018) | Usar os mesmos dois, com a mesma arte |
+| Voz | Sátira na moldura, com Nina e Brian | Sóbria | Adotar as duas camadas do doc 12 também no aplicativo: humor só em início, avisos e estados vazios; ficha seca |
+| Personagens | Nina e Brian (originais) | A especificação desaconselhava personagens; a capa já usa personagens originais (D-018) | Usar os mesmos dois, com a mesma arte |
 | Endereço | missoessecretasgta.com.br | missoes-secretas.vercel.app | Subdomínio `app.missoessecretasgta.com.br`, quando o aplicativo for divulgado |
 | Venda | A página `/app/` não promete preço | Pergunta 9 (D-016) em aberto | Ver abaixo |
 | Rota, coleções, regras de dinheiro, boatos | Não usados | Existem em `meta.json` | Viram páginas do site: "Rota sugerida", "Só no Capítulo 1", "Boatos que não se confirmaram" |
@@ -72,5 +72,5 @@ Consequências:
 1. O site passou a consumir `conteudo/segredos.json` e `conteudo/meta.json` (regiões, fontes, coleção "comece", `jogo`). Mudança de formato nesses arquivos quebra a importação do site: avisar antes.
 2. O `id` da ficha virou parte do endereço público do site (`/gta-6/<categoria>/<id>/`). A regra "nunca mude o id" agora protege também os links do site.
 3. A categoria de uma ficha também está no endereço. Trocar `cat` muda a URL do site (ele cria o redirecionamento se a troca for feita pelo painel, mas não na importação).
-4. Vale decidir juntos: a regra de spoiler por capítulo, a voz em duas camadas e o uso de Nina e Bira.
+4. Vale decidir juntos: a regra de spoiler por capítulo, a voz em duas camadas e o uso de Nina e Brian.
 5. A venda e os códigos de acesso ficam no site. O contrato para o aplicativo validar um código está em `docs/14-venda-e-acessos.md` (um `POST` que responde sim ou não). O bloqueio de quem não comprou é do lado do aplicativo.
