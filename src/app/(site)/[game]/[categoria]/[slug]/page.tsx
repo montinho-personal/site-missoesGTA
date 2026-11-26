@@ -2,7 +2,8 @@ import Link from "next/link";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { AppCta, Breadcrumbs, EntryGrid, FaqList, JsonLd, SpoilerBadge, StatusBadge } from "@/components/ui";
-import { FavButton, RevealButton, ShareButton, TrackView } from "@/components/client";
+import { FavButton, RevealButton, TrackView } from "@/components/client";
+import { ShareSheet } from "@/components/ShareSheet";
 import { Icon } from "@/components/Icon";
 import { entryUrl, getCtas, getEntry, getEntryChanges, getPublishedEntries, nearbyEntries, relatedEntries, toCard } from "@/server/content";
 import { saleConfig } from "@/server/mercadopago";
@@ -57,6 +58,7 @@ export default async function EntryPage({ params }: Props) {
   const isGuide = entry.kind === "guia";
   const crumbs = [{ name: "Início", href: "/" }, { name: "GTA 6", href: `/${game}/` }, { name: entry.category_name, href: `/${game}/${categoria}/` }, { name: entry.title }];
   const url = abs(path);
+  const shareCtx = { kind: "ficha" as const, url, title: entry.title, category: categoria, spoiler: entry.spoiler_level };
 
   const toc = [
     !isGuide && { id: "ficha", label: "Ficha da descoberta" },
@@ -120,7 +122,9 @@ export default async function EntryPage({ params }: Props) {
               <p className="text-lg sm:text-xl leading-relaxed">{entry.direct_answer || entry.summary}</p>
               <div className="mt-4 flex flex-wrap gap-2.5 no-print">
                 <FavButton id={entry.id} title={entry.title} withLabel />
-                <ShareButton title={entry.title} url={url} />
+              </div>
+              <div className="mt-3 no-print">
+                <ShareSheet compact ctx={shareCtx} storyPath={`${path}story/`} />
               </div>
             </section>
 
@@ -161,6 +165,14 @@ export default async function EntryPage({ params }: Props) {
             )}
 
             {hasPitch && <AppPitch entry={entry} nearby={nearby} sameRegion={sameRegion} sale={sale} />}
+
+            {/* Momento de sucesso: a pessoa acabou de ler como fazer. É quando ela quer contar para alguém. */}
+            <section aria-labelledby="h-compartilhar" className="card p-5 sm:p-6 max-w-3xl no-print">
+              <p className="label text-pink">Missão em dupla rende mais</p>
+              <h2 id="h-compartilhar" className="font-display text-xl sm:text-2xl font-extrabold mt-1.5">Manda pro parceiro de jogatina.</h2>
+              <p className="mt-1.5 text-fg-muted text-[0.97rem]">A mensagem já vai pronta no WhatsApp. Para Stories e Status, a gente gera a imagem{entry.spoiler_level === "historia" ? " sem entregar o spoiler" : ""}.</p>
+              <div className="mt-4"><ShareSheet ctx={shareCtx} storyPath={`${path}story/`} /></div>
+            </section>
 
             {entry.media.length > 0 && (
               <section aria-label="Imagens e vídeos" className="max-w-3xl flex flex-col gap-4">

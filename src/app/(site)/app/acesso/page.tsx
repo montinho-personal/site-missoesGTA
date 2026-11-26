@@ -3,6 +3,8 @@ import { Shell } from "@/components/Shell";
 import { Callout } from "@/components/ui";
 import { pageMeta } from "@/lib/seo";
 import { q } from "@/server/db";
+import { ShareSheet } from "@/components/ShareSheet";
+import { abs } from "@/lib/site";
 
 export const dynamic = "force-dynamic";
 export const metadata = pageMeta({ title: "Seu acesso ao aplicativo", description: "Situação do seu pedido e código de acesso ao aplicativo.", path: "/app/acesso/", noindex: true });
@@ -22,6 +24,10 @@ export default async function Acesso({ searchParams }: { searchParams: Promise<R
           <p className="mt-3 text-fg-muted">Este é o seu código de acesso. Guarde em lugar seguro: é ele que libera o aplicativo.</p>
           <p className="mt-4 font-display text-3xl sm:text-4xl font-black tracking-wider break-all select-all" aria-label="Código de acesso">{row.code}</p>
           <p className="mt-4"><Link href="/app/como-baixar-e-usar/#instalar" className="btn btn-app btn-sm">Como instalar e ativar</Link></p>
+          <div className="mt-6 border-t border-ink-600 pt-5">
+            <p className="font-display text-lg font-bold">Caçar sozinho é mais lento. Chama o parceiro.</p>
+            <div className="mt-3"><ShareSheet ctx={{ kind: "acesso", url: abs("/app/") }} storyPath="/app/story/" /></div>
+          </div>
           <p className="mt-4 text-sm text-fg-subtle">Salve esta página nos favoritos do navegador. Se perder o código, fale com a gente pelo <Link className="link" href="/contato/">contato</Link>, usando o e-mail da compra.</p>
         </div>
       )}

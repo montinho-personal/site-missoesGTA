@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Callout, FaqList, JsonLd } from "@/components/ui";
 import { TrackView } from "@/components/client";
 import { BuyForm, WaitlistForm } from "@/components/Forms";
+import { ShareSheet } from "@/components/ShareSheet";
 import { saleConfig } from "@/server/mercadopago";
 import { getPublishedEntries } from "@/server/content";
 import { formatDate } from "@/lib/labels";
@@ -187,6 +188,15 @@ export default async function AppPage() {
               <p className="mt-3 text-fg-muted">{selling ? "Pague uma vez, receba seu código de acesso na hora e use no aplicativo." : "Deixe seu e-mail e a gente avisa no dia do lançamento. Um aviso só. Quem manda dez e-mails por semana é a seguradora."}</p>
             </div>
             {selling ? <BuyForm priceLabel={sale.priceLabel!} /> : <WaitlistForm source="app_landing" />}
+          </div>
+        </section>
+
+        <section className="pt-16 sm:pt-24 max-w-3xl" aria-labelledby="h-indique">
+          <div className="card p-6 sm:p-8">
+            <p className="label text-pink">Conhece alguém que vive caçando segredo?</p>
+            <h2 id="h-indique" className="mt-2 text-2xl sm:text-3xl font-extrabold">Todo grupo tem aquele amigo que jura que achou um carro escondido.</h2>
+            <p className="mt-2 text-fg-muted">Manda pra ele. Agora ele vai ter como provar.</p>
+            <div className="mt-5"><ShareSheet ctx={{ kind: "app", url: abs("/app/"), priceLabel: sale.priceLabel }} storyPath="/app/story/" /></div>
           </div>
         </section>
 

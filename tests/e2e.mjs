@@ -20,6 +20,12 @@ for (const p of ["/gta-6/missoes-secretas/nao-existe/", "/gta-6/misterios/", "/g
 ok("admin exige login", [302, 303, 307].includes(await status("/admin/")));
 ok("admin/entradas exige login", [302, 303, 307].includes(await status("/admin/entradas/")));
 
+// Compartilhamento: imagens verticais de Stories
+for (const p of [ENTRY + "story/", "/app/story/"]) {
+  const r = await fetch(BASE + p);
+  ok(`imagem de Stories ${p}`, r.status === 200 && (r.headers.get("content-type") ?? "").includes("image/png"));
+}
+
 // 2. HTML: SEO técnico
 const html = await (await fetch(BASE + ENTRY)).text();
 ok("um único H1", (html.match(/<h1[\s>]/g) || []).length === 1);
@@ -125,6 +131,13 @@ for (const [w, hh] of [[360, 740], [390, 844], [768, 1024], [1280, 800]]) {
   ok("menu mobile abre", await page.locator("dialog[aria-label=Menu]").evaluate((d) => d.open));
   await page.keyboard.press("Escape");
   ok("menu fecha com Esc", !(await page.locator("dialog[aria-label=Menu]").evaluate((d) => d.open)));
+
+  // compartilhamento na ficha
+  await page.goto(BASE + ENTRY, { waitUntil: "networkidle" });
+  const wa = await page.locator("a[href^='https://wa.me/']").first().getAttribute("href");
+  const waText = decodeURIComponent(wa.split("text=")[1]);
+  ok("WhatsApp abre com mensagem pronta, título e link rastreável", /Skunk Ape/.test(waText) && /utm_source=whatsapp/.test(waText) && /utm_campaign=ficha_easter-eggs/.test(waText));
+  ok("ficha tem o bloco 'Manda pro parceiro'", (await page.locator("#h-compartilhar").count()) === 1);
 
   // barra fixa do aplicativo
   await page.evaluate(() => localStorage.removeItem("gs:sticky-off-until"));

@@ -25,6 +25,11 @@ const nextConfig: NextConfig = {
   trailingSlash: true,
   poweredByHeader: false,
   serverExternalPackages: ["@electric-sql/pglite", "postgres"],
+  // As imagens de Stories leem a fonte e as artes do disco: precisam ir junto para a função.
+  outputFileTracingIncludes: {
+    "/[game]/[categoria]/[slug]/story": ["./src/fonts/*.woff", "./public/arte/story/*.jpg"],
+    "/app/story": ["./src/fonts/*.woff", "./public/arte/story/*.jpg"],
+  },
   images: { formats: ["image/avif", "image/webp"] },
   turbopack: {
     rules: {

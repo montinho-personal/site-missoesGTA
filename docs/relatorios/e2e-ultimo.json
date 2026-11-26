@@ -1,6 +1,6 @@
 {
- "quando": "2026-11-26T09:55:54.101Z",
- "total": 106,
+ "quando": "2026-11-26T14:06:44.233Z",
+ "total": 110,
  "falhas": 0,
  "results": [
   {
@@ -150,6 +150,16 @@
   },
   {
    "name": "admin/entradas exige login",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "imagem de Stories /gta-6/easter-eggs/skunk-ape/story/",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "imagem de Stories /app/story/",
    "pass": true,
    "detail": ""
   },
@@ -404,6 +414,16 @@
    "detail": ""
   },
   {
+   "name": "WhatsApp abre com mensagem pronta, título e link rastreável",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "ficha tem o bloco 'Manda pro parceiro'",
+   "pass": true,
+   "detail": ""
+  },
+  {
    "name": "barra do app escondida no topo da página",
    "pass": true,
    "detail": ""
@@ -501,7 +521,7 @@
   {
    "name": "mudar slug cria redirecionamento 301",
    "pass": true,
-   "detail": "308 → /gta-6/dicas/como-salvar-o-jogo-novo/, /gta-6/dicas/como-salvar-o-jogo-novo/"
+   "detail": "308 → /gta-6/dicas/como-salvar-o-jogo-novo/"
   },
   {
    "name": "novo endereço responde 200 após revalidação",
