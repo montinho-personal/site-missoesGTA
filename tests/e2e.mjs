@@ -126,6 +126,21 @@ for (const [w, hh] of [[360, 740], [390, 844], [768, 1024], [1280, 800]]) {
   await page.keyboard.press("Escape");
   ok("menu fecha com Esc", !(await page.locator("dialog[aria-label=Menu]").evaluate((d) => d.open)));
 
+  // barra fixa do aplicativo
+  await page.evaluate(() => localStorage.removeItem("gs:sticky-off-until"));
+  await page.goto(BASE + "/gta-6/dinheiro/", { waitUntil: "networkidle" });
+  const bar = page.locator("[role=region][aria-label=Aplicativo]");
+  ok("barra do app escondida no topo da página", (await bar.getAttribute("aria-hidden")) === "true");
+  await page.mouse.wheel(0, 900); await page.waitForTimeout(500);
+  ok("barra do app sobe depois de rolar, com o texto da categoria", (await bar.getAttribute("aria-hidden")) === "false" && /Grana escondida/.test(await bar.innerText()));
+  await bar.getByRole("button", { name: /Fechar a chamada/ }).click();
+  await page.waitForTimeout(400);
+  await page.goto(BASE + "/gta-6/veiculos/", { waitUntil: "networkidle" }); await page.mouse.wheel(0, 900); await page.waitForTimeout(500);
+  ok("depois de fechada, a barra não volta em outra página", (await page.locator("[role=region][aria-label=Aplicativo]").getAttribute("aria-hidden")) === "true");
+  await page.evaluate(() => localStorage.removeItem("gs:sticky-off-until"));
+  await page.goto(BASE + "/app/", { waitUntil: "networkidle" }); await page.mouse.wheel(0, 900); await page.waitForTimeout(400);
+  ok("barra não aparece na própria página do app", (await page.locator("[role=region][aria-label=Aplicativo]").count()) === 0);
+
   // envio da comunidade
   await page.goto(BASE + "/enviar-descoberta/", { waitUntil: "networkidle" });
   await page.getByRole("button", { name: "Enviar" }).click();

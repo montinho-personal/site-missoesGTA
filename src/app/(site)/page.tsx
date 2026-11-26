@@ -104,7 +104,7 @@ export default async function Home() {
       </section>
 
       {/* 5. Aplicativo */}
-      <section className="wrap pt-16 sm:pt-24" aria-labelledby="h-app">
+      <section data-app-cta className="wrap pt-16 sm:pt-24" aria-labelledby="h-app">
         <div className="card overflow-hidden border-violet/40">
           <div className="grid md:grid-cols-[1.1fr_1fr]">
             <div className="p-6 sm:p-10">

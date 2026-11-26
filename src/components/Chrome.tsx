@@ -25,16 +25,16 @@ export function Header() {
     <header className="sticky top-0 z-40 border-b border-ink-600/70 bg-ink-950/90 backdrop-blur-md">
       <div className="wrap flex h-16 items-center gap-3">
         <Link href="/" className="py-2 shrink-0" aria-label={`${site.name}, página inicial`}><Wordmark /></Link>
-        <nav aria-label="Principal" className="hidden lg:flex items-center gap-1 ml-6 grow">
+        <nav aria-label="Principal" className="hidden xl:flex items-center gap-0.5 ml-6 grow">
           {mainNav.map((n) => (
             <Link key={n.href} href={n.href} aria-current={path === n.href ? "page" : undefined}
-              className="px-3 py-2 rounded-lg text-[0.95rem] font-medium text-fg-muted hover:text-fg aria-[current=page]:text-pink">{n.label}</Link>
+              className="px-2.5 py-2 rounded-lg text-[0.95rem] font-medium whitespace-nowrap text-fg-muted hover:text-fg aria-[current=page]:text-pink">{n.label}</Link>
           ))}
         </nav>
         <div className="ml-auto flex items-center gap-1">
           <SearchTrigger variant="icon" />
           <Link href="/app/" className="btn btn-app btn-sm hidden sm:inline-flex" onClick={() => track("cta_click", { cta_key: "header", placement: "header" })}>Aplicativo</Link>
-          <button type="button" className="lg:hidden size-11 inline-flex items-center justify-center rounded-full" aria-label="Abrir menu" onClick={() => menu.current?.showModal()}><Icon name="menu" size={24} /></button>
+          <button type="button" className="xl:hidden size-11 inline-flex items-center justify-center rounded-full" aria-label="Abrir menu" onClick={() => menu.current?.showModal()}><Icon name="menu" size={24} /></button>
         </div>
       </div>
 

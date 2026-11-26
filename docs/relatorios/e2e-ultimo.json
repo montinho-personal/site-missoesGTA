@@ -1,6 +1,6 @@
 {
- "quando": "2026-11-26T08:15:33.872Z",
- "total": 95,
+ "quando": "2026-11-26T08:34:20.375Z",
+ "total": 99,
  "falhas": 0,
  "results": [
   {
@@ -370,6 +370,26 @@
   },
   {
    "name": "menu fecha com Esc",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "barra do app escondida no topo da página",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "barra do app sobe depois de rolar, com o texto da categoria",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "depois de fechada, a barra não volta em outra página",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "barra não aparece na própria página do app",
    "pass": true,
    "detail": ""
   },

@@ -89,7 +89,7 @@ export function EntryGrid({ entries }: { entries: EntryCardData[] }) {
 export function AppCta({ cta, placement, context }: { cta: Cta | undefined; placement: string; context?: string }) {
   if (!cta) return null;
   return (
-    <aside aria-label="Aplicativo" className="card overflow-hidden border-violet/40 no-print">
+    <aside data-app-cta aria-label="Aplicativo" className="card overflow-hidden border-violet/40 no-print">
       <div className="grid-paper p-5 sm:p-7 flex flex-col sm:flex-row sm:items-center gap-5">
         <div className="grow">
           <p className="label text-violet mb-2 inline-flex items-center gap-2"><Icon name="phone" size={15} />{cta.eyebrow}</p>

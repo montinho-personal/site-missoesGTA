@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import { classify, normKeyword } from "../src/lib/keyword-rules";
 import { buildIndex, expandQuery, runSearch, type SearchDoc } from "../src/lib/search";
 import { factValue } from "../src/lib/labels";
+import { allStickyCopies, stickyCopyFor } from "../src/lib/sticky-copy";
 import entries from "../content/seed/entries.json";
 import categories from "../content/seed/categories.json";
 import regions from "../content/seed/regions.json";
@@ -76,5 +77,25 @@ describe("campos vazios nunca viram invenção", () => {
   it("distingue desconhecido de não aplicável", () => {
     expect(factValue(null)).toEqual({ text: "Ainda não confirmado", known: false });
     expect(factValue("n/a")).toEqual({ text: "Não se aplica", known: true });
+  });
+});
+
+describe("barra fixa do aplicativo", () => {
+  it("escolhe o texto pelo tipo de página", () => {
+    expect(stickyCopyFor("/")?.context).toBe("home");
+    expect(stickyCopyFor("/gta-6/dinheiro/")?.context).toBe("cat_dinheiro");
+    expect(stickyCopyFor("/gta-6/dinheiro/papagaio/")?.context).toBe("ficha_dinheiro");
+    expect(stickyCopyFor("/gta-6/mapa/vice-city/")?.context).toBe("regiao");
+    expect(stickyCopyFor("/gta-6/segredos/")?.context).toBe("segredos");
+  });
+  it("não aparece na página do aplicativo, na compra, em formulários e textos legais", () => {
+    for (const p of ["/app/", "/app/acesso/", "/admin/", "/privacidade/", "/termos/", "/contato/", "/enviar-descoberta/", "/busca/"]) expect(stickyCopyFor(p), p).toBeNull();
+  });
+  it("todo texto cabe na barra do celular e não usa urgência falsa", () => {
+    for (const c of allStickyCopies()) {
+      expect(c.title.length, c.title).toBeLessThanOrEqual(40);
+      expect(c.line.length, c.line).toBeLessThanOrEqual(78);
+      expect(`${c.title} ${c.line}`).not.toMatch(/últim|só hoje|agora ou nunca|corra|promoç|grátis/i);
+    }
   });
 });
