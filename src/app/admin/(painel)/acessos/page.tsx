@@ -1,5 +1,5 @@
 import { q } from "@/server/db";
-import { createCourtesyAction, revokeLicense, savePrice } from "@/server/admin-actions";
+import { createCourtesyAction, revokeLicense, saveAppUrl, savePrice } from "@/server/admin-actions";
 import { saleConfig } from "@/server/mercadopago";
 import { formatDate } from "@/lib/labels";
 import { courtesyMessage, whatsappLink } from "@/lib/share-copy";
@@ -10,10 +10,11 @@ export const metadata = { title: "Acessos e vendas" };
 
 export default async function Acessos({ searchParams }: { searchParams: Promise<Record<string, string | undefined>> }) {
   const sp = await searchParams;
+  const appUrl = (await q<{ value: string }>(`select value from settings where key = 'app_url'`))[0]?.value ?? null;
   const nome = sp.nome ?? "", tel = sp.tel ?? "", erro = sp.erro;
   const lote = sp.lote && /^[a-f0-9]{16}$/.test(sp.lote) ? await q<{ code: string; max_uses: number | null }>(`select code, max_uses from licenses where batch = $1 order by code`, [sp.lote]) : [];
   const novo = lote.length === 1 ? lote[0].code : null;
-  const msg = novo ? courtesyMessage(novo, nome, site.url, lote[0].max_uses) : "";
+  const msg = novo ? courtesyMessage(novo, nome, site.url, lote[0].max_uses, appUrl) : "";
   const sale = await saleConfig();
   const [lic, totals] = await Promise.all([
     q<{ code: string; email: string | null; origin: string; status: string; note: string | null; created_at: string; last_used_at: string | null; max_uses: number | null; usados: number }>(`select l.code, l.email, l.origin, l.status, l.note, l.created_at::text, l.last_used_at::text, l.max_uses, (select count(*) from license_uses u where u.code = l.code)::int as usados from licenses l order by l.created_at desc limit 300`),
@@ -45,6 +46,11 @@ export default async function Acessos({ searchParams }: { searchParams: Promise<
       <section id="cortesia" className="card p-5">
         <h2 className="text-xl font-bold">Liberar acesso de graça (cortesia)</h2>
         <p className="text-fg-muted mt-1 mb-4">Gera um código que você manda para a pessoa. Ela digita o código no aplicativo, sem pagar. Dá para escolher o nome do código ou deixar o sistema sortear.</p>
+        <form action={saveAppUrl} className="mb-5 flex flex-wrap items-end gap-3 rounded-lg border border-ink-600 p-3">
+          <div className="grow min-w-60"><label className="field-label" htmlFor="c-appurl">Endereço do aplicativo (vai nas mensagens)</label><input id="c-appurl" name="app_url" type="url" defaultValue={appUrl ?? ""} placeholder="https://app.missoessecretasgta.com.br" className="field" />
+            <span className="field-hint">{appUrl ? "As mensagens levam este link direto para o app." : "Ainda vazio: a mensagem manda para o passo a passo do site. Cole aqui o endereço quando o app for publicado."}</span></div>
+          <button className="btn btn-ghost">Salvar endereço</button>
+        </form>
         <form action={createCourtesyAction} className="grid gap-3 sm:grid-cols-2">
           <div><label className="field-label" htmlFor="c-nome">Nome de quem recebe</label><input id="c-nome" name="nome" maxLength={60} defaultValue={nome} placeholder="João" className="field" /></div>
           <div><label className="field-label" htmlFor="c-tel">WhatsApp da pessoa (opcional)</label><input id="c-tel" name="tel" inputMode="tel" defaultValue={tel} placeholder="11 98765-4321" className="field" /><span className="field-hint">Com o número, o WhatsApp já abre a conversa com ela.</span></div>
@@ -66,7 +72,7 @@ export default async function Acessos({ searchParams }: { searchParams: Promise<
               {lote.map((l) => (
                 <li key={l.code} className="py-2 flex items-center justify-between gap-3">
                   <span className="font-mono">{l.code}</span>
-                  <a className="link text-sm whitespace-nowrap" target="_blank" rel="noopener" href={whatsappLink(courtesyMessage(l.code, null, site.url, l.max_uses))}>Enviar no WhatsApp</a>
+                  <a className="link text-sm whitespace-nowrap" target="_blank" rel="noopener" href={whatsappLink(courtesyMessage(l.code, null, site.url, l.max_uses, appUrl))}>Enviar no WhatsApp</a>
                 </li>
               ))}
             </ul>
@@ -102,7 +108,7 @@ export default async function Acessos({ searchParams }: { searchParams: Promise<
                 <td className="p-3 whitespace-nowrap">{l.max_uses ? `${l.usados} de ${l.max_uses.toLocaleString("pt-BR")}${l.usados >= l.max_uses ? " · esgotado" : ""}` : "1 (individual)"}</td>
                 <td className="p-3">{l.status === "ativa" ? (
                   <div className="flex flex-col gap-1.5">
-                    {l.origin === "cortesia" && <a className="link text-sm whitespace-nowrap" target="_blank" rel="noopener" href={whatsappLink(courtesyMessage(l.code, /^Para: ([^·]+)/.exec(l.note ?? "")?.[1]?.trim(), site.url, l.max_uses))}>Enviar no WhatsApp</a>}
+                    {l.origin === "cortesia" && <a className="link text-sm whitespace-nowrap" target="_blank" rel="noopener" href={whatsappLink(courtesyMessage(l.code, /^Para: ([^·]+)/.exec(l.note ?? "")?.[1]?.trim(), site.url, l.max_uses, appUrl))}>Enviar no WhatsApp</a>}
                     <form action={revokeLicense}><input type="hidden" name="code" value={l.code} /><button className="link text-sm">Revogar</button></form>
                   </div>
                 ) : <span className="badge tone-red">Revogado</span>}</td>

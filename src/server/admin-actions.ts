@@ -207,6 +207,17 @@ export async function revokeLicense(fd: FormData) {
   revalidatePath("/admin/acessos");
 }
 
+/** Endereço público do aplicativo, usado nas mensagens de cortesia. Vazio = manda para o passo a passo do site. */
+export async function saveAppUrl(fd: FormData) {
+  await requireAdmin();
+  const raw = s(fd, "app_url");
+  let url: string | null = null;
+  try { const u = new URL(raw); if (u.protocol === "https:") url = u.toString().replace(/\/$/, ""); } catch {}
+  if (url) await q(`insert into settings (key, value) values ('app_url', $1) on conflict (key) do update set value = excluded.value, updated_at = now()`, [url]);
+  else await q(`delete from settings where key = 'app_url'`);
+  revalidatePath("/admin/acessos");
+}
+
 export async function savePrice(fd: FormData) {
   await requireAdmin();
   const { parsePrice } = await import("./mercadopago");

@@ -51,11 +51,13 @@ const aviso = (id, { assinatura = true } = {}) => {
   const v1 = createHmac("sha256", assinatura ? SECRET : "errado").update(`id:${id};request-id:${rid};ts:${ts};`).digest("hex");
   return fetch(`${BASE}/api/mercadopago/webhook/?data.id=${id}&type=payment`, { method: "POST", headers: { "x-signature": `ts=${ts},v1=${v1}`, "x-request-id": rid, "content-type": "application/json" }, body: JSON.stringify({ type: "payment", data: { id } }) });
 };
+let page;
+const gera = async () => { const antes = page.url(); await page.getByRole("button", { name: "Gerar código" }).click(); await page.waitForURL((u) => u.toString() !== antes && /lote=|erro=/.test(u.toString())); };
 const valida = async (codigo) => (await (await fetch(`${BASE}/api/acesso/validar/`, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ codigo }) })).json()).valido;
 
 try {
   const browser = await chromium.launch();
-  const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
+  page = await browser.newPage({ viewport: { width: 390, height: 844 } });
   // O preço é definido pelo dono no painel, sem variável de ambiente e sem novo deploy.
   await page.goto(BASE + "/app/", { waitUntil: "networkidle" });
   ok("sem preço no painel, vale o preço de lançamento de R$ 4,20", /R\$\s4,20/.test(await page.locator("main").innerText()) && (await page.getByRole("button", { name: /Comprar por R\$\s4,20/ }).count()) === 1);
@@ -129,27 +131,30 @@ try {
   await page.goto(BASE + "/admin/acessos/");
   const painel = await page.locator("body").innerText();
   ok("painel mostra a venda paga e a receita", /Venda ligada/.test(painel) && /R\$\s19,90/.test(painel) && painel.includes(codigo));
+  await page.getByLabel(/Endereço do aplicativo/).fill("https://app.exemplo.com.br/");
+  await page.getByRole("button", { name: "Salvar endereço" }).click();
+  await page.waitForTimeout(800);
+  await page.goto(BASE + "/admin/acessos/");
   await page.getByLabel("Nome de quem recebe").fill("João Silva");
   await page.getByLabel(/WhatsApp da pessoa/).fill("(11) 98765-4321");
   await page.getByLabel(/E-mail/).fill("amigo@example.com");
   await page.getByLabel(/Anotação/).fill("Cortesia de teste");
-  await page.getByRole("button", { name: "Gerar código" }).click();
-  await page.waitForURL(/lote=/);
+  await gera();
   const cortesia = (await page.locator("#cortesia [role=status] strong").first().innerText()).trim();
   ok("cortesia gera código que vale sem pagamento", (await valida(cortesia)) === true, cortesia);
   const zap = await page.getByRole("link", { name: /Enviar no WhatsApp para João/ }).getAttribute("href");
   ok("mensagem pronta para o WhatsApp, já com o número e o código", zap.startsWith("https://wa.me/5511987654321?text=") && decodeURIComponent(zap).includes(cortesia) && decodeURIComponent(zap).includes("Fala, João!") && (await page.locator("#c-msg").inputValue()).includes("/app/como-baixar-e-usar/#instalar"));
+  const msgZap = await page.locator("#c-msg").inputValue();
+  ok("mensagem leva o link do app e ensina a instalar no Android e no iPhone", msgZap.includes("1. Abra este link no celular: https://app.exemplo.com.br") && msgZap.includes("*Instalar app*") && msgZap.includes("*Adicionar à Tela de Início*") && msgZap.includes(`*${cortesia}*`));
   await page.getByLabel("Nome de quem recebe").fill("Nina");
   await page.getByLabel(/WhatsApp da pessoa/).fill("");
   await page.getByLabel(/Nome do código/).fill("nina vip");
-  await page.getByRole("button", { name: "Gerar código" }).click();
-  await page.waitForURL(/lote=/);
+  await gera();
   ok("dono escolhe o nome do código, e ele vale com ou sem hífen", (await valida("NINA-VIP")) === true && (await valida("ninavip")) === true && (await page.getByRole("link", { name: "Enviar no WhatsApp" }).first().getAttribute("href")).startsWith("https://wa.me/?text="));
   // um código, várias pessoas: cada aparelho ocupa uma vaga
   await page.getByLabel(/Nome do código/).fill("GRUPO-VIP");
   await page.getByLabel(/Quantas pessoas podem usar/).fill("2");
-  await page.getByRole("button", { name: "Gerar código" }).click();
-  await page.waitForURL(/lote=/);
+  await gera();
   const ap = async (codigo, aparelho) => (await fetch(`${BASE}/api/acesso/validar/`, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ codigo, aparelho }) })).json();
   const a1 = await ap("GRUPO-VIP", "aparelho-aaaa"), a2 = await ap("grupovip", "aparelho-bbbb"), a3 = await ap("GRUPO-VIP", "aparelho-cccc"), a1b = await ap("GRUPO-VIP", "aparelho-aaaa"), semAp = await ap("GRUPO-VIP", "");
   ok("código com 2 vagas: libera 2 aparelhos, recusa o 3º e continua valendo para quem já entrou", a1.valido && a2.valido && !a3.valido && a3.motivo === "esgotado" && a1b.valido && !semAp.valido && semAp.motivo === "aparelho", JSON.stringify([a1, a2, a3, a1b, semAp]));
@@ -158,13 +163,11 @@ try {
   // vários códigos de uma vez, numerados
   await page.getByLabel(/Nome do código/).fill("SORTEIO");
   await page.getByLabel(/Quantos códigos gerar/).fill("3");
-  await page.getByRole("button", { name: "Gerar código" }).click();
-  await page.waitForURL(/lote=/);
+  await gera();
   const lista = await page.locator("#c-lista").inputValue();
   ok("gera vários códigos numerados, cada um valendo para uma pessoa", lista === "SORTEIO-01\nSORTEIO-02\nSORTEIO-03" && (await valida("SORTEIO-02")) === true && (await page.getByRole("link", { name: "Enviar no WhatsApp" }).count()) >= 3, lista.replace(/\n/g, ","));
   await page.getByLabel(/Nome do código/).fill("NINA-VIP");
-  await page.getByRole("button", { name: "Gerar código" }).click();
-  await page.waitForURL(/erro=/);
+  await gera();
   ok("nome de código repetido é recusado com explicação", (await page.getByText(/O código NINA-VIP já existe/).count()) === 1);
   await page.locator("tr", { hasText: cortesia }).getByRole("button", { name: "Revogar" }).click();
   await page.waitForTimeout(700);
