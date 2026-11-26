@@ -12,13 +12,20 @@ const { chromium } = createRequire(import.meta.url)("playwright");
 const PORT = 3300, FAKE = 3399, BASE = `http://localhost:${PORT}`, SECRET = "segredo-de-teste", ADMIN = "senha-de-teste-123";
 const results = []; const ok = (n, p, d = "") => { results.push(p); console.log(`${p ? "PASS" : "FAIL"}  ${n}${d ? "  — " + d : ""}`); };
 
-const pagamentos = new Map(); let preferencia = null;
+const pagamentos = new Map(); let preferencia = null; let pix = null; let pixCount = 0;
+const PNG = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==";
 const fake = http.createServer((req, res) => {
   let body = ""; req.on("data", (c) => (body += c)); req.on("end", () => {
     res.setHeader("Content-Type", "application/json");
     if (req.method === "POST" && req.url === "/checkout/preferences") {
       preferencia = { ...JSON.parse(body), auth: req.headers.authorization };
       return res.end(JSON.stringify({ id: "pref-1", init_point: `${BASE}/app/acesso/?pedido=${preferencia.external_reference}` }));
+    }
+    if (req.method === "POST" && req.url === "/v1/payments") {
+      pix = { ...JSON.parse(body), auth: req.headers.authorization, idem: req.headers["x-idempotency-key"] };
+      const id = String(330 + (++pixCount));
+      pagamentos.set(id, { id: Number(id), status: "pending", external_reference: pix.external_reference, transaction_amount: pix.transaction_amount, currency_id: "BRL" });
+      return res.end(JSON.stringify({ id: Number(id), status: "pending", point_of_interaction: { transaction_data: { qr_code: "00020126PIXCOPIAECOLA" + id, qr_code_base64: PNG } } }));
     }
     const m = /^\/v1\/payments\/(\d+)$/.exec(req.url);
     if (m && pagamentos.has(m[1])) return res.end(JSON.stringify(pagamentos.get(m[1])));
@@ -56,10 +63,29 @@ try {
   await page.goto(BASE + "/app/", { waitUntil: "networkidle" });
   ok("página do app mostra o preço configurado", /R\$\s19,90/.test(await page.locator("main").innerText()));
   ok("botão de compra no lugar da lista de aviso", (await page.getByRole("button", { name: /Comprar por/ }).count()) === 1);
+
+  // Pix direto: QR Code no site, sem login no Mercado Pago, liberação mesmo sem o aviso chegar
+  await page.getByLabel("Seu e-mail").fill("pix@example.com");
+  await page.locator("#avise-me").getByRole("checkbox").check();
+  await page.waitForTimeout(2600);
+  await page.getByRole("button", { name: /Comprar por R\$\s19,90 no Pix/ }).click();
+  await page.waitForURL(/\/app\/acesso\/\?pedido=/);
+  const pedidoPix = new URL(page.url()).searchParams.get("pedido");
+  ok("Pix criado pela API com valor, referência, aviso e validade", pix?.transaction_amount === 19.9 && pix.payment_method_id === "pix" && pix.external_reference === pedidoPix && pix.notification_url.endsWith("/api/mercadopago/webhook/") && /-03:00$/.test(pix.date_of_expiration) && pix.idem === `pix-${pedidoPix}` && pix.auth === "Bearer TEST-token");
+  const telaPix = await page.locator("main").innerText();
+  ok("página de acesso mostra QR Code e copia e cola, sem código ainda", /Falta só o Pix/i.test(telaPix) && (await page.getByAltText("QR Code do Pix").count()) === 1 && (await page.locator("#pix-code").inputValue()).startsWith("00020126PIXCOPIAECOLA") && !/MS6-/.test(telaPix));
+  const idPix = String(330 + pixCount);
+  pagamentos.set(idPix, { ...pagamentos.get(idPix), status: "approved" });
+  await page.waitForFunction(() => /MS6-/.test(document.querySelector("main")?.innerText ?? ""), null, { timeout: 15000 }).catch(() => {});
+  const codigoPix = /MS6-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}/.exec(await page.locator("main").innerText())?.[0];
+  ok("Pix pago: a página se atualiza sozinha e mostra o código, mesmo sem o aviso", Boolean(codigoPix) && (await valida(codigoPix)) === true, codigoPix ?? "");
+
+  // Cartão: página do Mercado Pago (Checkout Pro) e liberação pelo aviso
+  await page.goto(BASE + "/app/", { waitUntil: "load" });
   await page.getByLabel("Seu e-mail").fill("comprador@example.com");
   await page.locator("#avise-me").getByRole("checkbox").check();
   await page.waitForTimeout(2600);
-  await page.getByRole("button", { name: /Comprar por/ }).click();
+  await page.getByRole("button", { name: "Pagar com cartão" }).click();
   await page.waitForURL(/\/app\/acesso\/\?pedido=/);
   const pedido = new URL(page.url()).searchParams.get("pedido");
   ok("preferência criada com valor, referência e retorno corretos", preferencia?.items?.[0]?.unit_price === 19.9 && preferencia.external_reference === pedido && preferencia.notification_url.endsWith("/api/mercadopago/webhook/") && preferencia.auth === "Bearer TEST-token");

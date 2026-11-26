@@ -6,8 +6,9 @@ import { site } from "@/lib/site";
 import { LAUNCH_PRICE_CENTS } from "@/lib/app-config";
 
 /**
- * Integração com o Mercado Pago (Checkout Pro): o comprador paga na página do Mercado Pago
- * e nenhum dado de cartão passa pelo site.
+ * Integração com o Mercado Pago. Dois caminhos: Pix direto (QR Code no próprio site, sem login no
+ * Mercado Pago) e Checkout Pro (cartão e outras formas, na página do Mercado Pago). Nenhum dado de
+ * cartão passa pelo site.
  *
  * Variáveis (todas no painel da hospedagem, nunca no repositório):
  *   MP_ACCESS_TOKEN    credencial de produção da aplicação no Mercado Pago
@@ -53,6 +54,38 @@ export async function createPreference(order: { id: string; email: string; cents
   const data = (await res.json()) as { init_point?: string };
   if (!data.init_point) throw new Error("Mercado Pago não devolveu o endereço de pagamento");
   return data.init_point;
+}
+
+export interface PixCharge { paymentId: string; qr: string; qrB64: string; expiresAt: string }
+
+/** Horário no fuso de Brasília, no formato que o Mercado Pago pede (yyyy-MM-ddTHH:mm:ss.SSS-03:00). */
+const brt = (d: Date) => new Date(d.getTime() - 3 * 3600_000).toISOString().replace("Z", "-03:00");
+
+/**
+ * Cobra por Pix direto pela API: o comprador vê o QR Code no próprio site e paga pelo app do banco,
+ * sem entrar na conta do Mercado Pago. O aviso de pagamento chega pelo mesmo webhook.
+ */
+export async function createPixPayment(order: { id: string; email: string; cents: number }): Promise<PixCharge> {
+  const expires = new Date(Date.now() + 30 * 60_000);
+  const res = await fetch(`${API()}/v1/payments`, {
+    method: "POST",
+    headers: { Authorization: `Bearer ${process.env.MP_ACCESS_TOKEN}`, "Content-Type": "application/json", "X-Idempotency-Key": `pix-${order.id}` },
+    body: JSON.stringify({
+      transaction_amount: order.cents / 100,
+      description: "Missões Secretas GTA 6: acesso ao aplicativo",
+      payment_method_id: "pix",
+      payer: { email: order.email },
+      external_reference: order.id,
+      notification_url: `${site.url}/api/mercadopago/webhook/`,
+      date_of_expiration: brt(expires),
+      statement_descriptor: "MISSOESSECRETAS",
+    }),
+  });
+  if (!res.ok) throw new Error(`Mercado Pago recusou o Pix (${res.status})`);
+  const data = (await res.json()) as { id?: number | string; point_of_interaction?: { transaction_data?: { qr_code?: string; qr_code_base64?: string } } };
+  const t = data.point_of_interaction?.transaction_data;
+  if (!data.id || !t?.qr_code || !t.qr_code_base64) throw new Error("Mercado Pago não devolveu o QR Code do Pix");
+  return { paymentId: String(data.id), qr: t.qr_code, qrB64: t.qr_code_base64, expiresAt: expires.toISOString() };
 }
 
 /**

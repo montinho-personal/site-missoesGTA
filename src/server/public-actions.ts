@@ -66,11 +66,14 @@ export async function joinWaitlist(_prev: FormState, fd: FormData): Promise<Form
   return { ok: true, message: "Pronto. Avisaremos você por e-mail quando o aplicativo estiver disponível, e só sobre isso." };
 }
 
-const buySchema = z.object({ email: z.email("Digite um e-mail válido.").max(160), consent: z.literal("on", { error: "É preciso aceitar os termos para comprar." }) });
+const buySchema = z.object({ email: z.email("Digite um e-mail válido.").max(160), consent: z.literal("on", { error: "É preciso aceitar os termos para comprar." }), metodo: z.enum(["pix", "cartao"]).default("pix") });
 
-/** Abre um pedido e manda o comprador para o pagamento no Mercado Pago. */
+/**
+ * Abre um pedido. Pix (padrão): cria a cobrança pela API e leva o comprador para a página de acesso,
+ * onde o QR Code aparece, sem login no Mercado Pago. Cartão: manda para a página do Mercado Pago.
+ */
 export async function startCheckout(_prev: FormState, fd: FormData): Promise<FormState> {
-  const { saleConfig, createPreference } = await import("./mercadopago");
+  const { saleConfig, createPreference, createPixPayment } = await import("./mercadopago");
   const { newOrderId } = await import("./licenses");
   const values = keep(fd);
   if (looksAutomated(fd)) return { ok: false, message: BOT, values };
@@ -82,8 +85,15 @@ export async function startCheckout(_prev: FormState, fd: FormData): Promise<For
   const id = newOrderId();
   const email = parsed.data.email.toLowerCase();
   await q(`insert into orders (id, email, amount_cents) values ($1, $2, $3)`, [id, email, sale.cents]);
-  let url: string;
-  try { url = await createPreference({ id, email, cents: sale.cents }); }
-  catch { return { ok: false, message: "Não foi possível abrir o pagamento agora. Nada foi cobrado. Tente de novo em instantes.", values }; }
-  redirect(url);
+  const fail = { ok: false as const, message: "Não foi possível abrir o pagamento agora. Nada foi cobrado. Tente de novo em instantes.", values };
+  if (parsed.data.metodo === "cartao") {
+    let url: string;
+    try { url = await createPreference({ id, email, cents: sale.cents }); } catch { return fail; }
+    redirect(url);
+  }
+  try {
+    const pix = await createPixPayment({ id, email, cents: sale.cents });
+    await q(`update orders set payment_id = $2, pix_qr = $3, pix_qr_b64 = $4, pix_expires_at = $5 where id = $1`, [id, pix.paymentId, pix.qr, pix.qrB64, pix.expiresAt]);
+  } catch { return fail; }
+  redirect(`/app/acesso/?pedido=${id}`);
 }

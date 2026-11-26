@@ -251,4 +251,13 @@ create table settings (
 );
 `,
   },
+  {
+    // Pix direto no site: o QR Code fica guardado no pedido para a página de acesso mostrar.
+    id: "005_pix",
+    sql: `
+alter table orders add column pix_qr text;
+alter table orders add column pix_qr_b64 text;
+alter table orders add column pix_expires_at timestamptz;
+`,
+  },
 ];

@@ -113,8 +113,11 @@ export function BuyForm({ priceLabel }: { priceLabel: string }) {
       <label className="flex items-start gap-3 cursor-pointer"><input type="checkbox" name="consent" required defaultChecked={state?.values?.consent === "on"} className="mt-1 size-5 accent-[#a98bff]" />
         <span className="text-sm text-fg-muted">Li e aceito os <Link href="/termos/" className="link">termos de uso</Link> e a <Link href="/privacidade/" className="link">política de privacidade</Link>. Sei que posso desistir da compra em até 7 dias.</span></label>
       {state && !state.ok && <Status state={state} />}
-      <button className="btn btn-app self-start" disabled={pending}>{pending ? "Abrindo o pagamento…" : `Comprar por ${priceLabel}`}</button>
-      <p className="text-sm text-fg-subtle">O pagamento é feito na página do Mercado Pago (Pix ou cartão). Nenhum dado de cartão passa por este site.</p>
+      <div className="flex flex-col sm:flex-row gap-3">
+        <button className="btn btn-app grow" name="metodo" value="pix" disabled={pending}>{pending ? "Gerando o pagamento…" : `Comprar por ${priceLabel} no Pix`}</button>
+        <button className="btn btn-ghost" name="metodo" value="cartao" disabled={pending}>Pagar com cartão</button>
+      </div>
+      <p className="text-sm text-fg-subtle">No Pix, o QR Code aparece aqui mesmo e você paga pelo app do seu banco, sem criar conta em lugar nenhum. No cartão, o pagamento é feito na página do Mercado Pago. Nenhum dado de cartão passa por este site.</p>
     </form>
   );
 }

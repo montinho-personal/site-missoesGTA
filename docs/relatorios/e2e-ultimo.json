@@ -1,5 +1,5 @@
 {
- "quando": "2026-11-26T14:06:44.233Z",
+ "quando": "2026-11-26T18:09:17.245Z",
  "total": 110,
  "falhas": 0,
  "results": [
@@ -521,7 +521,7 @@
   {
    "name": "mudar slug cria redirecionamento 301",
    "pass": true,
-   "detail": "308 → /gta-6/dicas/como-salvar-o-jogo-novo/"
+   "detail": "308 → /gta-6/dicas/como-salvar-o-jogo-novo/, /gta-6/dicas/como-salvar-o-jogo-novo/"
   },
   {
    "name": "novo endereço responde 200 após revalidação",
