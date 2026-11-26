@@ -51,7 +51,8 @@ const PAGES: Record<string, StickyCopy> = {
 };
 
 /** Onde a barra NÃO aparece: a própria página do app, compra, formulários e textos legais. */
-const HIDDEN = [/^\/app(\/|$)/, /^\/admin(\/|$)/, /^\/privacidade\//, /^\/termos\//, /^\/contato\//, /^\/enviar-descoberta\//, /^\/busca\//];
+const HIDDEN = [/^\/app(\/|$)/, // inclui o manual de instalação
+  /^\/admin(\/|$)/, /^\/privacidade\//, /^\/termos\//, /^\/contato\//, /^\/enviar-descoberta\//, /^\/busca\//];
 
 export function stickyCopyFor(pathname: string): StickyCopy | null {
   const path = pathname.endsWith("/") ? pathname : `${pathname}/`;

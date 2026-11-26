@@ -14,7 +14,7 @@ const status = async (p, opts) => (await fetch(BASE + p, { redirect: "manual", .
 const ENTRY = "/gta-6/easter-eggs/skunk-ape/";
 
 // 1. Rotas e códigos HTTP
-for (const p of ["/", "/gta-6/", "/gta-6/segredos/", "/gta-6/dinheiro/", "/gta-6/mapa/", "/gta-6/mapa/vice-city/", ENTRY, "/app/", "/sobre/", "/metodologia/", "/radar/", "/ajuda/", "/contato/", "/enviar-descoberta/", "/privacidade/", "/termos/", "/busca/", "/favoritos/", "/robots.txt", "/sitemap.xml", "/llms.txt", "/search-index.json"])
+for (const p of ["/", "/gta-6/", "/gta-6/segredos/", "/gta-6/dinheiro/", "/gta-6/mapa/", "/gta-6/mapa/vice-city/", ENTRY, "/app/", "/app/como-baixar-e-usar/", "/sobre/", "/metodologia/", "/radar/", "/ajuda/", "/contato/", "/enviar-descoberta/", "/privacidade/", "/termos/", "/busca/", "/favoritos/", "/robots.txt", "/sitemap.xml", "/llms.txt", "/search-index.json"])
   ok(`200 ${p}`, (await status(p)) === 200);
 for (const p of ["/gta-6/missoes-secretas/nao-existe/", "/gta-6/misterios/", "/gta-6/categoria-falsa/", "/gta-5/", "/qualquer/coisa/muito/funda/"]) ok(`404 real em ${p}`, (await status(p)) === 404);
 ok("admin exige login", [302, 303, 307].includes(await status("/admin/")));
@@ -49,7 +49,7 @@ const newPage = async (w, hh) => {
 // 3. Responsividade: sem rolagem horizontal, alvos de toque
 for (const [w, hh] of [[360, 740], [390, 844], [768, 1024], [1280, 800]]) {
   const page = await newPage(w, hh);
-  for (const p of ["/", ENTRY, "/gta-6/segredos/", "/app/"]) {
+  for (const p of ["/", ENTRY, "/gta-6/segredos/", "/app/", "/app/como-baixar-e-usar/"]) {
     await page.goto(BASE + p, { waitUntil: "networkidle" });
     const over = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
     ok(`sem rolagem horizontal ${w}px ${p}`, over <= 1, `excesso ${over}px`);
@@ -65,7 +65,7 @@ for (const [w, hh] of [[360, 740], [390, 844], [768, 1024], [1280, 800]]) {
 // 4. Acessibilidade automática (axe, WCAG 2.2 AA)
 {
   const page = await newPage(390, 844);
-  for (const p of ["/", ENTRY, "/gta-6/segredos/", "/app/", "/enviar-descoberta/", "/metodologia/"]) {
+  for (const p of ["/", ENTRY, "/gta-6/segredos/", "/app/", "/app/como-baixar-e-usar/", "/enviar-descoberta/", "/metodologia/"]) {
     await page.goto(BASE + p, { waitUntil: "networkidle" });
     await page.addScriptTag({ content: axeSrc });
     const v = await page.evaluate(async () => (await window.axe.run(document, { runOnly: ["wcag2a", "wcag2aa", "wcag21aa", "wcag22aa"] })).violations.map((x) => `${x.id}(${x.nodes.length}): ${x.nodes[0].target}`));

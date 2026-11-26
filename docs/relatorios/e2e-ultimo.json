@@ -1,6 +1,6 @@
 {
- "quando": "2026-11-26T08:34:20.375Z",
- "total": 99,
+ "quando": "2026-11-26T08:40:09.438Z",
+ "total": 105,
  "falhas": 0,
  "results": [
   {
@@ -40,6 +40,11 @@
   },
   {
    "name": "200 /app/",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "200 /app/como-baixar-e-usar/",
    "pass": true,
    "detail": ""
   },
@@ -214,6 +219,11 @@
    "detail": "excesso 0px"
   },
   {
+   "name": "sem rolagem horizontal 360px /app/como-baixar-e-usar/",
+   "pass": true,
+   "detail": "excesso 0px"
+  },
+  {
    "name": "sem rolagem horizontal 390px /",
    "pass": true,
    "detail": "excesso 0px"
@@ -230,6 +240,11 @@
   },
   {
    "name": "sem rolagem horizontal 390px /app/",
+   "pass": true,
+   "detail": "excesso 0px"
+  },
+  {
+   "name": "sem rolagem horizontal 390px /app/como-baixar-e-usar/",
    "pass": true,
    "detail": "excesso 0px"
   },
@@ -259,6 +274,11 @@
    "detail": "excesso 0px"
   },
   {
+   "name": "sem rolagem horizontal 768px /app/como-baixar-e-usar/",
+   "pass": true,
+   "detail": "excesso 0px"
+  },
+  {
    "name": "sem rolagem horizontal 1280px /",
    "pass": true,
    "detail": "excesso 0px"
@@ -279,6 +299,11 @@
    "detail": "excesso 0px"
   },
   {
+   "name": "sem rolagem horizontal 1280px /app/como-baixar-e-usar/",
+   "pass": true,
+   "detail": "excesso 0px"
+  },
+  {
    "name": "axe sem violações /",
    "pass": true,
    "detail": ""
@@ -295,6 +320,11 @@
   },
   {
    "name": "axe sem violações /app/",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "axe sem violações /app/como-baixar-e-usar/",
    "pass": true,
    "detail": ""
   },

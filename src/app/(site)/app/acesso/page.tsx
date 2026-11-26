@@ -21,6 +21,7 @@ export default async function Acesso({ searchParams }: { searchParams: Promise<R
           <p className="label text-ok">Pagamento confirmado</p>
           <p className="mt-3 text-fg-muted">Este é o seu código de acesso. Guarde em lugar seguro: é ele que libera o aplicativo.</p>
           <p className="mt-4 font-display text-3xl sm:text-4xl font-black tracking-wider break-all select-all" aria-label="Código de acesso">{row.code}</p>
+          <p className="mt-4"><Link href="/app/como-baixar-e-usar/#instalar" className="btn btn-app btn-sm">Como instalar e ativar</Link></p>
           <p className="mt-4 text-sm text-fg-subtle">Salve esta página nos favoritos do navegador. Se perder o código, fale com a gente pelo <Link className="link" href="/contato/">contato</Link>, usando o e-mail da compra.</p>
         </div>
       )}

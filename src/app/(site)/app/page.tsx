@@ -65,7 +65,7 @@ export default async function AppPage() {
               <p className="label text-violet mb-4">{appConfig.stage === "a_venda" ? "Aplicativo" : "Aplicativo · em preparação"}</p>
               <h1 className="text-[2.3rem] leading-[1.05] sm:text-6xl font-black">Não jogue GTA 6 deixando metade da aventura para trás.</h1>
               <p className="mt-5 text-lg sm:text-xl text-fg-muted max-w-xl">Para quem não quer apenas zerar. Um comparsa de bolso que sabe o que tem por perto, lembra o que você já achou e respeita o seu ritmo na história. Não pede parte do assalto.</p>
-              <div className="mt-7 flex flex-wrap gap-3">{primaryCta}<a href="#funcoes" className="btn btn-ghost">Ver as funções</a></div>
+              <div className="mt-7 flex flex-wrap gap-3">{primaryCta}<Link href="/app/como-baixar-e-usar/" className="btn btn-ghost">Como baixar e usar</Link></div>
               {!selling && <p className="mt-4 text-sm text-fg-subtle max-w-lg">Transparência: o aplicativo está em construção e ainda não foi lançado. Abaixo, cada função traz o estado real em que se encontra.</p>}
             </div>
             <div aria-hidden="true" className="flex justify-center">
@@ -109,7 +109,7 @@ export default async function AppPage() {
 
         <section id="funcoes" className="pt-16 sm:pt-24 scroll-mt-24" aria-labelledby="h-func">
           <h2 id="h-func" className="text-3xl sm:text-4xl font-extrabold">Funções e em que pé cada uma está</h2>
-          <p className="mt-3 text-fg-muted max-w-2xl">Promessa vaga a gente deixa para os políticos de Leonida. Cada função tem uma etiqueta: disponível, em desenvolvimento ou planejada.</p>
+          <p className="mt-3 text-fg-muted max-w-2xl">Promessa vaga a gente deixa para os políticos de Leonida. Cada função tem uma etiqueta: disponível, em desenvolvimento ou planejada. O passo a passo completo está no <Link href="/app/como-baixar-e-usar/" className="link">manual de como baixar e usar</Link>.</p>
           <ul className="mt-7 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {appConfig.features.map((f) => (
               <li key={f.key} className="card p-5 flex flex-col gap-2.5">

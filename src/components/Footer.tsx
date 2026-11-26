@@ -28,6 +28,7 @@ export function Footer({ categories }: { categories: Category[] }) {
           <Link className={a} href="/metodologia/">Como verificamos</Link>
           <Link className={a} href="/radar/">Radar de descobertas</Link>
           <Link className={a} href="/app/">Aplicativo</Link>
+          <Link className={a} href="/app/como-baixar-e-usar/">Como baixar e usar o app</Link>
           <Link className={a} href="/favoritos/">Meus favoritos</Link>
         </nav>
         <nav aria-label="Ajuda e termos" className={col}>

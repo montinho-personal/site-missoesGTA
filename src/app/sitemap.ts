@@ -24,6 +24,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }
   }
   out.unshift({ url: abs("/"), lastModified: latest([...allDates]) });
-  for (const p of ["/app/", "/sobre/", "/metodologia/", "/radar/", "/ajuda/", "/enviar-descoberta/", "/contato/", "/privacidade/", "/termos/"]) out.push({ url: abs(p) });
+  for (const p of ["/app/", "/app/como-baixar-e-usar/", "/sobre/", "/metodologia/", "/radar/", "/ajuda/", "/enviar-descoberta/", "/contato/", "/privacidade/", "/termos/"]) out.push({ url: abs(p) });
   return out;
 }
