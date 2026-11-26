@@ -6,12 +6,13 @@ const isProd = process.env.NODE_ENV === "production";
 // o HTML estático. Ver docs/09-seguranca-privacidade.md.
 const csp = [
   "default-src 'self'",
-  `script-src 'self' 'unsafe-inline'${isProd ? "" : " 'unsafe-eval'"} https://www.googletagmanager.com`,
+  `script-src 'self' 'unsafe-inline'${isProd ? "" : " 'unsafe-eval'"} https://www.googletagmanager.com https://sdk.mercadopago.com https://*.mercadopago.com https://http2.mlstatic.com`,
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob: https:",
   "font-src 'self'",
-  "connect-src 'self' https://www.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com",
-  "frame-src https://www.youtube-nocookie.com",
+  // Mercado Pago: o formulário de cartão (Card Payment Brick) roda em iframes e scripts deles.
+  "connect-src 'self' https://www.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com https://*.mercadopago.com https://*.mercadolibre.com https://*.mercadolivre.com",
+  "frame-src https://www.youtube-nocookie.com https://*.mercadopago.com https://*.mercadolibre.com https://*.mercadolivre.com",
   "object-src 'none'",
   "base-uri 'self'",
   "form-action 'self' https://www.mercadopago.com.br https://sandbox.mercadopago.com.br",

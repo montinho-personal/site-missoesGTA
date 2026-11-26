@@ -88,6 +88,37 @@ export async function createPixPayment(order: { id: string; email: string; cents
   return { paymentId: String(data.id), qr: t.qr_code, qrB64: t.qr_code_base64, expiresAt: expires.toISOString() };
 }
 
+/** Chave pública do formulário de cartão. Não é segredo; sem ela, o cartão volta a usar a página do Mercado Pago. */
+export const cardPublicKey = () => process.env.MP_PUBLIC_KEY?.trim() || null;
+
+export interface CardData { token: string; payment_method_id: string; issuer_id?: string | number | null; installments: number; payer: { email: string; identification?: { type: string; number: string } } }
+
+/**
+ * Cobra um cartão já tokenizado pelo formulário do Mercado Pago (o número do cartão nunca chega aqui).
+ * O valor vem sempre do pedido guardado no banco, nunca do navegador.
+ */
+export async function createCardPayment(order: { id: string; cents: number }, card: CardData): Promise<MpPayment & { status_detail?: string }> {
+  const res = await fetch(`${API()}/v1/payments`, {
+    method: "POST",
+    headers: { Authorization: `Bearer ${process.env.MP_ACCESS_TOKEN}`, "Content-Type": "application/json", "X-Idempotency-Key": `card-${order.id}-${card.token.slice(0, 40)}` },
+    body: JSON.stringify({
+      transaction_amount: order.cents / 100,
+      description: "Missões Secretas GTA 6: acesso ao aplicativo",
+      token: card.token,
+      installments: card.installments,
+      payment_method_id: card.payment_method_id,
+      ...(card.issuer_id ? { issuer_id: Number(card.issuer_id) } : {}),
+      payer: card.payer,
+      external_reference: order.id,
+      notification_url: `${site.url}/api/mercadopago/webhook/`,
+      statement_descriptor: "MISSOESSECRETAS",
+    }),
+  });
+  const data = (await res.json().catch(() => null)) as (MpPayment & { status_detail?: string }) | null;
+  if (!res.ok || !data?.id) throw new Error(`Mercado Pago recusou o cartão (${res.status})`);
+  return data;
+}
+
 /**
  * Confere a assinatura do aviso, como manda a documentação do Mercado Pago:
  * cabeçalho x-signature "ts=...,v1=..." e HMAC-SHA256 de "id:<data.id>;request-id:<x-request-id>;ts:<ts>;".

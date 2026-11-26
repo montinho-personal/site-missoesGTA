@@ -73,7 +73,7 @@ const buySchema = z.object({ email: z.email("Digite um e-mail válido.").max(160
  * onde o QR Code aparece, sem login no Mercado Pago. Cartão: manda para a página do Mercado Pago.
  */
 export async function startCheckout(_prev: FormState, fd: FormData): Promise<FormState> {
-  const { saleConfig, createPreference, createPixPayment } = await import("./mercadopago");
+  const { saleConfig, createPreference, createPixPayment, cardPublicKey } = await import("./mercadopago");
   const { newOrderId } = await import("./licenses");
   const values = keep(fd);
   if (looksAutomated(fd)) return { ok: false, message: BOT, values };
@@ -87,6 +87,7 @@ export async function startCheckout(_prev: FormState, fd: FormData): Promise<For
   await q(`insert into orders (id, email, amount_cents) values ($1, $2, $3)`, [id, email, sale.cents]);
   const fail = { ok: false as const, message: "Não foi possível abrir o pagamento agora. Nada foi cobrado. Tente de novo em instantes.", values };
   if (parsed.data.metodo === "cartao") {
+    if (cardPublicKey()) redirect(`/app/cartao/?pedido=${id}`);
     let url: string;
     try { url = await createPreference({ id, email, cents: sale.cents }); } catch { return fail; }
     redirect(url);

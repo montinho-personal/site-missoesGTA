@@ -12,7 +12,7 @@ const { chromium } = createRequire(import.meta.url)("playwright");
 const PORT = 3300, FAKE = 3399, BASE = `http://localhost:${PORT}`, SECRET = "segredo-de-teste", ADMIN = "senha-de-teste-123";
 const results = []; const ok = (n, p, d = "") => { results.push(p); console.log(`${p ? "PASS" : "FAIL"}  ${n}${d ? "  — " + d : ""}`); };
 
-const pagamentos = new Map(); let preferencia = null; let pix = null; let pixCount = 0;
+const pagamentos = new Map(); let preferencia = null; let pix = null; let cartao = null; let pixCount = 0;
 const PNG = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==";
 const fake = http.createServer((req, res) => {
   let body = ""; req.on("data", (c) => (body += c)); req.on("end", () => {
@@ -20,6 +20,14 @@ const fake = http.createServer((req, res) => {
     if (req.method === "POST" && req.url === "/checkout/preferences") {
       preferencia = { ...JSON.parse(body), auth: req.headers.authorization };
       return res.end(JSON.stringify({ id: "pref-1", init_point: `${BASE}/app/acesso/?pedido=${preferencia.external_reference}` }));
+    }
+    if (req.method === "POST" && req.url === "/v1/payments" && JSON.parse(body).token) {
+      cartao = { ...JSON.parse(body), idem: req.headers["x-idempotency-key"] };
+      const id = String(440 + (++pixCount));
+      const recusado = cartao.token === "tok-recusado";
+      const pay = { id: Number(id), status: recusado ? "rejected" : "approved", status_detail: recusado ? "cc_rejected_insufficient_amount" : "accredited", external_reference: cartao.external_reference, transaction_amount: cartao.transaction_amount, currency_id: "BRL" };
+      pagamentos.set(id, pay);
+      return res.end(JSON.stringify(pay));
     }
     if (req.method === "POST" && req.url === "/v1/payments") {
       pix = { ...JSON.parse(body), auth: req.headers.authorization, idem: req.headers["x-idempotency-key"] };
@@ -33,7 +41,7 @@ const fake = http.createServer((req, res) => {
   });
 }).listen(FAKE);
 
-const env = { ...process.env, PORT: String(PORT), MP_API_BASE: `http://localhost:${FAKE}`, MP_ACCESS_TOKEN: "TEST-token", MP_WEBHOOK_SECRET: SECRET, ADMIN_PASSWORD: ADMIN, SESSION_SECRET: "0123456789abcdef0123456789abcdef", NEXT_PUBLIC_SITE_URL: BASE };
+const env = { ...process.env, PORT: String(PORT), MP_API_BASE: `http://localhost:${FAKE}`, MP_ACCESS_TOKEN: "TEST-token", MP_WEBHOOK_SECRET: SECRET, MP_PUBLIC_KEY: "TEST-pk", ADMIN_PASSWORD: ADMIN, SESSION_SECRET: "0123456789abcdef0123456789abcdef", NEXT_PUBLIC_SITE_URL: BASE };
 const server = spawn("npx", ["next", "start", "-p", String(PORT)], { env, stdio: "ignore" });
 const fim = (code) => { server.kill(); fake.close(); process.exit(code); };
 for (let i = 0; i < 40; i++) { try { if ((await fetch(BASE + "/robots.txt")).ok) break; } catch {} await new Promise((r) => setTimeout(r, 500)); }
@@ -86,9 +94,15 @@ try {
   await page.locator("#avise-me").getByRole("checkbox").check();
   await page.waitForTimeout(2600);
   await page.getByRole("button", { name: "Pagar com cartão" }).click();
-  await page.waitForURL(/\/app\/acesso\/\?pedido=/);
+  await page.waitForURL(/\/app\/cartao\/\?pedido=/, { waitUntil: "domcontentloaded" });
   const pedido = new URL(page.url()).searchParams.get("pedido");
-  ok("preferência criada com valor, referência e retorno corretos", preferencia?.items?.[0]?.unit_price === 19.9 && preferencia.external_reference === pedido && preferencia.notification_url.endsWith("/api/mercadopago/webhook/") && preferencia.auth === "Bearer TEST-token");
+  ok("cartão abre o formulário do Mercado Pago dentro do site", page.url().includes("/app/cartao/?pedido=") && (await page.locator("#card-brick").count()) === 1 && preferencia === null);
+  const cobra = (token, ped = pedido, extra = {}) => fetch(`${BASE}/api/mercadopago/cartao/`, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ pedido: ped, token, payment_method_id: "visa", issuer_id: "25", installments: 1, payer: { email: "comprador@example.com", identification: { type: "CPF", number: "19119119100" } }, transaction_amount: 0.01, ...extra }) }).then((r) => r.json());
+  const recusa = await cobra("tok-recusado");
+  ok("cartão recusado explica o motivo e não libera nada", recusa.ok === false && /limite insuficiente/i.test(recusa.message) && (await valida("MS6-0000-0000-0000")) === false);
+  ok("o valor cobrado vem do pedido, não do navegador", cartao?.transaction_amount === 19.9 && cartao.external_reference === pedido && cartao.token === "tok-recusado");
+  ok("dados de cartão incompletos são recusados", (await cobra("", pedido)).ok === false);
+  await page.goto(`${BASE}/app/acesso/?pedido=${pedido}`, { waitUntil: "load" });
   ok("antes do pagamento a página não mostra código", /Aguardando a confirmação/.test(await page.locator("main").innerText()) && !/MS6-/.test(await page.locator("main").innerText()));
 
   pagamentos.set("111", { id: 111, status: "approved", external_reference: pedido, transaction_amount: 19.9, currency_id: "BRL" });
@@ -129,6 +143,18 @@ try {
   pagamentos.set("111", { ...pagamentos.get("111"), status: "refunded" });
   await aviso("111");
   ok("estorno desativa o código da compra", (await valida(codigo)) === false);
+  // cartão aprovado em pedido novo: libera na hora, sem esperar o aviso
+  await page.goto(BASE + "/app/", { waitUntil: "load" });
+  await page.getByLabel("Seu e-mail").fill("cartao@example.com");
+  await page.locator("#avise-me").getByRole("checkbox").check();
+  await page.waitForTimeout(2600);
+  await page.getByRole("button", { name: "Pagar com cartão" }).click();
+  await page.waitForURL(/\/app\/cartao\/\?pedido=/, { waitUntil: "domcontentloaded" });
+  const pedidoCartao = new URL(page.url()).searchParams.get("pedido");
+  const aprovado = await cobra("tok-aprovado", pedidoCartao);
+  await page.goto(`${BASE}/app/acesso/?pedido=${pedidoCartao}`, { waitUntil: "load" });
+  const codigoCartao = /MS6-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}/.exec(await page.locator("main").innerText())?.[0];
+  ok("cartão aprovado libera o código na hora", aprovado.ok === true && Boolean(codigoCartao) && (await valida(codigoCartao)) === true, codigoCartao ?? "");
   await browser.close();
 } catch (e) { console.error(e); ok("execução sem exceção", false, String(e).slice(0, 200)); }
 console.log(`\n${results.filter(Boolean).length}/${results.length} verificações de pagamento passaram`);
