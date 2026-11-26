@@ -63,33 +63,29 @@ export const STORY_HOOK: Record<string, string> = {
 };
 
 /**
- * Mensagem de WhatsApp para quem ganhou um código de cortesia: link do app, como instalar
- * (os mesmos passos de /app/como-baixar-e-usar/) e o código. Com vagas, serve para divulgar a um grupo.
- * Sem endereço do app configurado no painel, manda para o passo a passo do site.
+ * Mensagem de WhatsApp para quem ganhou uma cortesia: um link que abre o app já liberado (ninguém digita código)
+ * e como deixar o ícone na tela. Com vagas, serve para divulgar a um grupo.
  */
-export function courtesyMessage(code: string, nome?: string | null, site = "", vagas?: number | null, appUrl?: string | null): string {
+export function courtesyMessage(code: string, nome?: string | null, site = "", vagas?: number | null, appUrl = "https://app.missoessecretasgta.com.br"): string {
   const grupo = Boolean(vagas && vagas > 1);
   const oi = nome ? `Fala, ${nome.split(" ")[0]}!` : grupo ? "Fala, galera!" : "Fala, parceiro!";
-  const guia = `${site}/app/como-baixar-e-usar/#instalar`;
+  const link = `${appUrl.replace(/\/$/, "")}/entrar?chave=${code.toUpperCase().replace(/[^A-Z0-9]/g, "")}`;
   return [
     grupo
-      ? `${oi} 🕵️ Liberei o app *Missões Secretas GTA 6* de graça para as primeiras ${vagas!.toLocaleString("pt-BR")} pessoas que usarem este código.`
+      ? `${oi} 🕵️ Liberei o app *Missões Secretas GTA 6* de graça para as primeiras ${vagas!.toLocaleString("pt-BR")} pessoas que abrirem este link.`
       : `${oi} 🕵️ Liberei pra você o acesso ao app *Missões Secretas GTA 6*, na faixa.`,
     "",
-    `🔑 ${grupo ? "Código" : "Seu código"}: *${code}*`,
+    "👉 *Toque aqui no celular e o app abre já liberado:*",
+    link,
     "",
-    "📲 *Como instalar (1 minuto, sem loja de aplicativos):*",
-    "",
-    appUrl ? `1. Abra este link no celular: ${appUrl}` : `1. Abra o passo a passo e toque no endereço do app: ${guia}`,
-    "",
-    "2. *Android (Chrome):* toque nos três pontinhos ⋮ lá em cima e em *Instalar app* (se não aparecer, *Adicionar à tela inicial*).",
+    "📲 *Para ficar com o ícone na tela (sem loja de aplicativos):*",
+    "*Android (Chrome):* toque nos três pontinhos ⋮ lá em cima e em *Instalar app* (se não aparecer, *Adicionar à tela inicial*).",
     "*Samsung Internet:* toque em ≡ embaixo, *Adicionar página a* e *Tela inicial*.",
     "*iPhone (use o Safari):* toque em *Compartilhar* (o quadrado com a seta ⬆️), role e toque em *Adicionar à Tela de Início*.",
     "",
-    "3. Abra o app pelo ícone novo na tela e digite o código.",
+    `Passo a passo com mais detalhes: ${site}/app/como-baixar-e-usar/#instalar`,
     "",
-    ...(appUrl ? [`Passo a passo com mais detalhes: ${guia}`, ""] : []),
-    `Lá dentro tem o arquivo inteiro: missões secretas, carros raros, dinheiro escondido e lugares que o GPS não mostra, com local e passo a passo. ${grupo ? "Quando acabarem as vagas, o código para de funcionar. Corre. 🏃" : "O código é só seu, não espalha. 😉"}`,
+    `Lá dentro tem o arquivo inteiro: missões secretas, carros raros, dinheiro escondido e lugares que o GPS não mostra, com local e passo a passo. ${grupo ? "Quando acabarem as vagas, o link para de funcionar. Corre. 🏃" : "O link é só seu, não espalha. 😉"}`,
   ].join("\n");
 }
 

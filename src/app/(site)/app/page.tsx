@@ -43,7 +43,7 @@ export default async function AppPage() {
   const selling = sale.enabled;
   const faq = [
   { q: "O aplicativo já está disponível?", a: appConfig.stage === "a_venda" ? "Sim. Veja acima as condições e a compatibilidade." : "Ainda não. Estamos preparando o lançamento. Deixe seu e-mail e avisamos quando sair." },
-  { q: "Vai ser pago?", a: sale.isLaunchPrice ? `Sim: ${sale.priceLabel}, pagamento único. É o preço de lançamento e pode subir no futuro; quem compra agora paga uma vez só.` : sale.enabled ? `Sim: ${sale.priceLabel}, pagamento único. Depois de pagar você recebe um código de acesso.` : "Sim, o aplicativo será pago. O preço ainda não foi definido e vai aparecer nesta página, junto com a política de reembolso, antes de qualquer cobrança. As fichas continuam abertas e gratuitas aqui no portal." },
+  { q: "Vai ser pago?", a: sale.isLaunchPrice ? `Sim: ${sale.priceLabel}, pagamento único. É o preço de lançamento e pode subir no futuro; quem compra agora paga uma vez só.` : sale.enabled ? `Sim: ${sale.priceLabel}, pagamento único. Depois de pagar, o app abre liberado na hora e a confirmação chega por e-mail.` : "Sim, o aplicativo será pago. O preço ainda não foi definido e vai aparecer nesta página, junto com a política de reembolso, antes de qualquer cobrança. As fichas continuam abertas e gratuitas aqui no portal." },
   { q: "É aplicativo de loja?", a: "Não. É um aplicativo web: abre pelo navegador do celular e pode ser instalado na tela de início, sem passar pela App Store nem pelo Google Play." },
   { q: "Em quais aparelhos vai funcionar?", a: "Em qualquer celular ou computador com navegador atual. Foi desenhado primeiro para o celular, com o console ligado ao lado." },
   { q: "Preciso do aplicativo para usar o portal?", a: "Não. As respostas continuam completas e gratuitas no portal. O aplicativo é para quem quer organização e acompanhamento durante o jogo." },
@@ -185,7 +185,7 @@ export default async function AppPage() {
             <div>
               <p className="label text-violet mb-3">{selling ? "Pronto para explorar?" : "Lista de aviso"}</p>
               <h2 id="h-avise" className="text-3xl sm:text-4xl font-extrabold">Seu próximo segredo está esperando para ser descoberto.</h2>
-              <p className="mt-3 text-fg-muted">{selling ? "Pague uma vez, receba seu código de acesso na hora e use no aplicativo." : "Deixe seu e-mail e a gente avisa no dia do lançamento. Um aviso só. Quem manda dez e-mails por semana é a seguradora."}</p>
+              <p className="mt-3 text-fg-muted">{selling ? "Pague uma vez e o app abre liberado na hora. A confirmação chega no seu e-mail, com o botão para abrir em até 3 celulares." : "Deixe seu e-mail e a gente avisa no dia do lançamento. Um aviso só. Quem manda dez e-mails por semana é a seguradora."}</p>
             </div>
             {selling ? <BuyForm priceLabel={sale.priceLabel!} /> : <WaitlistForm source="app_landing" />}
           </div>

@@ -6,6 +6,7 @@ import { q } from "./db";
 const ALFABETO = "ABCDEFGHJKMNPQRSTUVWXYZ23456789";
 const grupo = () => Array.from({ length: 4 }, () => ALFABETO[randomInt(ALFABETO.length)]).join("");
 export const newCode = () => `MS6-${grupo()}-${grupo()}-${grupo()}`;
+export const DEVICES_PER_PURCHASE = 3;
 export const newOrderId = () => randomBytes(16).toString("hex");
 /** Aceita o código com ou sem hífens, em qualquer caixa. */
 export const normalizeCode = (raw: string) => {
@@ -47,12 +48,13 @@ export async function createCourtesy(o: CourtesyOptions): Promise<{ batch: strin
 
 /** Chamado quando o pagamento é aprovado. Repetir a chamada devolve o mesmo código (o aviso do Mercado Pago chega mais de uma vez). */
 export async function licenseForPaidOrder(orderId: string, email: string): Promise<string> {
-  await q(`insert into licenses (code, email, origin, order_id) values ($1, $2, 'compra', $3) on conflict (order_id) do nothing`, [newCode(), email, orderId]);
+  // Uma compra vale para até 3 aparelhos (o mesmo aparelho vale sempre).
+  await q(`insert into licenses (code, email, origin, order_id, max_uses) values ($1, $2, 'compra', $3, ${DEVICES_PER_PURCHASE}) on conflict (order_id) do nothing`, [newCode(), email, orderId]);
   const [row] = await q<{ code: string }>(`select code from licenses where order_id = $1`, [orderId]);
   return row.code;
 }
 
-export type Validation = { valido: boolean; motivo?: "esgotado" | "aparelho" };
+export type Validation = { valido: boolean; motivo?: "inexistente" | "cancelado" | "esgotado" | "aparelho" };
 
 /**
  * Vale com ou sem hífen, em qualquer caixa. Código com vagas (max_uses) precisa do identificador do aparelho:
@@ -60,9 +62,10 @@ export type Validation = { valido: boolean; motivo?: "esgotado" | "aparelho" };
  */
 export async function checkCode(raw: string, device?: string | null): Promise<Validation> {
   const c = compactCode(raw);
-  if (c.length < 4 || c.length > 24) return { valido: false };
-  const [lic] = await q<{ code: string; max_uses: number | null }>(`select code, max_uses from licenses where regexp_replace(code, '[^A-Z0-9]', '', 'g') = $1 and status = 'ativa'`, [c]);
-  if (!lic) return { valido: false };
+  if (c.length < 4 || c.length > 24) return { valido: false, motivo: "inexistente" };
+  const [lic] = await q<{ code: string; max_uses: number | null; status: string }>(`select code, max_uses, status from licenses where regexp_replace(code, '[^A-Z0-9]', '', 'g') = $1`, [c]);
+  if (!lic) return { valido: false, motivo: "inexistente" };
+  if (lic.status !== "ativa") return { valido: false, motivo: "cancelado" };
   if (lic.max_uses) {
     const dev = (device ?? "").replace(/[^A-Za-z0-9_-]/g, "").slice(0, 64);
     if (dev.length < 8) return { valido: false, motivo: "aparelho" };

@@ -5,12 +5,14 @@ import { formatDate } from "@/lib/labels";
 import { courtesyMessage, whatsappLink } from "@/lib/share-copy";
 import { site } from "@/lib/site";
 import { CopyText } from "@/components/client";
+import { DEFAULT_APP_URL } from "@/server/access";
 
 export const metadata = { title: "Acessos e vendas" };
 
 export default async function Acessos({ searchParams }: { searchParams: Promise<Record<string, string | undefined>> }) {
   const sp = await searchParams;
-  const appUrl = (await q<{ value: string }>(`select value from settings where key = 'app_url'`))[0]?.value ?? null;
+  const savedAppUrl = (await q<{ value: string }>(`select value from settings where key = 'app_url'`))[0]?.value ?? null;
+  const appUrl = savedAppUrl ?? DEFAULT_APP_URL;
   const nome = sp.nome ?? "", tel = sp.tel ?? "", erro = sp.erro;
   const lote = sp.lote && /^[a-f0-9]{16}$/.test(sp.lote) ? await q<{ code: string; max_uses: number | null }>(`select code, max_uses from licenses where batch = $1 order by code`, [sp.lote]) : [];
   const novo = lote.length === 1 ? lote[0].code : null;
@@ -58,10 +60,10 @@ export default async function Acessos({ searchParams }: { searchParams: Promise<
 
       <section id="cortesia" className="card p-5">
         <h2 className="text-xl font-bold">Liberar acesso de graça (cortesia)</h2>
-        <p className="text-fg-muted mt-1 mb-4">Gera um código que você manda para a pessoa. Ela digita o código no aplicativo, sem pagar. Dá para escolher o nome do código ou deixar o sistema sortear.</p>
+        <p className="text-fg-muted mt-1 mb-4">Gera um link que abre o app já liberado, sem pagar e sem digitar nada. Dá para escolher o nome do código (aparece no fim do link) ou deixar o sistema sortear.</p>
         <form action={saveAppUrl} className="mb-5 flex flex-wrap items-end gap-3 rounded-lg border border-ink-600 p-3">
-          <div className="grow min-w-60"><label className="field-label" htmlFor="c-appurl">Endereço do aplicativo (vai nas mensagens)</label><input id="c-appurl" name="app_url" type="url" defaultValue={appUrl ?? ""} placeholder="https://app.missoessecretasgta.com.br" className="field" />
-            <span className="field-hint">{appUrl ? "As mensagens levam este link direto para o app." : "Ainda vazio: a mensagem manda para o passo a passo do site. Cole aqui o endereço quando o app for publicado."}</span></div>
+          <div className="grow min-w-60"><label className="field-label" htmlFor="c-appurl">Endereço do aplicativo (vai nas mensagens)</label><input id="c-appurl" name="app_url" type="url" defaultValue={savedAppUrl ?? ""} placeholder={DEFAULT_APP_URL} className="field" />
+            <span className="field-hint">Vazio usa {DEFAULT_APP_URL}. As mensagens e os e-mails levam um link que abre o app já liberado.</span></div>
           <button className="btn btn-ghost">Salvar endereço</button>
         </form>
         <form action={createCourtesyAction} className="grid gap-3 sm:grid-cols-2">

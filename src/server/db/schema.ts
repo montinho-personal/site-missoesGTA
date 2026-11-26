@@ -276,4 +276,12 @@ create table license_uses (
 );
 `,
   },
+  {
+    // Acesso entregue: quando o e-mail de confirmação saiu (vazio = compra paga sem acesso entregue).
+    id: "007_entrega_do_acesso",
+    sql: `
+alter table orders add column access_email_at timestamptz;
+alter table orders add column access_email_error text;
+`,
+  },
 ];

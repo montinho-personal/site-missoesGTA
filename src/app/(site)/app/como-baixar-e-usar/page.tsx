@@ -8,15 +8,15 @@ import { saleConfig } from "@/server/mercadopago";
 export const revalidate = 600;
 export const metadata = pageMeta({
   title: "Como baixar e usar o aplicativo Missões Secretas GTA 6",
-  description: "Passo a passo para comprar, instalar no Android, no iPhone e no computador, ativar o código de acesso e usar o mapa, a lista, a rota e o modo sem spoiler.",
+  description: "Passo a passo para comprar, instalar no Android, no iPhone e no computador, abrir o app liberado e usar o mapa, a lista, a rota e o modo sem spoiler.",
   path: "/app/como-baixar-e-usar/",
 });
 
 const toc = [
   ["antes", "Antes de começar"],
-  ["comprar", "1. Comprar e receber o código"],
+  ["comprar", "1. Comprar e abrir o app"],
   ["instalar", "2. Instalar no aparelho"],
-  ["ativar", "3. Ativar com o código"],
+  ["ativar", "3. Primeiro acesso"],
   ["usar", "4. Usar no dia a dia"],
   ["dicas", "Dicas de quem joga"],
   ["duvidas", "Dúvidas"],
@@ -49,8 +49,8 @@ const B = ({ children }: { children: React.ReactNode }) => <strong className="te
 
 const faq = [
   { q: "Preciso baixar na Play Store ou na App Store?", a: "Não. É um aplicativo web: você abre o endereço no navegador e adiciona à tela de início. Ele ganha ícone, abre em tela cheia e funciona como um aplicativo de loja, sem ocupar o espaço de um." },
-  { q: "Perdi o código de acesso. E agora?", a: "Volte ao endereço que apareceu depois do pagamento (ele continua mostrando o código) ou fale com a gente pelo contato, usando o e-mail da compra. Achamos o seu código pelo e-mail." },
-  { q: "Troquei de celular. Perco o acesso?", a: "Não. Instale de novo no aparelho novo e digite o mesmo código." },
+  { q: "Perdi o acesso ou apaguei o e-mail. E agora?", a: "No aplicativo, toque em “Já comprei” e digite o e-mail da compra: chega na hora um e-mail novo com o botão que abre o app liberado. Se não chegar, fale com a gente pelo contato." },
+  { q: "Troquei de celular. Perco o acesso?", a: "Não. Abra o e-mail de confirmação no celular novo e toque em “Abrir o app”, ou use “Já comprei” no aplicativo. Uma compra vale para até 3 aparelhos." },
   { q: "Funciona sem internet?", a: "A ideia é funcionar: depois do primeiro acesso com internet, o aplicativo guarda as fichas no aparelho para você consultar sem sinal. Essa parte ainda está em construção." },
   { q: "Ocupa muito espaço?", a: "Pouco. Um aplicativo web não instala um pacote grande: guarda só as fichas e o mapa do arquivo." },
   { q: "O aplicativo mexe no jogo ou no console?", a: "Não. É um guia de consulta: não é mod, não se conecta ao console e não altera nada no jogo." },
@@ -85,7 +85,7 @@ export default async function ComoBaixarEUsar() {
               {[
                 ["phone", "Um celular ou computador", "Com navegador atualizado: Chrome, Safari, Edge ou Samsung Internet."],
                 ["radar", "Internet no primeiro acesso", "Para instalar e baixar as fichas. Depois, a ideia é funcionar também sem sinal."],
-                ["file", "Seu código de acesso", "Ele aparece na tela logo depois do pagamento (formato MS6-XXXX-XXXX-XXXX)."],
+                ["file", "O e-mail da compra", "É para onde vai a confirmação com o botão que abre o app liberado. Nada de código para digitar."],
                 ["shield", "Nada de loja de aplicativos", "Não precisa de Play Store nem App Store, nem de conta Google ou Apple."],
               ].map(([ic, t, d]) => (
                 <li key={t} className="card p-4 flex gap-3"><span className="text-cyan shrink-0 mt-0.5"><Icon name={ic} size={22} /></span><div><p className="font-semibold">{t}</p><p className="text-sm text-fg-muted mt-0.5">{d}</p></div></li>
@@ -94,17 +94,17 @@ export default async function ComoBaixarEUsar() {
           </section>
 
           <section id="comprar" aria-labelledby="h-comprar" className="mt-14 scroll-mt-24">
-            <h2 id="h-comprar" className="text-2xl sm:text-3xl font-extrabold">1. Comprar e receber o código</h2>
+            <h2 id="h-comprar" className="text-2xl sm:text-3xl font-extrabold">1. Comprar e abrir o app</h2>
             <div className="mt-4">
               <Passos itens={[
                 <>Abra a <Link href="/app/" className="link">página do aplicativo</Link> e desça até o formulário de compra.</>,
-                <>Digite seu <B>e-mail</B>, aceite os termos e toque em <B>Comprar</B>. Use um e-mail que você lê: é por ele que a gente acha o seu código se você perder.</>,
-                <>Você vai para a página do <B>Mercado Pago</B>. Pague com <B>Pix</B> ou <B>cartão</B>. Nenhum dado de cartão passa pelo nosso site.</>,
-                <>Depois de pagar, você volta para a página <B>Seu acesso ao aplicativo</B>. Pix costuma confirmar em instantes; cartão pode levar alguns minutos. Se aparecer “Aguardando a confirmação”, espere um pouco e atualize a página.</>,
-                <>Com o pagamento confirmado, aparece o seu <B>código de acesso</B>. <B>Salve a página nos favoritos</B> e anote o código. É ele que libera o aplicativo.</>,
+                <>Digite seu <B>e-mail</B>, aceite os termos e toque em <B>Comprar</B>. Use um e-mail que você lê: a confirmação e o botão que abre o app vão para ele.</>,
+                <>No <B>Pix</B>, o QR Code e o “copia e cola” aparecem na própria página: pague pelo app do seu banco. No <B>cartão</B>, preencha os dados nos campos do Mercado Pago. Nenhum dado de cartão passa pelo nosso site.</>,
+                <>Pix costuma confirmar em segundos, e a página muda sozinha para <B>Pagamento confirmado</B>. Cartão aprovado vai direto para ela.</>,
+                <>Toque em <B>Abrir o app</B>: ele abre já liberado, sem digitar nada. Na mesma hora chega o <B>e-mail de confirmação</B>, com o mesmo botão, para usar em outro celular (até 3 aparelhos).</>,
               ]} />
             </div>
-            <p className="mt-3 text-sm text-fg-subtle">Ganhou um código de cortesia? Pule esta etapa e vá direto para a instalação.</p>
+            <p className="mt-3 text-sm text-fg-subtle">Ganhou uma cortesia? Toque no link que você recebeu: ele abre o app já liberado. Depois siga a instalação.</p>
           </section>
 
           <section id="instalar" aria-labelledby="h-instalar" className="mt-14 scroll-mt-24">
@@ -149,15 +149,15 @@ export default async function ComoBaixarEUsar() {
           </section>
 
           <section id="ativar" aria-labelledby="h-ativar" className="mt-14 scroll-mt-24">
-            <h2 id="h-ativar" className="text-2xl sm:text-3xl font-extrabold">3. Ativar com o código</h2>
+            <h2 id="h-ativar" className="text-2xl sm:text-3xl font-extrabold">3. Primeiro acesso</h2>
             <div className="mt-4">
               <Passos itens={[
                 <>Abra o aplicativo pelo ícone na tela de início.</>,
-                <>Na primeira vez, ele pede o <B>código de acesso</B>. Digite como está na página do seu código. Pode ser com ou sem os hífens, em maiúsculas ou minúsculas.</>,
+                <>Se ele pedir para entrar, toque em <B>Já comprei</B> e digite o e-mail da compra. Chega um e-mail com o botão <B>Abrir o app</B>: toque nele neste aparelho. Não tem código para digitar.</>,
                 <>Pronto. O aplicativo baixa as fichas e abre no <B>Início</B>.</>,
               ]} />
             </div>
-            <p className="mt-3 text-sm text-fg-subtle">Em construção: a tela que pede o código ainda está sendo feita no aplicativo. O código em si já funciona e já é conferido pelo nosso site.</p>
+            <p className="mt-3 text-sm text-fg-subtle">Em construção: a liberação automática e o “Já comprei” estão sendo feitos no aplicativo. A compra só abre quando esse caminho estiver funcionando de ponta a ponta.</p>
           </section>
 
           <section id="usar" aria-labelledby="h-usar" className="mt-14 scroll-mt-24">

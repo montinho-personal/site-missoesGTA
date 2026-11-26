@@ -24,7 +24,7 @@ export default async function Cartao({ searchParams }: { searchParams: Promise<R
       ) : (
         <div className="card p-5 sm:p-7">
           <p className="label text-violet">Acesso ao aplicativo · {price}</p>
-          <p className="mt-2 text-fg-muted">Preencha os dados do cartão nos campos abaixo. Eles são do próprio Mercado Pago: o número do cartão não passa por este site. Assim que o pagamento for aprovado, você vai direto para o seu código de acesso.</p>
+          <p className="mt-2 text-fg-muted">Preencha os dados do cartão nos campos abaixo. Eles são do próprio Mercado Pago: o número do cartão não passa por este site. Assim que o pagamento for aprovado, você vai direto para o app liberado.</p>
           <div className="mt-5"><CardBrick publicKey={key} pedido={pedido!} amount={order.amount_cents / 100} email={order.email} /></div>
           <p className="mt-5 text-sm text-fg-subtle">Prefere Pix? <Link className="link" href="/app/#avise-me">Volte e escolha o Pix</Link>: confirma em segundos.</p>
         </div>

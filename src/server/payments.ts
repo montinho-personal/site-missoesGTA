@@ -18,6 +18,9 @@ export async function applyPayment(pay: MpPayment): Promise<string> {
     if (pay.currency_id !== "BRL" || Math.round(pay.transaction_amount * 100) < order.amount_cents) return "valor divergente";
     await q(`update orders set status = 'pago', payment_id = $2, paid_at = coalesce(paid_at, now()) where id = $1`, [order.id, String(pay.id)]);
     await licenseForPaidOrder(order.id, order.email);
+    // E-mail de confirmação com o botão que abre o app liberado (uma vez só; falha fica visível no painel).
+    const { deliverAccess } = await import("./access");
+    await deliverAccess(order.id);
   } else if (pay.status === "refunded" || pay.status === "charged_back" || pay.status === "cancelled") {
     await q(`update orders set status = 'estornado', payment_id = $2 where id = $1 and status = 'pago'`, [order.id, String(pay.id)]);
     await q(`update licenses set status = 'revogada', revoked_at = now() where order_id = $1 and status = 'ativa'`, [order.id]);

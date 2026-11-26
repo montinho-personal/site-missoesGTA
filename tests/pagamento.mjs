@@ -12,11 +12,12 @@ const { chromium } = createRequire(import.meta.url)("playwright");
 const PORT = 3300, FAKE = 3399, BASE = `http://localhost:${PORT}`, SECRET = "segredo-de-teste", ADMIN = "senha-de-teste-123";
 const results = []; const ok = (n, p, d = "") => { results.push(p); console.log(`${p ? "PASS" : "FAIL"}  ${n}${d ? "  — " + d : ""}`); };
 
-const pagamentos = new Map(); let preferencia = null; let pix = null; let cartao = null; let pixCount = 0;
+const pagamentos = new Map(); let preferencia = null; let pix = null; let cartao = null; let pixCount = 0; const emails = [];
 const PNG = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==";
 const fake = http.createServer((req, res) => {
   let body = ""; req.on("data", (c) => (body += c)); req.on("end", () => {
     res.setHeader("Content-Type", "application/json");
+    if (req.method === "POST" && req.url === "/emails") { emails.push({ ...JSON.parse(body), auth: req.headers.authorization }); return res.end(JSON.stringify({ id: "email-" + emails.length })); }
     if (req.method === "POST" && req.url === "/checkout/preferences") {
       preferencia = { ...JSON.parse(body), auth: req.headers.authorization };
       return res.end(JSON.stringify({ id: "pref-1", init_point: `${BASE}/app/acesso/?pedido=${preferencia.external_reference}` }));
@@ -41,7 +42,7 @@ const fake = http.createServer((req, res) => {
   });
 }).listen(FAKE);
 
-const env = { ...process.env, PORT: String(PORT), MP_API_BASE: `http://localhost:${FAKE}`, MP_ACCESS_TOKEN: "TEST-token", MP_WEBHOOK_SECRET: SECRET, MP_PUBLIC_KEY: "TEST-pk", ADMIN_PASSWORD: ADMIN, SESSION_SECRET: "0123456789abcdef0123456789abcdef", NEXT_PUBLIC_SITE_URL: BASE };
+const env = { ...process.env, PORT: String(PORT), MP_API_BASE: `http://localhost:${FAKE}`, MP_ACCESS_TOKEN: "TEST-token", MP_WEBHOOK_SECRET: SECRET, MP_PUBLIC_KEY: "TEST-pk", RESEND_API_KEY: "re_teste", RESEND_API_BASE: `http://localhost:${FAKE}`, APP_SITE_KEY: "chave-app-teste", ADMIN_PASSWORD: ADMIN, SESSION_SECRET: "0123456789abcdef0123456789abcdef", NEXT_PUBLIC_SITE_URL: BASE };
 const server = spawn("npx", ["next", "start", "-p", String(PORT)], { env, stdio: "ignore" });
 const fim = (code) => { server.kill(); fake.close(); process.exit(code); };
 for (let i = 0; i < 40; i++) { try { if ((await fetch(BASE + "/robots.txt")).ok) break; } catch {} await new Promise((r) => setTimeout(r, 500)); }
@@ -53,7 +54,9 @@ const aviso = (id, { assinatura = true } = {}) => {
 };
 let page;
 const gera = async () => { const antes = page.url(); await page.getByRole("button", { name: "Gerar código" }).click(); await page.waitForURL((u) => u.toString() !== antes && /lote=|erro=/.test(u.toString())); };
-const valida = async (codigo) => (await (await fetch(`${BASE}/api/acesso/validar/`, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ codigo }) })).json()).valido;
+const valida = async (codigo) => (await (await fetch(`${BASE}/api/acesso/validar/`, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ codigo, aparelho: "aparelho-teste-01" }) })).json()).valido;
+const confere = (chave, aparelho, key = "chave-app-teste") => fetch(`${BASE}/api/acesso/conferir/`, { method: "POST", headers: { "content-type": "application/json", ...(key ? { authorization: `Bearer ${key}` } : {}) }, body: JSON.stringify({ chave, aparelho }) });
+const compacto = (c) => c.replace(/[^A-Z0-9]/gi, "").toUpperCase();
 
 try {
   const browser = await chromium.launch();
@@ -79,7 +82,8 @@ try {
   await page.getByRole("button", { name: "Salvar preço" }).click();
   await page.waitForSelector("text=Venda aberta: R$");
   ok("dono troca o preço no painel e a página acompanha", true);
-  await page.goto(BASE + "/app/", { waitUntil: "networkidle" });
+  // A página do app é atualizada em segundo plano depois da troca de preço: espera a versão nova.
+  for (let i = 0; i < 10; i++) { await page.goto(BASE + "/app/", { waitUntil: "load" }); if (await page.getByRole("button", { name: /Comprar por R\$\s19,90 no Pix/ }).count()) break; await page.waitForTimeout(700); }
   ok("página do app mostra o preço configurado", /R\$\s19,90/.test(await page.locator("main").innerText()));
   ok("botão de compra no lugar da lista de aviso", (await page.getByRole("button", { name: /Comprar por/ }).count()) === 1);
 
@@ -98,6 +102,22 @@ try {
   await page.waitForFunction(() => /MS6-/.test(document.querySelector("main")?.innerText ?? ""), null, { timeout: 15000 }).catch(() => {});
   const codigoPix = /MS6-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}/.exec(await page.locator("main").innerText())?.[0];
   ok("Pix pago: a página se atualiza sozinha e mostra o código, mesmo sem o aviso", Boolean(codigoPix) && (await valida(codigoPix)) === true, codigoPix ?? "");
+  const abrir = await page.getByRole("link", { name: "Abrir o app" }).getAttribute("href");
+  ok("tela de obrigado tem o botão que abre o app já liberado", abrir === `https://app.missoessecretasgta.com.br/entrar?chave=${compacto(codigoPix)}` && /Seu acesso está liberado/.test(await page.locator("main").innerText()), abrir);
+  const conf = emails.find((e) => e.to[0] === "pix@example.com");
+  ok("e-mail de confirmação sai uma vez, com valor e o mesmo botão", Boolean(conf) && /Compra confirmada/.test(conf.subject) && conf.html.includes(abrir) && /R\$\s19,90/.test(conf.html) && conf.auth === "Bearer re_teste" && emails.filter((e) => e.to[0] === "pix@example.com").length === 1);
+  await page.reload({ waitUntil: "load" });
+  ok("recarregar não manda o e-mail de novo", emails.filter((e) => e.to[0] === "pix@example.com").length === 1 && /Mandamos a confirmação para pi•••@example.com/.test(await page.locator("main").innerText()));
+  ok("conferência do app exige a chave entre servidores", (await confere(codigoPix, "cel-1-aaaaaaaa", "")).status === 401 && (await confere(codigoPix, "cel-1-aaaaaaaa", "errada")).status === 401);
+  const c = async (ap) => (await confere(compacto(codigoPix), ap)).json();
+  // o 1º celular já entrou acima (aparelho-teste-01); mais 2 cabem, o 4º não
+  const [d2, d3, d4, d2b] = [await c("cel-2-bbbbbbbb"), await c("cel-3-cccccccc"), await c("cel-4-dddddddd"), await c("cel-2-bbbbbbbb")];
+  ok("uma compra vale para até 3 celulares (o 4º é recusado, quem entrou continua)", d2.valido && d3.valido && d4.valido === false && d4.motivo === "esgotado" && d2b.valido, JSON.stringify([d2, d3, d4, d2b]));
+  ok("chave que não existe responde 'inexistente', sem nenhum dado", JSON.stringify(await (await confere("MS6ZZZZZZZZZZZZ", "cel-1-aaaaaaaa")).json()) === '{"valido":false,"motivo":"inexistente"}');
+  const link = async (email) => (await fetch(`${BASE}/api/acesso/enviar-link/`, { method: "POST", headers: { "content-type": "application/json", origin: "https://app.missoessecretasgta.com.br" }, body: JSON.stringify({ email }) }));
+  const antes = emails.length;
+  const r1 = await link("PIX@example.com"), r2 = await link("ninguem@example.com");
+  ok("'Já comprei' manda o link só para quem comprou, com a mesma resposta para todos", (await r1.json()).ok && (await r2.json()).ok && emails.length === antes + 1 && emails.at(-1).to[0] === "pix@example.com" && emails.at(-1).html.includes(abrir) && r1.headers.get("access-control-allow-origin") === "https://app.missoessecretasgta.com.br");
 
   // Cartão: página do Mercado Pago (Checkout Pro) e liberação pelo aviso
   await page.goto(BASE + "/app/", { waitUntil: "load" });
@@ -152,9 +172,9 @@ try {
   const cortesia = (await page.locator("#cortesia [role=status] strong").first().innerText()).trim();
   ok("cortesia gera código que vale sem pagamento", (await valida(cortesia)) === true, cortesia);
   const zap = await page.getByRole("link", { name: /Enviar no WhatsApp para João/ }).getAttribute("href");
-  ok("mensagem pronta para o WhatsApp, já com o número e o código", zap.startsWith("https://wa.me/5511987654321?text=") && decodeURIComponent(zap).includes(cortesia) && decodeURIComponent(zap).includes("Fala, João!") && (await page.locator("#c-msg").inputValue()).includes("/app/como-baixar-e-usar/#instalar"));
+  ok("mensagem pronta para o WhatsApp, já com o número e o código", zap.startsWith("https://wa.me/5511987654321?text=") && decodeURIComponent(zap).includes(compacto(cortesia)) && decodeURIComponent(zap).includes("Fala, João!") && (await page.locator("#c-msg").inputValue()).includes("/app/como-baixar-e-usar/#instalar"));
   const msgZap = await page.locator("#c-msg").inputValue();
-  ok("mensagem leva o link do app e ensina a instalar no Android e no iPhone", msgZap.includes("1. Abra este link no celular: https://app.exemplo.com.br") && msgZap.includes("*Instalar app*") && msgZap.includes("*Adicionar à Tela de Início*") && msgZap.includes(`*${cortesia}*`));
+  ok("mensagem leva o link que abre o app liberado e ensina a instalar", msgZap.includes(`https://app.exemplo.com.br/entrar?chave=${compacto(cortesia)}`) && msgZap.includes("*Instalar app*") && msgZap.includes("*Adicionar à Tela de Início*") && !/digite o código/i.test(msgZap));
   await page.getByLabel("Nome de quem recebe").fill("Nina");
   await page.getByLabel(/WhatsApp da pessoa/).fill("");
   await page.getByLabel(/Nome do código/).fill("nina vip");
@@ -186,6 +206,7 @@ try {
   pagamentos.set("111", { ...pagamentos.get("111"), status: "refunded" });
   await aviso("111");
   ok("estorno desativa o código da compra", (await valida(codigo)) === false);
+  ok("depois do estorno, o app recebe 'cancelado'", (await (await confere(codigo, "aparelho-teste-01")).json()).motivo === "cancelado");
   // cartão aprovado em pedido novo: libera na hora, sem esperar o aviso
   await page.goto(BASE + "/app/", { waitUntil: "load" });
   await page.getByLabel("Seu e-mail").fill("cartao@example.com");

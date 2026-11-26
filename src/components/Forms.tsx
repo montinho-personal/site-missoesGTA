@@ -108,7 +108,7 @@ export function BuyForm({ priceLabel }: { priceLabel: string }) {
       <div>
         <label className="field-label" htmlFor="b-email">Seu e-mail</label>
         <input className="field" id="b-email" name="email" type="email" required autoComplete="email" placeholder="voce@exemplo.com" defaultValue={state?.values?.email} aria-describedby="b-hint" />
-        <span id="b-hint" className="field-hint">Fica ligado ao seu código de acesso, para a gente conseguir te ajudar se você perder.</span>
+        <span id="b-hint" className="field-hint">É para onde vai a confirmação da compra, com o botão que abre o app liberado.</span>
       </div>
       <label className="flex items-start gap-3 cursor-pointer"><input type="checkbox" name="consent" required defaultChecked={state?.values?.consent === "on"} className="mt-1 size-5 accent-[#a98bff]" />
         <span className="text-sm text-fg-muted">Li e aceito os <Link href="/termos/" className="link">termos de uso</Link> e a <Link href="/privacidade/" className="link">política de privacidade</Link>. Sei que posso desistir da compra em até 7 dias.</span></label>
