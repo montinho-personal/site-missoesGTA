@@ -4,6 +4,8 @@
 export type FeatureStatus = "disponivel" | "em_desenvolvimento" | "planejado";
 
 export const appConfig = {
+  // Decisão do fundador em 26/11/2026: o aplicativo é inteiro pago, e o dono pode liberar acesso de graça (cortesia).
+  // Falta definir preço, meio de pagamento e como a cortesia é concedida (docs/13).
   /** "pre_lancamento" = lista de espera; "a_venda" = CTA de compra */
   stage: "pre_lancamento" as "pre_lancamento" | "a_venda",
   name: "Missões Secretas GTA 6" as string | null,

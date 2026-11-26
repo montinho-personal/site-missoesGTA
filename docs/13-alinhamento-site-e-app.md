@@ -43,7 +43,19 @@ O aplicativo guarda o capítulo de cada ficha. O site derivou o nível assim: ca
 - **(b) Aplicativo aberto, com um extra pago:** as fichas ficam gratuitas, e paga-se por recursos a mais (por exemplo, progresso sincronizado em conta, rotas, avisos).
 - **(c) Aplicativo gratuito:** o site só divulga e leva as pessoas até ele.
 
-A equipe do aplicativo recomendou (b) ou (c). Concordo, e prefiro a (b): a (a) fecha o conteúdo que traz gente pela busca e é a de maior risco com a marca.
+A equipe do aplicativo recomendou (b) ou (c), e eu também.
+
+**Decisão do fundador, em 26/11/2026: opção (a), aplicativo inteiro pago, com a possibilidade de o dono liberar acesso de graça (cortesia).**
+
+O que essa decisão implica:
+
+- **Divisão de papéis:** o site é a porta aberta (fichas gratuitas, achadas pela busca); o aplicativo é o produto pago (mapa, progresso, rota, uso com o console ao lado). As "páginas públicas" previstas na especificação do aplicativo passam a ser papel do site.
+- **Controle de acesso no aplicativo:** exige conta ou código de acesso, o que antecipa parte da Fase 7 (conta) do aplicativo.
+- **Cortesia:** o dono precisa de uma tela para liberar acesso sem pagamento (por e-mail ou por código), com registro de quem recebeu e quando.
+- **Venda:** preço, meio de pagamento, nota fiscal e reembolso (o Código de Defesa do Consumidor dá 7 dias de arrependimento em compra pela internet).
+- **Risco de marca:** cobrar por um guia com o nome do jogo aumenta a chance de pedido de retirada. Vale a consulta jurídica antes de abrir a venda.
+
+Ainda falta decidir: preço e modelo (pagamento único ou assinatura), meio de pagamento, e como a cortesia é concedida.
 
 ## Recado para a sessão que cuida do aplicativo
 

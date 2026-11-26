@@ -26,7 +26,7 @@ const compare = [
 
 const faq = [
   { q: "O aplicativo já está disponível?", a: appConfig.stage === "a_venda" ? "Sim. Veja acima as condições e a compatibilidade." : "Ainda não. Estamos preparando o lançamento. Deixe seu e-mail e avisamos quando sair." },
-  { q: "Vai ser pago?", a: appConfig.price ? "O preço está indicado nesta página." : "Ainda não está decidido. O que já está decidido: as fichas continuam abertas e gratuitas aqui no portal. Se houver algo pago no aplicativo, o preço e a política de reembolso aparecem nesta página antes de qualquer cobrança." },
+  { q: "Vai ser pago?", a: appConfig.price ? "Sim, e o preço está indicado nesta página." : "Sim, o aplicativo será pago. O preço ainda não foi definido e vai aparecer nesta página, junto com a política de reembolso, antes de qualquer cobrança. As fichas continuam abertas e gratuitas aqui no portal." },
   { q: "É aplicativo de loja?", a: "Não. É um aplicativo web: abre pelo navegador do celular e pode ser instalado na tela de início, sem passar pela App Store nem pelo Google Play." },
   { q: "Em quais aparelhos vai funcionar?", a: "Em qualquer celular ou computador com navegador atual. Foi desenhado primeiro para o celular, com o console ligado ao lado." },
   { q: "Preciso do aplicativo para usar o portal?", a: "Não. As respostas continuam completas e gratuitas no portal. O aplicativo é para quem quer organização e acompanhamento durante o jogo." },
@@ -127,7 +127,7 @@ export default function AppPage() {
         </section>
 
         <section className="pt-16 sm:pt-24 grid gap-4 md:grid-cols-3" aria-label="Condições">
-          <div className="card p-5"><p className="label text-fg-subtle mb-2">Preço</p><p>{appConfig.price ? new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(appConfig.price.amount) : <span className="text-fg-muted">Ainda não decidido. As fichas seguem gratuitas no portal.</span>}</p></div>
+          <div className="card p-5"><p className="label text-fg-subtle mb-2">Preço</p><p>{appConfig.price ? new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(appConfig.price.amount) : <span className="text-fg-muted">O aplicativo será pago. Valor a definir; as fichas seguem gratuitas no portal.</span>}</p></div>
           <div className="card p-5"><p className="label text-fg-subtle mb-2">Compatibilidade</p><p>{appConfig.platforms ? appConfig.platforms.join(", ") + "." : <span className="text-fg-muted">A anunciar.</span>}</p></div>
           <div className="card p-5"><p className="label text-fg-subtle mb-2">Reembolso e suporte</p><p className="text-fg-muted">{appConfig.refundPolicy ?? "A política de cancelamento e reembolso será publicada junto com o preço."} {!appConfig.supportContact && <>Enquanto isso, fale com a gente pelo <Link className="link" href="/contato/">contato</Link>.</>}</p></div>
         </section>

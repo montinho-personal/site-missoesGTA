@@ -83,4 +83,4 @@ Data: 25/11/2026. Tudo aqui parte do que foi verificado no ambiente e em pesquis
 | 5 | **Quem testa no jogo.** | Sem teste humano, nada vira "Confirmado". | Painel com campos de plataforma, versão e data. |
 | 6 | **Responsável legal e canal de contato** para a política de privacidade (LGPD). | Identificação do controlador. | Textos-base em `/privacidade/` e `/termos/`, a revisar por advogado. |
 | 7 | **Política de imagens** (capturas próprias do jogo). | Uso de material de terceiro. | Site funciona sem nenhuma imagem do jogo; campo de mídia com crédito e texto alternativo no painel. |
-| 8 | **Modelo de preço do app.** | Comercial. | Insumo: nas lojas o padrão é grátis; preços visíveis de R$ 6,90 (pago único) a R$ 19,99–64,99 (compras internas). Hipótese: núcleo grátis + desbloqueio único abaixo de R$ 30. |
+| 8 | **Modelo de preço do app.** Decidido em 26/11: aplicativo inteiro pago, com cortesia liberada pelo dono. Falta o valor e o meio de pagamento. | Comercial. | Insumo: nas lojas o padrão é grátis; preços visíveis de R$ 6,90 (pago único) a R$ 19,99–64,99 (compras internas). Hipótese: núcleo grátis + desbloqueio único abaixo de R$ 30. |
