@@ -14,14 +14,14 @@ export function AppQuickPitch({ entry, nearby, sameRegion, total, sale }: { entr
   if (videos > 0) steps.push({ icon: "eye", title: videos === 1 ? "Assista ao vídeo de quem já fez" : `Assista aos ${videos} vídeos de quem já fez`, text: "Dentro da própria ficha, com o controle na mão." });
   steps.push({ icon: "check", title: "Siga o passo a passo e marque cada etapa", text: "O app lembra onde você parou e o que já achou." });
   const near = nearby > 0 ? nearby : sameRegion;
-  if (near > 0) steps.push({ icon: "compass", title: `Aproveite a viagem: mais ${near} ${near === 1 ? "segredo" : "segredos"} ${nearby > 0 ? "a até 2 km" : `em ${entry.region_name ?? "na região"}`}`, text: "Todos no mesmo mapa, para montar a rota." });
+  if (near > 0) steps.push({ icon: "compass", title: `Aproveita o rolê: mais ${near} ${near === 1 ? "segredo" : "segredos"} ${nearby > 0 ? "a até 2 km" : `em ${entry.region_name ?? "na região"}`}`, text: "Todos no mesmo mapa, para montar a rota." });
   const shown = steps.slice(0, 3);
   const price = sale.priceLabel ?? "R$ 4,20";
   return (
     <aside data-app-cta aria-labelledby="h-quick" className="card overflow-hidden border-violet/50 max-w-3xl no-print bg-gradient-to-br from-violet-strong/25 via-ink-800 to-ink-800">
       <div className="p-5 sm:p-6">
         <p className="label text-violet inline-flex items-center gap-2"><Icon name="phone" size={15} />No aplicativo · {price}, pagamento único</p>
-        <h2 id="h-quick" className="mt-2 font-display text-xl sm:text-2xl font-extrabold leading-tight">Faça esta em {shown.length} passos, sem errar o caminho</h2>
+        <h2 id="h-quick" className="mt-2 font-display text-xl sm:text-2xl font-extrabold leading-tight">Mete o loko nesta em {shown.length} passos, sem errar o caminho</h2>
         <ol className="mt-4 flex flex-col gap-3">
           {shown.map((s, i) => (
             <li key={s.title} className="flex gap-3">

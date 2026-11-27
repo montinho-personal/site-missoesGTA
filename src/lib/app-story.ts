@@ -8,20 +8,24 @@ export const appStory = {
   /** A assinatura. Vai em toda chamada principal. */
   tagline: "O segredo a gente revela. A aventura é você quem vive.",
   taglineShort: "O segredo a gente revela. A aventura é sua.",
+  /** Quantos segredos o app tem hoje (dito pelo Montinho em 27/11/2026). Mudou no app? Troque só aqui e nas chamadas (migração 012). */
+  secrets: 128,
+  /** O gancho, na língua da rua (decisão do Montinho em 27/11/2026: gíria, sátira e humor em toda chamada do app). */
+  hook: "128 segredos pra meter o loko.",
   /** O que o app é, em uma frase. */
-  promise: "Seu comparsa de bolso: segredos, localizações, orientações e vídeos de quem já fez.",
+  promise: "Seu comparsa de bolso: 128 segredos pra meter o loko, com o mapa, o passo a passo e o vídeo de quem já fez.",
   /** O manifesto, em parágrafos curtos (página do app). */
   manifesto: [
-    "Desde moleque a gente sabe: GTA nunca foi só seguir a seta amarela.",
-    "É liberdade. Adrenalina. Fazer o que ninguém esperava. Viver uma história que nenhum outro jogador viveu do mesmo jeito.",
-    "Agora pensa em quanta aventura você está deixando para trás só por não saber que ela existe. Carro raro. Dinheiro escondido. Lugar secreto. Missão que o jogo não te mostra.",
+    "Desde moleque a gente tá ligado: GTA nunca foi só seguir a seta amarela.",
+    "É liberdade. Adrenalina. Meter o loko quando ninguém espera. Viver um rolê que nenhum outro jogador viveu do mesmo jeito.",
+    "Agora pensa em quanto rolê você tá deixando passar batido só por não saber que ele existe. Carro raro. Grana escondida. Lugar secreto. Missão que o jogo não te mostra.",
     "Foi por isso que nasceu o Missões Secretas GTA 6.",
   ],
   /** O contraste: saber onde não é a mesma coisa que conseguir. */
   contrast: [
-    "Mas saber onde está o dinheiro não quer dizer que você vai escapar com ele.",
-    "Saber onde está o carro não quer dizer que a polícia vai facilitar a sua fuga.",
-    "Porque em GTA nenhuma aventura se repete.",
+    "Mas saber onde tá a grana não quer dizer que você vai sair vazado com ela.",
+    "Saber onde tá o carro não quer dizer que os homi vão facilitar a sua fuga.",
+    "Porque em GTA nenhum rolê se repete, parça.",
   ],
   /** O preço e a piada. */
   price: "R$ 4,20. Pagamento único. Sem mensalidade.",

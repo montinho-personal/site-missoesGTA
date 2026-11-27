@@ -151,9 +151,9 @@ export default async function Home() {
         <div className="card overflow-hidden border-violet/40">
           <div className="grid md:grid-cols-[1.1fr_1fr]">
             <div className="p-6 sm:p-10">
-              <p className="label text-violet mb-3">Seu comparsa de bolso</p>
+              <p className="label text-violet mb-3">128 segredos pra meter o loko</p>
               <h2 id="h-app" className="text-3xl sm:text-4xl font-extrabold">O segredo a gente revela. A aventura é você quem vive.</h2>
-              <p className="mt-4 text-fg-muted">Seu comparsa de bolso: segredos, localizações, orientações e vídeos de quem já fez. Saber onde está o dinheiro não garante que você escapa com ele, e é aí que começa a graça. R$ 4,20, uma vez só.</p>
+              <p className="mt-4 text-fg-muted">Seu comparsa de bolso: o mapa, o passo a passo e o vídeo de quem já fez. Saber onde tá a grana não garante que você sai vazado com ela, e é aí que começa a graça. R$ 4,20, uma vez só. Sim, 4,20.</p>
               <ul className="mt-5 flex flex-col gap-2.5">
                 {appConfig.features.slice(0, 3).map((f) => (
                   <li key={f.key} className="flex gap-3"><Icon name="check" size={20} className="text-violet shrink-0 mt-1" /><span><strong className="font-semibold">{f.title}.</strong> <span className="text-fg-muted">{f.text}</span></span></li>

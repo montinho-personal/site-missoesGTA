@@ -14,7 +14,7 @@ import { abs, site } from "@/lib/site";
 import { appStory } from "@/lib/app-story";
 
 export const metadata = pageMeta({
-  title: "App de segredos de GTA 6: o arquivo inteiro no bolso",
+  title: "App de segredos de GTA 6: 128 segredos pra meter o loko",
   description: "App para explorar GTA 6 a fundo: descobertas por região, checklist do que você já achou e controle de spoiler. Revisado todo dia. Veja o que já existe.",
   path: "/app/",
 });
@@ -71,9 +71,9 @@ export default async function AppPage() {
           <Breadcrumbs items={crumbs} />
           <div className="mt-8 grid gap-10 md:grid-cols-[1.2fr_1fr] md:items-center">
             <div>
-              <p className="label text-violet mb-4">Seu comparsa de bolso</p>
+              <p className="label text-violet mb-4">128 segredos pra meter o loko</p>
               <h1 className="text-[2.3rem] leading-[1.05] sm:text-6xl font-black">O segredo a gente revela. A aventura é você quem vive.</h1>
-              <p className="mt-5 text-lg sm:text-xl text-fg-muted max-w-xl">Carros raros, dinheiro escondido, lugares secretos e missões que o jogo não te mostra. No seu bolso, com a localização, o passo a passo e os vídeos de quem já fez.</p>
+              <p className="mt-5 text-lg sm:text-xl text-fg-muted max-w-xl">Carro raro, grana escondida, lugar secreto e missão que o jogo não te mostra. Seu comparsa de bolso entrega a localização, o passo a passo e o vídeo de quem já fez. O resto é contigo, mano.</p>
               <div className="mt-7 flex flex-wrap gap-3">{primaryCta}<Link href="/app/como-baixar-e-usar/" className="btn btn-ghost">Como baixar e usar</Link></div>
               <p className="mt-5 inline-flex flex-wrap items-baseline gap-x-2.5 gap-y-1 rounded-xl border border-gold/50 bg-ink-950/60 px-4 py-2.5">
                 <span className="font-display text-3xl font-black text-gold">{sale.priceLabel}</span>

@@ -145,7 +145,7 @@ for (const [w, hh] of [[360, 740], [390, 844], [768, 1024], [1280, 800]]) {
   const bar = page.locator("[role=region][aria-label=Aplicativo]");
   ok("barra do app escondida no topo da página", (await bar.getAttribute("aria-hidden")) === "true");
   await page.mouse.wheel(0, 900); await page.waitForTimeout(500);
-  ok("barra do app sobe depois de rolar, com o texto da categoria", (await bar.getAttribute("aria-hidden")) === "false" && /metade do assalto/.test(await bar.innerText()));
+  ok("barra do app sobe depois de rolar, com o texto da categoria", (await bar.getAttribute("aria-hidden")) === "false" && /meio assalto/.test(await bar.innerText()));
   await bar.getByRole("button", { name: /Fechar a chamada/ }).click();
   await page.waitForTimeout(400);
   await page.goto(BASE + "/gta-6/veiculos/", { waitUntil: "networkidle" }); await page.mouse.wheel(0, 900); await page.waitForTimeout(500);
