@@ -133,7 +133,7 @@ for (const [w, hh] of [[360, 740], [390, 844], [768, 1024], [1280, 800]]) {
   ok("menu fecha com Esc", !(await page.locator("dialog[aria-label=Menu]").evaluate((d) => d.open)));
 
   // compartilhamento na ficha
-  await page.goto(BASE + ENTRY, { waitUntil: "networkidle" });
+  await page.goto(BASE + ENTRY, { waitUntil: "load" }); await page.locator("#h-compartilhar").waitFor();
   const wa = await page.locator("a[href^='https://wa.me/']").first().getAttribute("href");
   const waText = decodeURIComponent(wa.split("text=")[1]);
   ok("WhatsApp abre com mensagem pronta, título e link rastreável", /Skunk Ape/.test(waText) && /utm_source=whatsapp/.test(waText) && /utm_campaign=ficha_easter-eggs/.test(waText));
