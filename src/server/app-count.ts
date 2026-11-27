@@ -4,16 +4,17 @@ import { q } from "./db";
 import { appUrl } from "./access";
 
 /**
- * Quantos segredos o aplicativo mostra hoje. Mesma conta do app (resumoDoGuia): toda ficha menos as desmentidas.
- * Lê a cópia publicada do app (/dados/v1/segredos.json), guardada por 1 hora. Se o app não responder,
+ * Quantos segredos o aplicativo mostra hoje: o mesmo total que o app exibe.
+ * Lê o índice da cópia publicada do app (/dados/v1/indice.json, campo "fichas"), guardado por 1 hora. Se o app não responder,
  * usa as fichas do app já importadas no site. Sem nenhum dos dois, devolve null e o texto sai sem número.
  */
 export const appSecretCount = cache(async (): Promise<number | null> => {
   try {
-    const r = await fetch(`${await appUrl()}/dados/v1/segredos.json`, { next: { revalidate: 3600 }, signal: AbortSignal.timeout(4000) });
+    // O índice da cópia publicada já traz o total que o app mostra ("fichas").
+    const r = await fetch(`${await appUrl()}/dados/v1/indice.json`, { next: { revalidate: 3600 }, signal: AbortSignal.timeout(4000) });
     if (r.ok) {
-      const lista = (await r.json()) as { selo?: string }[];
-      if (Array.isArray(lista) && lista.length > 0) return lista.filter((f) => f.selo !== "X").length;
+      const n = Number(((await r.json()) as { fichas?: unknown }).fichas);
+      if (Number.isInteger(n) && n > 0) return n;
     }
   } catch { /* cai na reserva */ }
   try {

@@ -351,4 +351,11 @@ update ctas set eyebrow = 'Seu comparsa de bolso', headline = 'Tem coisa em Leon
 update ctas set eyebrow = '{n} segredos pra meter o loko', headline = 'Tu manja de GTA 6. Mas manja do que ele esconde?', body = 'Mapa, passo a passo e vídeo de quem já fez, por R$ 4,20. Sim, 4,20. Entendedores entenderão.' where key = 'dicas';
 `,
   },
+  {
+    // A 012 chegou ao banco com o número escrito à mão (128). O número agora vem do app: "{n}" vira a contagem do dia.
+    id: "013_numero_de_segredos_automatico",
+    sql: `
+update ctas set eyebrow = replace(eyebrow, '128 segredos', '{n} segredos'), headline = replace(headline, '128 segredos', '{n} segredos'), body = replace(body, '128 segredos', '{n} segredos');
+`,
+  },
 ];
