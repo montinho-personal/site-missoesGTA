@@ -54,7 +54,7 @@ export function Header() {
             <span className="btn btn-app mt-3 w-full">Conhecer o aplicativo<Icon name="arrow" size={18} /></span>
           </Link>
           <nav aria-label="Menu" className="mt-4 flex flex-col">
-            {[...mainNav, { href: "/favoritos/", label: "Meus favoritos" }, { href: "/enviar-descoberta/", label: "Enviar uma descoberta" }, { href: "/ajuda/", label: "Central de ajuda" }, { href: "/sobre/", label: "Sobre o projeto" }].map((n) => (
+            {[...mainNav, { href: "/gta-6/guia/", label: "Guia do jogador" }, { href: "/favoritos/", label: "Meus favoritos" }, { href: "/enviar-descoberta/", label: "Enviar uma descoberta" }, { href: "/ajuda/", label: "Central de ajuda" }, { href: "/sobre/", label: "Sobre o projeto" }].map((n) => (
               <Link key={n.href} href={n.href} aria-current={path === n.href ? "page" : undefined}
                 className="flex items-center justify-between border-b border-ink-700 py-3.5 font-display text-lg font-semibold aria-[current=page]:text-pink">
                 {n.label}<Icon name="chevron" size={18} className="text-fg-subtle" />

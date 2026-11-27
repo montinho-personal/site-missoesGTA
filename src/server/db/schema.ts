@@ -317,4 +317,10 @@ create table password_resets (
 );
 `,
   },
+  {
+    // Sem mudança de tabela: só faz o conteúdo-semente rodar de novo e trazer a categoria
+    // "Guia do jogador" e os guias novos (o seed nunca sobrescreve o que já existe).
+    id: "010_guia_do_jogador",
+    sql: `select 1;`,
+  },
 ];
