@@ -39,7 +39,10 @@
    "tema:comandos",
    "treino-de-leonida"
   ],
-  "workflow_status": "rascunho"
+  "workflow_status": "publicado",
+  "reviewed_by": "Montinho",
+  "published_at": "2026-11-27T21:00:00Z",
+  "updated_at": "2026-11-27T21:00:00Z"
  },
  {
   "id": "gta6-dica-mira",
@@ -74,7 +77,10 @@
    "tema:mira",
    "treino-de-leonida"
   ],
-  "workflow_status": "rascunho"
+  "workflow_status": "publicado",
+  "reviewed_by": "Montinho",
+  "published_at": "2026-11-27T21:00:00Z",
+  "updated_at": "2026-11-27T21:00:00Z"
  },
  {
   "id": "gta6-dica-assaltos",
@@ -109,7 +115,10 @@
    "tema:assaltos",
    "treino-de-leonida"
   ],
-  "workflow_status": "rascunho"
+  "workflow_status": "publicado",
+  "reviewed_by": "Montinho",
+  "published_at": "2026-11-27T21:00:00Z",
+  "updated_at": "2026-11-27T21:00:00Z"
  },
  {
   "id": "gta6-dica-dinheiro",
@@ -144,7 +153,10 @@
    "tema:dinheiro",
    "treino-de-leonida"
   ],
-  "workflow_status": "rascunho"
+  "workflow_status": "publicado",
+  "reviewed_by": "Montinho",
+  "published_at": "2026-11-27T21:00:00Z",
+  "updated_at": "2026-11-27T21:00:00Z"
  },
  {
   "id": "gta6-dica-direcao",
@@ -179,7 +191,10 @@
    "tema:direcao",
    "treino-de-leonida"
   ],
-  "workflow_status": "rascunho"
+  "workflow_status": "publicado",
+  "reviewed_by": "Montinho",
+  "published_at": "2026-11-27T21:00:00Z",
+  "updated_at": "2026-11-27T21:00:00Z"
  },
  {
   "id": "gta6-dica-combate",
@@ -207,6 +222,9 @@
    "tema:combate",
    "treino-de-leonida"
   ],
-  "workflow_status": "rascunho"
+  "workflow_status": "publicado",
+  "reviewed_by": "Montinho",
+  "published_at": "2026-11-27T21:00:00Z",
+  "updated_at": "2026-11-27T21:00:00Z"
  }
 ]

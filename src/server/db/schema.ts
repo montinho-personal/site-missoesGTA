@@ -406,4 +406,16 @@ update entries set title = 'Como despistar a polícia no GTA 6', verification_st
 update entries set title = 'Combate no GTA 6: o básico', verification_status = 'nao_verificado', direct_answer = 'No corpo a corpo, o contra-ataque e a esquiva funcionam logo antes do golpe do inimigo chegar. Em cobertura, dá para contornar a quina sem se expor. E o menu de equipamento reúne armas, itens, acessórios e colete: deixe tudo pronto antes do tiroteio.', sources = '[{"nome": "GTABase: guia completo de controles", "url": "https://www.gtabase.com/articles/gta-6/gta-6-controls-guide-ps5-xbox-button-layout", "tipo": "imprensa", "data": "2026-11-27", "nota": "Lido na íntegra em 27/11/2026."}]'::jsonb where id = 'gta6-dica-combate' and workflow_status = 'rascunho' and reviewed_by is null;
 `,
   },
+  {
+    // O Montinho mandou publicar as 6 dicas do Treino de Leonida (27/11/2026, depois de aprovar os vídeos no painel).
+    id: "018_treino_publicar_dicas",
+    sql: `
+update entries set workflow_status = 'publicado', reviewed_by = 'Montinho', published_at = now(), updated_at = now()
+  where category_id = 'gta6-dicas' and tags @> '["treino-de-leonida"]'::jsonb and workflow_status = 'rascunho';
+insert into entry_changes (entry_id, kind, note)
+  select id, 'criacao', 'Dica do Treino de Leonida publicada, com fontes lidas e vídeos aprovados.' from entries e
+  where category_id = 'gta6-dicas' and tags @> '["treino-de-leonida"]'::jsonb and workflow_status = 'publicado'
+    and not exists (select 1 from entry_changes c where c.entry_id = e.id);
+`,
+  },
 ];
