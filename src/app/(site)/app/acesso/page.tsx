@@ -8,7 +8,7 @@ import { ShareSheet } from "@/components/ShareSheet";
 import { abs } from "@/lib/site";
 import { refreshPayment } from "@/server/payments";
 import { accessLink, appUrl } from "@/server/access";
-import { AutoRefresh, CopyPix } from "@/components/client";
+import { AutoRefresh, CopyPix, PurchaseTracker } from "@/components/client";
 
 export const dynamic = "force-dynamic";
 
@@ -20,9 +20,9 @@ export default async function Acesso({ searchParams }: { searchParams: Promise<R
   const sp = await searchParams;
   const pedido = typeof sp.pedido === "string" && /^[a-f0-9]{32}$/.test(sp.pedido) ? sp.pedido : null;
   // O número do pedido é longo e aleatório: funciona como a chave desta página.
-  type Row = { email: string; access_email_at: string | null; status: string; code: string | null; lic: string | null; payment_id: string | null; pix_qr: string | null; pix_qr_b64: string | null; pix_expires_at: string | null; pix_valid: boolean | null };
+  type Row = { email: string; amount_cents: number; access_email_at: string | null; status: string; code: string | null; lic: string | null; payment_id: string | null; pix_qr: string | null; pix_qr_b64: string | null; pix_expires_at: string | null; pix_valid: boolean | null };
   const read = async () => pedido ? (await q<Row>(
-    `select o.email, o.access_email_at::text, o.status, l.code, l.status as lic, o.payment_id, o.pix_qr, o.pix_qr_b64, o.pix_expires_at, (o.pix_expires_at > now()) as pix_valid from orders o left join licenses l on l.order_id = o.id where o.id = $1`, [pedido]))[0] : undefined;
+    `select o.email, o.amount_cents, o.access_email_at::text, o.status, l.code, l.status as lic, o.payment_id, o.pix_qr, o.pix_qr_b64, o.pix_expires_at, (o.pix_expires_at > now()) as pix_valid from orders o left join licenses l on l.order_id = o.id where o.id = $1`, [pedido]))[0] : undefined;
   let row = await read();
   // Pix pendente: confere direto na API, para liberar o código mesmo se o aviso do Mercado Pago atrasar.
   if (row?.status === "pendente" && row.payment_id) { await refreshPayment(row.payment_id); row = await read(); }
@@ -32,6 +32,7 @@ export default async function Acesso({ searchParams }: { searchParams: Promise<R
   return (
     <Shell title="Seu acesso ao aplicativo" path="/app/acesso/">
       {!row && <Callout icon="info" title="Pedido não encontrado"><p>Confira o endereço que você recebeu depois do pagamento. Se precisar, <Link className="link" href="/contato/">fale com a gente</Link>.</p></Callout>}
+      {row?.status === "pago" && <PurchaseTracker orderId={pedido!} cents={row.amount_cents} />}
       {row?.status === "pago" && row.code && row.lic === "ativa" && (
         <div className="card border-ok/60 p-6">
           <p className="label text-ok">Pagamento confirmado</p>

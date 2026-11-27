@@ -358,4 +358,9 @@ update ctas set eyebrow = '{n} segredos pra meter o loko', headline = 'Tu manja 
 update ctas set eyebrow = replace(eyebrow, '128 segredos', '{n} segredos'), headline = replace(headline, '128 segredos', '{n} segredos'), body = replace(body, '128 segredos', '{n} segredos');
 `,
   },
+  {
+    // De onde veio cada compra: UTM, clique de anúncio e site de origem (primeiro e último toque), quando a pessoa aceitou a medição.
+    id: "014_origem_do_pedido",
+    sql: `alter table orders add column if not exists attribution jsonb;`,
+  },
 ];

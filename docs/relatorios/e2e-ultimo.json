@@ -1,6 +1,6 @@
 {
- "quando": "2026-11-27T19:04:20.983Z",
- "total": 110,
+ "quando": "2026-11-27T19:48:19.250Z",
+ "total": 113,
  "falhas": 0,
  "results": [
   {
@@ -547,6 +547,21 @@
    "name": "banco de palavras-chave acessível no painel",
    "pass": true,
    "detail": ""
+  },
+  {
+   "name": "nada do Google carrega antes do aceite",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "depois do aceite, o Google Analytics carrega",
+   "pass": true,
+   "detail": "https://www.googletagmanager.com/gtag/js?id=G-TESTE123"
+  },
+  {
+   "name": "a origem da visita (UTM) fica guardada para o pedido",
+   "pass": true,
+   "detail": "{\"utm_source\":\"teste\",\"utm_medium\":\"e2e\",\"utm_campaign\":\"rastreio\",\"landing\":\"/\",\"at\":\"2026-11-27\"}"
   },
   {
    "name": "sem erros de JavaScript no console",

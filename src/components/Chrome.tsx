@@ -3,6 +3,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { Icon } from "./Icon";
+import { captureOrigin } from "@/lib/attribution";
 import { hookFor } from "@/lib/app-story";
 import { SearchDialog, SearchTrigger } from "./Search";
 import { SpoilerToggle } from "./client";
@@ -70,14 +71,29 @@ export function Header({ secrets }: { secrets: number | null }) {
   );
 }
 
+// Medição: Google Analytics 4 direto (NEXT_PUBLIC_GA_ID, "G-..."). O GTM (NEXT_PUBLIC_GTM_ID) fica só como alternativa:
+// os dois juntos contariam tudo em dobro. Nada carrega antes do "Aceitar".
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID;
+const MEASURE = GA_ID || GTM_ID;
 
 function loadGtm() {
-  if (!GTM_ID || document.getElementById("gtm-js")) return;
+  if (!MEASURE || document.getElementById("gtm-js")) return;
+  captureOrigin(Date.now());
   window.dataLayer = window.dataLayer || [];
-  window.dataLayer.push({ "gtm.start": Date.now(), event: "gtm.js" });
   const s = document.createElement("script");
-  s.id = "gtm-js"; s.async = true; s.src = `https://www.googletagmanager.com/gtm.js?id=${encodeURIComponent(GTM_ID)}`;
+  s.id = "gtm-js"; s.async = true;
+  if (GA_ID) {
+    window.gtag = function gtag() { // eslint-disable-next-line prefer-rest-params
+      window.dataLayer!.push(arguments as unknown as Record<string, unknown>); };
+    window.gtag("js", new Date());
+    // O cookie vale para o site e para o app (app.missoessecretasgta.com.br): a mesma pessoa é contada uma vez só.
+    window.gtag("config", GA_ID, { cookie_domain: "auto", linker: { domains: ["missoessecretasgta.com.br", "app.missoessecretasgta.com.br"] } });
+    s.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(GA_ID)}`;
+  } else {
+    window.dataLayer.push({ "gtm.start": Date.now(), event: "gtm.js" });
+    s.src = `https://www.googletagmanager.com/gtm.js?id=${encodeURIComponent(GTM_ID!)}`;
+  }
   document.head.appendChild(s);
 }
 
@@ -94,7 +110,7 @@ export function Consent() {
     window.addEventListener("gs:consent-open", reopen);
     return () => window.removeEventListener("gs:consent-open", reopen);
   }, [consent]);
-  if (!GTM_ID || !(consent === "none" || reopened)) return null;
+  if (!MEASURE || !(consent === "none" || reopened)) return null;
   const choose = (v: "granted" | "denied") => { setConsent(v); if (v === "granted") loadGtm(); setReopened(false); };
   return (
     <div role="region" aria-label="Privacidade" className="fixed inset-x-0 bottom-0 z-50 border-t border-ink-600 bg-ink-900 no-print">
@@ -110,6 +126,6 @@ export function Consent() {
 }
 
 export function ConsentReopen() {
-  if (!GTM_ID) return null;
+  if (!MEASURE) return null;
   return <button type="button" className="hover:text-fg underline-offset-4 hover:underline text-left py-1" onClick={() => window.dispatchEvent(new Event("gs:consent-open"))}>Preferências de privacidade</button>;
 }

@@ -188,7 +188,7 @@ export default async function AppPage() {
               <h2 id="h-avise" className="text-3xl sm:text-4xl font-extrabold">Seu próximo segredo está esperando para ser descoberto.</h2>
               <p className="mt-3 text-fg-muted">{selling ? `${appStory.price} O app abre liberado na hora e a confirmação chega no seu e-mail. O segredo a gente revela; a aventura é sua.` : "Deixe seu e-mail e a gente avisa no dia do lançamento. Um aviso só. Quem manda dez e-mails por semana é a seguradora."}</p>
             </div>
-            {selling ? <BuyForm priceLabel={sale.priceLabel!} /> : <WaitlistForm source="app_landing" />}
+            {selling ? <BuyForm priceLabel={sale.priceLabel!} priceCents={sale.cents} /> : <WaitlistForm source="app_landing" />}
           </div>
         </section>
 

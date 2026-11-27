@@ -46,6 +46,8 @@ const browser = await chromium.launch();
 const errors = [];
 const newPage = async (w, hh) => {
   const ctx = await browser.newContext({ viewport: { width: w, height: hh } });
+  // Quem navega nos testes já respondeu ao aviso de privacidade (recusou); o aviso tem teste próprio no fim.
+  await ctx.addInitScript(() => { try { if (!localStorage.getItem("gs:consent")) localStorage.setItem("gs:consent", "denied"); } catch {} });
   const page = await ctx.newPage();
   page.on("pageerror", (e) => errors.push(String(e)));
   page.on("console", (m) => { if (m.type() === "error") errors.push(m.text()); });
@@ -252,6 +254,24 @@ if (PW) {
   ok("banco de palavras-chave acessível no painel", (await page.locator("h1").innerText()).includes("palavras-chave"));
   await page.context().close();
 } else console.log("SKIP  painel (defina ADMIN_PASSWORD)");
+
+// Medição (só quando o site tem o ID do Google Analytics): aviso, nada antes do aceite, e a origem da visita guardada depois.
+{
+  const ctx = await browser.newContext({ viewport: { width: 390, height: 844 } });
+  const page = await ctx.newPage();
+  await page.route("https://www.googletagmanager.com/**", (r) => r.fulfill({ status: 200, contentType: "text/javascript", body: "" }));
+  await page.goto(BASE + "/?utm_source=teste&utm_medium=e2e&utm_campaign=rastreio", { waitUntil: "networkidle" });
+  const banner = page.locator("[role=region][aria-label=Privacidade]");
+  if (await banner.count()) {
+    ok("nada do Google carrega antes do aceite", (await page.locator("#gtm-js").count()) === 0);
+    await banner.getByRole("button", { name: "Aceitar" }).click();
+    await page.waitForTimeout(300);
+    const st = await page.evaluate(() => ({ gtag: typeof window.gtag, src: document.getElementById("gtm-js")?.getAttribute("src") ?? "", origem: localStorage.getItem("gs:origem") ?? "" }));
+    ok("depois do aceite, o Google Analytics carrega", st.gtag === "function" && st.src.includes("gtag/js?id="), st.src);
+    ok("a origem da visita (UTM) fica guardada para o pedido", /"utm_source":"teste"/.test(st.origem) && /"utm_campaign":"rastreio"/.test(st.origem), st.origem);
+  } else ok("sem ID de medição, não há aviso de privacidade", true);
+  await ctx.close();
+}
 
 await browser.close();
 const relevant = [...new Set(errors)].filter((e) => !/favicon/.test(e));

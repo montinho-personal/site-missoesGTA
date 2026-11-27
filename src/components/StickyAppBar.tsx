@@ -3,10 +3,12 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState, useSyncExternalStore } from "react";
 import { Icon } from "./Icon";
-import { track } from "@/lib/analytics";
+import { getConsent, track } from "@/lib/analytics";
 import { stickyCopyFor } from "@/lib/sticky-copy";
 import { fillCount } from "@/lib/app-story";
 
+const MEASURE = Boolean(process.env.NEXT_PUBLIC_GA_ID || process.env.NEXT_PUBLIC_GTM_ID);
+const subConsent = (cb: () => void) => { window.addEventListener("gs:consent", cb); return () => window.removeEventListener("gs:consent", cb); };
 const KEY = "gs:sticky-off-until";
 const PAUSE_DAYS = 3;
 /** Guarda a pausa da barra (chamado só ao tocar em fechar). */
@@ -35,6 +37,8 @@ export function StickyAppBar({ saleEnabled, priceLabel, secrets }: { saleEnabled
   const [dismissedNow, setDismissedNow] = useState(false);
   const dismissed = dismissedRaw || dismissedNow;
   const [blocked, setBlocked] = useState(false);
+  // Enquanto o aviso de privacidade está aberto (mesmo lugar, embaixo da tela), a barra espera a resposta.
+  const consentOpen = useSyncExternalStore(subConsent, () => MEASURE && getConsent() === null, () => true);
 
   useEffect(() => {
     // Blocos que já pedem a mesma coisa, e o rodapé: quando estão visíveis, a barra se recolhe.
@@ -52,7 +56,7 @@ export function StickyAppBar({ saleEnabled, priceLabel, secrets }: { saleEnabled
   }, [path]);
 
   if (!copy) return null;
-  const show = scrolled && !blocked && !dismissed;
+  const show = scrolled && !blocked && !dismissed && !consentOpen;
   const close = () => {
     savePause();
     setDismissedNow(true);

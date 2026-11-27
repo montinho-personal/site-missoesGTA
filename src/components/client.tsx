@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState, useSyncExternalStore } from "react";
 import { Icon } from "./Icon";
-import { track, type TrackEvent } from "@/lib/analytics";
+import { ecommerce, getConsent, track, type TrackEvent } from "@/lib/analytics";
 import { favs, spoilers } from "@/lib/store";
 
 const sub = (name: string) => (cb: () => void) => {
@@ -119,4 +119,19 @@ export function CopyText({ text, label = "Copiar mensagem", done = "Copiado" }: 
       <span role="status" aria-live="polite" className="sr-only">{copied ? done : ""}</span>
     </button>
   );
+}
+
+/**
+ * A compra confirmada vira o evento "purchase" do GA4, uma vez só por pedido (o GA4 também descarta repetidos
+ * pelo transaction_id). Roda na página de acesso, no navegador de quem comprou: a origem da visita fica ligada à compra.
+ */
+export function PurchaseTracker({ orderId, cents }: { orderId: string; cents: number }) {
+  useEffect(() => {
+    const key = `gs:compra-medida:${orderId}`;
+    try { if (localStorage.getItem(key)) return; } catch { return; }
+    if (getConsent() !== "granted") return;
+    track("purchase", ecommerce(cents, { transaction_id: orderId, payment_type: "pix" }));
+    try { localStorage.setItem(key, "1"); } catch {}
+  }, [orderId, cents]);
+  return null;
 }
