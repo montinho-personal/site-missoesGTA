@@ -3,7 +3,7 @@ import { z } from "zod";
 import { q } from "@/server/db";
 import { accessEmail, accessLink, appUrl, DEFAULT_APP_URL, newLoginCode } from "@/server/access";
 import { sendEmail } from "@/server/email";
-import { clientKey, rateLimit } from "@/server/security";
+import { clientKey, rateLimit, safeEqual } from "@/server/security";
 
 export const dynamic = "force-dynamic";
 
@@ -23,7 +23,10 @@ export async function POST(req: Request) {
   const parsed = schema.safeParse(await req.json().catch(() => null));
   if (!parsed.success) return Response.json({ ok: false, erro: "Digite um e-mail válido." }, { status: 400, headers: h });
   const email = parsed.data.email.toLowerCase();
-  if (!(await rateLimit("enviar-link", await clientKey(), 6, 3600)) || !(await rateLimit("enviar-link-email", createHash("sha256").update(email).digest("hex"), 3, 3600)))
+  // Vindo do servidor do app (com a chave), todos os clientes chegam do mesmo endereço: aí só vale o limite por e-mail.
+  const key = process.env.APP_SITE_KEY, got = (req.headers.get("authorization") ?? "").replace(/^Bearer\s+/i, "");
+  const fromApp = Boolean(key && got && safeEqual(got, key));
+  if ((!fromApp && !(await rateLimit("enviar-link", await clientKey(), 6, 3600))) || !(await rateLimit("enviar-link-email", createHash("sha256").update(email).digest("hex"), 3, 3600)))
     return Response.json({ ok: false, erro: "Muitos pedidos. Tente de novo daqui a pouco." }, { status: 429, headers: h });
   // O acesso mais recente e ativo desse e-mail (compra ou cortesia).
   const [lic] = await q<{ code: string }>(`select code from licenses where lower(email) = $1 and status = 'ativa' order by (origin = 'compra') desc, created_at desc limit 1`, [email]);

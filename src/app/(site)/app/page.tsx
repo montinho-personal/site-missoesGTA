@@ -180,6 +180,8 @@ export default async function AppPage() {
           <div className="card p-5"><p className="label text-fg-subtle mb-2">Reembolso e suporte</p><p className="text-fg-muted">{selling ? "Você pode desistir em até 7 dias depois da compra e receber o valor de volta, como prevê o Código de Defesa do Consumidor." : "A política de cancelamento e reembolso será publicada junto com o preço."} {!appConfig.supportContact && <>Enquanto isso, fale com a gente pelo <Link className="link" href="/contato/">contato</Link>.</>}</p></div>
         </section>
 
+        {/* "#comprar" é o endereço que o app usa no botão de compra; "#avise-me" fica pelos links antigos. */}
+        <span id="comprar" className="block scroll-mt-24" aria-hidden="true" />
         <section id="avise-me" className="pt-16 sm:pt-24 scroll-mt-24" aria-labelledby="h-avise">
           <div className="card border-violet/40 p-6 sm:p-10 grid gap-8 md:grid-cols-2 md:items-center">
             <div>

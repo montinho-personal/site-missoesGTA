@@ -119,6 +119,8 @@ try {
   const antes = emails.length;
   const r1 = await link("PIX@example.com"), r2 = await link("ninguem@example.com");
   ok("'Já comprei' manda o link só para quem comprou, com a mesma resposta para todos", (await r1.json()).ok && (await r2.json()).ok && emails.length === antes + 1 && emails.at(-1).to[0] === "pix@example.com" && emails.at(-1).html.includes(abrir) && r1.headers.get("access-control-allow-origin") === "https://app.missoessecretasgta.com.br");
+  const doApp = await Promise.all(Array.from({ length: 8 }, (_, i) => fetch(`${BASE}/api/acesso/enviar-link/`, { method: "POST", headers: { "content-type": "application/json", authorization: "Bearer chave-app-teste" }, body: JSON.stringify({ email: `cliente${i}@example.com` }) }).then((r) => r.status)));
+  ok("'Já comprei' pelo servidor do app não esbarra no limite por endereço", doApp.every((st) => st === 200), doApp.join(","));
   const cod6 = /(\d{3}) (\d{3})<\/span>/.exec(emails.at(-1).html);
   const seis = cod6 ? cod6[1] + cod6[2] : "";
   const confirma = (codigo, aparelho = "cel-2-bbbbbbbb", key = "chave-app-teste") => fetch(`${BASE}/api/acesso/confirmar-codigo/`, { method: "POST", headers: { "content-type": "application/json", ...(key ? { authorization: `Bearer ${key}` } : {}) }, body: JSON.stringify({ email: "pix@example.com", codigo, aparelho }) }).then((r) => r.status === 401 ? { status: 401 } : r.json());
