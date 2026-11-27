@@ -8,6 +8,7 @@ import { Icon } from "@/components/Icon";
 import { entryUrl, getCtas, getEntry, getEntryChanges, getPublishedEntries, nearbyEntries, relatedEntries, toCard } from "@/server/content";
 import { saleConfig } from "@/server/mercadopago";
 import { AppPitch } from "@/components/AppPitch";
+import { AppQuickPitch } from "@/components/AppQuickPitch";
 import { notFoundOrRedirect } from "@/server/route-helpers";
 import { breadcrumbLd, faqLd, pageMeta } from "@/lib/seo";
 import { entryFaq, entrySeoDescription, entrySeoTitle, withBrand } from "@/lib/seo-entry";
@@ -131,6 +132,9 @@ export default async function EntryPage({ params }: Props) {
             </section>
 
             {entry.summary && entry.direct_answer && <p className="max-w-3xl text-fg-muted text-lg">{entry.summary}</p>}
+
+            {/* O app aparece cedo, ensinando a fazer ESTA descoberta nele, com o preço à vista. */}
+            {!isGuideKind(entry) && <AppQuickPitch entry={entry} nearby={nearby.length} sameRegion={sameRegion} total={all.filter((x) => x.app_ref).length} sale={sale} />}
 
             {!isGuide && (
               <section aria-labelledby="ficha" className="max-w-3xl">
