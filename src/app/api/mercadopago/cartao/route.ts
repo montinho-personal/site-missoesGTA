@@ -31,6 +31,8 @@ const motivo: Record<string, string> = {
 
 /** Recebe o cartão já transformado em token pelo formulário do Mercado Pago e faz a cobrança. */
 export async function POST(req: Request) {
+  // Pagamento só por Pix (decisão de 27/11/2026): o cartão só volta com CARTAO_LIGADO=1 na hospedagem.
+  if (process.env.CARTAO_LIGADO !== "1") return Response.json({ ok: false, message: "Pagamento só por Pix." }, { status: 404 });
   if (!(await rateLimit("cartao", await clientKey(), 10, 3600))) return Response.json({ ok: false, message: "Muitas tentativas. Tente de novo mais tarde ou use o Pix." }, { status: 429 });
   const parsed = schema.safeParse(await req.json().catch(() => null));
   if (!parsed.success) return Response.json({ ok: false, message: "Dados do pagamento incompletos. Revise e tente de novo." }, { status: 400 });

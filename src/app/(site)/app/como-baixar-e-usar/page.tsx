@@ -99,7 +99,7 @@ export default async function ComoBaixarEUsar() {
               <Passos itens={[
                 <>Abra a <Link href="/app/" className="link">página do aplicativo</Link> e desça até o formulário de compra.</>,
                 <>Digite seu <B>e-mail</B>, aceite os termos e toque em <B>Comprar</B>. Use um e-mail que você lê: a confirmação e o botão que abre o app vão para ele.</>,
-                <>No <B>Pix</B>, o QR Code e o “copia e cola” aparecem na própria página: pague pelo app do seu banco. No <B>cartão</B>, preencha os dados nos campos do Mercado Pago. Nenhum dado de cartão passa pelo nosso site.</>,
+                <>O pagamento é por <B>Pix</B>: o QR Code e o “copia e cola” aparecem na própria página. Pague pelo app do seu banco.</>,
                 <>Pix costuma confirmar em segundos, e a página muda sozinha para <B>Pagamento confirmado</B>. Cartão aprovado vai direto para ela.</>,
                 <>Toque em <B>Abrir o app</B>: ele abre já liberado, sem digitar nada. Na mesma hora chega o <B>e-mail de confirmação</B>, com o mesmo botão, para usar em outro celular (até 3 aparelhos).</>,
               ]} />

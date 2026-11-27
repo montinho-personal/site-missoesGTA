@@ -127,22 +127,17 @@ try {
   const errado = await confirma(seis === "000000" ? "111111" : "000000"), semChave = await confirma(seis, "cel-2-bbbbbbbb", ""), certo = await confirma(seis), denovo = await confirma(seis);
   ok("iPhone: código de 6 dígitos do e-mail devolve a chave uma vez só", seis.length === 6 && errado.valido === false && semChave.status === 401 && certo.valido === true && certo.chave === compacto(codigoPix) && denovo.valido === false, JSON.stringify([seis, errado, certo, denovo]));
 
-  // Cartão: página do Mercado Pago (Checkout Pro) e liberação pelo aviso
+  // Só Pix: nenhum botão de cartão, e a rota do cartão fica desligada
   await page.goto(BASE + "/app/", { waitUntil: "load" });
+  ok("compra só por Pix: não há botão de cartão", (await page.getByRole("button", { name: /cart[aã]o/i }).count()) === 0);
+  ok("rota do cartão desligada", (await fetch(`${BASE}/api/mercadopago/cartao/`, { method: "POST", headers: { "content-type": "application/json" }, body: "{}" })).status === 404);
   await page.getByLabel("Seu e-mail").fill("comprador@example.com");
   await page.locator("#avise-me").getByRole("checkbox").check();
   await page.waitForTimeout(2600);
-  await page.getByRole("button", { name: "Pagar com cartão" }).click();
-  await page.waitForURL(/\/app\/cartao\/\?pedido=/, { waitUntil: "domcontentloaded" });
+  await page.getByRole("button", { name: /no Pix/ }).click();
+  await page.waitForURL(/\/app\/acesso\/\?pedido=/, { waitUntil: "domcontentloaded" });
   const pedido = new URL(page.url()).searchParams.get("pedido");
-  ok("cartão abre o formulário do Mercado Pago dentro do site", page.url().includes("/app/cartao/?pedido=") && (await page.locator("#card-brick").count()) === 1 && preferencia === null);
-  const cobra = (token, ped = pedido, extra = {}) => fetch(`${BASE}/api/mercadopago/cartao/`, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ pedido: ped, token, payment_method_id: "visa", issuer_id: "25", installments: 1, payer: { email: "comprador@example.com", identification: { type: "CPF", number: "19119119100" } }, transaction_amount: 0.01, ...extra }) }).then((r) => r.json());
-  const recusa = await cobra("tok-recusado");
-  ok("cartão recusado explica o motivo e não libera nada", recusa.ok === false && /limite insuficiente/i.test(recusa.message) && (await valida("MS6-0000-0000-0000")) === false);
-  ok("o valor cobrado vem do pedido, não do navegador", cartao?.transaction_amount === 19.9 && cartao.external_reference === pedido && cartao.token === "tok-recusado");
-  ok("dados de cartão incompletos são recusados", (await cobra("", pedido)).ok === false);
-  await page.goto(`${BASE}/app/acesso/?pedido=${pedido}`, { waitUntil: "load" });
-  ok("antes do pagamento a página não mostra código", /Aguardando a confirmação/.test(await page.locator("main").innerText()) && !/MS6-/.test(await page.locator("main").innerText()));
+  ok("antes do pagamento a página não mostra código", /Falta só o Pix/i.test(await page.locator("main").innerText()) && !/MS6-/.test(await page.locator("main").innerText()));
 
   pagamentos.set("111", { id: 111, status: "approved", external_reference: pedido, transaction_amount: 19.9, currency_id: "BRL" });
   ok("aviso com assinatura errada é recusado (401)", (await aviso("111", { assinatura: false })).status === 401);
@@ -215,18 +210,6 @@ try {
   await aviso("111");
   ok("estorno desativa o código da compra", (await valida(codigo)) === false);
   ok("depois do estorno, o app recebe 'cancelado'", (await (await confere(codigo, "aparelho-teste-01")).json()).motivo === "cancelado");
-  // cartão aprovado em pedido novo: libera na hora, sem esperar o aviso
-  await page.goto(BASE + "/app/", { waitUntil: "load" });
-  await page.getByLabel("Seu e-mail").fill("cartao@example.com");
-  await page.locator("#avise-me").getByRole("checkbox").check();
-  await page.waitForTimeout(2600);
-  await page.getByRole("button", { name: "Pagar com cartão" }).click();
-  await page.waitForURL(/\/app\/cartao\/\?pedido=/, { waitUntil: "domcontentloaded" });
-  const pedidoCartao = new URL(page.url()).searchParams.get("pedido");
-  const aprovado = await cobra("tok-aprovado", pedidoCartao);
-  await page.goto(`${BASE}/app/acesso/?pedido=${pedidoCartao}`, { waitUntil: "load" });
-  const codigoCartao = /MS6-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}/.exec(await page.locator("main").innerText())?.[0];
-  ok("cartão aprovado libera o código na hora", aprovado.ok === true && Boolean(codigoCartao) && (await valida(codigoCartao)) === true, codigoCartao ?? "");
   await browser.close();
 } catch (e) { console.error(e); ok("execução sem exceção", false, String(e).slice(0, 200)); }
 console.log(`\n${results.filter(Boolean).length}/${results.length} verificações de pagamento passaram`);

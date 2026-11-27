@@ -174,7 +174,7 @@ export default async function AppPage() {
             <p className="label text-gold mb-2">Preço</p>
             <p className="font-display text-4xl font-black text-gold">{sale.priceLabel}</p>
             {sale.isLaunchPrice && <p className="mt-2 text-[0.97rem]">Sim, quatro e vinte. Entendedores entenderão. Quem não entendeu, pergunta pro Brian.</p>}
-            <p className="mt-2 text-sm text-fg-muted">{sale.isLaunchPrice ? "Preço de lançamento, pagamento único por Pix ou cartão. Ele pode subir no futuro, conforme o arquivo cresce; quem compra agora paga uma vez e não paga a diferença depois." : "Pagamento único, por Pix ou cartão."}</p>
+            <p className="mt-2 text-sm text-fg-muted">{sale.isLaunchPrice ? "Preço de lançamento, pagamento único por Pix. Ele pode subir no futuro, conforme o arquivo cresce; quem compra agora paga uma vez e não paga a diferença depois." : "Pagamento único, por Pix."}</p>
           </div>
           <div className="card p-5"><p className="label text-fg-subtle mb-2">Compatibilidade</p><p>{appConfig.platforms ? appConfig.platforms.join(", ") + "." : <span className="text-fg-muted">A anunciar.</span>}</p></div>
           <div className="card p-5"><p className="label text-fg-subtle mb-2">Reembolso e suporte</p><p className="text-fg-muted">{selling ? "Você pode desistir em até 7 dias depois da compra e receber o valor de volta, como prevê o Código de Defesa do Consumidor." : "A política de cancelamento e reembolso será publicada junto com o preço."} {!appConfig.supportContact && <>Enquanto isso, fale com a gente pelo <Link className="link" href="/contato/">contato</Link>.</>}</p></div>

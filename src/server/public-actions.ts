@@ -86,7 +86,8 @@ export async function startCheckout(_prev: FormState, fd: FormData): Promise<For
   const email = parsed.data.email.toLowerCase();
   await q(`insert into orders (id, email, amount_cents) values ($1, $2, $3)`, [id, email, sale.cents]);
   const fail = { ok: false as const, message: "Não foi possível abrir o pagamento agora. Nada foi cobrado. Tente de novo em instantes.", values };
-  if (parsed.data.metodo === "cartao") {
+  // Pagamento só por Pix (decisão do Montinho em 27/11/2026). O caminho do cartão fica no código, desligado.
+  if (parsed.data.metodo === "cartao" && process.env.CARTAO_LIGADO === "1") {
     if (cardPublicKey()) redirect(`/app/cartao/?pedido=${id}`);
     let url: string;
     try { url = await createPreference({ id, email, cents: sale.cents }); } catch { return fail; }

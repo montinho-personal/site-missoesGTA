@@ -15,7 +15,7 @@ export default async function Cartao({ searchParams }: { searchParams: Promise<R
   const pedido = typeof sp.pedido === "string" && /^[a-f0-9]{32}$/.test(sp.pedido) ? sp.pedido : null;
   const [order] = pedido ? await q<{ email: string; amount_cents: number; status: string }>(`select email, amount_cents, status from orders where id = $1`, [pedido]) : [];
   if (order?.status === "pago") redirect(`/app/acesso/?pedido=${pedido}`);
-  const key = cardPublicKey();
+  const key = process.env.CARTAO_LIGADO === "1" ? cardPublicKey() : null;
   const price = order ? new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(order.amount_cents / 100) : "";
   return (
     <Shell title="Pagar com cartão" path="/app/cartao/">
