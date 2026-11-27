@@ -20,6 +20,15 @@ for (const p of ["/gta-6/missoes-secretas/nao-existe/", "/gta-6/misterios/", "/g
 ok("admin exige login", [302, 303, 307].includes(await status("/admin/")));
 ok("admin/entradas exige login", [302, 303, 307].includes(await status("/admin/entradas/")));
 
+// Compartilhamento no WhatsApp: toda página aponta para a própria arte, e a arte sai em PNG leve (WhatsApp corta acima de ~300 KB)
+for (const p of ["/", "/app/", ENTRY, "/gta-6/dinheiro/", "/sobre/"]) {
+  const h = await (await fetch(BASE + p)).text();
+  const m = /<meta property="og:image" content="([^"]+)"/.exec(h);
+  const img = m ? await fetch(m[1].replace(/^https?:\/\/[^/]+/, BASE).replace(/&amp;/g, "&")) : null;
+  const buf = img ? Buffer.from(await img.arrayBuffer()) : Buffer.alloc(0);
+  ok(`imagem de compartilhamento em ${p}`, !!img && img.status === 200 && (img.headers.get("content-type") ?? "").includes("image/png") && buf.length > 20000 && buf.length < 300000, `${buf.length} bytes`);
+}
+
 // Compartilhamento: imagens verticais de Stories
 for (const p of [ENTRY + "story/", "/app/story/"]) {
   const r = await fetch(BASE + p);

@@ -30,6 +30,7 @@ const nextConfig: NextConfig = {
   outputFileTracingIncludes: {
     "/[game]/[categoria]/[slug]/story": ["./src/fonts/*.woff", "./public/arte/story/*.jpg"],
     "/app/story": ["./src/fonts/*.woff", "./public/arte/story/*.jpg"],
+    "/og": ["./src/fonts/*.woff"],
   },
   images: { formats: ["image/avif", "image/webp"] },
   turbopack: {

@@ -1,6 +1,6 @@
 {
- "quando": "2026-11-27T19:48:19.250Z",
- "total": 113,
+ "quando": "2026-11-27T20:05:08.489Z",
+ "total": 116,
  "falhas": 0,
  "results": [
   {
@@ -152,6 +152,31 @@
    "name": "admin/entradas exige login",
    "pass": true,
    "detail": ""
+  },
+  {
+   "name": "imagem de compartilhamento em /",
+   "pass": true,
+   "detail": "199276 bytes"
+  },
+  {
+   "name": "imagem de compartilhamento em /app/",
+   "pass": true,
+   "detail": "197622 bytes"
+  },
+  {
+   "name": "imagem de compartilhamento em /gta-6/easter-eggs/skunk-ape/",
+   "pass": true,
+   "detail": "182414 bytes"
+  },
+  {
+   "name": "imagem de compartilhamento em /gta-6/dinheiro/",
+   "pass": true,
+   "detail": "185541 bytes"
+  },
+  {
+   "name": "imagem de compartilhamento em /sobre/",
+   "pass": true,
+   "detail": "179079 bytes"
   },
   {
    "name": "imagem de Stories /gta-6/easter-eggs/skunk-ape/story/",
@@ -549,19 +574,9 @@
    "detail": ""
   },
   {
-   "name": "nada do Google carrega antes do aceite",
+   "name": "sem ID de medição, não há aviso de privacidade",
    "pass": true,
    "detail": ""
-  },
-  {
-   "name": "depois do aceite, o Google Analytics carrega",
-   "pass": true,
-   "detail": "https://www.googletagmanager.com/gtag/js?id=G-TESTE123"
-  },
-  {
-   "name": "a origem da visita (UTM) fica guardada para o pedido",
-   "pass": true,
-   "detail": "{\"utm_source\":\"teste\",\"utm_medium\":\"e2e\",\"utm_campaign\":\"rastreio\",\"landing\":\"/\",\"at\":\"2026-11-27\"}"
   },
   {
    "name": "sem erros de JavaScript no console",
