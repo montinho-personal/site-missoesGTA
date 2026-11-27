@@ -221,6 +221,33 @@ if (PW) {
   await page.waitForTimeout(600);
   ok("moderação muda o estado do envio", (await page.locator("li.card", { hasText: "Teste e2e" }).count()) === 0);
 
+  // Treino de Leonida: vídeo de dica entra como rascunho, não aparece antes da aprovação, e depois aparece na dica e na lista do app
+  {
+    const DICA = "/gta-6/dicas/como-guardar-carros-roubados/";
+    await page.goto(BASE + "/admin/videos/");
+    await page.locator("#tv-url").fill("javascript:alert(1)");
+    await page.getByRole("button", { name: "Guardar como rascunho" }).click();
+    await page.waitForSelector("text=Não reconheci o link");
+    ok("painel de vídeos recusa link que não é vídeo", true);
+    await page.locator("#tv-url").fill("https://www.tiktok.com/@teste.e2e/video/7300000000000000001?lang=pt");
+    await page.locator("#tv-creator").fill("@teste.e2e");
+    await page.locator("#tv-title").fill("Dica de teste do e2e");
+    await page.locator("#tv-entry").selectOption("gta6-0017");
+    await page.getByRole("button", { name: "Guardar como rascunho" }).click();
+    await page.waitForSelector("text=Guardado como rascunho");
+    ok("vídeo de dica entra como rascunho, com crédito", true);
+    const antes = await (await fetch(BASE + DICA)).text();
+    ok("rascunho não aparece no site", !antes.includes("teste.e2e"));
+    await page.goto(BASE + "/admin/videos/");
+    await page.locator("li.card", { has: page.locator('input[value="@teste.e2e"]') }).first().getByRole("button", { name: "Aprovar e publicar" }).click();
+    await page.waitForTimeout(800);
+    const depois = await (await fetch(BASE + DICA)).text();
+    ok("aprovado, o vídeo aparece na dica com o crédito do criador", depois.includes("Treino de Leonida") && depois.includes("@teste.e2e"));
+    const feed = await (await fetch(BASE + "/api/dicas/")).json();
+    const d = feed.dicas.find((x) => x.id === "gta6-0017");
+    ok("lista do app traz a dica com vídeo, resumo curto e link rastreável para o site", !!d && d.videos[0]?.plataforma === "tiktok" && d.videos[0]?.criador === "@teste.e2e" && d.resumo.length <= 220 && d.site.includes("utm_source=app"));
+  }
+
   // trava editorial: "confirmado" sem evidência
   await page.goto(BASE + "/admin/entradas/gta6-0018/");
   await page.getByRole("button", { name: "Salvar" }).click();
@@ -283,7 +310,8 @@ if (PW) {
 }
 
 await browser.close();
-const relevant = [...new Set(errors)].filter((e) => !/favicon/.test(e));
+// Falha de rede para recursos de fora (miniaturas do YouTube) depende do ambiente de teste, não do site.
+const relevant = [...new Set(errors)].filter((e) => !/favicon/.test(e) && !/net::ERR_(TUNNEL_CONNECTION_FAILED|NAME_NOT_RESOLVED|PROXY_CONNECTION_FAILED)/.test(e));
 ok("sem erros de JavaScript no console", relevant.length === 0, relevant.slice(0, 3).join(" | "));
 const failed = results.filter((r) => !r.pass);
 console.log(`\n${results.length - failed.length}/${results.length} verificações passaram`);

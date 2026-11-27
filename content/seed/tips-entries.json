@@ -1,0 +1,247 @@
+[
+ {
+  "id": "gta6-dica-comandos",
+  "game_id": "gta6",
+  "category_id": "gta6-dicas",
+  "author_id": "redacao",
+  "kind": "guia",
+  "slug": "comandos-ps5-xbox",
+  "title": "Comandos do GTA 6 no PS5 e no Xbox: o que mudou",
+  "direct_answer": "Segundo guias publicados depois do lançamento, no esquema padrão a corrida fica no analógico esquerdo (L3) e a cobertura no R1; o esquema clássico devolve a corrida para o X. Os guias divergem sobre o freio de mão, então confira no menu de controles do seu jogo.",
+  "verification_status": "nao_verificado",
+  "evidence_type": "relatos",
+  "spoiler_level": "nenhum",
+  "sources": [
+   {
+    "nome": "Shacknews",
+    "url": "https://www.shacknews.com/article/151396/gta6-ps5-controls",
+    "tipo": "imprensa",
+    "data": null,
+    "nota": "Lido só o resumo da busca: abrir e conferir antes de publicar."
+   },
+   {
+    "nome": "GTABase",
+    "url": "https://www.gtabase.com/articles/gta-6/gta-6-controls-guide-ps5-xbox-button-layout",
+    "tipo": "imprensa",
+    "data": null,
+    "nota": "Lido só o resumo da busca: abrir e conferir antes de publicar."
+   },
+   {
+    "nome": "Push Square",
+    "url": "https://www.pushsquare.com/news/2026/09/its-a-miracle-gta-6-wont-make-you-mash-the-x-button-to-sprint",
+    "tipo": "imprensa",
+    "data": null,
+    "nota": "Lido só o resumo da busca: abrir e conferir antes de publicar."
+   }
+  ],
+  "tags": [
+   "gta6",
+   "tema:comandos",
+   "treino-de-leonida"
+  ],
+  "workflow_status": "rascunho"
+ },
+ {
+  "id": "gta6-dica-mira",
+  "game_id": "gta6",
+  "category_id": "gta6-dicas",
+  "author_id": "redacao",
+  "kind": "guia",
+  "slug": "melhores-configuracoes-de-mira",
+  "title": "Melhores configurações de mira no GTA 6",
+  "direct_answer": "Os ajustes de mira ficam em Pausa > Configurações > Jogabilidade > Combate. São três modos: travamento, parcial e livre; os guias apontam o parcial como padrão e o mais indicado para começar. Na mira livre, desligue também a Assistência de Disparo, que ainda puxa para inimigos próximos.",
+  "verification_status": "nao_verificado",
+  "evidence_type": "relatos",
+  "spoiler_level": "nenhum",
+  "sources": [
+   {
+    "nome": "Insider Gaming Brasil",
+    "url": "https://insider-gaming.com/br/?p=30633",
+    "tipo": "imprensa",
+    "data": null,
+    "nota": "Lido só o resumo da busca: abrir e conferir antes de publicar."
+   },
+   {
+    "nome": "Critical Hits",
+    "url": "https://criticalhits.com.br/dicas/gta-6-melhores-configuracoes-para-ps5-e-xbox-series-xs",
+    "tipo": "imprensa",
+    "data": null,
+    "nota": "Lido só o resumo da busca: abrir e conferir antes de publicar."
+   },
+   {
+    "nome": "Dexerto",
+    "url": "https://www.dexerto.com/wikis/gta-6/best-controller-settings/",
+    "tipo": "imprensa",
+    "data": null,
+    "nota": "Lido só o resumo da busca: abrir e conferir antes de publicar."
+   }
+  ],
+  "tags": [
+   "gta6",
+   "tema:mira",
+   "treino-de-leonida"
+  ],
+  "workflow_status": "rascunho"
+ },
+ {
+  "id": "gta6-dica-assaltos",
+  "game_id": "gta6",
+  "category_id": "gta6-dicas",
+  "author_id": "redacao",
+  "kind": "guia",
+  "slug": "como-fazer-um-assalto-sem-dar-errado",
+  "title": "Como fazer um assalto sem dar errado no GTA 6",
+  "direct_answer": "Antes de anunciar o assalto, resolva funcionários, alarme e câmeras. Joias, drogas e notas marcadas vão para receptadores, e cada um paga diferente; despiste a polícia antes de ir até um deles.",
+  "verification_status": "nao_verificado",
+  "evidence_type": "relatos",
+  "spoiler_level": "nenhum",
+  "sources": [
+   {
+    "nome": "Games.gg",
+    "url": "https://games.gg/grand-theft-auto-vi/guides/grand-theft-auto-6-store-robbery-guide/",
+    "tipo": "imprensa",
+    "data": null,
+    "nota": "Lido só o resumo da busca: abrir e conferir antes de publicar."
+   },
+   {
+    "nome": "Metaforge",
+    "url": "https://metaforge.app/gta-6/gta-6-robberies-heists-guide",
+    "tipo": "imprensa",
+    "data": null,
+    "nota": "Lido só o resumo da busca: abrir e conferir antes de publicar."
+   },
+   {
+    "nome": "KeenGamer",
+    "url": "https://www.keengamer.com/articles/guides/how-to-fence-stolen-goods-in-gta-6-all-fence-locations-and-marked-bills/",
+    "tipo": "imprensa",
+    "data": null,
+    "nota": "Lido só o resumo da busca: abrir e conferir antes de publicar."
+   }
+  ],
+  "tags": [
+   "gta6",
+   "tema:assaltos",
+   "treino-de-leonida"
+  ],
+  "workflow_status": "rascunho"
+ },
+ {
+  "id": "gta6-dica-dinheiro",
+  "game_id": "gta6",
+  "category_id": "gta6-dicas",
+  "author_id": "redacao",
+  "kind": "guia",
+  "slug": "como-ganhar-dinheiro-rapido",
+  "title": "Como ganhar dinheiro rápido no começo do GTA 6",
+  "direct_answer": "Roubos, venda de carros e corridas aparecem nos guias como as fontes de dinheiro do começo. Dinheiro no bolso pode ser perdido se você morrer; o que está no banco fica seguro.",
+  "verification_status": "nao_verificado",
+  "evidence_type": "relatos",
+  "spoiler_level": "nenhum",
+  "sources": [
+   {
+    "nome": "PC Gamer",
+    "url": "https://www.pcgamer.com/games/grand-theft-auto/gta-6-how-to-make-money/",
+    "tipo": "imprensa",
+    "data": null,
+    "nota": "Lido só o resumo da busca: abrir e conferir antes de publicar."
+   },
+   {
+    "nome": "Video Games Chronicle",
+    "url": "https://www.videogameschronicle.com/guide/how-to-make-money-in-gta-6/",
+    "tipo": "imprensa",
+    "data": null,
+    "nota": "Lido só o resumo da busca: abrir e conferir antes de publicar."
+   },
+   {
+    "nome": "AlcastHQ",
+    "url": "https://alcasthq.com/gta-6-robberies/",
+    "tipo": "imprensa",
+    "data": null,
+    "nota": "Lido só o resumo da busca: abrir e conferir antes de publicar."
+   }
+  ],
+  "tags": [
+   "gta6",
+   "tema:dinheiro",
+   "treino-de-leonida"
+  ],
+  "workflow_status": "rascunho"
+ },
+ {
+  "id": "gta6-dica-direcao",
+  "game_id": "gta6",
+  "category_id": "gta6-dicas",
+  "author_id": "redacao",
+  "kind": "guia",
+  "slug": "como-despistar-a-policia",
+  "title": "Como despistar a polícia no GTA 6",
+  "direct_answer": "O nível de procurado vai de 1 a 6 estrelas, com ícones vermelhos embaixo que mostram o que a polícia sabe de você. Para fugir: quebre a linha de visão, saia da área de busca e depois apague as pistas, como trocar de roupa e de veículo.",
+  "verification_status": "nao_verificado",
+  "evidence_type": "relatos",
+  "spoiler_level": "nenhum",
+  "sources": [
+   {
+    "nome": "Dexerto",
+    "url": "https://www.dexerto.com/wikis/gta-6/how-to-lose-the-police/",
+    "tipo": "imprensa",
+    "data": null,
+    "nota": "Lido só o resumo da busca: abrir e conferir antes de publicar."
+   },
+   {
+    "nome": "GTABase",
+    "url": "https://www.gtabase.com/articles/gta-6/gta-6-wanted-level-explained-police-system-guide",
+    "tipo": "imprensa",
+    "data": null,
+    "nota": "Lido só o resumo da busca: abrir e conferir antes de publicar."
+   },
+   {
+    "nome": "IBTimes UK",
+    "url": "https://www.ibtimes.co.uk/gta-6-revolutionary-police-system-crime-evasion-1818769",
+    "tipo": "imprensa",
+    "data": null,
+    "nota": "Lido só o resumo da busca: abrir e conferir antes de publicar."
+   }
+  ],
+  "tags": [
+   "gta6",
+   "tema:direcao",
+   "treino-de-leonida"
+  ],
+  "workflow_status": "rascunho"
+ },
+ {
+  "id": "gta6-dica-combate",
+  "game_id": "gta6",
+  "category_id": "gta6-dicas",
+  "author_id": "redacao",
+  "kind": "guia",
+  "slug": "roda-de-armas-e-combate",
+  "title": "Roda de armas e combate no GTA 6: o básico",
+  "direct_answer": "Segurando a roda de armas, o R1 alterna entre as abas de armas e de itens; os itens de vida e de adrenalina ficam no Quadrado e no Triângulo dentro da roda. Para trocar de arma sem perder tempo, deixe as que você mais usa à mão antes do tiroteio.",
+  "verification_status": "nao_verificado",
+  "evidence_type": "relatos",
+  "spoiler_level": "nenhum",
+  "sources": [
+   {
+    "nome": "All Things How (roda de armas)",
+    "url": "https://allthings.how/gta-6-how-the-weapon-wheel-and-inventory-work/",
+    "tipo": "imprensa",
+    "data": null,
+    "nota": "Lido só o resumo da busca: abrir e conferir antes de publicar."
+   },
+   {
+    "nome": "All Things How (combate)",
+    "url": "https://allthings.how/gta-6-combat-how-grapples-counters-cover-and-drive-bys-work/",
+    "tipo": "imprensa",
+    "data": null,
+    "nota": "Lido só o resumo da busca: abrir e conferir antes de publicar."
+   }
+  ],
+  "tags": [
+   "gta6",
+   "tema:combate",
+   "treino-de-leonida"
+  ],
+  "workflow_status": "rascunho"
+ }
+]

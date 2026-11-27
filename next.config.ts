@@ -12,7 +12,7 @@ const csp = [
   "font-src 'self'",
   // Mercado Pago: o formulário de cartão (Card Payment Brick) roda em iframes e scripts deles.
   "connect-src 'self' https://www.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com https://*.mercadopago.com https://*.mercadolibre.com https://*.mercadolivre.com",
-  "frame-src https://www.youtube-nocookie.com https://*.mercadopago.com https://*.mercadolibre.com https://*.mercadolivre.com",
+  "frame-src https://www.youtube-nocookie.com https://www.tiktok.com https://*.mercadopago.com https://*.mercadolibre.com https://*.mercadolivre.com",
   "object-src 'none'",
   "base-uri 'self'",
   "form-action 'self' https://www.mercadopago.com.br https://sandbox.mercadopago.com.br",

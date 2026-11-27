@@ -5,7 +5,7 @@ import { getDb } from "@/server/db";
 
 export const dynamic = "force-dynamic";
 
-const NAV = [["/admin/", "Visão geral"], ["/admin/entradas/", "Descobertas e guias"], ["/admin/envios/", "Envios da comunidade"], ["/admin/acessos/", "Acessos e vendas"], ["/admin/categorias/", "Categorias"], ["/admin/palavras-chave/", "Palavras-chave"], ["/admin/ctas/", "CTAs"], ["/admin/redirecionamentos/", "Redirecionamentos"]];
+const NAV = [["/admin/", "Visão geral"], ["/admin/entradas/", "Descobertas e guias"], ["/admin/envios/", "Envios da comunidade"], ["/admin/videos/", "Vídeos de dica"], ["/admin/acessos/", "Acessos e vendas"], ["/admin/categorias/", "Categorias"], ["/admin/palavras-chave/", "Palavras-chave"], ["/admin/ctas/", "CTAs"], ["/admin/redirecionamentos/", "Redirecionamentos"]];
 
 export default async function PanelLayout({ children }: { children: React.ReactNode }) {
   await requireAdmin();

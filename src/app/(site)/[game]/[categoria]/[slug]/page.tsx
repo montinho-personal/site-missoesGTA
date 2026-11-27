@@ -6,6 +6,8 @@ import { FavButton, RevealButton, TrackView } from "@/components/client";
 import { ShareSheet } from "@/components/ShareSheet";
 import { Icon } from "@/components/Icon";
 import { entryUrl, getCtas, getEntry, getEntryChanges, getPublishedEntries, nearbyEntries, relatedEntries, toCard } from "@/server/content";
+import { TipVideos } from "@/components/TipVideos";
+import { videosFor } from "@/server/tips";
 import { saleConfig } from "@/server/mercadopago";
 import { AppPitch } from "@/components/AppPitch";
 import { AppQuickPitch } from "@/components/AppQuickPitch";
@@ -50,7 +52,7 @@ export default async function EntryPage({ params }: Props) {
   const e = await getEntry(game, categoria, slug);
   if (!e) await notFoundOrRedirect(path);
   const entry = e!;
-  const [all, ctas, changes, sale] = await Promise.all([getPublishedEntries(game), getCtas(), getEntryChanges(entry.id), saleConfig()]);
+  const [all, ctas, changes, sale, videos] = await Promise.all([getPublishedEntries(game), getCtas(), getEntryChanges(entry.id), saleConfig(), videosFor(entry.id)]);
   const nearby = nearbyEntries(entry, all);
   // O argumento do aplicativo usa os dados desta ficha; sem pino, vídeo ou vizinho, fica o CTA comum.
   const sameRegion = entry.region_id ? all.filter((x) => x.id !== entry.id && x.region_id === entry.region_id).length : 0;
@@ -132,6 +134,9 @@ export default async function EntryPage({ params }: Props) {
             </section>
 
             {entry.summary && entry.direct_answer && <p className="max-w-3xl text-fg-muted text-lg">{entry.summary}</p>}
+
+            {/* Treino de Leonida: os vídeos aprovados desta dica, logo depois da resposta. */}
+            <TipVideos videos={videos.map((v) => ({ id: v.id, platform: v.platform, video_id: v.video_id, url: v.url, title: v.title, creator_name: v.creator_name, creator_url: v.creator_url }))} context={entry.id} />
 
             {/* O app aparece cedo, ensinando a fazer ESTA descoberta nele, com o preço à vista. */}
             {!isGuideKind(entry) && <AppQuickPitch entry={entry} nearby={nearby.length} sameRegion={sameRegion} total={all.filter((x) => x.app_ref).length} sale={sale} />}

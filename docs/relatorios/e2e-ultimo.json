@@ -1,6 +1,6 @@
 {
- "quando": "2026-11-27T20:05:08.489Z",
- "total": 116,
+ "quando": "2026-11-27T21:30:58.132Z",
+ "total": 121,
  "falhas": 0,
  "results": [
   {
@@ -530,6 +530,31 @@
   },
   {
    "name": "moderação muda o estado do envio",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "painel de vídeos recusa link que não é vídeo",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "vídeo de dica entra como rascunho, com crédito",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "rascunho não aparece no site",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "aprovado, o vídeo aparece na dica com o crédito do criador",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "lista do app traz a dica com vídeo, resumo curto e link rastreável para o site",
    "pass": true,
    "detail": ""
   },

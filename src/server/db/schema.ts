@@ -363,4 +363,35 @@ update ctas set eyebrow = replace(eyebrow, '128 segredos', '{n} segredos'), head
     id: "014_origem_do_pedido",
     sql: `alter table orders add column if not exists attribution jsonb;`,
   },
+  {
+    // Treino de Leonida: vídeos de dica (YouTube e TikTok tocam; Instagram é link), sempre de terceiros, com crédito.
+    // Entram como rascunho e só aparecem depois de aprovados no painel. Cada vídeo pode pertencer a uma dica (entries).
+    id: "015_videos_de_dica",
+    sql: `
+create table if not exists tip_videos (
+  id serial primary key,
+  entry_id text references entries(id) on delete set null,
+  platform text not null check (platform in ('youtube','tiktok','instagram')),
+  video_id text not null,
+  url text not null,
+  title text not null default '',
+  creator_name text not null default '',
+  creator_url text,
+  theme text,
+  status text not null default 'rascunho' check (status in ('rascunho','aprovado','rejeitado')),
+  note text,
+  sort int not null default 0,
+  created_at timestamptz not null default now(),
+  approved_at timestamptz,
+  unique (platform, video_id)
+);
+create index if not exists tip_videos_entry on tip_videos (entry_id, status, sort);
+`,
+  },
+  {
+    // Primeira leva do Treino de Leonida (pesquisa de 27/11/2026): 6 dicas e 24 vídeos, TUDO como rascunho, no conteúdo-semente
+    // (content/seed/tips-entries.json e tip-videos.json). Sem mudança de tabela: só faz o seed rodar de novo.
+    id: "016_treino_primeira_leva",
+    sql: `select 1;`,
+  },
 ];

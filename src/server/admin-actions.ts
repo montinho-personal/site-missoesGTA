@@ -237,3 +237,45 @@ export async function savePrice(fd: FormData) {
   revalidatePath("/app");
   revalidatePath("/admin/acessos");
 }
+
+// ---- Treino de Leonida: vídeos de dica ----
+const tipThemes = ["comandos", "mira", "assaltos", "dinheiro", "direcao", "combate"] as const;
+
+/** Cola o link: o site reconhece a plataforma, busca título e criador (oEmbed) e guarda como rascunho. */
+export async function addTipVideo(_p: { message: string; ok?: boolean } | null, fd: FormData): Promise<{ message: string; ok?: boolean }> {
+  await requireAdmin();
+  const { parseVideoUrl } = await import("@/lib/video-url");
+  const { fetchVideoMeta } = await import("./tips");
+  const ref = parseVideoUrl(s(fd, "url"));
+  if (!ref) return { message: "Não reconheci o link. Use um link de vídeo do YouTube, TikTok ou Instagram." };
+  const theme = z.enum(tipThemes).safeParse(s(fd, "theme")).data ?? null;
+  const entry = nul(s(fd, "entry_id"));
+  const meta = await fetchVideoMeta(ref.platform, ref.url);
+  const title = (s(fd, "title") || meta?.title || "").slice(0, 200);
+  const creator = (s(fd, "creator_name") || meta?.creator_name || "").slice(0, 120);
+  if (!creator) return { message: "Não consegui ler o nome do criador. Preencha o campo “Criador” (o crédito é obrigatório)." };
+  const rows = await q<{ id: number }>(
+    `insert into tip_videos (platform, video_id, url, title, creator_name, creator_url, theme, entry_id, note) values ($1,$2,$3,$4,$5,$6,$7,$8,$9)
+     on conflict (platform, video_id) do nothing returning id`,
+    [ref.platform, ref.id, ref.url, title, creator, meta?.creator_url ?? null, theme, entry, nul(s(fd, "note"))]);
+  if (rows.length === 0) return { message: "Esse vídeo já está na lista." };
+  revalidatePath("/admin/videos/");
+  return { ok: true, message: `Guardado como rascunho: “${title || ref.url}”, de ${creator}. Revise e aprove abaixo.` };
+}
+
+export async function updateTipVideo(fd: FormData) {
+  await requireAdmin();
+  const id = Number(s(fd, "id"));
+  if (!Number.isInteger(id)) return;
+  const acao = s(fd, "acao");
+  if (acao === "apagar") { await q(`delete from tip_videos where id = $1`, [id]); refresh(); return; }
+  const status = z.enum(["rascunho", "aprovado", "rejeitado"]).safeParse(acao).data;
+  const theme = z.enum(tipThemes).safeParse(s(fd, "theme")).data ?? null;
+  const sort = Math.max(0, Math.min(999, Number(s(fd, "sort")) || 0));
+  const entry = nul(s(fd, "entry_id"));
+  if (status === "aprovado" && !entry) redirect(`/admin/videos/?erro=sem-dica#v${id}`);
+  await q(`update tip_videos set entry_id = $2, theme = $3, sort = $4, title = coalesce(nullif($5, ''), title), creator_name = coalesce(nullif($6, ''), creator_name),
+           status = coalesce($7, status), approved_at = case when $7 = 'aprovado' and status <> 'aprovado' then now() else approved_at end where id = $1`,
+    [id, entry, theme, sort, s(fd, "title").slice(0, 200), s(fd, "creator_name").slice(0, 120), status ?? null]);
+  refresh();
+}
