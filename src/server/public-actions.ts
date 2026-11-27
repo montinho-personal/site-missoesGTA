@@ -30,7 +30,7 @@ const submissionSchema = z.object({
 });
 
 // Em caso de erro devolvemos o que a pessoa digitou: ninguém deve reescrever um relato por causa de um campo.
-const keep = (fd: FormData) => Object.fromEntries([...fd].filter(([k, v]) => typeof v === "string" && !["t", "website"].includes(k)).map(([k, v]) => [k, String(v).slice(0, 4000)]));
+const keep = (fd: FormData) => Object.fromEntries([...fd].filter(([k, v]) => typeof v === "string" && !["t", "website", "senha"].includes(k)).map(([k, v]) => [k, String(v).slice(0, 4000)]));
 
 export async function submitToTeam(_prev: FormState, fd: FormData): Promise<FormState> {
   const values = keep(fd);
@@ -66,7 +66,7 @@ export async function joinWaitlist(_prev: FormState, fd: FormData): Promise<Form
   return { ok: true, message: "Pronto. Avisaremos você por e-mail quando o aplicativo estiver disponível, e só sobre isso." };
 }
 
-const buySchema = z.object({ email: z.email("Digite um e-mail válido.").max(160), consent: z.literal("on", { error: "É preciso aceitar os termos para comprar." }), metodo: z.enum(["pix", "cartao"]).default("pix") });
+const buySchema = z.object({ email: z.email("Digite um e-mail válido.").max(160), consent: z.literal("on", { error: "É preciso aceitar os termos para comprar." }), metodo: z.enum(["pix", "cartao"]).default("pix"), senha: z.string().min(8, "A senha precisa ter pelo menos 8 caracteres.").max(100, "A senha pode ter no máximo 100 caracteres.") });
 
 /**
  * Abre um pedido. Pix (padrão): cria a cobrança pela API e leva o comprador para a página de acesso,
@@ -84,6 +84,11 @@ export async function startCheckout(_prev: FormState, fd: FormData): Promise<For
   if (!(await rateLimit("checkout", await clientKey(), 8, 3600))) return { ok: false, message: "Muitas tentativas. Tente de novo mais tarde.", values };
   const id = newOrderId();
   const email = parsed.data.email.toLowerCase();
+  // Conta: e-mail novo cria a conta com a senha; e-mail que já tem conta precisa da mesma senha.
+  const { accountExists, setPassword, verifyLogin } = await import("./accounts");
+  if (await accountExists(email)) {
+    if (!(await verifyLogin(email, parsed.data.senha))) return { ok: false, message: "Este e-mail já tem conta. Use a mesma senha de antes, ou recupere em “Esqueci a senha”, no app.", values };
+  } else await setPassword(email, parsed.data.senha);
   await q(`insert into orders (id, email, amount_cents) values ($1, $2, $3)`, [id, email, sale.cents]);
   const fail = { ok: false as const, message: "Não foi possível abrir o pagamento agora. Nada foi cobrado. Tente de novo em instantes.", values };
   // Pagamento só por Pix (decisão do Montinho em 27/11/2026). O caminho do cartão fica no código, desligado.
@@ -98,4 +103,37 @@ export async function startCheckout(_prev: FormState, fd: FormData): Promise<For
     await q(`update orders set payment_id = $2, pix_qr = $3, pix_qr_b64 = $4, pix_expires_at = $5 where id = $1`, [id, pix.paymentId, pix.qr, pix.qrB64, pix.expiresAt]);
   } catch { return fail; }
   redirect(`/app/acesso/?pedido=${id}`);
+}
+
+const forgotSchema = z.object({ email: z.email("Digite um e-mail válido.").max(160) });
+
+/** "Esqueci a senha" pelo site: manda o link de nova senha. A resposta é a mesma para qualquer e-mail. */
+export async function forgotPassword(_prev: FormState, fd: FormData): Promise<FormState> {
+  const values = keep(fd);
+  if (looksAutomated(fd)) return { ok: false, message: BOT, values };
+  const parsed = forgotSchema.safeParse(Object.fromEntries(fd));
+  if (!parsed.success) return { ok: false, message: parsed.error.issues[0].message, values };
+  const email = parsed.data.email.toLowerCase();
+  if (!(await rateLimit("esqueci", await clientKey(), 6, 3600))) return { ok: false, message: "Muitos pedidos. Tente de novo daqui a pouco.", values };
+  const { accountExists, activeLicenseFor, newResetToken } = await import("./accounts");
+  if ((await accountExists(email)) || (await activeLicenseFor(email))) {
+    const { resetEmail } = await import("./access");
+    const { sendEmail } = await import("./email");
+    const { abs } = await import("@/lib/site");
+    await sendEmail({ to: email, ...resetEmail(abs(`/conta/nova-senha/?t=${await newResetToken(email)}`)) });
+  }
+  return { ok: true, message: "Se este e-mail tiver compra ou conta, o link para criar a senha chega em instantes. Olhe também a caixa de spam." };
+}
+
+const newPassSchema = z.object({ t: z.string().regex(/^[a-f0-9]{48}$/), senha: z.string().min(8, "A senha precisa ter pelo menos 8 caracteres.").max(100), senha2: z.string() });
+
+/** Cria ou troca a senha com o link do e-mail (vale 1 hora, uma vez só). */
+export async function resetPassword(_prev: FormState, fd: FormData): Promise<FormState> {
+  const parsed = newPassSchema.safeParse(Object.fromEntries(fd));
+  if (!parsed.success) return { ok: false, message: parsed.error.issues[0].path[0] === "t" ? "Este link não vale mais. Peça um novo em “Esqueci a senha”." : parsed.error.issues[0].message };
+  if (parsed.data.senha !== parsed.data.senha2) return { ok: false, message: "As duas senhas não são iguais." };
+  const { redeemResetToken } = await import("./accounts");
+  const email = await redeemResetToken(parsed.data.t, parsed.data.senha);
+  if (!email) return { ok: false, message: "Este link venceu ou já foi usado. Peça um novo em “Esqueci a senha”." };
+  return { ok: true, message: email };
 }

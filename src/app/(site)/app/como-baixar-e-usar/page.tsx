@@ -49,8 +49,8 @@ const B = ({ children }: { children: React.ReactNode }) => <strong className="te
 
 const faq = [
   { q: "Preciso baixar na Play Store ou na App Store?", a: "Não. É um aplicativo web: você abre o endereço no navegador e adiciona à tela de início. Ele ganha ícone, abre em tela cheia e funciona como um aplicativo de loja, sem ocupar o espaço de um." },
-  { q: "Perdi o acesso ou apaguei o e-mail. E agora?", a: "No aplicativo, toque em “Já comprei” e digite o e-mail da compra: chega na hora um e-mail novo com o botão que abre o app liberado. Se não chegar, fale com a gente pelo contato." },
-  { q: "Troquei de celular. Perco o acesso?", a: "Não. Abra o e-mail de confirmação no celular novo e toque em “Abrir o app”, ou use “Já comprei” no aplicativo. Uma compra vale para até 3 aparelhos." },
+  { q: "Esqueci a senha. E agora?", a: "No aplicativo ou no site, toque em “Esqueci a senha” e digite o e-mail da compra. Chega um link para criar uma senha nova. Se não chegar, olhe o spam ou fale com a gente pelo contato." },
+  { q: "Troquei de celular. Perco o acesso?", a: "Não. No celular novo, entre no app com o seu e-mail e a sua senha. Uma compra vale para até 3 celulares." },
   { q: "Funciona sem internet?", a: "A ideia é funcionar: depois do primeiro acesso com internet, o aplicativo guarda as fichas no aparelho para você consultar sem sinal. Essa parte ainda está em construção." },
   { q: "Ocupa muito espaço?", a: "Pouco. Um aplicativo web não instala um pacote grande: guarda só as fichas e o mapa do arquivo." },
   { q: "O aplicativo mexe no jogo ou no console?", a: "Não. É um guia de consulta: não é mod, não se conecta ao console e não altera nada no jogo." },
@@ -98,7 +98,7 @@ export default async function ComoBaixarEUsar() {
             <div className="mt-4">
               <Passos itens={[
                 <>Abra a <Link href="/app/" className="link">página do aplicativo</Link> e desça até o formulário de compra.</>,
-                <>Digite seu <B>e-mail</B>, aceite os termos e toque em <B>Comprar</B>. Use um e-mail que você lê: a confirmação e o botão que abre o app vão para ele.</>,
+                <>Digite seu <B>e-mail</B>, <B>crie uma senha</B>, aceite os termos e toque em <B>Comprar</B>. É com esse e-mail e essa senha que você entra no app, em qualquer celular.</>,
                 <>O pagamento é por <B>Pix</B>: o QR Code e o “copia e cola” aparecem na própria página. Pague pelo app do seu banco.</>,
                 <>Pix costuma confirmar em segundos, e a página muda sozinha para <B>Pagamento confirmado</B>. Cartão aprovado vai direto para ela.</>,
                 <>Toque em <B>Abrir o app</B>: ele abre já liberado, sem digitar nada. Na mesma hora chega o <B>e-mail de confirmação</B>, com o mesmo botão, para usar em outro celular (até 3 aparelhos).</>,
@@ -153,7 +153,7 @@ export default async function ComoBaixarEUsar() {
             <div className="mt-4">
               <Passos itens={[
                 <>Abra o aplicativo pelo ícone na tela de início.</>,
-                <>Se ele pedir para entrar, toque em <B>Já comprei</B> e digite o e-mail da compra. Chega um e-mail com o botão <B>Abrir o app</B>: toque nele neste aparelho. Não tem código para digitar.</>,
+                <>Se ele pedir para entrar, digite o <B>e-mail da compra</B> e a <B>senha que você criou</B> ao comprar. Esqueceu a senha? Toque em <B>Esqueci a senha</B> e crie outra pelo e-mail.</>,
                 <>Pronto. O aplicativo baixa as fichas e abre no <B>Início</B>.</>,
               ]} />
             </div>

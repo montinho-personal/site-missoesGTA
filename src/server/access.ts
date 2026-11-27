@@ -26,9 +26,9 @@ export function accessEmail(o: { link: string; kind: "compra" | "link"; cents?: 
     ? `Pagamento de ${brl(o.cents ?? 0)} confirmado${quando ? ` em ${quando}` : ""}. Seu acesso já está liberado.`
     : "Você pediu para entrar no app. Toque no botão abaixo, neste celular.";
   const passos = [
-    "Toque em <b>Abrir o app</b>, no celular onde você vai usar. Ele abre já liberado.",
+    "Toque em <b>Abrir o app</b>, no celular onde você vai usar. Ele abre já liberado. Ou entre no app com <b>este e-mail e a sua senha</b>.",
     "Para ficar com o ícone na tela: no <b>Android (Chrome)</b>, toque nos três pontinhos ⋮ e em <b>Instalar app</b>. No <b>iPhone (Safari)</b>, toque em <b>Compartilhar</b> e em <b>Adicionar à Tela de Início</b>.",
-    `Quer usar em outro celular? Abra este mesmo e-mail nele e toque no botão. Vale para até ${DEVICES_ADVERTISED} celulares.`,
+    `Em outro celular, entre no app com o seu e-mail e a sua senha (ou abra este e-mail nele e toque no botão). Vale para até ${DEVICES_ADVERTISED} celulares.`,
   ];
   const html = `<!doctype html><html lang="pt-BR"><body style="margin:0;background:#0c0b19;font-family:Arial,Helvetica,sans-serif;color:#f5f3ff">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td align="center" style="padding:28px 16px">
@@ -79,4 +79,21 @@ export async function redeemLoginCode(email: string, code: string): Promise<bool
   if (row.code_hash !== hashCode(email, code)) { await q(`update login_codes set attempts = attempts + 1 where id = $1`, [row.id]); return false; }
   await q(`update login_codes set used_at = now() where id = $1`, [row.id]);
   return true;
+}
+
+/** E-mail de "criar ou trocar a senha", com o link que vale 1 hora. */
+export function resetEmail(link: string) {
+  const subject = "Crie sua senha do Missões Secretas GTA 6";
+  const html = `<!doctype html><html lang="pt-BR"><body style="margin:0;background:#0c0b19;font-family:Arial,Helvetica,sans-serif;color:#f5f3ff">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td align="center" style="padding:28px 16px">
+<table role="presentation" width="100%" style="max-width:520px;background:#131127;border:1px solid #2a2650;border-radius:14px" cellpadding="0" cellspacing="0"><tr><td style="padding:28px 24px">
+<p style="margin:0 0 6px;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#ff4d9d;font-weight:bold">Missões Secretas GTA 6</p>
+<h1 style="margin:0 0 14px;font-size:24px;line-height:1.2;color:#ffffff">Criar ou trocar a senha</h1>
+<p style="margin:0 0 22px;font-size:16px;line-height:1.5;color:#bdb8d9">Toque no botão para escolher a sua senha. O link vale por 1 hora e funciona uma vez só.</p>
+<p style="margin:0 0 26px"><a href="${esc(link)}" style="display:inline-block;background:#6d43e0;color:#ffffff;text-decoration:none;font-weight:bold;font-size:17px;padding:14px 26px;border-radius:10px">Criar minha senha</a></p>
+<p style="margin:0 0 8px;font-size:13px;line-height:1.5;color:#9690b8">O botão não abriu? Copie este endereço no navegador:<br><a href="${esc(link)}" style="color:#5ce1f2;word-break:break-all">${esc(link)}</a></p>
+<p style="margin:14px 0 0;font-size:13px;color:#9690b8">Não foi você? É só ignorar este e-mail: nada muda na sua conta.</p>
+</td></tr></table></td></tr></table></body></html>`;
+  const text = ["Criar ou trocar a senha", "", "Abra o link para escolher a sua senha (vale 1 hora, uma vez só):", link, "", "Não foi você? Ignore este e-mail."].join("\n");
+  return { subject, html, text };
 }

@@ -89,6 +89,7 @@ try {
 
   // Pix direto: QR Code no site, sem login no Mercado Pago, liberação mesmo sem o aviso chegar
   await page.getByLabel("Seu e-mail").fill("pix@example.com");
+  await page.getByLabel("Crie uma senha").fill("senha-forte-1");
   await page.locator("#avise-me").getByRole("checkbox").check();
   await page.waitForTimeout(2600);
   await page.getByRole("button", { name: /Comprar por R\$\s19,90 no Pix/ }).click();
@@ -121,7 +122,25 @@ try {
   ok("'Já comprei' manda o link só para quem comprou, com a mesma resposta para todos", (await r1.json()).ok && (await r2.json()).ok && emails.length === antes + 1 && emails.at(-1).to[0] === "pix@example.com" && emails.at(-1).html.includes(abrir) && r1.headers.get("access-control-allow-origin") === "https://app.missoessecretasgta.com.br");
   const doApp = await Promise.all(Array.from({ length: 8 }, (_, i) => fetch(`${BASE}/api/acesso/enviar-link/`, { method: "POST", headers: { "content-type": "application/json", authorization: "Bearer chave-app-teste" }, body: JSON.stringify({ email: `cliente${i}@example.com` }) }).then((r) => r.status)));
   ok("'Já comprei' pelo servidor do app não esbarra no limite por endereço", doApp.every((st) => st === 200), doApp.join(","));
-  const cod6 = /(\d{3}) (\d{3})<\/span>/.exec(emails.at(-1).html);
+  // Conta: entrar no app com e-mail e senha
+  const entra = (email, senha, aparelho = "cel-2-bbbbbbbb", key = "chave-app-teste") => fetch(`${BASE}/api/acesso/entrar/`, { method: "POST", headers: { "content-type": "application/json", ...(key ? { authorization: `Bearer ${key}` } : {}) }, body: JSON.stringify({ email, senha, aparelho }) }).then((r) => r.status === 401 ? { status: 401 } : r.json());
+  const ok1 = await entra("PIX@example.com", "senha-forte-1"), errada = await entra("pix@example.com", "outra-senha"), semConta = await entra("ninguem@example.com", "senha-forte-1"), semK = await entra("pix@example.com", "senha-forte-1", "cel-2-bbbbbbbb", "");
+  ok("app entra com e-mail e senha e recebe a chave; senha errada e conta inexistente dão o mesmo 'senha'", ok1.valido === true && ok1.chave === compacto(codigoPix) && errada.motivo === "senha" && semConta.motivo === "senha" && semK.status === 401, JSON.stringify([ok1, errada, semConta]));
+  // esqueci a senha: link por e-mail, página de nova senha, entrar com a nova
+  const antesReset = emails.length;
+  await fetch(`${BASE}/api/acesso/esqueci-senha/`, { method: "POST", headers: { "content-type": "application/json", authorization: "Bearer chave-app-teste" }, body: JSON.stringify({ email: "pix@example.com" }) });
+  const resetMail = emails[antesReset];
+  const resetUrl = /href="([^"]*\/conta\/nova-senha\/\?t=[a-f0-9]{48})"/.exec(resetMail?.html ?? "")?.[1];
+  ok("'Esqueci a senha' manda o link de nova senha", Boolean(resetUrl) && /Crie sua senha/.test(resetMail.subject), resetUrl ?? "");
+  await page.goto(resetUrl.replace(/^https?:\/\/[^/]+/, BASE), { waitUntil: "load" });
+  await page.getByLabel("Nova senha").fill("senha-nova-22");
+  await page.getByLabel("Repita a senha").fill("senha-nova-22");
+  await page.getByRole("button", { name: "Salvar a senha" }).click();
+  await page.getByText("Senha criada.").waitFor();
+  ok("nova senha vale e a antiga deixa de valer", (await entra("pix@example.com", "senha-nova-22")).valido === true && (await entra("pix@example.com", "senha-forte-1")).motivo === "senha");
+  await page.goto(resetUrl.replace(/^https?:\/\/[^/]+/, BASE), { waitUntil: "load" });
+  ok("o link de nova senha vale uma vez só", /venceu ou já foi usado/.test(await page.locator("main").innerText()));
+  const cod6 = /(\d{3}) (\d{3})<\/span>/.exec(emails.filter((e) => /Seu link para entrar/.test(e.subject)).at(-1).html);
   const seis = cod6 ? cod6[1] + cod6[2] : "";
   const confirma = (codigo, aparelho = "cel-2-bbbbbbbb", key = "chave-app-teste") => fetch(`${BASE}/api/acesso/confirmar-codigo/`, { method: "POST", headers: { "content-type": "application/json", ...(key ? { authorization: `Bearer ${key}` } : {}) }, body: JSON.stringify({ email: "pix@example.com", codigo, aparelho }) }).then((r) => r.status === 401 ? { status: 401 } : r.json());
   const errado = await confirma(seis === "000000" ? "111111" : "000000"), semChave = await confirma(seis, "cel-2-bbbbbbbb", ""), certo = await confirma(seis), denovo = await confirma(seis);
@@ -132,6 +151,7 @@ try {
   ok("compra só por Pix: não há botão de cartão", (await page.getByRole("button", { name: /cart[aã]o/i }).count()) === 0);
   ok("rota do cartão desligada", (await fetch(`${BASE}/api/mercadopago/cartao/`, { method: "POST", headers: { "content-type": "application/json" }, body: "{}" })).status === 404);
   await page.getByLabel("Seu e-mail").fill("comprador@example.com");
+  await page.getByLabel("Crie uma senha").fill("senha-forte-1");
   await page.locator("#avise-me").getByRole("checkbox").check();
   await page.waitForTimeout(2600);
   await page.getByRole("button", { name: /no Pix/ }).click();

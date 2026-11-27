@@ -299,4 +299,22 @@ create table login_codes (
 create index login_codes_email on login_codes (email, expires_at);
 `,
   },
+  {
+    // Conta do comprador: e-mail e senha (só o resumo scrypt fica guardado) e pedidos de nova senha.
+    id: "009_contas",
+    sql: `
+create table accounts (
+  email text primary key,
+  pass_hash text not null,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
+);
+create table password_resets (
+  token_hash text primary key,
+  email text not null,
+  expires_at timestamptz not null,
+  used_at timestamptz
+);
+`,
+  },
 ];

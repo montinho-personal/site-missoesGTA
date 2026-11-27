@@ -1,7 +1,7 @@
 "use client";
 import { useActionState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { joinWaitlist, startCheckout, submitToTeam, type FormState } from "@/server/public-actions";
+import { forgotPassword, joinWaitlist, resetPassword, startCheckout, submitToTeam, type FormState } from "@/server/public-actions";
 import { track } from "@/lib/analytics";
 import { Icon } from "./Icon";
 
@@ -108,13 +108,53 @@ export function BuyForm({ priceLabel }: { priceLabel: string }) {
       <div>
         <label className="field-label" htmlFor="b-email">Seu e-mail</label>
         <input className="field" id="b-email" name="email" type="email" required autoComplete="email" placeholder="voce@exemplo.com" defaultValue={state?.values?.email} aria-describedby="b-hint" />
-        <span id="b-hint" className="field-hint">É para onde vai a confirmação da compra, com o botão que abre o app liberado.</span>
+        <span id="b-hint" className="field-hint">É com ele que você entra no app. A confirmação da compra chega nele.</span>
+      </div>
+      <div>
+        <label className="field-label" htmlFor="b-senha">Crie uma senha</label>
+        <input className="field" id="b-senha" name="senha" type="password" required minLength={8} maxLength={100} autoComplete="new-password" aria-describedby="b-senha-hint" />
+        <span id="b-senha-hint" className="field-hint">Mínimo de 8 caracteres. No app, você entra com o e-mail e esta senha, em qualquer celular. Já comprou antes? Use a mesma senha.</span>
       </div>
       <label className="flex items-start gap-3 cursor-pointer"><input type="checkbox" name="consent" required defaultChecked={state?.values?.consent === "on"} className="mt-1 size-5 accent-[#a98bff]" />
         <span className="text-sm text-fg-muted">Li e aceito os <Link href="/termos/" className="link">termos de uso</Link> e a <Link href="/privacidade/" className="link">política de privacidade</Link>. Sei que posso desistir da compra em até 7 dias.</span></label>
       {state && !state.ok && <Status state={state} />}
       <button className="btn btn-app" name="metodo" value="pix" disabled={pending}>{pending ? "Gerando o Pix…" : `Comprar por ${priceLabel} no Pix`}</button>
       <p className="text-sm text-fg-subtle">Pagamento só por Pix: o QR Code e o “copia e cola” aparecem aqui mesmo, e você paga pelo app do seu banco. Confirma em segundos.</p>
+    </form>
+  );
+}
+
+export function ForgotPasswordForm() {
+  const [state, action, pending] = useActionState(forgotPassword, null);
+  return (
+    <form action={action} className="relative flex flex-col gap-3.5" noValidate>
+      <Trap attempt={state} />
+      <div>
+        <label className="field-label" htmlFor="f-email">E-mail da compra</label>
+        <input className="field" id="f-email" name="email" type="email" required autoComplete="email" defaultValue={state?.values?.email} />
+      </div>
+      {state && <Status state={state} />}
+      <button className="btn btn-app self-start" disabled={pending}>{pending ? "Enviando…" : "Mandar o link"}</button>
+    </form>
+  );
+}
+
+export function NewPasswordForm({ token, appLink }: { token: string; appLink: string }) {
+  const [state, action, pending] = useActionState(resetPassword, null);
+  if (state?.ok) return (
+    <div role="status" className="card border-ok/60 p-5">
+      <p className="font-display text-xl font-bold">Senha criada.</p>
+      <p className="mt-2 text-fg-muted">Agora é só entrar no app com <strong className="text-fg">{state.message}</strong> e a senha nova.</p>
+      <a href={appLink} className="btn btn-app mt-4">Abrir o app<Icon name="arrow" size={18} /></a>
+    </div>
+  );
+  return (
+    <form action={action} className="flex flex-col gap-3.5" noValidate>
+      <input type="hidden" name="t" value={token} />
+      <div><label className="field-label" htmlFor="n-senha">Nova senha</label><input className="field" id="n-senha" name="senha" type="password" required minLength={8} autoComplete="new-password" /><span className="field-hint">Mínimo de 8 caracteres.</span></div>
+      <div><label className="field-label" htmlFor="n-senha2">Repita a senha</label><input className="field" id="n-senha2" name="senha2" type="password" required minLength={8} autoComplete="new-password" /></div>
+      {state && !state.ok && <Status state={state} />}
+      <button className="btn btn-app self-start" disabled={pending}>{pending ? "Salvando…" : "Salvar a senha"}</button>
     </form>
   );
 }

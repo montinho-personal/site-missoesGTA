@@ -36,9 +36,9 @@ export default async function Acesso({ searchParams }: { searchParams: Promise<R
         <div className="card border-ok/60 p-6">
           <p className="label text-ok">Pagamento confirmado</p>
           <h2 className="mt-2 text-3xl font-black">Seu acesso está liberado.</h2>
-          <p className="mt-3 text-fg-muted">Toque no botão no celular onde você vai jogar. O app abre já liberado, sem digitar nada.</p>
+          <p className="mt-3 text-fg-muted">Toque no botão no celular onde você vai jogar: o app abre já liberado. Em qualquer outro celular, entre no app com <strong className="text-fg">o seu e-mail e a senha que você criou</strong>.</p>
           <a href={link!} className="btn btn-app mt-5 w-full sm:w-auto text-lg">Abrir o app<Icon name="arrow" size={18} /></a>
-          <p className="mt-4 text-fg-muted">{row.access_email_at ? <>Mandamos a confirmação para <strong className="text-fg">{mask(row.email)}</strong>, com o mesmo botão.</> : <>A confirmação está a caminho do seu e-mail, <strong className="text-fg">{mask(row.email)}</strong>, com o mesmo botão.</>} Ele vale para até 3 celulares: em outro aparelho, abra o e-mail e toque em “Abrir o app”.</p>
+          <p className="mt-4 text-fg-muted">{row.access_email_at ? <>Mandamos a confirmação para <strong className="text-fg">{mask(row.email)}</strong>, com o mesmo botão.</> : <>A confirmação está a caminho do seu e-mail, <strong className="text-fg">{mask(row.email)}</strong>, com o mesmo botão.</>} Vale para até 3 celulares. Esqueceu a senha? <Link href="/conta/esqueci-senha/" className="link">Crie uma nova</Link>.</p>
           <ol className="mt-5 list-decimal pl-5 text-fg-muted flex flex-col gap-1.5">
             <li>Toque em <strong className="text-fg">Abrir o app</strong>.</li>
             <li>Para ter o ícone na tela: no Android (Chrome), três pontinhos ⋮ e <strong className="text-fg">Instalar app</strong>. No iPhone (Safari), <strong className="text-fg">Compartilhar</strong> e <strong className="text-fg">Adicionar à Tela de Início</strong>.</li>
