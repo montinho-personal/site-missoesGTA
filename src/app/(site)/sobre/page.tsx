@@ -44,6 +44,8 @@ export default function Sobre() {
         <p>Uma equipe pequena de jogadores que acompanha a série desde os primeiros jogos. Quando uma descoberta for testada por alguém da equipe dentro do jogo, a página registra a plataforma, a versão e a data.</p>
         <h2>Como o projeto se sustenta</h2>
         <p>O portal é gratuito e as respostas ficam completas aqui. O projeto se mantém com o <Link href="/app/">aplicativo</Link>, que vende organização e praticidade para quem quer explorar a fundo. Não escondemos resposta para forçar ninguém a comprar. Isso é coisa de vilão de missão secundária.</p>
+        <h2>Para ir mais fundo</h2>
+        <p>Comece pela <Link href="/gta-6/segredos/">lista completa de segredos</Link>, explore por <Link href="/gta-6/mapa/">região do mapa</Link> ou veja <Link href="/metodologia/">como checamos cada descoberta</Link>. Notícias oficiais do jogo ficam no <a href="https://www.rockstargames.com/VI" target="_blank" rel="noopener">site oficial de GTA VI</a>.</p>
       </div>
       <div className="mt-8"><Callout icon="info" title="Projeto independente"><p>{site.independence}</p></Callout></div>
     </Shell>

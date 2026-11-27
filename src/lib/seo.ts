@@ -3,7 +3,8 @@ import { abs, site } from "./site";
 
 export function pageMeta(o: { title: string; description: string; path: string; noindex?: boolean; type?: "website" | "article"; published?: string | null; modified?: string | null; absoluteTitle?: boolean }): Metadata {
   return {
-    title: o.absoluteTitle ? { absolute: o.title } : o.title,
+    // A marca entra no fim só quando o título inteiro cabe nos ~60 caracteres que o Google mostra.
+    title: o.absoluteTitle || o.title.length + ` | ${site.name}`.length > 60 ? { absolute: o.title } : o.title,
     description: o.description,
     alternates: { canonical: o.path },
     ...(o.noindex ? { robots: { index: false, follow: true } } : {}),

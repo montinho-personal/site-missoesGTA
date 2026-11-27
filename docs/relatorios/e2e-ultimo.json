@@ -1,6 +1,6 @@
 {
- "quando": "2026-11-26T09:55:54.101Z",
- "total": 106,
+ "quando": "2026-11-27T08:34:42.399Z",
+ "total": 110,
  "falhas": 0,
  "results": [
   {
@@ -154,6 +154,16 @@
    "detail": ""
   },
   {
+   "name": "imagem de Stories /gta-6/easter-eggs/skunk-ape/story/",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "imagem de Stories /app/story/",
+   "pass": true,
+   "detail": ""
+  },
+  {
    "name": "um único H1",
    "pass": true,
    "detail": ""
@@ -171,7 +181,7 @@
   {
    "name": "JSON-LD válido com Article e BreadcrumbList",
    "pass": true,
-   "detail": "BreadcrumbList,Article"
+   "detail": "BreadcrumbList,Article,FAQPage"
   },
   {
    "name": "sem preço/avaliação fictícios no schema",
@@ -381,7 +391,7 @@
   {
    "name": "filtro por tipo reduz a lista",
    "pass": true,
-   "detail": "128 → 16"
+   "detail": "130 → 16"
   },
   {
    "name": "filtro não muda a URL (nada de combinações indexáveis)",
@@ -400,6 +410,16 @@
   },
   {
    "name": "menu fecha com Esc",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "WhatsApp abre com mensagem pronta, título e link rastreável",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "ficha tem o bloco 'Manda pro parceiro'",
    "pass": true,
    "detail": ""
   },
@@ -501,7 +521,7 @@
   {
    "name": "mudar slug cria redirecionamento 301",
    "pass": true,
-   "detail": "308 → /gta-6/dicas/como-salvar-o-jogo-novo/, /gta-6/dicas/como-salvar-o-jogo-novo/"
+   "detail": "308 → /gta-6/dicas/como-salvar-o-jogo-novo/"
   },
   {
    "name": "novo endereço responde 200 após revalidação",

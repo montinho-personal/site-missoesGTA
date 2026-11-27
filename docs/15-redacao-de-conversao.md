@@ -63,3 +63,13 @@ Cada clique manda `cta_click` com `placement` (`sticky`, `entry_after_steps`, `c
 - O painel não usa a contagem real de segredos por perto (isso está no bloco da ficha, que já tem o dado).
 - Não há variação por origem do visitante (busca, rede social, link direto).
 - Nenhum desses textos foi testado com jogadores.
+
+
+## Conceito central do app (27/11/2026, do Montinho)
+
+**"O segredo a gente revela. A aventura é você quem vive."**
+
+- O app é o **comparsa de bolso**: segredos, localizações, orientações e vídeos de quem já fez.
+- **Contraste:** saber onde está o dinheiro não garante escapar com ele; saber onde está o carro não faz a polícia facilitar a fuga. Em GTA nenhuma aventura se repete.
+- **Preço:** R$ 4,20, pagamento único, sem mensalidade. "Sim… 4,20. 😏 Entendedores entenderão. Não entendeu? Pergunta pro Donnie ou pro Brian."
+- Os textos moram em `src/lib/app-story.ts`. Aplicado em: página do app (título e manifesto), seção do app na home, chamada rápida e chamada longa das fichas, cartão do menu, painel que sobe e as 8 chamadas (migração 011). O app recebeu o mesmo conceito pela conversa do app.

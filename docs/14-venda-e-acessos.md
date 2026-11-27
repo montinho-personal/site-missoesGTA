@@ -48,7 +48,25 @@ Testado com um **Mercado Pago simulado** (`tests/pagamento.mjs`, 18 verificaçõ
 ## Limites conhecidos
 
 - **Sem envio de e-mail.** O código aparece na tela depois do pagamento. Quem fechar a página e perder o endereço precisa pedir pelo contato; o dono acha o código pelo e-mail em `/admin/acessos/`. Vale ligar um serviço de e-mail transacional.
-- **Um código não é preso a um aparelho.** Pode ser compartilhado. O painel mostra o último uso, e o dono pode revogar. Limite por aparelho depende de conta no aplicativo.
+- **Código individual não é preso a um aparelho.** Pode ser compartilhado. O painel mostra o último uso, e o dono pode revogar.
+- **Código com vagas** (ex.: NINA-VIP para 50 pessoas): cada aparelho novo ocupa uma vaga; o mesmo aparelho continua valendo sempre. Quando acabam as vagas, aparelhos novos recebem `{"valido": false, "motivo": "esgotado"}`.
+
+### Contrato com o aplicativo (validação)
+
+```
+POST /api/acesso/validar/
+{"codigo": "NINA-VIP", "aparelho": "<id aleatório criado e guardado pelo app, 8 a 64 caracteres: letras, números, - e _>"}
+→ {"valido": true} | {"valido": false} | {"valido": false, "motivo": "esgotado" | "aparelho" | "muitas_tentativas"}
+```
+
+O aplicativo deve **sempre** mandar `aparelho` (um UUID gerado na primeira abertura e guardado no aparelho). Sem ele, códigos individuais continuam valendo, mas códigos com vagas respondem `motivo: "aparelho"`. Código vale com ou sem hífen e em qualquer caixa.
+
+### Cortesias no painel (`/admin/acessos/`)
+
+- Nome do código opcional (4 a 24 letras/números, com hífen). Vazio: sorteia MS6-XXXX-XXXX-XXXX.
+- "Quantas pessoas podem usar este código": 1 = individual; N = as primeiras N.
+- "Quantos códigos gerar": até 200 de uma vez; com nome escolhido saem numerados (SORTEIO-01, -02...).
+- Depois de gerar: mensagem pronta, botão do WhatsApp (abre direto na conversa se houver número) e copiar.
 - **Nota fiscal** não é emitida pelo site.
 - **Bloqueio no aplicativo** ainda não existe: é trabalho do repositório do aplicativo.
 - **Direito de arrependimento:** a página informa os 7 dias do Código de Defesa do Consumidor; a devolução é feita pelo dono no painel do Mercado Pago, e o aviso de estorno desativa o código.

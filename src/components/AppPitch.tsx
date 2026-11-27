@@ -62,6 +62,7 @@ export function AppPitch({ entry, nearby, sameRegion, sale }: { entry: Entry; ne
           </TrackLink>
           <Link href="/app/" className="link text-[0.97rem]">Ver como o aplicativo funciona</Link>
         </div>
+        <p className="mt-5 font-display text-lg font-bold">O segredo a gente revela. A aventura é você quem vive.</p>
         {!sale.enabled && <p className="mt-3 text-sm text-fg-subtle">O aplicativo ainda não foi lançado. A ficha completa continua aqui, de graça.</p>}
       </div>
     </aside>

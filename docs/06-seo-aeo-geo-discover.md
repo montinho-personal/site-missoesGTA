@@ -70,3 +70,23 @@ Regras: sem número inventado no título, sem "você não vai acreditar", e o st
 ## SEO de imagens e vídeos (quando existirem)
 
 Capturas próprias, 1.600 px de largura, nome de arquivo descritivo, texto alternativo obrigatório (o painel recusa imagem sem ele), crédito e legenda. Vídeo próprio curto por descoberta testada, hospedado no YouTube e incorporado por `youtube-nocookie` (já liberado na CSP).
+
+## Rodada de SEO de 26/11/2026
+
+Auditoria das 159 páginas do sitemap (script em `docs/seo/`, refeita depois das mudanças).
+
+| Medida | Antes | Depois |
+|---|---|---|
+| Fichas com FAQ marcada para Google e IAs (FAQPage) | 3 de 128 | 128 de 128 |
+| Fichas com título acima de 60 caracteres | 65 | 1 |
+| Fichas com descrição curta (menos de 110) | 90 | 4 |
+| Categorias com FAQ | 0 de 7 | 7 de 7 |
+| Categorias com link para a fonte oficial | 0 | 7 |
+| Regiões com FAQ e CollectionPage | 0 de 10 | 10 de 10 |
+
+O que mudou:
+- `src/lib/seo-entry.ts`: título no formato de busca ("X em GTA 6: onde fica e como fazer"), descrição com local, recompensa e selo, e perguntas frequentes montadas **só com os dados da ficha** (local, recompensa, requisitos, se dá para perder ou repetir, status). Nada é inventado.
+- Categorias e regiões ganharam perguntas com números contados no próprio arquivo.
+- A marca só entra no fim do título quando o título inteiro cabe em 60 caracteres (`pageMeta`).
+- Links externos para o site oficial de GTA VI e o Newswire da Rockstar em categorias, Sobre e Metodologia.
+- Mapa de palavras-chave por página: `docs/seo/mapa-de-palavras-chave.md` e `.csv`, gerado por `scripts/mapa-palavras-chave.py`. Volume de busca fica em branco até alguém consultar Keyword Planner ou Search Console.

@@ -37,3 +37,4 @@ Sem `DATABASE_URL`, o projeto usa um Postgres embutido (PGlite) em `.data/`, já
 | [13](docs/13-alinhamento-site-e-app.md) | Alinhamento entre site e aplicativo |
 | [14](docs/14-venda-e-acessos.md) | Venda pelo Mercado Pago, códigos de acesso e cortesia |
 | [15](docs/15-redacao-de-conversao.md) | Redação de conversão e o painel do aplicativo |
+| [16](docs/16-compartilhamento.md) | Compartilhamento: WhatsApp, Stories e Status |

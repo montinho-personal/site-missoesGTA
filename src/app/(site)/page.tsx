@@ -12,12 +12,12 @@ import { homeFaq } from "@/lib/game-facts";
 import { formatDate } from "@/lib/labels";
 import { site } from "@/lib/site";
 import { appConfig } from "@/lib/app-config";
-import { radioSpots } from "@/lib/voice";
+import { narrators, radioSpots } from "@/lib/voice";
 
 export const metadata = pageMeta({
-  title: `${site.name}: segredos, easter eggs e dinheiro escondido`,
+  title: `${site.name}: segredos, easter eggs e dinheiro`,
   absoluteTitle: true,
-  description: "Missões secretas, lugares escondidos, dinheiro, carros raros e mistérios de GTA 6, com fontes e status de verificação. Feito por jogadores, para quem quer ir além da história.",
+  description: "Missões secretas, lugares escondidos, dinheiro, carros raros e mistérios de GTA 6, com fonte e selo de verificação em cada descoberta. Revisado todo dia.",
   path: "/",
 });
 
@@ -41,15 +41,58 @@ export default async function Home() {
         </div>
         <div className="wrap pt-48 pb-12 md:pt-20 md:pb-24">
           <div className="max-w-2xl">
-            <p className="label text-pink mb-4">Para quem vai além do óbvio</p>
-            <h1 className="text-[2.35rem] leading-[1.05] sm:text-6xl font-black">O GTA 6 esconde muito mais do que você imagina.</h1>
-            <p className="mt-5 text-lg sm:text-xl text-fg-muted max-w-xl">Missões secretas, carros raros, dinheiro escondido e lugares que não aparecem no GPS. A gente conta o que o jogo esconde. O resto é entre você e a polícia de Leonida.</p>
+            <p className="label text-pink mb-4">Arquivo Leonida · aberto até de madrugada</p>
+            <h1 className="text-[2.35rem] leading-[1.05] sm:text-6xl font-black">Todo mundo vai zerar o GTA 6. Pouca gente vai ver o que ele esconde.</h1>
+            <p className="mt-5 text-lg sm:text-xl text-fg-muted max-w-xl">Uma repórter que não publica nada sem prova e um ex-taxista que conhece cada beco de Leonida montaram o arquivo que faltava: missões secretas, carros raros, dinheiro escondido e lugares que o GPS finge que não existem. Em português, e com carimbo de verdade.</p>
             <div className="mt-7 max-w-xl"><SearchTrigger variant="hero" /></div>
             <div className="mt-4 flex flex-col sm:flex-row gap-3 max-w-xl">
               <Link href="/gta-6/segredos/" className="btn btn-primary grow">Explorar os segredos<Icon name="arrow" size={18} /></Link>
               <TrackLink href="/app/" className="btn btn-ghost" event="cta_click" params={{ cta_key: "hero", placement: "home_hero" }}>Conhecer o aplicativo</TrackLink>
             </div>
-            <p className="mt-5 text-sm text-fg-subtle inline-flex items-center gap-2"><Icon name="shield" size={16} className="text-ok" />Proteção contra spoilers ligada. Aqui ninguém estraga o final de ninguém.</p>
+            <p className="mt-5 text-sm text-fg-subtle inline-flex items-center gap-2"><Icon name="shield" size={16} className="text-ok" />Revisado todo dia. Proteção contra spoiler ligada: aqui ninguém estraga o final de ninguém.</p>
+          </div>
+        </div>
+      </section>
+
+      {/* 1b. Quem escreve: a história do arquivo, contada pelos narradores */}
+      <section className="wrap pt-14 sm:pt-20" aria-labelledby="h-quem">
+        <div className="grid gap-8 lg:grid-cols-[1.15fr_1fr] lg:items-start">
+          <div>
+            <div className="deco-rule mb-4" aria-hidden="true"><i /></div>
+            <p className="label text-pink mb-2">Quem escreve este arquivo</p>
+            <h2 id="h-quem" className="text-3xl sm:text-4xl font-extrabold">Ele jurava que tinha visto. Ela pediu prova. Foi assim que tudo começou.</h2>
+            <div className="mt-5 text-lg text-fg-muted flex flex-col gap-4">
+              <p>Madrugada em Vice City. <strong className="text-fg font-semibold">Brian Heder</strong>, vinte anos de táxi pelas ruas de Leonida, entrou na redação jurando que tinha visto uma coisa que não aparecia em mapa nenhum. <strong className="text-fg font-semibold">Nina Valdez</strong>, que já tinha perdido três empregos por publicar a verdade, fez a única pergunta que importa: “Cadê a prova?”</p>
+              <p>Ele voltou com o print. Ela voltou com mais duas fontes. Naquela noite nasceu a regra que manda aqui até hoje: <span className="text-fg">nada vira fato sem fonte, e nada fica escondido só porque é difícil de achar.</span></p>
+              <p>Desde então é assim. O Brian vai para a rua atrás do que os outros não viram. A Nina abre uma pasta, cruza relatos de jogadores do mundo inteiro e carimba. Você chega, lê em português e vai direto ao que interessa: onde fica, como faz e se vale a viagem.</p>
+            </div>
+            <ul className="mt-6 grid gap-3 sm:grid-cols-2">
+              {narrators.map((n) => (
+                <li key={n.name} className="card p-4">
+                  <p className="font-display font-bold text-lg">{n.name}</p>
+                  <p className="label text-fg-subtle mt-0.5">{n.role}</p>
+                  <p className="mt-2 text-fg-muted italic">{n.line}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="card grid-paper p-6 sm:p-8">
+            <p className="label text-cyan mb-4">Por que ler com eles</p>
+            <ul className="flex flex-col gap-5">
+              {[
+                { icon: "shield", title: "Carimbo em tudo", text: "Confirmado, relato ou em investigação. Você não perde a noite atrás de lenda de fórum." },
+                { icon: "radar", title: "Revisado todo dia", text: "O radar mostra o que entrou, o que caiu e o que voltou para a investigação." },
+                { icon: "eye", title: "Sem estragar o final", text: "Spoiler de história fica coberto até você pedir para ver." },
+                { icon: "target", title: "Direto ao ponto", text: "Resposta de vinte segundos não precisa de vídeo de vinte minutos." },
+              ].map((b) => (
+                <li key={b.title} className="flex gap-3">
+                  <Icon name={b.icon as "shield"} size={22} className="text-pink shrink-0 mt-1" />
+                  <span><strong className="font-display font-bold text-fg">{b.title}.</strong> <span className="text-fg-muted">{b.text}</span></span>
+                </li>
+              ))}
+            </ul>
+            <Link href="/sobre/" className="btn btn-ghost mt-7 w-full">Conheça a Nina e o Brian</Link>
+            <p className="mt-4 text-sm text-fg-subtle">Nina e Brian são os narradores do arquivo, personagens nossos. As descobertas, as fontes e os carimbos são de verdade.</p>
           </div>
         </div>
       </section>
@@ -109,8 +152,8 @@ export default async function Home() {
           <div className="grid md:grid-cols-[1.1fr_1fr]">
             <div className="p-6 sm:p-10">
               <p className="label text-violet mb-3">Seu comparsa de bolso</p>
-              <h2 id="h-app" className="text-3xl sm:text-4xl font-extrabold">Cada segredo. Cada descoberta. Uma nova aventura.</h2>
-              <p className="mt-4 text-fg-muted">O portal resolve a dúvida de agora. O aplicativo é o parceiro que vai no banco do carona: sabe o que tem por perto, lembra o que você já achou e não conta o final do filme.</p>
+              <h2 id="h-app" className="text-3xl sm:text-4xl font-extrabold">O segredo a gente revela. A aventura é você quem vive.</h2>
+              <p className="mt-4 text-fg-muted">Seu comparsa de bolso: segredos, localizações, orientações e vídeos de quem já fez. Saber onde está o dinheiro não garante que você escapa com ele, e é aí que começa a graça. R$ 4,20, uma vez só.</p>
               <ul className="mt-5 flex flex-col gap-2.5">
                 {appConfig.features.slice(0, 3).map((f) => (
                   <li key={f.key} className="flex gap-3"><Icon name="check" size={20} className="text-violet shrink-0 mt-1" /><span><strong className="font-semibold">{f.title}.</strong> <span className="text-fg-muted">{f.text}</span></span></li>
@@ -163,7 +206,6 @@ export default async function Home() {
             <p>De explorar o mapa sem saber o que ia encontrar. De ouvir um amigo jurar que existia um carro escondido, uma missão que ninguém tinha feito, um lugar que não estava em revista nenhuma.</p>
             <p>A gente cresceu, os gráficos mudaram, os mapas ficaram enormes. A vontade de descobrir o que existe além do óbvio continua a mesma.</p>
             <p className="text-fg">Este arquivo é para quem não quer só terminar GTA 6. É para quem quer descobrir o que ele esconde, e contar para os amigos antes que eles descubram sozinhos.</p>
-            <Link href="/sobre/" className="link self-start font-semibold">Conheça a Nina e o Brian</Link>
           </div>
         </div>
       </section>

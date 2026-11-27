@@ -50,6 +50,8 @@ export default function Metodologia() {
         <p>Erramos? <Link href="/enviar-descoberta/?tipo=correcao">Envie uma correção</Link>. Toda mudança relevante fica registrada no histórico da própria página e no <Link href="/radar/">Radar de descobertas</Link>.</p>
         <h2>Uso de inteligência artificial</h2>
         <p>Usamos ferramentas de IA para organizar pesquisa e rascunhar textos. Nenhuma página é publicada sem fontes identificadas, e nenhum selo sobe de nível sem as fontes que a regra exige.</p>
+        <h2>Onde fica a informação oficial</h2>
+        <p>O que a própria Rockstar Games publica sobre o jogo fica no <a href="https://www.rockstargames.com/VI" target="_blank" rel="noopener">site oficial de GTA VI</a> e no <a href="https://www.rockstargames.com/newswire" target="_blank" rel="noopener">Newswire da Rockstar</a>. É o primeiro lugar que conferimos quando sai atualização. Este é um guia não oficial, sem ligação com a Rockstar Games.</p>
       </div>
     </Shell>
   );

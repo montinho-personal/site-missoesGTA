@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useState, useSyncExternalStore } from "react";
 import { Icon } from "./Icon";
 import { track, type TrackEvent } from "@/lib/analytics";
@@ -79,6 +80,43 @@ export function ShareButton({ title, url }: { title: string; url: string }) {
       }}>
       <Icon name={done ? "check" : "share"} size={18} />
       <span aria-live="polite">{done ? "Link copiado" : "Compartilhar"}</span>
+    </button>
+  );
+}
+
+/** Pix copia e cola: botão que copia o código e confirma na tela. */
+export function CopyPix({ code }: { code: string }) {
+  const [copied, setCopied] = useState(false);
+  return (
+    <div className="flex flex-col gap-2">
+      <label className="field-label" htmlFor="pix-code">Pix copia e cola</label>
+      <textarea id="pix-code" readOnly value={code} rows={3} className="field font-mono text-xs break-all" onFocus={(e) => e.currentTarget.select()} />
+      <button type="button" className="btn btn-app" onClick={async () => { try { await navigator.clipboard.writeText(code); setCopied(true); setTimeout(() => setCopied(false), 2500); } catch {} }}>
+        {copied ? "Código copiado. Agora cole no app do banco" : "Copiar código Pix"}
+      </button>
+      <p role="status" aria-live="polite" className="sr-only">{copied ? "Código copiado" : ""}</p>
+    </div>
+  );
+}
+
+/** Enquanto o Pix não confirma, a página se confere sozinha a cada poucos segundos. */
+export function AutoRefresh({ seconds = 5, until }: { seconds?: number; until?: string }) {
+  const router = useRouter();
+  useEffect(() => {
+    const stop = until ? new Date(until).getTime() + 60_000 : Infinity;
+    const t = setInterval(() => { if (Date.now() < stop && document.visibilityState === "visible") router.refresh(); }, seconds * 1000);
+    return () => clearInterval(t);
+  }, [router, seconds, until]);
+  return null;
+}
+
+/** Botão que copia um texto pronto (mensagem, código) e confirma na tela. */
+export function CopyText({ text, label = "Copiar mensagem", done = "Copiado" }: { text: string; label?: string; done?: string }) {
+  const [copied, setCopied] = useState(false);
+  return (
+    <button type="button" className="btn btn-ghost" onClick={async () => { try { await navigator.clipboard.writeText(text); setCopied(true); setTimeout(() => setCopied(false), 2500); } catch {} }}>
+      {copied ? done : label}
+      <span role="status" aria-live="polite" className="sr-only">{copied ? done : ""}</span>
     </button>
   );
 }

@@ -2,13 +2,16 @@ import Link from "next/link";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { AppCta, Breadcrumbs, EntryGrid, FaqList, JsonLd, SpoilerBadge, StatusBadge } from "@/components/ui";
-import { FavButton, RevealButton, ShareButton, TrackView } from "@/components/client";
+import { FavButton, RevealButton, TrackView } from "@/components/client";
+import { ShareSheet } from "@/components/ShareSheet";
 import { Icon } from "@/components/Icon";
 import { entryUrl, getCtas, getEntry, getEntryChanges, getPublishedEntries, nearbyEntries, relatedEntries, toCard } from "@/server/content";
 import { saleConfig } from "@/server/mercadopago";
 import { AppPitch } from "@/components/AppPitch";
+import { AppQuickPitch } from "@/components/AppQuickPitch";
 import { notFoundOrRedirect } from "@/server/route-helpers";
 import { breadcrumbLd, faqLd, pageMeta } from "@/lib/seo";
+import { entryFaq, entrySeoDescription, entrySeoTitle, withBrand } from "@/lib/seo-entry";
 import { evidenceLabel, factValue, formatDate, precisionInfo, rewardTypeLabel, statusInfo } from "@/lib/labels";
 import { abs, site } from "@/lib/site";
 import { appConfig } from "@/lib/app-config";
@@ -26,7 +29,7 @@ export async function generateMetadata({ params }: Props) {
   const e = await getEntry(game, categoria, slug);
   if (!e) return {};
   return pageMeta({
-    title: e.seo_title || `${e.title} (GTA 6)`, description: e.seo_description || e.direct_answer || e.summary,
+    title: withBrand(entrySeoTitle(e)), absoluteTitle: true, description: entrySeoDescription(e),
     path: entryUrl(e), type: "article", published: e.published_at, modified: e.updated_at,
   });
 }
@@ -57,7 +60,9 @@ export default async function EntryPage({ params }: Props) {
   const isGuide = entry.kind === "guia";
   const crumbs = [{ name: "Início", href: "/" }, { name: "GTA 6", href: `/${game}/` }, { name: entry.category_name, href: `/${game}/${categoria}/` }, { name: entry.title }];
   const url = abs(path);
+  const shareCtx = { kind: "ficha" as const, url, title: entry.title, category: categoria, spoiler: entry.spoiler_level };
 
+  const faq = entryFaq(entry);
   const toc = [
     !isGuide && { id: "ficha", label: "Ficha da descoberta" },
     entry.steps.length > 0 && { id: "passo-a-passo", label: "Passo a passo" },
@@ -65,7 +70,7 @@ export default async function EntryPage({ params }: Props) {
     entry.common_mistakes.length > 0 && { id: "erros-comuns", label: "Erros comuns" },
     entry.troubleshooting.length > 0 && { id: "problemas", label: "Se não funcionar" },
     { id: "verificacao", label: "Como sabemos" },
-    entry.faq.length > 0 && { id: "perguntas", label: "Perguntas frequentes" },
+    faq.length > 0 && { id: "perguntas", label: "Perguntas frequentes" },
   ].filter(Boolean) as { id: string; label: string }[];
 
   const ld = {
@@ -81,7 +86,7 @@ export default async function EntryPage({ params }: Props) {
         ...(entry.media.filter((m) => m.tipo === "imagem").length ? { image: entry.media.filter((m) => m.tipo === "imagem").map((m) => m.url) } : {}),
         citation: entry.sources.map((s) => s.url),
       },
-      ...(entry.faq.length ? [faqLd(entry.faq)] : []),
+      ...(faq.length ? [faqLd(faq)] : []),
     ],
   };
 
@@ -120,11 +125,16 @@ export default async function EntryPage({ params }: Props) {
               <p className="text-lg sm:text-xl leading-relaxed">{entry.direct_answer || entry.summary}</p>
               <div className="mt-4 flex flex-wrap gap-2.5 no-print">
                 <FavButton id={entry.id} title={entry.title} withLabel />
-                <ShareButton title={entry.title} url={url} />
+              </div>
+              <div className="mt-3 no-print">
+                <ShareSheet compact ctx={shareCtx} storyPath={`${path}story/`} />
               </div>
             </section>
 
             {entry.summary && entry.direct_answer && <p className="max-w-3xl text-fg-muted text-lg">{entry.summary}</p>}
+
+            {/* O app aparece cedo, ensinando a fazer ESTA descoberta nele, com o preço à vista. */}
+            {!isGuideKind(entry) && <AppQuickPitch entry={entry} nearby={nearby.length} sameRegion={sameRegion} total={all.filter((x) => x.app_ref).length} sale={sale} />}
 
             {!isGuide && (
               <section aria-labelledby="ficha" className="max-w-3xl">
@@ -161,6 +171,14 @@ export default async function EntryPage({ params }: Props) {
             )}
 
             {hasPitch && <AppPitch entry={entry} nearby={nearby} sameRegion={sameRegion} sale={sale} />}
+
+            {/* Momento de sucesso: a pessoa acabou de ler como fazer. É quando ela quer contar para alguém. */}
+            <section aria-labelledby="h-compartilhar" className="card p-5 sm:p-6 max-w-3xl no-print">
+              <p className="label text-pink">Missão em dupla rende mais</p>
+              <h2 id="h-compartilhar" className="font-display text-xl sm:text-2xl font-extrabold mt-1.5">Manda pro parceiro de jogatina.</h2>
+              <p className="mt-1.5 text-fg-muted text-[0.97rem]">A mensagem já vai pronta no WhatsApp. Para Stories e Status, a gente gera a imagem{entry.spoiler_level === "historia" ? " sem entregar o spoiler" : ""}.</p>
+              <div className="mt-4"><ShareSheet ctx={shareCtx} storyPath={`${path}story/`} /></div>
+            </section>
 
             {entry.media.length > 0 && (
               <section aria-label="Imagens e vídeos" className="max-w-3xl flex flex-col gap-4">
@@ -244,10 +262,10 @@ export default async function EntryPage({ params }: Props) {
             {!hasPitch && <div className="max-w-3xl"><AppCta cta={ctas[entry.category_cta ?? "padrao"] ?? ctas.padrao} placement="entry" context={entry.id} /></div>}
             {appConfig.deepLinkBase && entry.app_ref && <p className="max-w-3xl -mt-6"><a className="link" href={`${appConfig.deepLinkBase}${entry.app_ref}`}>Abrir esta descoberta no aplicativo</a></p>}
 
-            {entry.faq.length > 0 && (
+            {faq.length > 0 && (
               <section aria-labelledby="perguntas" className="max-w-3xl">
                 <h2 id="perguntas" className="text-2xl font-extrabold mb-4">Perguntas frequentes</h2>
-                <FaqList items={entry.faq} />
+                <FaqList items={faq} />
               </section>
             )}
           </div>

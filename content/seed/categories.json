@@ -103,5 +103,20 @@
   "seo_title": "Dicas de GTA 6 para iniciantes e tutoriais de como fazer",
   "seo_description": "Dicas de GTA 6 para quem está começando e tutoriais diretos das mecânicas do jogo, com a resposta logo no início.",
   "faq": []
+ },
+ {
+  "id": "gta6-guia",
+  "game_id": "gta6",
+  "slug": "guia",
+  "name": "Guia do jogador",
+  "tagline": "Antes de sair de casa",
+  "icon": "compass",
+  "cta_key": null,
+  "sort": 8,
+  "description": "As perguntas de quem vai jogar GTA 6: data de lançamento, preço no Brasil, plataformas e o que vem em cada edição, com a fonte de cada resposta.",
+  "intro_md": "Antes de caçar segredo, todo mundo passa pelas mesmas dúvidas: quando sai, quanto custa, em que console roda. Aqui ficam as respostas, curtas e com fonte. A Nina confere cada número; o Brian só quer saber se dá para jogar hoje à noite.",
+  "seo_title": "Guia do jogador de GTA 6: lançamento, preço e plataformas",
+  "seo_description": "Data de lançamento, preço no Brasil, plataformas e edições de GTA 6, com resposta curta e a fonte de cada informação.",
+  "faq": []
  }
 ]

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Callout, FaqList, JsonLd } from "@/components/ui";
 import { TrackView } from "@/components/client";
 import { BuyForm, WaitlistForm } from "@/components/Forms";
+import { ShareSheet } from "@/components/ShareSheet";
 import { saleConfig } from "@/server/mercadopago";
 import { getPublishedEntries } from "@/server/content";
 import { formatDate } from "@/lib/labels";
@@ -10,10 +11,11 @@ import { Breadcrumbs } from "@/components/ui";
 import { breadcrumbLd, faqLd, pageMeta } from "@/lib/seo";
 import { appConfig, featureStatusLabel, type FeatureStatus } from "@/lib/app-config";
 import { abs, site } from "@/lib/site";
+import { appStory } from "@/lib/app-story";
 
 export const metadata = pageMeta({
-  title: "Aplicativo de segredos de GTA 6: seu companheiro de exploração",
-  description: "Um aplicativo para explorar GTA 6 a fundo: descobertas organizadas por região, checklist do que você já achou e controle de spoilers. Veja o que já existe e o que está planejado.",
+  title: "App de segredos de GTA 6: o arquivo inteiro no bolso",
+  description: "App para explorar GTA 6 a fundo: descobertas por região, checklist do que você já achou e controle de spoiler. Revisado todo dia. Veja o que já existe.",
   path: "/app/",
 });
 
@@ -42,7 +44,7 @@ export default async function AppPage() {
   const selling = sale.enabled;
   const faq = [
   { q: "O aplicativo já está disponível?", a: appConfig.stage === "a_venda" ? "Sim. Veja acima as condições e a compatibilidade." : "Ainda não. Estamos preparando o lançamento. Deixe seu e-mail e avisamos quando sair." },
-  { q: "Vai ser pago?", a: sale.isLaunchPrice ? `Sim: ${sale.priceLabel}, pagamento único. É o preço de lançamento e pode subir no futuro; quem compra agora paga uma vez só.` : sale.enabled ? `Sim: ${sale.priceLabel}, pagamento único. Depois de pagar você recebe um código de acesso.` : "Sim, o aplicativo será pago. O preço ainda não foi definido e vai aparecer nesta página, junto com a política de reembolso, antes de qualquer cobrança. As fichas continuam abertas e gratuitas aqui no portal." },
+  { q: "Vai ser pago?", a: sale.isLaunchPrice ? `Sim: ${sale.priceLabel}, pagamento único. É o preço de lançamento e pode subir no futuro; quem compra agora paga uma vez só.` : sale.enabled ? `Sim: ${sale.priceLabel}, pagamento único. Depois de pagar, o app abre liberado na hora e a confirmação chega por e-mail.` : "Sim, o aplicativo será pago. O preço ainda não foi definido e vai aparecer nesta página, junto com a política de reembolso, antes de qualquer cobrança. As fichas continuam abertas e gratuitas aqui no portal." },
   { q: "É aplicativo de loja?", a: "Não. É um aplicativo web: abre pelo navegador do celular e pode ser instalado na tela de início, sem passar pela App Store nem pelo Google Play." },
   { q: "Em quais aparelhos vai funcionar?", a: "Em qualquer celular ou computador com navegador atual. Foi desenhado primeiro para o celular, com o console ligado ao lado." },
   { q: "Preciso do aplicativo para usar o portal?", a: "Não. As respostas continuam completas e gratuitas no portal. O aplicativo é para quem quer organização e acompanhamento durante o jogo." },
@@ -69,13 +71,13 @@ export default async function AppPage() {
           <Breadcrumbs items={crumbs} />
           <div className="mt-8 grid gap-10 md:grid-cols-[1.2fr_1fr] md:items-center">
             <div>
-              <p className="label text-violet mb-4">{appConfig.stage === "a_venda" ? "Aplicativo" : "Aplicativo · em preparação"}</p>
-              <h1 className="text-[2.3rem] leading-[1.05] sm:text-6xl font-black">Não jogue GTA 6 deixando metade da aventura para trás.</h1>
-              <p className="mt-5 text-lg sm:text-xl text-fg-muted max-w-xl">Para quem não quer apenas zerar. Um comparsa de bolso que sabe o que tem por perto, lembra o que você já achou e respeita o seu ritmo na história. Não pede parte do assalto.</p>
+              <p className="label text-violet mb-4">Seu comparsa de bolso</p>
+              <h1 className="text-[2.3rem] leading-[1.05] sm:text-6xl font-black">O segredo a gente revela. A aventura é você quem vive.</h1>
+              <p className="mt-5 text-lg sm:text-xl text-fg-muted max-w-xl">Carros raros, dinheiro escondido, lugares secretos e missões que o jogo não te mostra. No seu bolso, com a localização, o passo a passo e os vídeos de quem já fez.</p>
               <div className="mt-7 flex flex-wrap gap-3">{primaryCta}<Link href="/app/como-baixar-e-usar/" className="btn btn-ghost">Como baixar e usar</Link></div>
               <p className="mt-5 inline-flex flex-wrap items-baseline gap-x-2.5 gap-y-1 rounded-xl border border-gold/50 bg-ink-950/60 px-4 py-2.5">
                 <span className="font-display text-3xl font-black text-gold">{sale.priceLabel}</span>
-                <span className="text-sm text-fg-muted">{sale.isLaunchPrice ? "preço de lançamento · pagamento único" : "pagamento único"}</span>
+                <span className="text-sm text-fg-muted">pagamento único · sem mensalidade</span>
               </p>
               {!selling && <p className="mt-4 text-sm text-fg-subtle max-w-lg">Transparência: o aplicativo está em construção e ainda não foi lançado. Abaixo, cada função traz o estado real em que se encontra.</p>}
             </div>
@@ -107,13 +109,20 @@ export default async function AppPage() {
           </section>
         )}
 
+        {/* O manifesto do app: o conceito central (src/lib/app-story.ts). */}
         <section className="pt-16 sm:pt-24" aria-labelledby="h-porque">
           <div className="max-w-3xl">
             <div className="deco-rule mb-4" aria-hidden="true"><i /></div>
-            <h2 id="h-porque" className="text-3xl sm:text-4xl font-extrabold">Menos tempo procurando. Mais tempo descobrindo.</h2>
-            <div className="mt-4 text-lg text-fg-muted flex flex-col gap-4">
-              <p>Você conhece a cena: jogo pausado, celular na mão, três abas abertas e um vídeo de doze minutos, com patrocínio no meio, para explicar uma coisa que cabia em uma frase. Quando você acha, a polícia já chegou.</p>
-              <p>O portal resolve a pergunta de agora. O aplicativo fica com o resto do serviço: o que mais existe naquela região, o que você já riscou da lista e o que ainda está te esperando. É o arquivo da Nina com a memória do Brian, só que no seu bolso e sem as histórias repetidas.</p>
+            <h2 id="h-porque" className="text-3xl sm:text-4xl font-extrabold">GTA nunca foi só cumprir missão.</h2>
+            <div className="mt-5 text-lg text-fg-muted flex flex-col gap-4">
+              {appStory.manifesto.map((t, i) => <p key={i} className={i === appStory.manifesto.length - 1 ? "text-fg font-semibold" : undefined}>{t}</p>)}
+              <p>{appStory.promise}</p>
+            </div>
+            <div className="mt-8 card border-pink/40 p-5 sm:p-7">
+              <div className="flex flex-col gap-2 text-lg">
+                {appStory.contrast.map((t) => <p key={t}>{t}</p>)}
+              </div>
+              <p className="mt-5 font-display text-2xl sm:text-3xl font-black leading-tight">{appStory.tagline}</p>
             </div>
           </div>
         </section>
@@ -172,21 +181,32 @@ export default async function AppPage() {
           <div className="card border-gold/50 p-5">
             <p className="label text-gold mb-2">Preço</p>
             <p className="font-display text-4xl font-black text-gold">{sale.priceLabel}</p>
-            {sale.isLaunchPrice && <p className="mt-2 text-[0.97rem]">Sim, quatro e vinte. Entendedores entenderão. Quem não entendeu, pergunta pro Brian.</p>}
-            <p className="mt-2 text-sm text-fg-muted">{sale.isLaunchPrice ? "Preço de lançamento, pagamento único por Pix ou cartão. Ele pode subir no futuro, conforme o arquivo cresce; quem compra agora paga uma vez e não paga a diferença depois." : "Pagamento único, por Pix ou cartão."}</p>
+            {sale.isLaunchPrice && <p className="mt-2 text-[0.97rem]">{appStory.joke.join(" ")}</p>}
+            <p className="mt-2 text-sm text-fg-muted">{sale.isLaunchPrice ? "Pagamento único, por Pix. Sem mensalidade. É o preço de lançamento e pode subir no futuro, conforme o arquivo cresce; quem compra agora paga uma vez e não paga a diferença depois." : "Pagamento único, por Pix. Sem mensalidade."}</p>
           </div>
           <div className="card p-5"><p className="label text-fg-subtle mb-2">Compatibilidade</p><p>{appConfig.platforms ? appConfig.platforms.join(", ") + "." : <span className="text-fg-muted">A anunciar.</span>}</p></div>
           <div className="card p-5"><p className="label text-fg-subtle mb-2">Reembolso e suporte</p><p className="text-fg-muted">{selling ? "Você pode desistir em até 7 dias depois da compra e receber o valor de volta, como prevê o Código de Defesa do Consumidor." : "A política de cancelamento e reembolso será publicada junto com o preço."} {!appConfig.supportContact && <>Enquanto isso, fale com a gente pelo <Link className="link" href="/contato/">contato</Link>.</>}</p></div>
         </section>
 
+        {/* "#comprar" é o endereço que o app usa no botão de compra; "#avise-me" fica pelos links antigos. */}
+        <span id="comprar" className="block scroll-mt-24" aria-hidden="true" />
         <section id="avise-me" className="pt-16 sm:pt-24 scroll-mt-24" aria-labelledby="h-avise">
           <div className="card border-violet/40 p-6 sm:p-10 grid gap-8 md:grid-cols-2 md:items-center">
             <div>
               <p className="label text-violet mb-3">{selling ? "Pronto para explorar?" : "Lista de aviso"}</p>
               <h2 id="h-avise" className="text-3xl sm:text-4xl font-extrabold">Seu próximo segredo está esperando para ser descoberto.</h2>
-              <p className="mt-3 text-fg-muted">{selling ? "Pague uma vez, receba seu código de acesso na hora e use no aplicativo." : "Deixe seu e-mail e a gente avisa no dia do lançamento. Um aviso só. Quem manda dez e-mails por semana é a seguradora."}</p>
+              <p className="mt-3 text-fg-muted">{selling ? `${appStory.price} O app abre liberado na hora e a confirmação chega no seu e-mail. O segredo a gente revela; a aventura é sua.` : "Deixe seu e-mail e a gente avisa no dia do lançamento. Um aviso só. Quem manda dez e-mails por semana é a seguradora."}</p>
             </div>
             {selling ? <BuyForm priceLabel={sale.priceLabel!} /> : <WaitlistForm source="app_landing" />}
+          </div>
+        </section>
+
+        <section className="pt-16 sm:pt-24 max-w-3xl" aria-labelledby="h-indique">
+          <div className="card p-6 sm:p-8">
+            <p className="label text-pink">Conhece alguém que vive caçando segredo?</p>
+            <h2 id="h-indique" className="mt-2 text-2xl sm:text-3xl font-extrabold">Todo grupo tem aquele amigo que jura que achou um carro escondido.</h2>
+            <p className="mt-2 text-fg-muted">Manda pra ele. Agora ele vai ter como provar.</p>
+            <div className="mt-5"><ShareSheet ctx={{ kind: "app", url: abs("/app/"), priceLabel: sale.priceLabel }} storyPath="/app/story/" /></div>
           </div>
         </section>
 

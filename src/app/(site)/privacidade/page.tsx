@@ -16,7 +16,7 @@ export default function Privacidade() {
         <ul>
           <li><strong>Envio de descoberta, correção ou contato:</strong> o texto que você escreveu, o link de evidência e, se você informar, nome e e-mail. Usamos para apurar, responder e dar crédito. Base legal: seu consentimento e nosso legítimo interesse em manter a informação correta.</li>
           <li><strong>Lista de aviso do aplicativo:</strong> seu e-mail e a data do consentimento, usados apenas para avisar sobre o lançamento. Você pode pedir a remoção a qualquer momento.</li>
-          <li><strong>Compra do aplicativo:</strong> seu e-mail, o valor e a situação do pedido, mais o código de acesso gerado. O pagamento acontece na página do Mercado Pago; não recebemos nem guardamos dados de cartão. Guardamos o pedido pelo prazo exigido pela legislação fiscal e de consumo.</li>
+          <li><strong>Compra do aplicativo:</strong> seu e-mail, o valor e a situação do pedido, mais o acesso gerado e os aparelhos em que ele foi aberto (um identificador aleatório, sem dado pessoal). Usamos o e-mail para mandar a confirmação da compra e o link de entrada ou de nova senha quando você pedir. A senha nunca fica guardada: guardamos só um resumo dela que não dá para desfazer. O pagamento acontece na página do Mercado Pago; não recebemos nem guardamos dados de cartão. Guardamos o pedido pelo prazo exigido pela legislação fiscal e de consumo.</li>
           <li><strong>Proteção contra abuso:</strong> para limitar envios em massa, guardamos por até 24 horas um identificador derivado do endereço IP de forma irreversível (hash). Não guardamos o IP em si.</li>
         </ul>
         <h2>Medição de audiência</h2>
