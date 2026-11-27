@@ -1,7 +1,7 @@
 import "server-only";
 import { createHash, randomInt } from "node:crypto";
 import { q } from "./db";
-import { compactCode, DEVICES_PER_PURCHASE } from "./licenses";
+import { compactCode, DEVICES_ADVERTISED } from "./licenses";
 import { sendEmail } from "./email";
 import { site } from "@/lib/site";
 
@@ -28,7 +28,7 @@ export function accessEmail(o: { link: string; kind: "compra" | "link"; cents?: 
   const passos = [
     "Toque em <b>Abrir o app</b>, no celular onde você vai usar. Ele abre já liberado.",
     "Para ficar com o ícone na tela: no <b>Android (Chrome)</b>, toque nos três pontinhos ⋮ e em <b>Instalar app</b>. No <b>iPhone (Safari)</b>, toque em <b>Compartilhar</b> e em <b>Adicionar à Tela de Início</b>.",
-    `Quer usar em outro celular? Abra este mesmo e-mail nele e toque no botão. Vale para até ${DEVICES_PER_PURCHASE} aparelhos.`,
+    `Quer usar em outro celular? Abra este mesmo e-mail nele e toque no botão. Vale para até ${DEVICES_ADVERTISED} celulares.`,
   ];
   const html = `<!doctype html><html lang="pt-BR"><body style="margin:0;background:#0c0b19;font-family:Arial,Helvetica,sans-serif;color:#f5f3ff">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td align="center" style="padding:28px 16px">

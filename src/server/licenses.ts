@@ -6,7 +6,10 @@ import { q } from "./db";
 const ALFABETO = "ABCDEFGHJKMNPQRSTUVWXYZ23456789";
 const grupo = () => Array.from({ length: 4 }, () => ALFABETO[randomInt(ALFABETO.length)]).join("");
 export const newCode = () => `MS6-${grupo()}-${grupo()}-${grupo()}`;
-export const DEVICES_PER_PURCHASE = 3;
+// Limite de aparelhos por compra: 5 por dentro, "até 3 celulares" para o cliente (decisão do Montinho em 27/11/2026).
+// A folga cobre o iPhone, onde o Safari e o app instalado contam como dois aparelhos.
+export const DEVICES_PER_PURCHASE = 5;
+export const DEVICES_ADVERTISED = 3;
 export const newOrderId = () => randomBytes(16).toString("hex");
 /** Aceita o código com ou sem hífens, em qualquer caixa. */
 export const normalizeCode = (raw: string) => {

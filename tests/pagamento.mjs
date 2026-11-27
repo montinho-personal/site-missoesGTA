@@ -110,9 +110,10 @@ try {
   ok("recarregar não manda o e-mail de novo", emails.filter((e) => e.to[0] === "pix@example.com").length === 1 && /Mandamos a confirmação para pi•••@example.com/.test(await page.locator("main").innerText()));
   ok("conferência do app exige a chave entre servidores", (await confere(codigoPix, "cel-1-aaaaaaaa", "")).status === 401 && (await confere(codigoPix, "cel-1-aaaaaaaa", "errada")).status === 401);
   const c = async (ap) => (await confere(compacto(codigoPix), ap)).json();
-  // o 1º celular já entrou acima (aparelho-teste-01); mais 2 cabem, o 4º não
-  const [d2, d3, d4, d2b] = [await c("cel-2-bbbbbbbb"), await c("cel-3-cccccccc"), await c("cel-4-dddddddd"), await c("cel-2-bbbbbbbb")];
-  ok("uma compra vale para até 3 celulares (o 4º é recusado, quem entrou continua)", d2.valido && d3.valido && d4.valido === false && d4.motivo === "esgotado" && d2b.valido, JSON.stringify([d2, d3, d4, d2b]));
+  // o 1º aparelho já entrou acima (aparelho-teste-01); cabem 5 por dentro (o cliente lê "até 3 celulares")
+  const [d2, d3, d4, d5, d6, d2b] = [await c("cel-2-bbbbbbbb"), await c("cel-3-cccccccc"), await c("cel-4-dddddddd"), await c("cel-5-eeeeeeee"), await c("cel-6-ffffffff"), await c("cel-2-bbbbbbbb")];
+  ok("uma compra vale para 5 aparelhos por dentro (o 6º é recusado, quem entrou continua)", d2.valido && d3.valido && d4.valido && d5.valido && d6.valido === false && d6.motivo === "esgotado" && d2b.valido, JSON.stringify([d2, d3, d4, d5, d6, d2b]));
+  ok("e-mail fala em até 3 celulares", conf.html.includes("até 3 celulares"));
   ok("chave que não existe responde 'inexistente', sem nenhum dado", JSON.stringify(await (await confere("MS6ZZZZZZZZZZZZ", "cel-1-aaaaaaaa")).json()) === '{"valido":false,"motivo":"inexistente"}');
   const link = async (email) => (await fetch(`${BASE}/api/acesso/enviar-link/`, { method: "POST", headers: { "content-type": "application/json", origin: "https://app.missoessecretasgta.com.br" }, body: JSON.stringify({ email }) }));
   const antes = emails.length;
