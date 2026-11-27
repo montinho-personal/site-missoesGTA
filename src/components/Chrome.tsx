@@ -45,7 +45,15 @@ export function Header() {
             <Wordmark />
             <button type="button" className="size-11 -mr-2 inline-flex items-center justify-center" aria-label="Fechar menu" onClick={() => menu.current?.close()}><Icon name="close" size={24} /></button>
           </div>
-          <nav aria-label="Menu" className="mt-6 flex flex-col">
+          {/* O app vem primeiro no menu: é o que sustenta o projeto. */}
+          <Link href="/app/" onClick={() => track("cta_click", { cta_key: "menu", placement: "menu_mobile_topo" })}
+            className="mt-5 block rounded-[14px] border border-violet/60 bg-gradient-to-br from-violet-strong/45 via-ink-800 to-pink-deep/25 p-4 no-underline shadow-[0_8px_30px_-10px_rgb(109_67_224/0.8)]">
+            <span className="label text-violet inline-flex items-center gap-2"><Icon name="phone" size={15} />Aplicativo</span>
+            <span className="mt-1.5 block font-display text-xl font-black leading-tight text-fg">O arquivo inteiro no seu celular</span>
+            <span className="mt-1 block text-sm text-fg-muted">Todos os segredos com local e passo a passo, sem spoiler.</span>
+            <span className="btn btn-app mt-3 w-full">Conhecer o aplicativo<Icon name="arrow" size={18} /></span>
+          </Link>
+          <nav aria-label="Menu" className="mt-4 flex flex-col">
             {[...mainNav, { href: "/favoritos/", label: "Meus favoritos" }, { href: "/enviar-descoberta/", label: "Enviar uma descoberta" }, { href: "/ajuda/", label: "Central de ajuda" }, { href: "/sobre/", label: "Sobre o projeto" }].map((n) => (
               <Link key={n.href} href={n.href} aria-current={path === n.href ? "page" : undefined}
                 className="flex items-center justify-between border-b border-ink-700 py-3.5 font-display text-lg font-semibold aria-[current=page]:text-pink">
@@ -54,7 +62,6 @@ export function Header() {
             ))}
           </nav>
           <div className="mt-6"><SpoilerToggle /></div>
-          <Link href="/app/" className="btn btn-app mt-auto" onClick={() => track("cta_click", { cta_key: "menu", placement: "menu_mobile" })}>Conhecer o aplicativo</Link>
         </div>
       </dialog>
       <SearchDialog />
