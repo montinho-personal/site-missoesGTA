@@ -104,9 +104,9 @@ try {
   const codigoPix = /MS6-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}/.exec(await page.locator("main").innerText())?.[0];
   ok("Pix pago: a página se atualiza sozinha e mostra o código, mesmo sem o aviso", Boolean(codigoPix) && (await valida(codigoPix)) === true, codigoPix ?? "");
   const abrir = await page.getByRole("link", { name: "Abrir o app" }).getAttribute("href");
-  ok("tela de obrigado tem o botão que abre o app já liberado", abrir === `https://app.missoessecretasgta.com.br/entrar?chave=${compacto(codigoPix)}` && /Seu acesso está liberado/.test(await page.locator("main").innerText()), abrir);
+  ok("tela de obrigado tem o botão que abre o app já liberado", abrir === `https://app.missoessecretasgta.com.br/entrar?chave=${compacto(codigoPix)}&utm_source=site&utm_medium=obrigado&utm_campaign=acesso_app` && /Seu acesso está liberado/.test(await page.locator("main").innerText()), abrir);
   const conf = emails.find((e) => e.to[0] === "pix@example.com");
-  ok("e-mail de confirmação sai uma vez, com valor e o mesmo botão", Boolean(conf) && /Compra confirmada/.test(conf.subject) && conf.html.includes(abrir) && /R\$\s19,90/.test(conf.html) && conf.auth === "Bearer re_teste" && emails.filter((e) => e.to[0] === "pix@example.com").length === 1);
+  ok("e-mail de confirmação sai uma vez, com valor e o botão que abre o app (com a origem: e-mail)", Boolean(conf) && /Compra confirmada/.test(conf.subject) && conf.html.includes(`entrar?chave=${compacto(codigoPix)}`) && /utm_source=email/.test(conf.html) && /R\$\s19,90/.test(conf.html) && conf.auth === "Bearer re_teste" && emails.filter((e) => e.to[0] === "pix@example.com").length === 1);
   await page.reload({ waitUntil: "load" });
   ok("recarregar não manda o e-mail de novo", emails.filter((e) => e.to[0] === "pix@example.com").length === 1 && /Mandamos a confirmação para pi•••@example.com/.test(await page.locator("main").innerText()));
   ok("conferência do app exige a chave entre servidores", (await confere(codigoPix, "cel-1-aaaaaaaa", "")).status === 401 && (await confere(codigoPix, "cel-1-aaaaaaaa", "errada")).status === 401);
@@ -119,7 +119,7 @@ try {
   const link = async (email) => (await fetch(`${BASE}/api/acesso/enviar-link/`, { method: "POST", headers: { "content-type": "application/json", origin: "https://app.missoessecretasgta.com.br" }, body: JSON.stringify({ email }) }));
   const antes = emails.length;
   const r1 = await link("PIX@example.com"), r2 = await link("ninguem@example.com");
-  ok("'Já comprei' manda o link só para quem comprou, com a mesma resposta para todos", (await r1.json()).ok && (await r2.json()).ok && emails.length === antes + 1 && emails.at(-1).to[0] === "pix@example.com" && emails.at(-1).html.includes(abrir) && r1.headers.get("access-control-allow-origin") === "https://app.missoessecretasgta.com.br");
+  ok("'Já comprei' manda o link só para quem comprou, com a mesma resposta para todos", (await r1.json()).ok && (await r2.json()).ok && emails.length === antes + 1 && emails.at(-1).to[0] === "pix@example.com" && emails.at(-1).html.includes(`entrar?chave=${compacto(codigoPix)}`) && r1.headers.get("access-control-allow-origin") === "https://app.missoessecretasgta.com.br");
   const doApp = await Promise.all(Array.from({ length: 8 }, (_, i) => fetch(`${BASE}/api/acesso/enviar-link/`, { method: "POST", headers: { "content-type": "application/json", authorization: "Bearer chave-app-teste" }, body: JSON.stringify({ email: `cliente${i}@example.com` }) }).then((r) => r.status)));
   ok("'Já comprei' pelo servidor do app não esbarra no limite por endereço", doApp.every((st) => st === 200), doApp.join(","));
   // Conta: entrar no app com e-mail e senha
@@ -197,7 +197,7 @@ try {
   const zap = await page.getByRole("link", { name: /Enviar no WhatsApp para João/ }).getAttribute("href");
   ok("mensagem pronta para o WhatsApp, já com o número e o código", zap.startsWith("https://wa.me/5511987654321?text=") && decodeURIComponent(zap).includes(compacto(cortesia)) && decodeURIComponent(zap).includes("Fala, João!") && (await page.locator("#c-msg").inputValue()).includes("/app/como-baixar-e-usar/#instalar"));
   const msgZap = await page.locator("#c-msg").inputValue();
-  ok("mensagem leva o link que abre o app liberado e ensina a instalar", msgZap.includes(`https://app.exemplo.com.br/entrar?chave=${compacto(cortesia)}`) && msgZap.includes("*Instalar app*") && msgZap.includes("*Adicionar à Tela de Início*") && !/digite o código/i.test(msgZap));
+  ok("mensagem leva o link que abre o app liberado e ensina a instalar", msgZap.includes(`https://app.exemplo.com.br/entrar?chave=${compacto(cortesia)}&utm_source=whatsapp&utm_medium=cortesia`) && msgZap.includes("*Instalar app*") && msgZap.includes("*Adicionar à Tela de Início*") && !/digite o código/i.test(msgZap));
   await page.getByLabel("Nome de quem recebe").fill("Nina");
   await page.getByLabel(/WhatsApp da pessoa/).fill("");
   await page.getByLabel(/Nome do código/).fill("nina vip");

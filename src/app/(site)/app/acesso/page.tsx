@@ -27,7 +27,7 @@ export default async function Acesso({ searchParams }: { searchParams: Promise<R
   // Pix pendente: confere direto na API, para liberar o código mesmo se o aviso do Mercado Pago atrasar.
   if (row?.status === "pendente" && row.payment_id) { await refreshPayment(row.payment_id); row = await read(); }
   const pixAberto = row?.status === "pendente" && row.pix_qr && row.pix_qr_b64 && row.pix_expires_at && row.pix_valid;
-  const link = row?.code ? accessLink(await appUrl(), row.code) : null;
+  const link = row?.code ? accessLink(await appUrl(), row.code, "site") : null;
   const pixVencido = row?.status === "pendente" && row.pix_qr && !pixAberto;
   return (
     <Shell title="Seu acesso ao aplicativo" path="/app/acesso/">

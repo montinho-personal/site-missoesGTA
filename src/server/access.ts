@@ -13,7 +13,9 @@ export async function appUrl(): Promise<string> {
 }
 
 /** Link que abre o app já liberado: o comprador nunca digita nada. */
-export const accessLink = (base: string, code: string) => `${base.replace(/\/$/, "")}/entrar?chave=${compactCode(code)}`;
+/** Link que abre o app já liberado. As etiquetas UTM dizem ao Analytics por onde a pessoa chegou ao app. */
+export const accessLink = (base: string, code: string, via: "email" | "site" = "email") =>
+  `${base.replace(/\/$/, "")}/entrar?chave=${compactCode(code)}&utm_source=${via === "email" ? "email" : "site"}&utm_medium=${via === "email" ? "compra" : "obrigado"}&utm_campaign=acesso_app`;
 
 const esc = (s: string) => s.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]!);
 const brl = (cents: number) => new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(cents / 100);
