@@ -49,8 +49,8 @@ export function Header() {
           <Link href="/app/" onClick={() => track("cta_click", { cta_key: "menu", placement: "menu_mobile_topo" })}
             className="mt-5 block rounded-[14px] border border-violet/60 bg-gradient-to-br from-violet-strong/45 via-ink-800 to-pink-deep/25 p-4 no-underline shadow-[0_8px_30px_-10px_rgb(109_67_224/0.8)]">
             <span className="label text-violet inline-flex items-center gap-2"><Icon name="phone" size={15} />Aplicativo</span>
-            <span className="mt-1.5 block font-display text-xl font-black leading-tight text-fg">O arquivo inteiro no seu celular</span>
-            <span className="mt-1 block text-sm text-fg-muted">Todos os segredos com local e passo a passo, sem spoiler.</span>
+            <span className="mt-1.5 block font-display text-xl font-black leading-tight text-fg">O segredo a gente revela. A aventura é sua.</span>
+            <span className="mt-1 block text-sm text-fg-muted">Segredos, localizações e vídeos no seu bolso. R$ 4,20, uma vez só.</span>
             <span className="btn btn-app mt-3 w-full">Conhecer o aplicativo<Icon name="arrow" size={18} /></span>
           </Link>
           <nav aria-label="Menu" className="mt-4 flex flex-col">

@@ -11,6 +11,7 @@ import { Breadcrumbs } from "@/components/ui";
 import { breadcrumbLd, faqLd, pageMeta } from "@/lib/seo";
 import { appConfig, featureStatusLabel, type FeatureStatus } from "@/lib/app-config";
 import { abs, site } from "@/lib/site";
+import { appStory } from "@/lib/app-story";
 
 export const metadata = pageMeta({
   title: "App de segredos de GTA 6: o arquivo inteiro no bolso",
@@ -70,13 +71,13 @@ export default async function AppPage() {
           <Breadcrumbs items={crumbs} />
           <div className="mt-8 grid gap-10 md:grid-cols-[1.2fr_1fr] md:items-center">
             <div>
-              <p className="label text-violet mb-4">{appConfig.stage === "a_venda" ? "Aplicativo" : "Aplicativo · em preparação"}</p>
-              <h1 className="text-[2.3rem] leading-[1.05] sm:text-6xl font-black">Não jogue GTA 6 deixando metade da aventura para trás.</h1>
-              <p className="mt-5 text-lg sm:text-xl text-fg-muted max-w-xl">Para quem não quer apenas zerar. Um comparsa de bolso que sabe o que tem por perto, lembra o que você já achou e respeita o seu ritmo na história. Não pede parte do assalto.</p>
+              <p className="label text-violet mb-4">Seu comparsa de bolso</p>
+              <h1 className="text-[2.3rem] leading-[1.05] sm:text-6xl font-black">O segredo a gente revela. A aventura é você quem vive.</h1>
+              <p className="mt-5 text-lg sm:text-xl text-fg-muted max-w-xl">Carros raros, dinheiro escondido, lugares secretos e missões que o jogo não te mostra. No seu bolso, com a localização, o passo a passo e os vídeos de quem já fez.</p>
               <div className="mt-7 flex flex-wrap gap-3">{primaryCta}<Link href="/app/como-baixar-e-usar/" className="btn btn-ghost">Como baixar e usar</Link></div>
               <p className="mt-5 inline-flex flex-wrap items-baseline gap-x-2.5 gap-y-1 rounded-xl border border-gold/50 bg-ink-950/60 px-4 py-2.5">
                 <span className="font-display text-3xl font-black text-gold">{sale.priceLabel}</span>
-                <span className="text-sm text-fg-muted">{sale.isLaunchPrice ? "preço de lançamento · pagamento único" : "pagamento único"}</span>
+                <span className="text-sm text-fg-muted">pagamento único · sem mensalidade</span>
               </p>
               {!selling && <p className="mt-4 text-sm text-fg-subtle max-w-lg">Transparência: o aplicativo está em construção e ainda não foi lançado. Abaixo, cada função traz o estado real em que se encontra.</p>}
             </div>
@@ -108,13 +109,20 @@ export default async function AppPage() {
           </section>
         )}
 
+        {/* O manifesto do app: o conceito central (src/lib/app-story.ts). */}
         <section className="pt-16 sm:pt-24" aria-labelledby="h-porque">
           <div className="max-w-3xl">
             <div className="deco-rule mb-4" aria-hidden="true"><i /></div>
-            <h2 id="h-porque" className="text-3xl sm:text-4xl font-extrabold">Menos tempo procurando. Mais tempo descobrindo.</h2>
-            <div className="mt-4 text-lg text-fg-muted flex flex-col gap-4">
-              <p>Você conhece a cena: jogo pausado, celular na mão, três abas abertas e um vídeo de doze minutos, com patrocínio no meio, para explicar uma coisa que cabia em uma frase. Quando você acha, a polícia já chegou.</p>
-              <p>O portal resolve a pergunta de agora. O aplicativo fica com o resto do serviço: o que mais existe naquela região, o que você já riscou da lista e o que ainda está te esperando. É o arquivo da Nina com a memória do Brian, só que no seu bolso e sem as histórias repetidas.</p>
+            <h2 id="h-porque" className="text-3xl sm:text-4xl font-extrabold">GTA nunca foi só cumprir missão.</h2>
+            <div className="mt-5 text-lg text-fg-muted flex flex-col gap-4">
+              {appStory.manifesto.map((t, i) => <p key={i} className={i === appStory.manifesto.length - 1 ? "text-fg font-semibold" : undefined}>{t}</p>)}
+              <p>{appStory.promise}</p>
+            </div>
+            <div className="mt-8 card border-pink/40 p-5 sm:p-7">
+              <div className="flex flex-col gap-2 text-lg">
+                {appStory.contrast.map((t) => <p key={t}>{t}</p>)}
+              </div>
+              <p className="mt-5 font-display text-2xl sm:text-3xl font-black leading-tight">{appStory.tagline}</p>
             </div>
           </div>
         </section>
@@ -173,8 +181,8 @@ export default async function AppPage() {
           <div className="card border-gold/50 p-5">
             <p className="label text-gold mb-2">Preço</p>
             <p className="font-display text-4xl font-black text-gold">{sale.priceLabel}</p>
-            {sale.isLaunchPrice && <p className="mt-2 text-[0.97rem]">Sim, quatro e vinte. Entendedores entenderão. Quem não entendeu, pergunta pro Brian.</p>}
-            <p className="mt-2 text-sm text-fg-muted">{sale.isLaunchPrice ? "Preço de lançamento, pagamento único por Pix. Ele pode subir no futuro, conforme o arquivo cresce; quem compra agora paga uma vez e não paga a diferença depois." : "Pagamento único, por Pix."}</p>
+            {sale.isLaunchPrice && <p className="mt-2 text-[0.97rem]">{appStory.joke.join(" ")}</p>}
+            <p className="mt-2 text-sm text-fg-muted">{sale.isLaunchPrice ? "Pagamento único, por Pix. Sem mensalidade. É o preço de lançamento e pode subir no futuro, conforme o arquivo cresce; quem compra agora paga uma vez e não paga a diferença depois." : "Pagamento único, por Pix. Sem mensalidade."}</p>
           </div>
           <div className="card p-5"><p className="label text-fg-subtle mb-2">Compatibilidade</p><p>{appConfig.platforms ? appConfig.platforms.join(", ") + "." : <span className="text-fg-muted">A anunciar.</span>}</p></div>
           <div className="card p-5"><p className="label text-fg-subtle mb-2">Reembolso e suporte</p><p className="text-fg-muted">{selling ? "Você pode desistir em até 7 dias depois da compra e receber o valor de volta, como prevê o Código de Defesa do Consumidor." : "A política de cancelamento e reembolso será publicada junto com o preço."} {!appConfig.supportContact && <>Enquanto isso, fale com a gente pelo <Link className="link" href="/contato/">contato</Link>.</>}</p></div>
@@ -187,7 +195,7 @@ export default async function AppPage() {
             <div>
               <p className="label text-violet mb-3">{selling ? "Pronto para explorar?" : "Lista de aviso"}</p>
               <h2 id="h-avise" className="text-3xl sm:text-4xl font-extrabold">Seu próximo segredo está esperando para ser descoberto.</h2>
-              <p className="mt-3 text-fg-muted">{selling ? "Pague uma vez e o app abre liberado na hora. A confirmação chega no seu e-mail, com o botão para abrir em até 3 celulares." : "Deixe seu e-mail e a gente avisa no dia do lançamento. Um aviso só. Quem manda dez e-mails por semana é a seguradora."}</p>
+              <p className="mt-3 text-fg-muted">{selling ? `${appStory.price} O app abre liberado na hora e a confirmação chega no seu e-mail. O segredo a gente revela; a aventura é sua.` : "Deixe seu e-mail e a gente avisa no dia do lançamento. Um aviso só. Quem manda dez e-mails por semana é a seguradora."}</p>
             </div>
             {selling ? <BuyForm priceLabel={sale.priceLabel!} /> : <WaitlistForm source="app_landing" />}
           </div>

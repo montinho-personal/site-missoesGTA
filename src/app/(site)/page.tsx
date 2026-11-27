@@ -152,8 +152,8 @@ export default async function Home() {
           <div className="grid md:grid-cols-[1.1fr_1fr]">
             <div className="p-6 sm:p-10">
               <p className="label text-violet mb-3">Seu comparsa de bolso</p>
-              <h2 id="h-app" className="text-3xl sm:text-4xl font-extrabold">Cada segredo. Cada descoberta. Uma nova aventura.</h2>
-              <p className="mt-4 text-fg-muted">O portal resolve a dúvida de agora. O aplicativo é o parceiro que vai no banco do carona: sabe o que tem por perto, lembra o que você já achou e não conta o final do filme.</p>
+              <h2 id="h-app" className="text-3xl sm:text-4xl font-extrabold">O segredo a gente revela. A aventura é você quem vive.</h2>
+              <p className="mt-4 text-fg-muted">Seu comparsa de bolso: segredos, localizações, orientações e vídeos de quem já fez. Saber onde está o dinheiro não garante que você escapa com ele, e é aí que começa a graça. R$ 4,20, uma vez só.</p>
               <ul className="mt-5 flex flex-col gap-2.5">
                 {appConfig.features.slice(0, 3).map((f) => (
                   <li key={f.key} className="flex gap-3"><Icon name="check" size={20} className="text-violet shrink-0 mt-1" /><span><strong className="font-semibold">{f.title}.</strong> <span className="text-fg-muted">{f.text}</span></span></li>

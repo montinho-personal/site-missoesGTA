@@ -323,4 +323,18 @@ create table password_resets (
     id: "010_guia_do_jogador",
     sql: `select 1;`,
   },
+  {
+    // Conceito central do app (27/11/2026): "O segredo a gente revela. A aventura é você quem vive."
+    id: "011_chamadas_do_app",
+    sql: `
+update ctas set eyebrow = 'Seu comparsa de bolso', headline = 'O segredo a gente revela. A aventura é você quem vive.', body = 'Segredos, localizações, orientações e vídeos de quem já fez, no seu bolso. R$ 4,20, pagamento único, sem mensalidade.', button_label = 'Conhecer o aplicativo' where key = 'padrao';
+update ctas set eyebrow = 'Seu comparsa de bolso', headline = 'A missão que o jogo não te mostra. O app mostra onde ela começa.', body = 'O resto, a perseguição e o caos, é história sua. O segredo a gente revela; a aventura é você quem vive.', button_label = 'Conhecer o aplicativo' where key = 'missoes';
+update ctas set eyebrow = 'Seu comparsa de bolso', headline = 'O app mostra a porta. Entrar é com você.', body = 'Bunkers e esconderijos com localização e vídeo de quem já foi. O segredo a gente revela; a aventura é sua.', button_label = 'Conhecer o aplicativo' where key = 'lugares';
+update ctas set eyebrow = 'Seu comparsa de bolso', headline = 'Saber onde está o dinheiro é metade do assalto.', body = 'A outra metade é escapar com ele. O app mostra o esconderijo e o caminho; a fuga é com você.', button_label = 'Conhecer o aplicativo' where key = 'dinheiro';
+update ctas set eyebrow = 'Seu comparsa de bolso', headline = 'Saber onde está o carro não faz a polícia facilitar.', body = 'O app mostra o pino e o vídeo de quem já pegou. Chegar lá inteiro é com você.', button_label = 'Conhecer o aplicativo' where key = 'veiculos';
+update ctas set eyebrow = 'Seu comparsa de bolso', headline = 'Quanta aventura você já deixou para trás?', body = 'O app lembra o que você achou e mostra o que ainda falta. O segredo a gente revela; a aventura é sua.', button_label = 'Conhecer o aplicativo' where key = 'colecionaveis';
+update ctas set eyebrow = 'Seu comparsa de bolso', headline = 'Tem coisa em Leonida que pouca gente viu.', body = 'O app mostra onde procurar. O que acontece lá é história sua.', button_label = 'Conhecer o aplicativo' where key = 'misterios';
+update ctas set eyebrow = 'Seu comparsa de bolso', headline = 'Você conhece GTA 6. Mas conhece tudo que ele esconde?', body = 'Segredos, localizações e vídeos no seu bolso, por R$ 4,20. O segredo a gente revela; a aventura é você quem vive.', button_label = 'Conhecer o aplicativo' where key = 'dicas';
+`,
+  },
 ];

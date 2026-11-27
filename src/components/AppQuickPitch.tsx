@@ -31,7 +31,7 @@ export function AppQuickPitch({ entry, nearby, sameRegion, total, sale }: { entr
           ))}
         </ol>
         <p className="mt-4 rounded-lg border border-gold/40 bg-gold/5 px-3.5 py-2.5 text-[0.97rem]">
-          <strong className="text-gold font-display">{price}</strong> libera <strong>os {total} segredos</strong> do arquivo, do jeito acima. Menos que um café, e uma vez só.
+          <strong className="text-gold font-display">{price}</strong> libera <strong>os {total} segredos</strong> do arquivo. Pagamento único, sem mensalidade. O segredo a gente revela; a aventura é sua.
         </p>
         <div className="mt-4 flex flex-col sm:flex-row sm:items-center gap-3">
           <TrackLink href="/app/#comprar" className="btn btn-app" event="cta_click" params={{ cta_key: "ficha_rapida", placement: "entry_after_answer", context: entry.id }}>
