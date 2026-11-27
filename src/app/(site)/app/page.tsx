@@ -12,6 +12,8 @@ import { breadcrumbLd, faqLd, pageMeta } from "@/lib/seo";
 import { appConfig, featureStatusLabel, type FeatureStatus } from "@/lib/app-config";
 import { abs, site } from "@/lib/site";
 import { appStory, fillCount, hookFor } from "@/lib/app-story";
+import { TrailerFeature } from "@/components/TrailerVideo";
+import { trailerLd } from "@/lib/trailer";
 import { appSecretCount } from "@/server/app-count";
 
 export const metadata = pageMeta({
@@ -65,7 +67,7 @@ export default async function AppPage() {
 
   return (
     <>
-      <JsonLd data={{ "@context": "https://schema.org", "@graph": ld }} />
+      <JsonLd data={{ "@context": "https://schema.org", "@graph": [...ld, trailerLd()] }} />
       <TrackView event="view_app_landing" />
       <section className="border-b border-ink-600 grid-paper">
         <div className="wrap pt-6 pb-14 sm:pb-20">
@@ -82,19 +84,7 @@ export default async function AppPage() {
               </p>
               {!selling && <p className="mt-4 text-sm text-fg-subtle max-w-lg">Transparência: o aplicativo está em construção e ainda não foi lançado. Abaixo, cada função traz o estado real em que se encontra.</p>}
             </div>
-            <div aria-hidden="true" className="flex justify-center">
-              <div className="w-60 rounded-[2.2rem] border-2 border-ink-500 bg-ink-900 p-4 shadow-2xl">
-                <div className="h-2 w-16 rounded-full bg-ink-600 mx-auto mb-4" />
-                <p className="label text-violet mb-2">Perto de você</p>
-                {[["target", "ok"], ["cash", "violet"], ["car", "violet"], ["eye", "violet"], ["egg", "violet"]].map(([ic, t], i) => (
-                  <div key={ic} className="flex items-center gap-3 rounded-xl border border-ink-600 p-2.5 mb-2">
-                    <span className={`tone-${t}`}><Icon name={i === 0 ? "check" : ic} size={20} /></span>
-                    <span className="grow"><span className="block h-2 rounded bg-ink-500" style={{ width: `${90 - i * 9}%` }} /><span className="block h-1.5 rounded bg-ink-600 w-1/2 mt-1.5" /></span>
-                  </div>
-                ))}
-                <p className="text-[0.65rem] text-fg-subtle text-center mt-3">Ilustração conceitual, não é captura de tela.</p>
-              </div>
-            </div>
+            <TrailerFeature placement="app_hero" caption="O app em ação, com telas reais, em 1 minuto." />
           </div>
         </div>
       </section>

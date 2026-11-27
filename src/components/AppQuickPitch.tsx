@@ -1,4 +1,5 @@
 import { Icon } from "./Icon";
+import { TrailerCompact } from "./TrailerVideo";
 import { TrackLink } from "./client";
 import type { Entry } from "@/lib/types";
 
@@ -30,6 +31,7 @@ export function AppQuickPitch({ entry, nearby, sameRegion, total, sale }: { entr
             </li>
           ))}
         </ol>
+        <div className="mt-4"><TrailerCompact placement="entry_after_answer_video" /></div>
         <p className="mt-4 rounded-lg border border-gold/40 bg-gold/5 px-3.5 py-2.5 text-[0.97rem]">
           <strong className="text-gold font-display">{price}</strong> libera <strong>os {total} segredos</strong> do arquivo. Pagamento único, sem mensalidade. O segredo a gente revela; a aventura é sua.
         </p>

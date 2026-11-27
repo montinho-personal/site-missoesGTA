@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ConsentReopen, Wordmark } from "./Chrome";
 import { SpoilerToggle } from "./client";
+import { FooterTrailer } from "./TrailerVideo";
 import { site } from "@/lib/site";
 import type { Category } from "@/lib/types";
 
@@ -14,6 +15,7 @@ export function Footer({ categories }: { categories: Category[] }) {
           <Wordmark />
           <p className="mt-3 text-fg-muted max-w-sm">{site.tagline}</p>
           <div className="mt-5"><SpoilerToggle /></div>
+          <FooterTrailer />
         </div>
         <nav aria-label="Categorias de GTA 6" className={col}>
           <p className="label text-fg-subtle mb-2">GTA 6</p>

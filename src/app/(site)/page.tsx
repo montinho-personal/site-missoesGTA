@@ -11,6 +11,7 @@ import { faqLd, pageMeta, websiteLd } from "@/lib/seo";
 import { homeFaq } from "@/lib/game-facts";
 import { formatDate } from "@/lib/labels";
 import { hookFor } from "@/lib/app-story";
+import { TrailerFeature } from "@/components/TrailerVideo";
 import { appSecretCount } from "@/server/app-count";
 import { site } from "@/lib/site";
 import { appConfig } from "@/lib/app-config";
@@ -164,16 +165,8 @@ export default async function Home() {
               <TrackLink href="/app/" className="btn btn-app mt-7" event="cta_click" params={{ cta_key: "home_app", placement: "home_app_section" }}>Conhecer o aplicativo<Icon name="arrow" size={18} /></TrackLink>
               {appConfig.stage === "pre_lancamento" && <p className="mt-3 text-sm text-fg-subtle">Em preparação. Na página do aplicativo dizemos o que já existe e o que ainda é plano.</p>}
             </div>
-            <div className="grid-paper relative min-h-56 border-t md:border-t-0 md:border-l border-ink-600 flex items-center justify-center p-8" aria-hidden="true">
-              <div className="w-44 rounded-[1.7rem] border-2 border-ink-500 bg-ink-900 p-3 shadow-2xl rotate-3">
-                <div className="h-2 w-12 rounded-full bg-ink-600 mx-auto mb-3" />
-                {["target", "cash", "car", "eye"].map((ic, i) => (
-                  <div key={ic} className="flex items-center gap-2.5 rounded-lg border border-ink-600 p-2 mb-2">
-                    <span className={i === 0 ? "text-ok" : "text-violet"}><Icon name={i === 0 ? "check" : ic} size={18} /></span>
-                    <span className="grow"><span className="block h-1.5 rounded bg-ink-500 w-full" /><span className="block h-1.5 rounded bg-ink-600 w-2/3 mt-1.5" /></span>
-                  </div>
-                ))}
-              </div>
+            <div className="grid-paper relative border-t md:border-t-0 md:border-l border-ink-600 flex items-center justify-center p-6 sm:p-8">
+              <TrailerFeature placement="home_app" />
             </div>
           </div>
         </div>
@@ -228,7 +221,7 @@ export default async function Home() {
       </section>
 
       {/* 9. Conversão final */}
-      <section className="wrap pt-10"><AppCta cta={ctas.padrao} placement="home_final" /></section>
+      <section className="wrap pt-10"><AppCta cta={ctas.padrao} placement="home_final" video={false} /></section>
     </>
   );
 }

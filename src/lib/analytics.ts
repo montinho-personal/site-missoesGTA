@@ -4,7 +4,7 @@ export type TrackEvent =
   | "view_discovery" | "category_click" | "filter_use"
   | "cta_click" | "view_app_landing" | "app_interest_click" | "begin_checkout" | "purchase"
   | "waitlist_signup" | "share" | "favorite_add" | "favorite_remove"
-  | "spoiler_toggle" | "spoiler_reveal" | "submission_sent";
+  | "spoiler_toggle" | "spoiler_reveal" | "submission_sent" | "video_play";
 
 const KEY = "gs:consent";
 export const getConsent = (): "granted" | "denied" | null => {
