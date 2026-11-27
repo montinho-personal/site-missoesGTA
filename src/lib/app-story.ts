@@ -4,16 +4,23 @@
 // Atenção: a piada do 4,20 depende do preço. Se o preço mudar no painel, revise estes textos,
 // o cartão do menu (Chrome.tsx), o painel que sobe (sticky-copy.ts) e as chamadas (migração 011).
 
+/**
+ * O gancho na língua da rua (decisão do Montinho em 27/11/2026): "{n} segredos pra meter o loko".
+ * O número não fica escrito à mão: vem da contagem do próprio app (src/server/app-count.ts).
+ * Sem número disponível, "{n} segredos" vira "Segredos" e a frase continua de pé.
+ */
+export function fillCount(text: string, n: number | null): string {
+  if (n) return text.replace(/\{n\}/g, String(n));
+  return text.replace(/(^|[.!?:]\s+)\{n\} segredos/g, "$1Segredos").replace(/\{n\} segredos/g, "segredos");
+}
+export const hookFor = (n: number | null) => fillCount("{n} segredos pra meter o loko", n);
+
 export const appStory = {
   /** A assinatura. Vai em toda chamada principal. */
   tagline: "O segredo a gente revela. A aventura é você quem vive.",
   taglineShort: "O segredo a gente revela. A aventura é sua.",
-  /** Quantos segredos o app tem hoje (dito pelo Montinho em 27/11/2026). Mudou no app? Troque só aqui e nas chamadas (migração 012). */
-  secrets: 128,
-  /** O gancho, na língua da rua (decisão do Montinho em 27/11/2026: gíria, sátira e humor em toda chamada do app). */
-  hook: "128 segredos pra meter o loko.",
-  /** O que o app é, em uma frase. */
-  promise: "Seu comparsa de bolso: 128 segredos pra meter o loko, com o mapa, o passo a passo e o vídeo de quem já fez.",
+  /** O que o app é, em uma frase. "{n} segredos" vira o número do dia (fillCount). */
+  promise: "Seu comparsa de bolso: {n} segredos pra meter o loko, com o mapa, o passo a passo e o vídeo de quem já fez.",
   /** O manifesto, em parágrafos curtos (página do app). */
   manifesto: [
     "Desde moleque a gente tá ligado: GTA nunca foi só seguir a seta amarela.",

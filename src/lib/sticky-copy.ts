@@ -37,7 +37,7 @@ const CATEGORY: Record<string, { list: StickyCopy; entry: StickyCopy }> = {
 };
 
 const PAGES: Record<string, StickyCopy> = {
-  home: { title: "128 segredos pra meter o loko.", line: "Mapa, passo a passo e vídeo no app. R$ 4,20, uma vez só.", context: "home" },
+  home: { title: "{n} segredos pra meter o loko.", line: "Mapa, passo a passo e vídeo no app. R$ 4,20, uma vez só.", context: "home" },
   segredos: { title: "Tudo isso num mapa só, mano.", line: "No aplicativo você vê tudo no mapa e risca o que já fez.", context: "segredos" },
   jogo: { title: "Leonida é grande. Não se perde, parça.", line: "Cada segredo com pino, vídeo e a sua lista do que falta.", context: "hub" },
   mapa: { title: "As regiões viram pinos no aplicativo.", line: "O mapa que este site não tem: ponto por ponto, com precisão.", context: "mapa" },
@@ -47,7 +47,7 @@ const PAGES: Record<string, StickyCopy> = {
   radar: { title: "O arquivo cresce. Seu mapa também.", line: "No aplicativo, as fichas novas aparecem no mapa.", context: "radar" },
   favoritos: { title: "Porta-luvas é bom. Mapa é melhor.", line: "No aplicativo, o que você salvou vira pino e checklist.", context: "favoritos" },
   ajuda: { title: "Dúvida resolvida? Bora jogar.", line: "O aplicativo mostra o que fazer perto de onde você está.", context: "ajuda" },
-  padrao: { title: "128 segredos pra meter o loko.", line: "O segredo a gente revela. R$ 4,20, uma vez só.", context: "padrao" },
+  padrao: { title: "{n} segredos pra meter o loko.", line: "O segredo a gente revela. R$ 4,20, uma vez só.", context: "padrao" },
 };
 
 /** Onde a barra NÃO aparece: a própria página do app, compra, formulários e textos legais. */

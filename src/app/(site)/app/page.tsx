@@ -11,10 +11,11 @@ import { Breadcrumbs } from "@/components/ui";
 import { breadcrumbLd, faqLd, pageMeta } from "@/lib/seo";
 import { appConfig, featureStatusLabel, type FeatureStatus } from "@/lib/app-config";
 import { abs, site } from "@/lib/site";
-import { appStory } from "@/lib/app-story";
+import { appStory, fillCount, hookFor } from "@/lib/app-story";
+import { appSecretCount } from "@/server/app-count";
 
 export const metadata = pageMeta({
-  title: "App de segredos de GTA 6: 128 segredos pra meter o loko",
+  title: "App de segredos de GTA 6: segredos pra meter o loko",
   description: "App para explorar GTA 6 a fundo: descobertas por região, checklist do que você já achou e controle de spoiler. Revisado todo dia. Veja o que já existe.",
   path: "/app/",
 });
@@ -35,7 +36,7 @@ export const revalidate = 600;
 
 export default async function AppPage() {
   // A venda liga sozinha quando existirem: credenciais do Mercado Pago, preço e banco permanente.
-  const [sale, entries] = await Promise.all([saleConfig(), getPublishedEntries()]);
+  const [sale, entries, secrets] = await Promise.all([saleConfig(), getPublishedEntries(), appSecretCount()]);
   // Números reais do arquivo, para o argumento da revisão diária.
   const fichas = entries.filter((e) => e.app_ref).length;
   const fontes = new Set(entries.flatMap((e) => e.sources.filter((s) => s.tipo !== "video").map((s) => s.url))).size;
@@ -71,7 +72,7 @@ export default async function AppPage() {
           <Breadcrumbs items={crumbs} />
           <div className="mt-8 grid gap-10 md:grid-cols-[1.2fr_1fr] md:items-center">
             <div>
-              <p className="label text-violet mb-4">128 segredos pra meter o loko</p>
+              <p className="label text-violet mb-4">{hookFor(secrets)}</p>
               <h1 className="text-[2.3rem] leading-[1.05] sm:text-6xl font-black">O segredo a gente revela. A aventura é você quem vive.</h1>
               <p className="mt-5 text-lg sm:text-xl text-fg-muted max-w-xl">Carro raro, grana escondida, lugar secreto e missão que o jogo não te mostra. Seu comparsa de bolso entrega a localização, o passo a passo e o vídeo de quem já fez. O resto é contigo, mano.</p>
               <div className="mt-7 flex flex-wrap gap-3">{primaryCta}<Link href="/app/como-baixar-e-usar/" className="btn btn-ghost">Como baixar e usar</Link></div>
@@ -116,7 +117,7 @@ export default async function AppPage() {
             <h2 id="h-porque" className="text-3xl sm:text-4xl font-extrabold">GTA nunca foi só cumprir missão.</h2>
             <div className="mt-5 text-lg text-fg-muted flex flex-col gap-4">
               {appStory.manifesto.map((t, i) => <p key={i} className={i === appStory.manifesto.length - 1 ? "text-fg font-semibold" : undefined}>{t}</p>)}
-              <p>{appStory.promise}</p>
+              <p>{fillCount(appStory.promise, secrets)}</p>
             </div>
             <div className="mt-8 card border-pink/40 p-5 sm:p-7">
               <div className="flex flex-col gap-2 text-lg">

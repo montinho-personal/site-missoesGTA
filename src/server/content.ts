@@ -2,6 +2,8 @@ import "server-only";
 import { cache } from "react";
 import { q } from "./db";
 import type { Author, Category, Cta, Entry, EntryCardData, EntryChange, Region } from "@/lib/types";
+import { appSecretCount } from "./app-count";
+import { fillCount } from "@/lib/app-story";
 
 const iso = (v: unknown): string | null => {
   if (v == null) return null;
@@ -76,8 +78,9 @@ export const getRegions = cache(async (gameSlug = "gta-6"): Promise<Region[]> =>
 export const getGames = cache(async () => q<{ id: string; slug: string; name: string; short_name: string }>(`select id, slug, name, short_name from games where published order by sort`));
 
 export const getCtas = cache(async (): Promise<Record<string, Cta>> => {
-  const rows = await q<Cta>(`select * from ctas where active`);
-  return Object.fromEntries(rows.map((c) => [c.key, c]));
+  const [rows, n] = await Promise.all([q<Cta>(`select * from ctas where active`), appSecretCount()]);
+  // "{n} segredos" nos textos vira o número do dia, lido do app.
+  return Object.fromEntries(rows.map((c) => [c.key, { ...c, eyebrow: fillCount(c.eyebrow, n), headline: fillCount(c.headline, n), body: fillCount(c.body, n) }]));
 });
 
 export const getAuthors = cache(async () => q<Author>(`select * from authors order by name`));

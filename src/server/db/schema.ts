@@ -338,17 +338,17 @@ update ctas set eyebrow = 'Seu comparsa de bolso', headline = 'Você conhece GTA
 `,
   },
   {
-    // Voz da rua (27/11/2026, decisão do Montinho): gíria, sátira e humor nas chamadas do app. "128 segredos pra meter o loko."
+    // Voz da rua (27/11/2026, decisão do Montinho): gíria, sátira e humor nas chamadas do app. "{n} segredos pra meter o loko."
     id: "012_chamadas_na_lingua_da_rua",
     sql: `
-update ctas set eyebrow = '128 segredos pra meter o loko', headline = 'O segredo a gente revela. A aventura é você quem vive.', body = 'Onde tá a grana, o carro raro e o bunker, com mapa e vídeo de quem já fez. R$ 4,20, uma vez só, sem mensalidade.' where key = 'padrao';
+update ctas set eyebrow = '{n} segredos pra meter o loko', headline = 'O segredo a gente revela. A aventura é você quem vive.', body = 'Onde tá a grana, o carro raro e o bunker, com mapa e vídeo de quem já fez. R$ 4,20, uma vez só, sem mensalidade.' where key = 'padrao';
 update ctas set eyebrow = 'Seu comparsa de bolso', headline = 'Missão que o jogo esconde? A gente entrega onde começa.', body = 'A perseguição e o caos ficam por sua conta, parça. O segredo a gente revela; a aventura é você quem vive.' where key = 'missoes';
 update ctas set eyebrow = 'Seu comparsa de bolso', headline = 'O app mostra a porta. Entrar é contigo, mano.', body = 'Bunker e esconderijo com localização e vídeo de quem já colou lá. O segredo a gente revela; a aventura é sua.' where key = 'lugares';
 update ctas set eyebrow = 'Seu comparsa de bolso', headline = 'Saber onde tá a grana é metade do assalto.', body = 'A outra metade é sair vazado com ela. O app mostra o esconderijo e o caminho; a fuga é contigo.' where key = 'dinheiro';
 update ctas set eyebrow = 'Seu comparsa de bolso', headline = 'Achar o carro raro é fácil. Quero ver despistar os homi.', body = 'O app dá o pino no mapa e o vídeo de quem já pegou. Chegar lá inteiro é contigo.' where key = 'veiculos';
 update ctas set eyebrow = 'Seu comparsa de bolso', headline = 'Quanto rolê você já deixou passar batido?', body = 'O app lembra o que você já achou e mostra o que falta, sem caô. O segredo a gente revela; a aventura é sua.' where key = 'colecionaveis';
 update ctas set eyebrow = 'Seu comparsa de bolso', headline = 'Tem coisa em Leonida que pouca gente viu, tá ligado?', body = 'O app mostra onde procurar. O que rola lá é história sua.' where key = 'misterios';
-update ctas set eyebrow = '128 segredos pra meter o loko', headline = 'Tu manja de GTA 6. Mas manja do que ele esconde?', body = 'Mapa, passo a passo e vídeo de quem já fez, por R$ 4,20. Sim, 4,20. Entendedores entenderão.' where key = 'dicas';
+update ctas set eyebrow = '{n} segredos pra meter o loko', headline = 'Tu manja de GTA 6. Mas manja do que ele esconde?', body = 'Mapa, passo a passo e vídeo de quem já fez, por R$ 4,20. Sim, 4,20. Entendedores entenderão.' where key = 'dicas';
 `,
   },
 ];

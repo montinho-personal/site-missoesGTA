@@ -10,6 +10,8 @@ import { getCategories, getCtas, getPublicChanges, getPublishedEntries, toCard }
 import { faqLd, pageMeta, websiteLd } from "@/lib/seo";
 import { homeFaq } from "@/lib/game-facts";
 import { formatDate } from "@/lib/labels";
+import { hookFor } from "@/lib/app-story";
+import { appSecretCount } from "@/server/app-count";
 import { site } from "@/lib/site";
 import { appConfig } from "@/lib/app-config";
 import { narrators, radioSpots } from "@/lib/voice";
@@ -22,7 +24,7 @@ export const metadata = pageMeta({
 });
 
 export default async function Home() {
-  const [entries, categories, changes, ctas] = await Promise.all([getPublishedEntries(), getCategories(), getPublicChanges(6), getCtas()]);
+  const [entries, categories, changes, ctas, secrets] = await Promise.all([getPublishedEntries(), getCategories(), getPublicChanges(6), getCtas(), appSecretCount()]);
   const featured = entries.filter((e) => e.featured && e.spoiler_level !== "historia").slice(0, 6);
   const investigating = entries.filter((e) => e.verification_status === "nao_verificado").slice(0, 3);
 
@@ -151,7 +153,7 @@ export default async function Home() {
         <div className="card overflow-hidden border-violet/40">
           <div className="grid md:grid-cols-[1.1fr_1fr]">
             <div className="p-6 sm:p-10">
-              <p className="label text-violet mb-3">128 segredos pra meter o loko</p>
+              <p className="label text-violet mb-3">{hookFor(secrets)}</p>
               <h2 id="h-app" className="text-3xl sm:text-4xl font-extrabold">O segredo a gente revela. A aventura é você quem vive.</h2>
               <p className="mt-4 text-fg-muted">Seu comparsa de bolso: o mapa, o passo a passo e o vídeo de quem já fez. Saber onde tá a grana não garante que você sai vazado com ela, e é aí que começa a graça. R$ 4,20, uma vez só. Sim, 4,20.</p>
               <ul className="mt-5 flex flex-col gap-2.5">
