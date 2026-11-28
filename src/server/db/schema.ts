@@ -432,4 +432,10 @@ alter table licenses add column if not exists trial_hours int;
 alter table licenses add column if not exists expires_at timestamptz;
 `,
   },
+  {
+    // Retrato do guia do app de 28/11/2026 (130 fichas): 5 fichas novas e 49 revisadas. Sem mudança de tabela:
+    // faz o seed rodar, que agora também atualiza as fichas vindas do app (os campos do site ficam como estão).
+    id: "021_retrato_do_app_28_11",
+    sql: `select 1;`,
+  },
 ];

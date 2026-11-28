@@ -25,6 +25,20 @@ async function insertRows(db: Db, table: string, rows: Record<string, unknown>[]
   }
 }
 
+// Campos do site: a revisão do app não mexe na publicação, no revisor, no destaque nem nas datas de criação.
+const SITE_OWNED = new Set(["id", "workflow_status", "reviewed_by", "featured", "published_at", "created_at"]);
+
+/** Fichas que vêm do app: o app é a fonte dos fatos, então o texto revisado lá substitui o daqui. */
+async function syncAppEntries(db: Db, rows: Record<string, unknown>[]) {
+  for (const row of rows) {
+    if (!row.app_ref) continue;
+    const cols = Object.keys(row).filter((c) => !c.startsWith("_") && !SITE_OWNED.has(c));
+    const vals = cols.map((c) => (JSON_COLS.has(c) && row[c] != null ? JSON.stringify(row[c]) : row[c]));
+    const sets = cols.map((c, i) => (JSON_COLS.has(c) ? `${c} = $${i + 2}::text::jsonb` : `${c} = $${i + 2}`));
+    await db.query(`update entries set ${sets.join(", ")} where id = $1 and app_ref is not null`, [row.id, ...vals]);
+  }
+}
+
 export async function seed(db: Db) {
   await insertRows(db, "games", games);
   await insertRows(db, "categories", categories);
@@ -32,6 +46,7 @@ export async function seed(db: Db) {
   await insertRows(db, "authors", authors);
   await insertRows(db, "ctas", ctas);
   await insertRows(db, "entries", entries as Record<string, unknown>[]);
+  await syncAppEntries(db, entries as Record<string, unknown>[]);
   // Treino de Leonida: rascunhos para o dono revisar (nada disso é público até ser aprovado no painel).
   await insertRows(db, "entries", tipsEntries as Record<string, unknown>[]);
   await insertRows(db, "tip_videos", tipVideos as Record<string, unknown>[]);

@@ -1,5 +1,5 @@
 {
- "quando": "2026-11-28T14:21:44.127Z",
+ "quando": "2026-11-28T18:20:23.200Z",
  "total": 127,
  "falhas": 0,
  "results": [
@@ -161,12 +161,12 @@
   {
    "name": "imagem de compartilhamento em /",
    "pass": true,
-   "detail": "199276 bytes"
+   "detail": "199338 bytes"
   },
   {
    "name": "imagem de compartilhamento em /app/",
    "pass": true,
-   "detail": "197622 bytes"
+   "detail": "197660 bytes"
   },
   {
    "name": "imagem de compartilhamento em /gta-6/easter-eggs/skunk-ape/",
@@ -176,7 +176,7 @@
   {
    "name": "imagem de compartilhamento em /gta-6/dinheiro/",
    "pass": true,
-   "detail": "185541 bytes"
+   "detail": "185576 bytes"
   },
   {
    "name": "imagem de compartilhamento em /sobre/",
@@ -421,7 +421,7 @@
   {
    "name": "filtro por tipo reduz a lista",
    "pass": true,
-   "detail": "138 → 17"
+   "detail": "143 → 18"
   },
   {
    "name": "filtro não muda a URL (nada de combinações indexáveis)",
@@ -581,7 +581,7 @@
   {
    "name": "teste grátis vale e o prazo de 24 horas começa no primeiro uso",
    "pass": true,
-   "detail": "{\"valido\":true,\"expira_em\":\"2026-11-29T14:21:42.330Z\"}"
+   "detail": "{\"valido\":true,\"expira_em\":\"2026-11-29T18:20:21.205Z\"}"
   },
   {
    "name": "painel mostra o teste e até quando vale",
