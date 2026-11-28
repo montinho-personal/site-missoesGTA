@@ -8,6 +8,7 @@ import { Icon } from "@/components/Icon";
 import { entryUrl, getCtas, getEntry, getEntryChanges, getPublishedEntries, nearbyEntries, relatedEntries, toCard } from "@/server/content";
 import { TipVideos } from "@/components/TipVideos";
 import { videosFor } from "@/server/tips";
+import { appUrl } from "@/server/access";
 import { saleConfig } from "@/server/mercadopago";
 import { AppPitch } from "@/components/AppPitch";
 import { AppQuickPitch } from "@/components/AppQuickPitch";
@@ -136,7 +137,7 @@ export default async function EntryPage({ params }: Props) {
             {entry.summary && entry.direct_answer && <p className="max-w-3xl text-fg-muted text-lg">{entry.summary}</p>}
 
             {/* Treino de Leonida: os vídeos aprovados desta dica, logo depois da resposta. */}
-            <TipVideos videos={videos.map((v) => ({ id: v.id, platform: v.platform, video_id: v.video_id, url: v.url, title: v.title, creator_name: v.creator_name, creator_url: v.creator_url }))} context={entry.id} />
+            <TipVideos videos={videos.map((v) => ({ id: v.id, platform: v.platform, video_id: v.video_id, url: v.url, title: v.title, creator_name: v.creator_name, creator_url: v.creator_url }))} context={entry.id} appHref={videos.length ? `${(await appUrl()).replace(/\/$/, "")}/app/treino?utm_source=site&utm_medium=dica&utm_campaign=treino_de_leonida#${encodeURIComponent(entry.id)}` : undefined} />
 
             {/* O app aparece cedo, ensinando a fazer ESTA descoberta nele, com o preço à vista. */}
             {!isGuideKind(entry) && <AppQuickPitch entry={entry} nearby={nearby.length} sameRegion={sameRegion} total={all.filter((x) => x.app_ref).length} sale={sale} />}

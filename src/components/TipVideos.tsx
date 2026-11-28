@@ -49,7 +49,7 @@ function OneVideo({ v, context }: { v: PublicTipVideo; context: string }) {
   );
 }
 
-export function TipVideos({ videos, context, heading = "Aprende vendo" }: { videos: PublicTipVideo[]; context: string; heading?: string }) {
+export function TipVideos({ videos, context, heading = "Aprende vendo", appHref }: { videos: PublicTipVideo[]; context: string; heading?: string; appHref?: string }) {
   if (videos.length === 0) return null;
   return (
     <section aria-labelledby="h-videos" className="max-w-3xl">
@@ -57,6 +57,12 @@ export function TipVideos({ videos, context, heading = "Aprende vendo" }: { vide
       <h2 id="h-videos" className="text-2xl font-extrabold mt-1">{heading}</h2>
       <p className="mt-1.5 text-fg-muted text-[0.97rem]">{videos.length === 1 ? "Um vídeo curto" : `${videos.length} vídeos curtos`} de quem manja, com o crédito de cada criador. Os vídeos são deles; a gente só junta o que presta.</p>
       <div className="mt-4 grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">{videos.map((v) => <OneVideo key={v.id} v={v} context={context} />)}</div>
+      {appHref && (
+        <div className="mt-5 flex flex-col sm:flex-row sm:items-center gap-3 rounded-xl border border-violet/40 bg-violet-strong/10 p-4">
+          <p className="grow text-[0.97rem]"><strong className="font-display">Treina no celular, com o controle na mão.</strong> <span className="text-fg-muted">No app, os vídeos ficam no modo rápido e funcionam até sem internet.</span></p>
+          <a href={appHref} className="btn btn-app shrink-0" onClick={() => track("cta_click", { cta_key: "treinar_no_app", placement: "dica_videos", context })}>Treinar no app</a>
+        </div>
+      )}
     </section>
   );
 }

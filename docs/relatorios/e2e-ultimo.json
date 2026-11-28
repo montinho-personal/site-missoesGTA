@@ -1,6 +1,6 @@
 {
- "quando": "2026-11-27T22:08:03.168Z",
- "total": 121,
+ "quando": "2026-11-28T01:06:27.079Z",
+ "total": 122,
  "falhas": 0,
  "results": [
   {
@@ -550,6 +550,11 @@
   },
   {
    "name": "aprovado, o vídeo aparece na dica com o crédito do criador",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "dica com vídeo tem o botão Treinar no app, apontando para a tela do Treino",
    "pass": true,
    "detail": ""
   },

@@ -243,6 +243,7 @@ if (PW) {
     await page.waitForTimeout(800);
     const depois = await (await fetch(BASE + DICA)).text();
     ok("aprovado, o vídeo aparece na dica com o crédito do criador", depois.includes("Treino de Leonida") && depois.includes("@teste.e2e"));
+    ok("dica com vídeo tem o botão Treinar no app, apontando para a tela do Treino", /\/app\/treino\?utm_source=site[^"]*#gta6-0017/.test(depois));
     const feed = await (await fetch(BASE + "/api/dicas/")).json();
     const d = feed.dicas.find((x) => x.id === "gta6-0017");
     ok("lista do app traz a dica com vídeo, resumo curto e link rastreável para o site", !!d && d.videos[0]?.plataforma === "tiktok" && d.videos[0]?.criador === "@teste.e2e" && d.resumo.length <= 220 && d.site.includes("utm_source=app"));
