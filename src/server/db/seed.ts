@@ -7,6 +7,7 @@ import entries from "../../../content/seed/entries.json";
 import ctas from "../../../content/seed/ctas.json";
 import tipsEntries from "../../../content/seed/tips-entries.json";
 import tipVideos from "../../../content/seed/tip-videos.json";
+import radarEntries from "../../../content/seed/radar-entries.json";
 
 const JSON_COLS = new Set([
   "faq", "coords", "steps", "common_mistakes", "troubleshooting", "sources", "media", "related", "tags",
@@ -34,7 +35,9 @@ export async function seed(db: Db) {
   // Treino de Leonida: rascunhos para o dono revisar (nada disso é público até ser aprovado no painel).
   await insertRows(db, "entries", tipsEntries as Record<string, unknown>[]);
   await insertRows(db, "tip_videos", tipVideos as Record<string, unknown>[]);
-  for (const e of entries as { id: string; published_at?: string; _change_note?: string }[]) {
+  // Fichas que vieram do radar e ainda não estão no guia do app (o importador não apaga: sem app_ref).
+  await insertRows(db, "entries", radarEntries as Record<string, unknown>[]);
+  for (const e of [...entries, ...radarEntries] as { id: string; published_at?: string; _change_note?: string }[]) {
     const has = await db.query(`select 1 from entry_changes where entry_id = $1 limit 1`, [e.id]);
     if (has.length === 0) {
       await db.query(

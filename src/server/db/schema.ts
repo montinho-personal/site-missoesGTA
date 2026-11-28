@@ -418,4 +418,10 @@ insert into entry_changes (entry_id, kind, note)
     and not exists (select 1 from entry_changes c where c.entry_id = e.id);
 `,
   },
+  {
+    // Duas fichas novas pedidas pelo Montinho em 28/11/2026 (bonés do Mario e Growler rosa da Vanessa), no conteúdo-semente
+    // (content/seed/radar-entries.json). Sem mudança de tabela: só faz o seed rodar de novo.
+    id: "019_fichas_do_radar_28_11",
+    sql: `select 1;`,
+  },
 ];

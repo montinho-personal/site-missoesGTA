@@ -1,5 +1,5 @@
 {
- "quando": "2026-11-28T01:06:27.079Z",
+ "quando": "2026-11-28T11:05:02.166Z",
  "total": 122,
  "falhas": 0,
  "results": [
@@ -416,7 +416,7 @@
   {
    "name": "filtro por tipo reduz a lista",
    "pass": true,
-   "detail": "136 → 16"
+   "detail": "138 → 17"
   },
   {
    "name": "filtro não muda a URL (nada de combinações indexáveis)",

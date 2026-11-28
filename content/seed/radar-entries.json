@@ -1,0 +1,201 @@
+[
+ {
+  "id": "gta6-bones-mario",
+  "app_ref": null,
+  "game_id": "gta6",
+  "category_id": "gta6-easter-eggs",
+  "region_id": "gta6-mount-kalaga-e-lummox",
+  "author_id": "redacao",
+  "kind": "descoberta",
+  "slug": "bones-mario-e-luigi",
+  "title": "Bonés do Mario e do Luigi na fábrica Lawton",
+  "direct_answer": "Nas ruínas da fábrica de papel Lawton Co., na beira do rio, ao sul de Moreau (Lummox County). Fume o bong da mesa, quebre o bloco quase invisível que aparece no pilar mais alto e pegue dois bonés, com as letras J e L.",
+  "summary": "",
+  "body_md": "## Bom saber\n\n- As fontes divergem sobre como quebrar o bloco: umas dizem pulando por baixo dele, como no Mario; outras, que só deu atirando.\n- As cores dos bonés também variam de fonte para fonte.\n- Ninguém informou ainda se depende de capítulo, se dá para repetir ou se os bonés ficam no guarda-roupa.\n- O crédito da descoberta é disputado entre alguns criadores de vídeo.",
+  "location_text": "Ruínas da fábrica de papel Lawton Co., na beira do rio, ao sul de Moreau, em Lummox County",
+  "landmark": "Procure a mesa com o bong sobre uma lona, junto a um muro de tijolo pichado, perto do rio.",
+  "coords": null,
+  "character_req": null,
+  "requirements": null,
+  "chapter": 0,
+  "progress_required": null,
+  "conditions": null,
+  "steps": [
+   "Vá até as ruínas da fábrica Lawton Co., na beira do rio, ao sul de Moreau.",
+   "Use o bong que está na mesa sobre a lona.",
+   "Olhe para o pilar mais alto: aparece um bloco quase invisível.",
+   "Quebre o bloco (pulando por baixo ou atirando, as fontes divergem).",
+   "Pegue os dois bonés que caem: um com J e outro com L."
+  ],
+  "reward": "Dois bonés, com as letras J e L",
+  "reward_value": null,
+  "reward_type": "item",
+  "repeatable": null,
+  "missable": null,
+  "common_mistakes": [],
+  "troubleshooting": [],
+  "platform_tested": null,
+  "game_version": "1.002.002",
+  "last_verified_on": "2026-11-28",
+  "verification_status": "provavel",
+  "evidence_type": "relatos",
+  "spoiler_level": "nenhum",
+  "sources": [
+   {
+    "nome": "Kotaku",
+    "url": "https://kotaku.com/gta-6-includes-a-mario-and-luigi-easter-egg-2000759536",
+    "tipo": "imprensa",
+    "data": null,
+    "nota": null
+   },
+   {
+    "nome": "Nintendo Life",
+    "url": "https://www.nintendolife.com/news/2026/11/random-gta-6-hides-an-adorable-mario-and-luigi-easter-egg-in-its-massive-world",
+    "tipo": "imprensa",
+    "data": null,
+    "nota": null
+   },
+   {
+    "nome": "TheGamer",
+    "url": "https://www.thegamer.com/gta-6-super-mario-easter-egg-unlockable-hats-jason-lucia-location-guide/",
+    "tipo": "imprensa",
+    "data": null,
+    "nota": null
+   },
+   {
+    "nome": "GameSpot",
+    "url": "https://www.gamespot.com/articles/gta-6-has-a-super-mario-bros-easter-egg-and-its-a-trip/",
+    "tipo": "imprensa",
+    "data": null,
+    "nota": null
+   },
+   {
+    "nome": "Sportskeeda",
+    "url": "https://www.sportskeeda.com/gta/how-get-mario-luigi-hats-gta-6",
+    "tipo": "imprensa",
+    "data": null,
+    "nota": null
+   }
+  ],
+  "media": [],
+  "faq": [],
+  "related": [],
+  "tags": [
+   "mario",
+   "luigi",
+   "bone",
+   "easter egg",
+   "lummox",
+   "colecionavel"
+  ],
+  "seo_title": "Bonés do Mario e do Luigi em GTA 6: onde fica o bloco",
+  "seo_description": "Ruínas da fábrica Lawton Co., ao sul de Moreau: fume o bong, quebre o bloco escondido e pegue os bonés com J e L.",
+  "workflow_status": "publicado",
+  "featured": true,
+  "reviewed_by": "Montinho",
+  "published_at": "2026-11-28T08:00:00Z",
+  "created_at": "2026-11-28T08:00:00Z",
+  "updated_at": "2026-11-28T08:00:00Z",
+  "_change_note": "Ficha criada a partir do radar de 28/11/2026, com fontes listadas. Ainda não está no guia do aplicativo."
+ },
+ {
+  "id": "gta6-growler-vanessa",
+  "app_ref": null,
+  "game_id": "gta6",
+  "category_id": "gta6-veiculos",
+  "region_id": "gta6-vice-city",
+  "author_id": "redacao",
+  "kind": "descoberta",
+  "slug": "growler-rosa-da-vanessa",
+  "title": "Growler rosa da Vanessa (o \"Porsche rosa\")",
+  "direct_answer": "Garagem em La Perle, na Del Rio Boulevard, ao lado do Auntie's Place Take Out, com laço rosa na porta. O código 92665 está nas mensagens do laptop antigo da Vanessa. Recompensa: Pfister Growler rosa. Só a partir do Capítulo 3, e dá para perder.",
+  "summary": "",
+  "body_md": "## Bom saber\n\n- O Pfister é a marca do jogo inspirada na Porsche; por isso a galera chama de \"Porsche rosa\".\n- Pode ser perdido: uma fonte diz que some depois do Capítulo 3; outra, que o código para de funcionar no começo do Capítulo 4. Não deixe para depois.\n- A senha do laptop aparece em uma fonte só.",
+  "location_text": "Garagem na Del Rio Boulevard, em La Perle (Vice City), ao lado do Auntie's Place Take Out",
+  "landmark": "Porta de garagem com um laço rosa e um teclado numérico.",
+  "coords": null,
+  "character_req": null,
+  "requirements": "Código 92665, das mensagens do laptop antigo da Vanessa",
+  "chapter": 3,
+  "progress_required": "A partir do Capítulo 3",
+  "conditions": null,
+  "steps": [
+   "Leia as mensagens do laptop antigo da Vanessa: o código 92665 está na conversa com \"Unknown\".",
+   "Vá até a garagem com laço rosa na Del Rio Boulevard, em La Perle, ao lado do Auntie's Place Take Out.",
+   "Digite 92665 no teclado da porta.",
+   "Leve o Pfister Growler rosa para guardar."
+  ],
+  "reward": "Pfister Growler rosa",
+  "reward_value": null,
+  "reward_type": "veiculo",
+  "repeatable": "Não, é único",
+  "missable": "Sim: some no fim do Capítulo 3 ou no começo do 4 (as fontes divergem)",
+  "common_mistakes": [],
+  "troubleshooting": [],
+  "platform_tested": null,
+  "game_version": "1.002.002",
+  "last_verified_on": "2026-11-28",
+  "verification_status": "confirmado",
+  "evidence_type": "relatos",
+  "spoiler_level": "leve",
+  "sources": [
+   {
+    "nome": "GamesRadar",
+    "url": "https://www.gamesradar.com/games/grand-theft-auto/gta-6-growler-pink-porsche/",
+    "tipo": "imprensa",
+    "data": null,
+    "nota": null
+   },
+   {
+    "nome": "Beebom",
+    "url": "https://beebom.com/gta-6-vanessas-growler-pink-porsche-location-stats/",
+    "tipo": "imprensa",
+    "data": null,
+    "nota": null
+   },
+   {
+    "nome": "Game8",
+    "url": "https://game8.co/games/GTA-6/archives/639794",
+    "tipo": "imprensa",
+    "data": null,
+    "nota": null
+   },
+   {
+    "nome": "GTA BOOM",
+    "url": "https://www.gtaboom.com/gta-6-vanessas-garage-and-pink-growler-7339",
+    "tipo": "imprensa",
+    "data": null,
+    "nota": null
+   },
+   {
+    "nome": "The Tab",
+    "url": "https://thetab.com/2026/11/24/how-to-unlock-the-free-pink-porsche-in-gta-6-that-disappears-after-chapter-3",
+    "tipo": "imprensa",
+    "data": null,
+    "nota": null
+   }
+  ],
+  "media": [],
+  "faq": [],
+  "related": [],
+  "tags": [
+   "pfister",
+   "growler",
+   "porsche",
+   "rosa",
+   "carro raro",
+   "perdivel",
+   "unico",
+   "garagem"
+  ],
+  "seo_title": "Porsche rosa em GTA 6: código da garagem do Growler da Vanessa",
+  "seo_description": "Garagem em La Perle com laço rosa: código 92665, a partir do Capítulo 3. Pfister Growler rosa, que dá para perder.",
+  "workflow_status": "publicado",
+  "featured": true,
+  "reviewed_by": "Montinho",
+  "published_at": "2026-11-28T08:00:00Z",
+  "created_at": "2026-11-28T08:00:00Z",
+  "updated_at": "2026-11-28T08:00:00Z",
+  "_change_note": "Ficha criada a partir do pedido do Montinho em 28/11/2026, com fontes listadas. Ainda não está no guia do aplicativo."
+ }
+]
