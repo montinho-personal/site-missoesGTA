@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { site } from "@/lib/site";
+import { ogUrl } from "@/lib/seo";
 
 const archivo = localFont({ src: "../fonts/archivo.woff2", variable: "--font-archivo", weight: "100 900", display: "swap" });
 const inter = localFont({ src: "../fonts/inter.woff2", variable: "--font-inter", weight: "100 900", display: "swap" });
@@ -15,8 +16,8 @@ export const metadata: Metadata = {
   robots: site.indexable
     ? { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 } }
     : { index: false, follow: false },
-  openGraph: { type: "website", siteName: site.name, locale: "pt_BR" },
-  twitter: { card: "summary_large_image" },
+  openGraph: { type: "website", siteName: site.name, locale: "pt_BR", images: [{ url: ogUrl("/"), width: 1200, height: 630, alt: site.name }] },
+  twitter: { card: "summary_large_image", images: [ogUrl("/")] },
   verification: { google: process.env.GOOGLE_SITE_VERIFICATION, other: process.env.BING_SITE_VERIFICATION ? { "msvalidate.01": process.env.BING_SITE_VERIFICATION } : undefined },
   formatDetection: { telephone: false },
 };

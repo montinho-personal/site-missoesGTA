@@ -7,8 +7,8 @@ export interface StickyCopy { title: string; line: string; context: string }
 
 const CATEGORY: Record<string, { list: StickyCopy; entry: StickyCopy }> = {
   "missoes-secretas": {
-    list: { title: "Missão sem pino no mapa é passeio.", line: "No aplicativo, cada encontro tem lugar marcado e o vídeo de quem já fez.", context: "cat_missoes" },
-    entry: { title: "Leu o passo a passo? Veja onde fica.", line: "O pino desta missão no mapa, e o que mais dá para fazer na mesma viagem.", context: "ficha_missoes" },
+    list: { title: "Missão sem pino é rolê perdido.", line: "No aplicativo, cada encontro tem lugar marcado e o vídeo de quem já fez.", context: "cat_missoes" },
+    entry: { title: "Leu o passo a passo? Cola no mapa.", line: "O pino desta missão no mapa, e o que mais dá para fazer na mesma viagem.", context: "ficha_missoes" },
   },
   "lugares-secretos": {
     list: { title: "Bunker não tem placa. O mapa tem pino.", line: "Todos os esconderijos no mapa do aplicativo, com a precisão de cada um.", context: "cat_bunkers" },
@@ -19,35 +19,35 @@ const CATEGORY: Record<string, { list: StickyCopy; entry: StickyCopy }> = {
     entry: { title: "Achou graça? Tem mais por perto.", line: "No mapa do aplicativo, os outros segredos em volta deste.", context: "ficha_easter" },
   },
   dinheiro: {
-    list: { title: "Saber onde é metade do assalto.", line: "O app mostra onde está o dinheiro. Escapar com ele é com você.", context: "cat_dinheiro" },
-    entry: { title: "Esse é um. Quantos tem no caminho?", line: "No mapa do aplicativo, os outros esconderijos perto deste.", context: "ficha_dinheiro" },
+    list: { title: "Saber onde tá a grana é meio assalto.", line: "O app mostra onde ela tá. Sair vazado com ela é contigo.", context: "cat_dinheiro" },
+    entry: { title: "Essa grana é uma. E as do caminho?", line: "No mapa do aplicativo, os outros esconderijos perto deste.", context: "ficha_dinheiro" },
   },
   veiculos: {
     list: { title: "O app mostra o carro. A fuga é sua.", line: "Cada carro raro com pino, condição para aparecer e vídeo.", context: "cat_veiculos" },
-    entry: { title: "Viu o carro. Agora vá buscar.", line: "O pino no mapa do aplicativo, sem ficar comparando print.", context: "ficha_veiculos" },
+    entry: { title: "Viu a nave? Agora vai buscar.", line: "O pino no mapa do aplicativo, sem ficar comparando print.", context: "ficha_veiculos" },
   },
   "armas-e-itens": {
     list: { title: "Arma única não fica na vitrine.", line: "Fica no mapa do aplicativo, com o ponto e o vídeo de quem pegou.", context: "cat_armas" },
     entry: { title: "Sabe o que é. Falta saber onde.", line: "O pino desta arma no mapa, e o que mais tem por perto.", context: "ficha_armas" },
   },
   dicas: {
-    list: { title: "Aprendeu o básico? Hora de explorar.", line: "O aplicativo mostra o que procurar em seguida, no mapa.", context: "cat_dicas" },
+    list: { title: "Pegou o básico? Bora meter o loko.", line: "O aplicativo mostra o que procurar em seguida, no mapa.", context: "cat_dicas" },
     entry: { title: "Resolvido. E agora, o que fazer?", line: "O aplicativo separa os segredos mais fáceis para começar.", context: "ficha_dicas" },
   },
 };
 
 const PAGES: Record<string, StickyCopy> = {
-  home: { title: "O segredo a gente revela.", line: "A aventura é você quem vive. Segredos, pino no mapa e vídeos no app.", context: "home" },
-  segredos: { title: "Todos esses segredos. Um mapa só.", line: "No aplicativo você vê tudo no mapa e risca o que já fez.", context: "segredos" },
-  jogo: { title: "Leonida é grande. O mapa ajuda.", line: "Cada segredo com pino, vídeo e a sua lista do que falta.", context: "hub" },
+  home: { title: "{n} segredos pra meter o loko.", line: "Mapa, passo a passo e vídeo no app. R$ 4,20, uma vez só.", context: "home" },
+  segredos: { title: "Tudo isso num mapa só, mano.", line: "No aplicativo você vê tudo no mapa e risca o que já fez.", context: "segredos" },
+  jogo: { title: "Leonida é grande. Não se perde, parça.", line: "Cada segredo com pino, vídeo e a sua lista do que falta.", context: "hub" },
   mapa: { title: "As regiões viram pinos no aplicativo.", line: "O mapa que este site não tem: ponto por ponto, com precisão.", context: "mapa" },
-  regiao: { title: "Essa região inteira, pino por pino.", line: "No aplicativo você monta a rota e faz tudo na mesma viagem.", context: "regiao" },
+  regiao: { title: "Essa quebrada inteira, pino por pino.", line: "No aplicativo você monta a rota e faz tudo no mesmo rolê.", context: "regiao" },
   sobre: { title: "Seu comparsa de bolso.", line: "O segredo a gente revela. A aventura é você quem vive.", context: "sobre" },
   metodologia: { title: "Mesma régua. Agora com mapa.", line: "O selo de cada ficha vai junto para o aplicativo.", context: "metodologia" },
   radar: { title: "O arquivo cresce. Seu mapa também.", line: "No aplicativo, as fichas novas aparecem no mapa.", context: "radar" },
   favoritos: { title: "Porta-luvas é bom. Mapa é melhor.", line: "No aplicativo, o que você salvou vira pino e checklist.", context: "favoritos" },
-  ajuda: { title: "Dúvida resolvida? Hora de jogar.", line: "O aplicativo mostra o que fazer perto de onde você está.", context: "ajuda" },
-  padrao: { title: "O segredo a gente revela.", line: "A aventura é você quem vive. R$ 4,20, uma vez só.", context: "padrao" },
+  ajuda: { title: "Dúvida resolvida? Bora jogar.", line: "O aplicativo mostra o que fazer perto de onde você está.", context: "ajuda" },
+  padrao: { title: "{n} segredos pra meter o loko.", line: "O segredo a gente revela. R$ 4,20, uma vez só.", context: "padrao" },
 };
 
 /** Onde a barra NÃO aparece: a própria página do app, compra, formulários e textos legais. */

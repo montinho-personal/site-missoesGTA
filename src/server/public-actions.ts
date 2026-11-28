@@ -66,6 +66,17 @@ export async function joinWaitlist(_prev: FormState, fd: FormData): Promise<Form
   return { ok: true, message: "Pronto. Avisaremos você por e-mail quando o aplicativo estiver disponível, e só sobre isso." };
 }
 
+// Origem do comprador (UTM, clique de anúncio, site que mandou), validada campo a campo. Qualquer coisa fora disso é descartada.
+const touchSchema = z.object({
+  utm_source: z.string().max(120), utm_medium: z.string().max(120), utm_campaign: z.string().max(120), utm_content: z.string().max(120),
+  utm_term: z.string().max(120), gclid: z.string().max(120), fbclid: z.string().max(120), ref: z.string().max(120), landing: z.string().max(120), at: z.string().max(10),
+}).partial().strip();
+const originSchema = z.object({ ultimo: touchSchema.optional(), primeiro: touchSchema.optional() }).strip();
+function parseOrigin(raw: FormDataEntryValue | null): string | null {
+  if (typeof raw !== "string" || !raw || raw.length > 3000) return null;
+  try { const r = originSchema.safeParse(JSON.parse(raw)); return r.success && (r.data.ultimo || r.data.primeiro) ? JSON.stringify(r.data) : null; } catch { return null; }
+}
+
 const buySchema = z.object({ email: z.email("Digite um e-mail válido.").max(160), consent: z.literal("on", { error: "É preciso aceitar os termos para comprar." }), metodo: z.enum(["pix", "cartao"]).default("pix"), senha: z.string().min(8, "A senha precisa ter pelo menos 8 caracteres.").max(100, "A senha pode ter no máximo 100 caracteres.") });
 
 /**
@@ -89,7 +100,7 @@ export async function startCheckout(_prev: FormState, fd: FormData): Promise<For
   if (await accountExists(email)) {
     if (!(await verifyLogin(email, parsed.data.senha))) return { ok: false, message: "Este e-mail já tem conta. Use a mesma senha de antes, ou recupere em “Esqueci a senha”, no app.", values };
   } else await setPassword(email, parsed.data.senha);
-  await q(`insert into orders (id, email, amount_cents) values ($1, $2, $3)`, [id, email, sale.cents]);
+  await q(`insert into orders (id, email, amount_cents, attribution) values ($1, $2, $3, $4)`, [id, email, sale.cents, parseOrigin(fd.get("origem"))]);
   const fail = { ok: false as const, message: "Não foi possível abrir o pagamento agora. Nada foi cobrado. Tente de novo em instantes.", values };
   // Pagamento só por Pix (decisão do Montinho em 27/11/2026). O caminho do cartão fica no código, desligado.
   if (parsed.data.metodo === "cartao" && process.env.CARTAO_LIGADO === "1") {

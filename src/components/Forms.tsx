@@ -2,7 +2,8 @@
 import { useActionState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { forgotPassword, joinWaitlist, resetPassword, startCheckout, submitToTeam, type FormState } from "@/server/public-actions";
-import { track } from "@/lib/analytics";
+import { ecommerce, track } from "@/lib/analytics";
+import { readOrigin } from "@/lib/attribution";
 import { Icon } from "./Icon";
 
 function Trap({ attempt }: { attempt?: unknown }) {
@@ -100,11 +101,17 @@ export function WaitlistForm({ source }: { source: string }) {
   );
 }
 
-export function BuyForm({ priceLabel }: { priceLabel: string }) {
+export function BuyForm({ priceLabel, priceCents }: { priceLabel: string; priceCents: number }) {
   const [state, action, pending] = useActionState(startCheckout, null);
+  // De onde a pessoa veio vai junto com o pedido (só existe se ela aceitou a medição).
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const f = e.currentTarget.elements.namedItem("origem"); if (f instanceof HTMLInputElement) f.value = readOrigin();
+    track("begin_checkout", ecommerce(priceCents, { payment_type: "pix", placement: "app_landing" }));
+  };
   return (
-    <form action={action} className="relative flex flex-col gap-3.5" noValidate onSubmit={() => track("begin_checkout", { placement: "app_landing" })}>
+    <form action={action} className="relative flex flex-col gap-3.5" noValidate onSubmit={onSubmit}>
       <Trap attempt={state} />
+      <input type="hidden" name="origem" defaultValue="" />
       <div>
         <label className="field-label" htmlFor="b-email">Seu e-mail</label>
         <input className="field" id="b-email" name="email" type="email" required autoComplete="email" placeholder="voce@exemplo.com" defaultValue={state?.values?.email} aria-describedby="b-hint" />

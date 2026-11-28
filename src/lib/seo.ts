@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { abs, site } from "./site";
 
+export const OG_VERSION = "2";
+export const ogUrl = (path: string) => abs(`/og/?p=${encodeURIComponent(path)}&v=${OG_VERSION}`);
+
 export function pageMeta(o: { title: string; description: string; path: string; noindex?: boolean; type?: "website" | "article"; published?: string | null; modified?: string | null; absoluteTitle?: boolean }): Metadata {
   return {
     // A marca entra no fim só quando o título inteiro cabe nos ~60 caracteres que o Google mostra.
@@ -8,8 +11,11 @@ export function pageMeta(o: { title: string; description: string; path: string; 
     description: o.description,
     alternates: { canonical: o.path },
     ...(o.noindex ? { robots: { index: false, follow: true } } : {}),
+    twitter: { card: "summary_large_image", title: o.title, description: o.description, images: [ogUrl(o.path)] },
     openGraph: {
       type: o.type ?? "website", url: o.path, title: o.title, description: o.description, siteName: site.name, locale: "pt_BR",
+      // A imagem do WhatsApp/Instagram: arte da própria página (src/app/og/route.tsx). "v" troca quando a arte muda, para os apps buscarem de novo.
+      images: [{ url: ogUrl(o.path), width: 1200, height: 630, alt: o.title, type: "image/png" }],
       ...(o.type === "article" ? { publishedTime: o.published ?? undefined, modifiedTime: o.modified ?? undefined } : {}),
     },
   };

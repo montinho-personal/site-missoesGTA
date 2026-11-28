@@ -11,10 +11,13 @@ import { Breadcrumbs } from "@/components/ui";
 import { breadcrumbLd, faqLd, pageMeta } from "@/lib/seo";
 import { appConfig, featureStatusLabel, type FeatureStatus } from "@/lib/app-config";
 import { abs, site } from "@/lib/site";
-import { appStory } from "@/lib/app-story";
+import { appStory, fillCount, hookFor } from "@/lib/app-story";
+import { TrailerFeature } from "@/components/TrailerVideo";
+import { trailerLd } from "@/lib/trailer";
+import { appSecretCount } from "@/server/app-count";
 
 export const metadata = pageMeta({
-  title: "App de segredos de GTA 6: o arquivo inteiro no bolso",
+  title: "App de segredos de GTA 6: segredos pra meter o loko",
   description: "App para explorar GTA 6 a fundo: descobertas por região, checklist do que você já achou e controle de spoiler. Revisado todo dia. Veja o que já existe.",
   path: "/app/",
 });
@@ -35,7 +38,7 @@ export const revalidate = 600;
 
 export default async function AppPage() {
   // A venda liga sozinha quando existirem: credenciais do Mercado Pago, preço e banco permanente.
-  const [sale, entries] = await Promise.all([saleConfig(), getPublishedEntries()]);
+  const [sale, entries, secrets] = await Promise.all([saleConfig(), getPublishedEntries(), appSecretCount()]);
   // Números reais do arquivo, para o argumento da revisão diária.
   const fichas = entries.filter((e) => e.app_ref).length;
   const fontes = new Set(entries.flatMap((e) => e.sources.filter((s) => s.tipo !== "video").map((s) => s.url))).size;
@@ -64,16 +67,16 @@ export default async function AppPage() {
 
   return (
     <>
-      <JsonLd data={{ "@context": "https://schema.org", "@graph": ld }} />
+      <JsonLd data={{ "@context": "https://schema.org", "@graph": [...ld, trailerLd()] }} />
       <TrackView event="view_app_landing" />
       <section className="border-b border-ink-600 grid-paper">
         <div className="wrap pt-6 pb-14 sm:pb-20">
           <Breadcrumbs items={crumbs} />
           <div className="mt-8 grid gap-10 md:grid-cols-[1.2fr_1fr] md:items-center">
             <div>
-              <p className="label text-violet mb-4">Seu comparsa de bolso</p>
+              <p className="label text-violet mb-4">{hookFor(secrets)}</p>
               <h1 className="text-[2.3rem] leading-[1.05] sm:text-6xl font-black">O segredo a gente revela. A aventura é você quem vive.</h1>
-              <p className="mt-5 text-lg sm:text-xl text-fg-muted max-w-xl">Carros raros, dinheiro escondido, lugares secretos e missões que o jogo não te mostra. No seu bolso, com a localização, o passo a passo e os vídeos de quem já fez.</p>
+              <p className="mt-5 text-lg sm:text-xl text-fg-muted max-w-xl">Carro raro, grana escondida, lugar secreto e missão que o jogo não te mostra. Seu comparsa de bolso entrega a localização, o passo a passo e o vídeo de quem já fez. O resto é contigo, mano.</p>
               <div className="mt-7 flex flex-wrap gap-3">{primaryCta}<Link href="/app/como-baixar-e-usar/" className="btn btn-ghost">Como baixar e usar</Link></div>
               <p className="mt-5 inline-flex flex-wrap items-baseline gap-x-2.5 gap-y-1 rounded-xl border border-gold/50 bg-ink-950/60 px-4 py-2.5">
                 <span className="font-display text-3xl font-black text-gold">{sale.priceLabel}</span>
@@ -81,19 +84,7 @@ export default async function AppPage() {
               </p>
               {!selling && <p className="mt-4 text-sm text-fg-subtle max-w-lg">Transparência: o aplicativo está em construção e ainda não foi lançado. Abaixo, cada função traz o estado real em que se encontra.</p>}
             </div>
-            <div aria-hidden="true" className="flex justify-center">
-              <div className="w-60 rounded-[2.2rem] border-2 border-ink-500 bg-ink-900 p-4 shadow-2xl">
-                <div className="h-2 w-16 rounded-full bg-ink-600 mx-auto mb-4" />
-                <p className="label text-violet mb-2">Perto de você</p>
-                {[["target", "ok"], ["cash", "violet"], ["car", "violet"], ["eye", "violet"], ["egg", "violet"]].map(([ic, t], i) => (
-                  <div key={ic} className="flex items-center gap-3 rounded-xl border border-ink-600 p-2.5 mb-2">
-                    <span className={`tone-${t}`}><Icon name={i === 0 ? "check" : ic} size={20} /></span>
-                    <span className="grow"><span className="block h-2 rounded bg-ink-500" style={{ width: `${90 - i * 9}%` }} /><span className="block h-1.5 rounded bg-ink-600 w-1/2 mt-1.5" /></span>
-                  </div>
-                ))}
-                <p className="text-[0.65rem] text-fg-subtle text-center mt-3">Ilustração conceitual, não é captura de tela.</p>
-              </div>
-            </div>
+            <TrailerFeature placement="app_hero" caption="O app em ação, com telas reais, em 1 minuto." />
           </div>
         </div>
       </section>
@@ -116,7 +107,7 @@ export default async function AppPage() {
             <h2 id="h-porque" className="text-3xl sm:text-4xl font-extrabold">GTA nunca foi só cumprir missão.</h2>
             <div className="mt-5 text-lg text-fg-muted flex flex-col gap-4">
               {appStory.manifesto.map((t, i) => <p key={i} className={i === appStory.manifesto.length - 1 ? "text-fg font-semibold" : undefined}>{t}</p>)}
-              <p>{appStory.promise}</p>
+              <p>{fillCount(appStory.promise, secrets)}</p>
             </div>
             <div className="mt-8 card border-pink/40 p-5 sm:p-7">
               <div className="flex flex-col gap-2 text-lg">
@@ -197,7 +188,7 @@ export default async function AppPage() {
               <h2 id="h-avise" className="text-3xl sm:text-4xl font-extrabold">Seu próximo segredo está esperando para ser descoberto.</h2>
               <p className="mt-3 text-fg-muted">{selling ? `${appStory.price} O app abre liberado na hora e a confirmação chega no seu e-mail. O segredo a gente revela; a aventura é sua.` : "Deixe seu e-mail e a gente avisa no dia do lançamento. Um aviso só. Quem manda dez e-mails por semana é a seguradora."}</p>
             </div>
-            {selling ? <BuyForm priceLabel={sale.priceLabel!} /> : <WaitlistForm source="app_landing" />}
+            {selling ? <BuyForm priceLabel={sale.priceLabel!} priceCents={sale.cents} /> : <WaitlistForm source="app_landing" />}
           </div>
         </section>
 

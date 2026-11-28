@@ -8,6 +8,8 @@ import { notFoundOrRedirect, requireGame } from "@/server/route-helpers";
 import { breadcrumbLd, faqLd, pageMeta } from "@/lib/seo";
 import { abs } from "@/lib/site";
 import { categoryFaq } from "@/lib/seo-entry";
+import { getApprovedTipVideos } from "@/server/tips";
+import { TIP_THEMES, platformName, themeOf, thumbUrl } from "@/lib/video-url";
 
 export const revalidate = 600;
 export async function generateStaticParams() {
@@ -31,7 +33,7 @@ export default async function CategoryPage({ params }: PageProps<"/[game]/[categ
   const c = categories.find((x) => x.slug === categoria);
   if (!c) await notFoundOrRedirect(path);
   const cat = c!;
-  const [all, ctas] = await Promise.all([getPublishedEntries(g.slug), getCtas()]);
+  const [all, ctas, tipVideos] = await Promise.all([getPublishedEntries(g.slug), getCtas(), getApprovedTipVideos()]);
   const inCat = all.filter((e) => e.category_id === cat.id);
   const cards = inCat.map(toCard);
   const faq = [...cat.faq, ...categoryFaq(cat.name, inCat)];
@@ -50,6 +52,45 @@ export default async function CategoryPage({ params }: PageProps<"/[game]/[categ
         <h1 className="text-4xl sm:text-5xl font-black">{cat.name} de {g.short_name}</h1>
         <div className="prose mt-4 text-lg text-fg-muted"><Markdown>{cat.intro_md || cat.description}</Markdown></div>
       </header>
+
+      {/* Treino de Leonida: as dicas organizadas por tema, com os vídeos aprovados de cada uma. */}
+      {cat.slug === "dicas" && (
+        <section aria-labelledby="h-treino" className="mb-12">
+          <p className="label text-pink">Treino de Leonida</p>
+          <h2 id="h-treino" className="text-2xl sm:text-3xl font-extrabold mt-1">Aprende vendo, joga melhor.</h2>
+          <p className="mt-2 text-fg-muted max-w-2xl">Os vídeos curtos de quem manja, organizados por tema, com o crédito de cada criador. A gente escreve o resumo e o passo a passo; o resto é treino, mano.</p>
+          <nav aria-label="Temas" className="mt-4 flex flex-wrap gap-2">{TIP_THEMES.map((t) => <a key={t.key} href={`#tema-${t.key}`} className="chip">{t.name}</a>)}</nav>
+          <div className="mt-6 flex flex-col gap-8">
+            {TIP_THEMES.map((t) => {
+              const list = inCat.filter((e) => themeOf(e.tags) === t.key);
+              return (
+                <div key={t.key} id={`tema-${t.key}`} className="scroll-mt-24">
+                  <h3 className="font-display text-xl font-bold">{t.name}</h3>
+                  {list.length === 0 ? <p className="mt-2 text-fg-subtle">Em preparação: os vídeos deste tema estão passando pela nossa revisão.</p> : (
+                    <ul className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                      {list.map((e) => {
+                        const vids = tipVideos.get(e.id) ?? [];
+                        const yt = vids.find((v) => v.platform === "youtube");
+                        const th = yt ? thumbUrl({ platform: "youtube", id: yt.video_id }) : null;
+                        return (
+                          <li key={e.id}><Link href={`/${g.slug}/${cat.slug}/${e.slug}/`} className="card flex gap-3 p-3 no-underline hover:border-violet/60">
+                            <span className="relative w-16 shrink-0 aspect-[9/16] overflow-hidden rounded-lg bg-ink-900 grid place-items-center">
+                              {/* eslint-disable-next-line @next/next/no-img-element */}
+                              {th ? <img src={th} alt="" loading="lazy" className="absolute inset-0 size-full object-cover" /> : <Icon name="eye" size={20} className="text-violet" />}
+                            </span>
+                            <span className="min-w-0"><span className="block font-semibold leading-snug">{e.title}</span>
+                              <span className="mt-1 block text-sm text-fg-muted">{vids.length ? `${vids.length} ${vids.length === 1 ? "vídeo" : "vídeos"} · ${[...new Set(vids.map((v) => platformName[v.platform]))].join(" e ")}` : "Passo a passo em texto"}</span></span>
+                          </Link></li>
+                        );
+                      })}
+                    </ul>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </section>
+      )}
 
       <Explorer entries={cards} show={["region", "rewardType", "status", "character"]} />
 

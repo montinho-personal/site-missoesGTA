@@ -20,6 +20,15 @@ for (const p of ["/gta-6/missoes-secretas/nao-existe/", "/gta-6/misterios/", "/g
 ok("admin exige login", [302, 303, 307].includes(await status("/admin/")));
 ok("admin/entradas exige login", [302, 303, 307].includes(await status("/admin/entradas/")));
 
+// Compartilhamento no WhatsApp: toda página aponta para a própria arte, e a arte sai em PNG leve (WhatsApp corta acima de ~300 KB)
+for (const p of ["/", "/app/", ENTRY, "/gta-6/dinheiro/", "/sobre/"]) {
+  const h = await (await fetch(BASE + p)).text();
+  const m = /<meta property="og:image" content="([^"]+)"/.exec(h);
+  const img = m ? await fetch(m[1].replace(/^https?:\/\/[^/]+/, BASE).replace(/&amp;/g, "&")) : null;
+  const buf = img ? Buffer.from(await img.arrayBuffer()) : Buffer.alloc(0);
+  ok(`imagem de compartilhamento em ${p}`, !!img && img.status === 200 && (img.headers.get("content-type") ?? "").includes("image/png") && buf.length > 20000 && buf.length < 300000, `${buf.length} bytes`);
+}
+
 // Compartilhamento: imagens verticais de Stories
 for (const p of [ENTRY + "story/", "/app/story/"]) {
   const r = await fetch(BASE + p);
@@ -46,6 +55,8 @@ const browser = await chromium.launch();
 const errors = [];
 const newPage = async (w, hh) => {
   const ctx = await browser.newContext({ viewport: { width: w, height: hh } });
+  // Quem navega nos testes já respondeu ao aviso de privacidade (recusou); o aviso tem teste próprio no fim.
+  await ctx.addInitScript(() => { try { if (!localStorage.getItem("gs:consent")) localStorage.setItem("gs:consent", "denied"); } catch {} });
   const page = await ctx.newPage();
   page.on("pageerror", (e) => errors.push(String(e)));
   page.on("console", (m) => { if (m.type() === "error") errors.push(m.text()); });
@@ -145,7 +156,7 @@ for (const [w, hh] of [[360, 740], [390, 844], [768, 1024], [1280, 800]]) {
   const bar = page.locator("[role=region][aria-label=Aplicativo]");
   ok("barra do app escondida no topo da página", (await bar.getAttribute("aria-hidden")) === "true");
   await page.mouse.wheel(0, 900); await page.waitForTimeout(500);
-  ok("barra do app sobe depois de rolar, com o texto da categoria", (await bar.getAttribute("aria-hidden")) === "false" && /metade do assalto/.test(await bar.innerText()));
+  ok("barra do app sobe depois de rolar, com o texto da categoria", (await bar.getAttribute("aria-hidden")) === "false" && /meio assalto/.test(await bar.innerText()));
   await bar.getByRole("button", { name: /Fechar a chamada/ }).click();
   await page.waitForTimeout(400);
   await page.goto(BASE + "/gta-6/veiculos/", { waitUntil: "networkidle" }); await page.mouse.wheel(0, 900); await page.waitForTimeout(500);
@@ -210,6 +221,34 @@ if (PW) {
   await page.waitForTimeout(600);
   ok("moderação muda o estado do envio", (await page.locator("li.card", { hasText: "Teste e2e" }).count()) === 0);
 
+  // Treino de Leonida: vídeo de dica entra como rascunho, não aparece antes da aprovação, e depois aparece na dica e na lista do app
+  {
+    const DICA = "/gta-6/dicas/como-guardar-carros-roubados/";
+    await page.goto(BASE + "/admin/videos/");
+    await page.locator("#tv-url").fill("javascript:alert(1)");
+    await page.getByRole("button", { name: "Guardar como rascunho" }).click();
+    await page.waitForSelector("text=Não reconheci o link");
+    ok("painel de vídeos recusa link que não é vídeo", true);
+    await page.locator("#tv-url").fill("https://www.tiktok.com/@teste.e2e/video/7300000000000000001?lang=pt");
+    await page.locator("#tv-creator").fill("@teste.e2e");
+    await page.locator("#tv-title").fill("Dica de teste do e2e");
+    await page.locator("#tv-entry").selectOption("gta6-0017");
+    await page.getByRole("button", { name: "Guardar como rascunho" }).click();
+    await page.waitForSelector("text=Guardado como rascunho");
+    ok("vídeo de dica entra como rascunho, com crédito", true);
+    const antes = await (await fetch(BASE + DICA)).text();
+    ok("rascunho não aparece no site", !antes.includes("teste.e2e"));
+    await page.goto(BASE + "/admin/videos/");
+    await page.locator("li.card", { has: page.locator('input[value="@teste.e2e"]') }).first().getByRole("button", { name: "Aprovar e publicar" }).click();
+    await page.waitForTimeout(800);
+    const depois = await (await fetch(BASE + DICA)).text();
+    ok("aprovado, o vídeo aparece na dica com o crédito do criador", depois.includes("Treino de Leonida") && depois.includes("@teste.e2e"));
+    ok("dica com vídeo tem o botão Treinar no app, apontando para a tela do Treino", /\/app\/treino\?utm_source=site[^"]*#gta6-0017/.test(depois));
+    const feed = await (await fetch(BASE + "/api/dicas/")).json();
+    const d = feed.dicas.find((x) => x.id === "gta6-0017");
+    ok("lista do app traz a dica com vídeo, resumo curto e link rastreável para o site", !!d && d.videos[0]?.plataforma === "tiktok" && d.videos[0]?.criador === "@teste.e2e" && d.resumo.length <= 220 && d.site.includes("utm_source=app"));
+  }
+
   // trava editorial: "confirmado" sem evidência
   await page.goto(BASE + "/admin/entradas/gta6-0018/");
   await page.getByRole("button", { name: "Salvar" }).click();
@@ -253,8 +292,27 @@ if (PW) {
   await page.context().close();
 } else console.log("SKIP  painel (defina ADMIN_PASSWORD)");
 
+// Medição (só quando o site tem o ID do Google Analytics): aviso, nada antes do aceite, e a origem da visita guardada depois.
+{
+  const ctx = await browser.newContext({ viewport: { width: 390, height: 844 } });
+  const page = await ctx.newPage();
+  await page.route("https://www.googletagmanager.com/**", (r) => r.fulfill({ status: 200, contentType: "text/javascript", body: "" }));
+  await page.goto(BASE + "/?utm_source=teste&utm_medium=e2e&utm_campaign=rastreio", { waitUntil: "networkidle" });
+  const banner = page.locator("[role=region][aria-label=Privacidade]");
+  if (await banner.count()) {
+    ok("nada do Google carrega antes do aceite", (await page.locator("#gtm-js").count()) === 0);
+    await banner.getByRole("button", { name: "Aceitar" }).click();
+    await page.waitForTimeout(300);
+    const st = await page.evaluate(() => ({ gtag: typeof window.gtag, src: document.getElementById("gtm-js")?.getAttribute("src") ?? "", origem: localStorage.getItem("gs:origem") ?? "" }));
+    ok("depois do aceite, o Google Analytics carrega", st.gtag === "function" && st.src.includes("gtag/js?id="), st.src);
+    ok("a origem da visita (UTM) fica guardada para o pedido", /"utm_source":"teste"/.test(st.origem) && /"utm_campaign":"rastreio"/.test(st.origem), st.origem);
+  } else ok("sem ID de medição, não há aviso de privacidade", true);
+  await ctx.close();
+}
+
 await browser.close();
-const relevant = [...new Set(errors)].filter((e) => !/favicon/.test(e));
+// Falha de rede para recursos de fora (miniaturas do YouTube) depende do ambiente de teste, não do site.
+const relevant = [...new Set(errors)].filter((e) => !/favicon/.test(e) && !/net::ERR_(TUNNEL_CONNECTION_FAILED|NAME_NOT_RESOLVED|PROXY_CONNECTION_FAILED)/.test(e));
 ok("sem erros de JavaScript no console", relevant.length === 0, relevant.slice(0, 3).join(" | "));
 const failed = results.filter((r) => !r.pass);
 console.log(`\n${results.length - failed.length}/${results.length} verificações passaram`);

@@ -1,0 +1,230 @@
+[
+ {
+  "id": "gta6-dica-comandos",
+  "game_id": "gta6",
+  "category_id": "gta6-dicas",
+  "author_id": "redacao",
+  "kind": "guia",
+  "slug": "comandos-ps5-xbox",
+  "title": "Comandos do GTA 6 no PS5 e no Xbox: o que mudou",
+  "direct_answer": "No esquema padrão, correr não é mais apertar o X várias vezes: você clica o analógico esquerdo (L3) para correr. Se preferir o jeito antigo, o esquema Clássico troca os botões de correr e agachar, e ainda tem a opção para canhotos. Tudo isso fica em Configurações > Esquema de controle, com prévia de cada botão.",
+  "verification_status": "provavel",
+  "evidence_type": "relatos",
+  "spoiler_level": "nenhum",
+  "sources": [
+   {
+    "nome": "GTABase: guia completo de controles",
+    "url": "https://www.gtabase.com/articles/gta-6/gta-6-controls-guide-ps5-xbox-button-layout",
+    "tipo": "imprensa",
+    "data": "2026-11-27",
+    "nota": "Lido na íntegra em 27/11/2026."
+   },
+   {
+    "nome": "Shacknews: controles no PS5",
+    "url": "https://www.shacknews.com/article/151396/gta6-ps5-controls",
+    "tipo": "imprensa",
+    "data": "2026-11-27",
+    "nota": "Lido na íntegra em 27/11/2026."
+   },
+   {
+    "nome": "Push Square: o fim de apertar X para correr",
+    "url": "https://www.pushsquare.com/news/2026/09/its-a-miracle-gta-6-wont-make-you-mash-the-x-button-to-sprint",
+    "tipo": "imprensa",
+    "data": "2026-11-27",
+    "nota": "Lido na íntegra em 27/11/2026."
+   }
+  ],
+  "tags": [
+   "gta6",
+   "tema:comandos",
+   "treino-de-leonida"
+  ],
+  "workflow_status": "publicado",
+  "reviewed_by": "Montinho",
+  "published_at": "2026-11-27T21:00:00Z",
+  "updated_at": "2026-11-27T21:00:00Z"
+ },
+ {
+  "id": "gta6-dica-mira",
+  "game_id": "gta6",
+  "category_id": "gta6-dicas",
+  "author_id": "redacao",
+  "kind": "guia",
+  "slug": "melhores-configuracoes-de-mira",
+  "title": "Melhores configurações de mira no GTA 6",
+  "direct_answer": "Os guias recomendam o modo de mira Parcial: ele ajuda a apontar sem travar no inimigo. Como ponto de partida, a Critical Hits sugere sensibilidade de mira 5 (horizontal) e 6 (vertical) com aceleração 5; a Dexerto sugere 5 e 5, aceleração 4 e zona morta 2 nos dois analógicos. São gostos pessoais: ajuste aos poucos até ficar do teu jeito.",
+  "verification_status": "provavel",
+  "evidence_type": "relatos",
+  "spoiler_level": "nenhum",
+  "sources": [
+   {
+    "nome": "Critical Hits: melhores configurações para PS5 e Xbox",
+    "url": "https://criticalhits.com.br/dicas/gta-6-melhores-configuracoes-para-ps5-e-xbox-series-xs",
+    "tipo": "imprensa",
+    "data": "2026-11-27",
+    "nota": "Lido na íntegra em 27/11/2026."
+   },
+   {
+    "nome": "Dexerto: melhores configurações de controle",
+    "url": "https://www.dexerto.com/wikis/gta-6/best-controller-settings/",
+    "tipo": "imprensa",
+    "data": "2026-11-27",
+    "nota": "Lido na íntegra em 27/11/2026."
+   }
+  ],
+  "tags": [
+   "gta6",
+   "tema:mira",
+   "treino-de-leonida"
+  ],
+  "workflow_status": "publicado",
+  "reviewed_by": "Montinho",
+  "published_at": "2026-11-27T21:00:00Z",
+  "updated_at": "2026-11-27T21:00:00Z"
+ },
+ {
+  "id": "gta6-dica-assaltos",
+  "game_id": "gta6",
+  "category_id": "gta6-dicas",
+  "author_id": "redacao",
+  "kind": "guia",
+  "slug": "como-fazer-um-assalto-sem-dar-errado",
+  "title": "Como fazer um assalto sem dar errado no GTA 6",
+  "direct_answer": "Comece pelos mercadinhos: aponte a arma para o caixa e ameace para ele abrir a registradora. Rende pouco, mas é o assalto mais simples do começo. Joalherias e casas de penhores pagam mais e têm mais segurança, então faça o reconhecimento antes. Bancos só depois que uma missão te der o bloqueador de tinta; lá, o maior risco é alguém disparar o alarme.",
+  "verification_status": "provavel",
+  "evidence_type": "relatos",
+  "spoiler_level": "nenhum",
+  "sources": [
+   {
+    "nome": "VGC: como ganhar dinheiro",
+    "url": "https://www.videogameschronicle.com/guide/how-to-make-money-in-gta-6/",
+    "tipo": "imprensa",
+    "data": "2026-11-27",
+    "nota": "Lido na íntegra em 27/11/2026."
+   },
+   {
+    "nome": "PC Gamer: os jeitos mais rápidos de ganhar dinheiro",
+    "url": "https://www.pcgamer.com/games/grand-theft-auto/gta-6-how-to-make-money/",
+    "tipo": "imprensa",
+    "data": "2026-11-27",
+    "nota": "Lido na íntegra em 27/11/2026."
+   }
+  ],
+  "tags": [
+   "gta6",
+   "tema:assaltos",
+   "treino-de-leonida"
+  ],
+  "workflow_status": "publicado",
+  "reviewed_by": "Montinho",
+  "published_at": "2026-11-27T21:00:00Z",
+  "updated_at": "2026-11-27T21:00:00Z"
+ },
+ {
+  "id": "gta6-dica-dinheiro",
+  "game_id": "gta6",
+  "category_id": "gta6-dicas",
+  "author_id": "redacao",
+  "kind": "guia",
+  "slug": "como-ganhar-dinheiro-rapido",
+  "title": "Como ganhar dinheiro rápido no começo do GTA 6",
+  "direct_answer": "No começo, assaltar mercadinho é rápido mas rende pouco; as missões principais e secundárias pagam bem melhor. A partir do Capítulo 2 dá para vender carros sem rastreador para o Moses, de US$ 1.000 a US$ 5.000 cada, segundo a VGC. E leve a grana ao banco: o dinheiro do bolso pode ser perdido se você for preso ou morrer.",
+  "verification_status": "provavel",
+  "evidence_type": "relatos",
+  "spoiler_level": "nenhum",
+  "sources": [
+   {
+    "nome": "VGC: como ganhar dinheiro",
+    "url": "https://www.videogameschronicle.com/guide/how-to-make-money-in-gta-6/",
+    "tipo": "imprensa",
+    "data": "2026-11-27",
+    "nota": "Lido na íntegra em 27/11/2026."
+   },
+   {
+    "nome": "PC Gamer: os jeitos mais rápidos de ganhar dinheiro",
+    "url": "https://www.pcgamer.com/games/grand-theft-auto/gta-6-how-to-make-money/",
+    "tipo": "imprensa",
+    "data": "2026-11-27",
+    "nota": "Lido na íntegra em 27/11/2026."
+   }
+  ],
+  "tags": [
+   "gta6",
+   "tema:dinheiro",
+   "treino-de-leonida"
+  ],
+  "workflow_status": "publicado",
+  "reviewed_by": "Montinho",
+  "published_at": "2026-11-27T21:00:00Z",
+  "updated_at": "2026-11-27T21:00:00Z"
+ },
+ {
+  "id": "gta6-dica-direcao",
+  "game_id": "gta6",
+  "category_id": "gta6-dicas",
+  "author_id": "redacao",
+  "kind": "guia",
+  "slug": "como-despistar-a-policia",
+  "title": "Como despistar a polícia no GTA 6",
+  "direct_answer": "O nível de procurado vai até 6 estrelas. Para fugir, entre em becos e ruas laterais para quebrar a linha de visão e saia da área de busca sem ser visto: as estrelas piscam e somem. Mas a polícia continua procurando na área quente marcada no mapa. Se for voltar lá, troque de roupa numa loja e de carro, ou pinte o seu na oficina. Se a polícia procura um casal, separe Jason e Lucia.",
+  "verification_status": "provavel",
+  "evidence_type": "relatos",
+  "spoiler_level": "nenhum",
+  "sources": [
+   {
+    "nome": "GTABase: procurado e área quente",
+    "url": "https://www.gtabase.com/articles/gta-6/gta-6-wanted-level-explained-police-system-guide",
+    "tipo": "imprensa",
+    "data": "2026-11-27",
+    "nota": "Lido na íntegra em 27/11/2026."
+   },
+   {
+    "nome": "Dexerto: como despistar a polícia",
+    "url": "https://www.dexerto.com/wikis/gta-6/how-to-lose-the-police/",
+    "tipo": "imprensa",
+    "data": "2026-11-27",
+    "nota": "Lido na íntegra em 27/11/2026."
+   }
+  ],
+  "tags": [
+   "gta6",
+   "tema:direcao",
+   "treino-de-leonida"
+  ],
+  "workflow_status": "publicado",
+  "reviewed_by": "Montinho",
+  "published_at": "2026-11-27T21:00:00Z",
+  "updated_at": "2026-11-27T21:00:00Z"
+ },
+ {
+  "id": "gta6-dica-combate",
+  "game_id": "gta6",
+  "category_id": "gta6-dicas",
+  "author_id": "redacao",
+  "kind": "guia",
+  "slug": "roda-de-armas-e-combate",
+  "title": "Combate no GTA 6: o básico",
+  "direct_answer": "No corpo a corpo, o contra-ataque e a esquiva funcionam logo antes do golpe do inimigo chegar. Em cobertura, dá para contornar a quina sem se expor. E o menu de equipamento reúne armas, itens, acessórios e colete: deixe tudo pronto antes do tiroteio.",
+  "verification_status": "nao_verificado",
+  "evidence_type": "relatos",
+  "spoiler_level": "nenhum",
+  "sources": [
+   {
+    "nome": "GTABase: guia completo de controles",
+    "url": "https://www.gtabase.com/articles/gta-6/gta-6-controls-guide-ps5-xbox-button-layout",
+    "tipo": "imprensa",
+    "data": "2026-11-27",
+    "nota": "Lido na íntegra em 27/11/2026."
+   }
+  ],
+  "tags": [
+   "gta6",
+   "tema:combate",
+   "treino-de-leonida"
+  ],
+  "workflow_status": "publicado",
+  "reviewed_by": "Montinho",
+  "published_at": "2026-11-27T21:00:00Z",
+  "updated_at": "2026-11-27T21:00:00Z"
+ }
+]

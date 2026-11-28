@@ -21,7 +21,7 @@ export function AppPitch({ entry, nearby, sameRegion, sale }: { entry: Entry; ne
     <aside data-app-cta aria-labelledby="h-pitch" className="card overflow-hidden border-violet/40 max-w-3xl no-print">
       <div className="grid-paper p-5 sm:p-7">
         <p className="label text-violet inline-flex items-center gap-2"><Icon name="phone" size={15} />No aplicativo{!sale.enabled && " · em construção"}</p>
-        <h2 id="h-pitch" className="font-display text-2xl sm:text-[1.7rem] font-extrabold leading-tight mt-2">Leu o passo a passo. Agora veja no mapa.</h2>
+        <h2 id="h-pitch" className="font-display text-2xl sm:text-[1.7rem] font-extrabold leading-tight mt-2">Leu o passo a passo? Agora cola no mapa.</h2>
         <ul className="mt-5 flex flex-col gap-4">
           {hasPin && (
             <li className="flex gap-3.5">

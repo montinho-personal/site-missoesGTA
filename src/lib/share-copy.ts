@@ -69,7 +69,7 @@ export const STORY_HOOK: Record<string, string> = {
 export function courtesyMessage(code: string, nome?: string | null, site = "", vagas?: number | null, appUrl = "https://app.missoessecretasgta.com.br"): string {
   const grupo = Boolean(vagas && vagas > 1);
   const oi = nome ? `Fala, ${nome.split(" ")[0]}!` : grupo ? "Fala, galera!" : "Fala, parceiro!";
-  const link = `${appUrl.replace(/\/$/, "")}/entrar?chave=${code.toUpperCase().replace(/[^A-Z0-9]/g, "")}`;
+  const link = `${appUrl.replace(/\/$/, "")}/entrar?chave=${code.toUpperCase().replace(/[^A-Z0-9]/g, "")}&utm_source=whatsapp&utm_medium=cortesia&utm_campaign=acesso_app`;
   return [
     grupo
       ? `${oi} 🕵️ Liberei o app *Missões Secretas GTA 6* de graça para as primeiras ${vagas!.toLocaleString("pt-BR")} pessoas que abrirem este link.`

@@ -6,6 +6,7 @@ import { courtesyMessage, whatsappLink } from "@/lib/share-copy";
 import { site } from "@/lib/site";
 import { CopyText } from "@/components/client";
 import { DEFAULT_APP_URL } from "@/server/access";
+import { originLabel, type Origin } from "@/lib/attribution";
 
 export const metadata = { title: "Acessos e vendas" };
 
@@ -23,6 +24,12 @@ export default async function Acessos({ searchParams }: { searchParams: Promise<
     q<{ pagos: number; pendentes: number; receita: number; cortesias: number }>(`select (select count(*) from orders where status = 'pago')::int as pagos, (select count(*) from orders where status = 'pendente')::int as pendentes, (select coalesce(sum(amount_cents), 0) from orders where status = 'pago')::int as receita, (select count(*) from licenses where origin = 'cortesia' and status = 'ativa')::int as cortesias`),
   ]);
   const t = totals[0];
+  // De onde veio cada compra (o mesmo dado vai para o Google Analytics quando a pessoa aceita a medição).
+  const compras = await q<{ id: string; email: string; amount_cents: number; paid_at: string; attribution: { ultimo?: Origin; primeiro?: Origin } | null }>(
+    `select id, email, amount_cents, paid_at::text, attribution from orders where status = 'pago' order by paid_at desc nulls last limit 50`).catch(() => []);
+  const porOrigem = new Map<string, { n: number; cents: number }>();
+  for (const c of compras) { const k = originLabel(c.attribution?.ultimo ?? c.attribution?.primeiro); const v = porOrigem.get(k) ?? { n: 0, cents: 0 }; porOrigem.set(k, { n: v.n + 1, cents: v.cents + c.amount_cents }); }
+  const brl = (cents: number) => (cents / 100).toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
   return (
     <div className="flex flex-col gap-6">
       <h1 className="text-3xl font-black">Acessos e vendas</h1>
@@ -131,6 +138,20 @@ export default async function Acessos({ searchParams }: { searchParams: Promise<
             ))}
           </tbody>
         </table></div>
+      </section>
+      <section className="card p-5" aria-labelledby="h-origem">
+        <h2 id="h-origem" className="text-xl font-bold">De onde vieram as compras</h2>
+        <p className="mt-1 text-sm text-fg-muted">Últimas 50 compras pagas. A origem é a visita que trouxe a pessoa (link com UTM, anúncio ou site que mandou). Sem o aceite da medição, aparece “direto ou sem consentimento”.</p>
+        {compras.length === 0 ? <p className="mt-3 text-fg-muted">Nenhuma compra paga ainda.</p> : (<>
+          <ul className="mt-3 flex flex-wrap gap-2">{[...porOrigem].sort((a, b) => b[1].cents - a[1].cents).map(([k, v]) => <li key={k} className="badge tone-violet">{k}: {v.n} · {brl(v.cents)}</li>)}</ul>
+          <div className="mt-4 overflow-x-auto"><table className="w-full text-sm">
+            <thead><tr className="text-left text-fg-subtle"><th className="py-2 pr-3">Data</th><th className="py-2 pr-3">E-mail</th><th className="py-2 pr-3">Valor</th><th className="py-2 pr-3">Origem (última visita)</th><th className="py-2">Primeira origem</th></tr></thead>
+            <tbody>{compras.map((c) => (
+              <tr key={c.id} className="border-t border-ink-700"><td className="py-2 pr-3 whitespace-nowrap">{c.paid_at ? formatDate(c.paid_at) : "—"}</td><td className="py-2 pr-3">{c.email}</td><td className="py-2 pr-3">{brl(c.amount_cents)}</td>
+                <td className="py-2 pr-3">{originLabel(c.attribution?.ultimo)}{c.attribution?.ultimo?.landing ? <span className="text-fg-subtle"> · entrou por {c.attribution.ultimo.landing}</span> : null}</td><td className="py-2">{originLabel(c.attribution?.primeiro)}</td></tr>
+            ))}</tbody>
+          </table></div>
+        </>)}
       </section>
     </div>
   );

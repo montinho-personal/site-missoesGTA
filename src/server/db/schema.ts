@@ -337,4 +337,85 @@ update ctas set eyebrow = 'Seu comparsa de bolso', headline = 'Tem coisa em Leon
 update ctas set eyebrow = 'Seu comparsa de bolso', headline = 'Você conhece GTA 6. Mas conhece tudo que ele esconde?', body = 'Segredos, localizações e vídeos no seu bolso, por R$ 4,20. O segredo a gente revela; a aventura é você quem vive.', button_label = 'Conhecer o aplicativo' where key = 'dicas';
 `,
   },
+  {
+    // Voz da rua (27/11/2026, decisão do Montinho): gíria, sátira e humor nas chamadas do app. "{n} segredos pra meter o loko."
+    id: "012_chamadas_na_lingua_da_rua",
+    sql: `
+update ctas set eyebrow = '{n} segredos pra meter o loko', headline = 'O segredo a gente revela. A aventura é você quem vive.', body = 'Onde tá a grana, o carro raro e o bunker, com mapa e vídeo de quem já fez. R$ 4,20, uma vez só, sem mensalidade.' where key = 'padrao';
+update ctas set eyebrow = 'Seu comparsa de bolso', headline = 'Missão que o jogo esconde? A gente entrega onde começa.', body = 'A perseguição e o caos ficam por sua conta, parça. O segredo a gente revela; a aventura é você quem vive.' where key = 'missoes';
+update ctas set eyebrow = 'Seu comparsa de bolso', headline = 'O app mostra a porta. Entrar é contigo, mano.', body = 'Bunker e esconderijo com localização e vídeo de quem já colou lá. O segredo a gente revela; a aventura é sua.' where key = 'lugares';
+update ctas set eyebrow = 'Seu comparsa de bolso', headline = 'Saber onde tá a grana é metade do assalto.', body = 'A outra metade é sair vazado com ela. O app mostra o esconderijo e o caminho; a fuga é contigo.' where key = 'dinheiro';
+update ctas set eyebrow = 'Seu comparsa de bolso', headline = 'Achar o carro raro é fácil. Quero ver despistar os homi.', body = 'O app dá o pino no mapa e o vídeo de quem já pegou. Chegar lá inteiro é contigo.' where key = 'veiculos';
+update ctas set eyebrow = 'Seu comparsa de bolso', headline = 'Quanto rolê você já deixou passar batido?', body = 'O app lembra o que você já achou e mostra o que falta, sem caô. O segredo a gente revela; a aventura é sua.' where key = 'colecionaveis';
+update ctas set eyebrow = 'Seu comparsa de bolso', headline = 'Tem coisa em Leonida que pouca gente viu, tá ligado?', body = 'O app mostra onde procurar. O que rola lá é história sua.' where key = 'misterios';
+update ctas set eyebrow = '{n} segredos pra meter o loko', headline = 'Tu manja de GTA 6. Mas manja do que ele esconde?', body = 'Mapa, passo a passo e vídeo de quem já fez, por R$ 4,20. Sim, 4,20. Entendedores entenderão.' where key = 'dicas';
+`,
+  },
+  {
+    // A 012 chegou ao banco com o número escrito à mão (128). O número agora vem do app: "{n}" vira a contagem do dia.
+    id: "013_numero_de_segredos_automatico",
+    sql: `
+update ctas set eyebrow = replace(eyebrow, '128 segredos', '{n} segredos'), headline = replace(headline, '128 segredos', '{n} segredos'), body = replace(body, '128 segredos', '{n} segredos');
+`,
+  },
+  {
+    // De onde veio cada compra: UTM, clique de anúncio e site de origem (primeiro e último toque), quando a pessoa aceitou a medição.
+    id: "014_origem_do_pedido",
+    sql: `alter table orders add column if not exists attribution jsonb;`,
+  },
+  {
+    // Treino de Leonida: vídeos de dica (YouTube e TikTok tocam; Instagram é link), sempre de terceiros, com crédito.
+    // Entram como rascunho e só aparecem depois de aprovados no painel. Cada vídeo pode pertencer a uma dica (entries).
+    id: "015_videos_de_dica",
+    sql: `
+create table if not exists tip_videos (
+  id serial primary key,
+  entry_id text references entries(id) on delete set null,
+  platform text not null check (platform in ('youtube','tiktok','instagram')),
+  video_id text not null,
+  url text not null,
+  title text not null default '',
+  creator_name text not null default '',
+  creator_url text,
+  theme text,
+  status text not null default 'rascunho' check (status in ('rascunho','aprovado','rejeitado')),
+  note text,
+  sort int not null default 0,
+  created_at timestamptz not null default now(),
+  approved_at timestamptz,
+  unique (platform, video_id)
+);
+create index if not exists tip_videos_entry on tip_videos (entry_id, status, sort);
+`,
+  },
+  {
+    // Primeira leva do Treino de Leonida (pesquisa de 27/11/2026): 6 dicas e 24 vídeos, TUDO como rascunho, no conteúdo-semente
+    // (content/seed/tips-entries.json e tip-videos.json). Sem mudança de tabela: só faz o seed rodar de novo.
+    id: "016_treino_primeira_leva",
+    sql: `select 1;`,
+  },
+  {
+    // Treino de Leonida: textos das 6 dicas conferidos nos artigos completos (27/11/2026). Só troca o que ainda é rascunho intocado.
+    id: "017_treino_textos_conferidos",
+    sql: `
+update entries set title = 'Comandos do GTA 6 no PS5 e no Xbox: o que mudou', verification_status = 'provavel', direct_answer = 'No esquema padrão, correr não é mais apertar o X várias vezes: você clica o analógico esquerdo (L3) para correr. Se preferir o jeito antigo, o esquema Clássico troca os botões de correr e agachar, e ainda tem a opção para canhotos. Tudo isso fica em Configurações > Esquema de controle, com prévia de cada botão.', sources = '[{"nome": "GTABase: guia completo de controles", "url": "https://www.gtabase.com/articles/gta-6/gta-6-controls-guide-ps5-xbox-button-layout", "tipo": "imprensa", "data": "2026-11-27", "nota": "Lido na íntegra em 27/11/2026."}, {"nome": "Shacknews: controles no PS5", "url": "https://www.shacknews.com/article/151396/gta6-ps5-controls", "tipo": "imprensa", "data": "2026-11-27", "nota": "Lido na íntegra em 27/11/2026."}, {"nome": "Push Square: o fim de apertar X para correr", "url": "https://www.pushsquare.com/news/2026/09/its-a-miracle-gta-6-wont-make-you-mash-the-x-button-to-sprint", "tipo": "imprensa", "data": "2026-11-27", "nota": "Lido na íntegra em 27/11/2026."}]'::jsonb where id = 'gta6-dica-comandos' and workflow_status = 'rascunho' and reviewed_by is null;
+update entries set title = 'Melhores configurações de mira no GTA 6', verification_status = 'provavel', direct_answer = 'Os guias recomendam o modo de mira Parcial: ele ajuda a apontar sem travar no inimigo. Como ponto de partida, a Critical Hits sugere sensibilidade de mira 5 (horizontal) e 6 (vertical) com aceleração 5; a Dexerto sugere 5 e 5, aceleração 4 e zona morta 2 nos dois analógicos. São gostos pessoais: ajuste aos poucos até ficar do teu jeito.', sources = '[{"nome": "Critical Hits: melhores configurações para PS5 e Xbox", "url": "https://criticalhits.com.br/dicas/gta-6-melhores-configuracoes-para-ps5-e-xbox-series-xs", "tipo": "imprensa", "data": "2026-11-27", "nota": "Lido na íntegra em 27/11/2026."}, {"nome": "Dexerto: melhores configurações de controle", "url": "https://www.dexerto.com/wikis/gta-6/best-controller-settings/", "tipo": "imprensa", "data": "2026-11-27", "nota": "Lido na íntegra em 27/11/2026."}]'::jsonb where id = 'gta6-dica-mira' and workflow_status = 'rascunho' and reviewed_by is null;
+update entries set title = 'Como fazer um assalto sem dar errado no GTA 6', verification_status = 'provavel', direct_answer = 'Comece pelos mercadinhos: aponte a arma para o caixa e ameace para ele abrir a registradora. Rende pouco, mas é o assalto mais simples do começo. Joalherias e casas de penhores pagam mais e têm mais segurança, então faça o reconhecimento antes. Bancos só depois que uma missão te der o bloqueador de tinta; lá, o maior risco é alguém disparar o alarme.', sources = '[{"nome": "VGC: como ganhar dinheiro", "url": "https://www.videogameschronicle.com/guide/how-to-make-money-in-gta-6/", "tipo": "imprensa", "data": "2026-11-27", "nota": "Lido na íntegra em 27/11/2026."}, {"nome": "PC Gamer: os jeitos mais rápidos de ganhar dinheiro", "url": "https://www.pcgamer.com/games/grand-theft-auto/gta-6-how-to-make-money/", "tipo": "imprensa", "data": "2026-11-27", "nota": "Lido na íntegra em 27/11/2026."}]'::jsonb where id = 'gta6-dica-assaltos' and workflow_status = 'rascunho' and reviewed_by is null;
+update entries set title = 'Como ganhar dinheiro rápido no começo do GTA 6', verification_status = 'provavel', direct_answer = 'No começo, assaltar mercadinho é rápido mas rende pouco; as missões principais e secundárias pagam bem melhor. A partir do Capítulo 2 dá para vender carros sem rastreador para o Moses, de US$ 1.000 a US$ 5.000 cada, segundo a VGC. E leve a grana ao banco: o dinheiro do bolso pode ser perdido se você for preso ou morrer.', sources = '[{"nome": "VGC: como ganhar dinheiro", "url": "https://www.videogameschronicle.com/guide/how-to-make-money-in-gta-6/", "tipo": "imprensa", "data": "2026-11-27", "nota": "Lido na íntegra em 27/11/2026."}, {"nome": "PC Gamer: os jeitos mais rápidos de ganhar dinheiro", "url": "https://www.pcgamer.com/games/grand-theft-auto/gta-6-how-to-make-money/", "tipo": "imprensa", "data": "2026-11-27", "nota": "Lido na íntegra em 27/11/2026."}]'::jsonb where id = 'gta6-dica-dinheiro' and workflow_status = 'rascunho' and reviewed_by is null;
+update entries set title = 'Como despistar a polícia no GTA 6', verification_status = 'provavel', direct_answer = 'O nível de procurado vai até 6 estrelas. Para fugir, entre em becos e ruas laterais para quebrar a linha de visão e saia da área de busca sem ser visto: as estrelas piscam e somem. Mas a polícia continua procurando na área quente marcada no mapa. Se for voltar lá, troque de roupa numa loja e de carro, ou pinte o seu na oficina. Se a polícia procura um casal, separe Jason e Lucia.', sources = '[{"nome": "GTABase: procurado e área quente", "url": "https://www.gtabase.com/articles/gta-6/gta-6-wanted-level-explained-police-system-guide", "tipo": "imprensa", "data": "2026-11-27", "nota": "Lido na íntegra em 27/11/2026."}, {"nome": "Dexerto: como despistar a polícia", "url": "https://www.dexerto.com/wikis/gta-6/how-to-lose-the-police/", "tipo": "imprensa", "data": "2026-11-27", "nota": "Lido na íntegra em 27/11/2026."}]'::jsonb where id = 'gta6-dica-direcao' and workflow_status = 'rascunho' and reviewed_by is null;
+update entries set title = 'Combate no GTA 6: o básico', verification_status = 'nao_verificado', direct_answer = 'No corpo a corpo, o contra-ataque e a esquiva funcionam logo antes do golpe do inimigo chegar. Em cobertura, dá para contornar a quina sem se expor. E o menu de equipamento reúne armas, itens, acessórios e colete: deixe tudo pronto antes do tiroteio.', sources = '[{"nome": "GTABase: guia completo de controles", "url": "https://www.gtabase.com/articles/gta-6/gta-6-controls-guide-ps5-xbox-button-layout", "tipo": "imprensa", "data": "2026-11-27", "nota": "Lido na íntegra em 27/11/2026."}]'::jsonb where id = 'gta6-dica-combate' and workflow_status = 'rascunho' and reviewed_by is null;
+`,
+  },
+  {
+    // O Montinho mandou publicar as 6 dicas do Treino de Leonida (27/11/2026, depois de aprovar os vídeos no painel).
+    id: "018_treino_publicar_dicas",
+    sql: `
+update entries set workflow_status = 'publicado', reviewed_by = 'Montinho', published_at = now(), updated_at = now()
+  where category_id = 'gta6-dicas' and tags @> '["treino-de-leonida"]'::jsonb and workflow_status = 'rascunho';
+insert into entry_changes (entry_id, kind, note)
+  select id, 'criacao', 'Dica do Treino de Leonida publicada, com fontes lidas e vídeos aprovados.' from entries e
+  where category_id = 'gta6-dicas' and tags @> '["treino-de-leonida"]'::jsonb and workflow_status = 'publicado'
+    and not exists (select 1 from entry_changes c where c.entry_id = e.id);
+`,
+  },
 ];

@@ -1,6 +1,6 @@
 {
- "quando": "2026-11-27T08:34:42.399Z",
- "total": 110,
+ "quando": "2026-11-28T01:06:27.079Z",
+ "total": 122,
  "falhas": 0,
  "results": [
   {
@@ -152,6 +152,31 @@
    "name": "admin/entradas exige login",
    "pass": true,
    "detail": ""
+  },
+  {
+   "name": "imagem de compartilhamento em /",
+   "pass": true,
+   "detail": "199276 bytes"
+  },
+  {
+   "name": "imagem de compartilhamento em /app/",
+   "pass": true,
+   "detail": "197622 bytes"
+  },
+  {
+   "name": "imagem de compartilhamento em /gta-6/easter-eggs/skunk-ape/",
+   "pass": true,
+   "detail": "182414 bytes"
+  },
+  {
+   "name": "imagem de compartilhamento em /gta-6/dinheiro/",
+   "pass": true,
+   "detail": "185541 bytes"
+  },
+  {
+   "name": "imagem de compartilhamento em /sobre/",
+   "pass": true,
+   "detail": "179079 bytes"
   },
   {
    "name": "imagem de Stories /gta-6/easter-eggs/skunk-ape/story/",
@@ -391,7 +416,7 @@
   {
    "name": "filtro por tipo reduz a lista",
    "pass": true,
-   "detail": "130 → 16"
+   "detail": "136 → 16"
   },
   {
    "name": "filtro não muda a URL (nada de combinações indexáveis)",
@@ -509,6 +534,36 @@
    "detail": ""
   },
   {
+   "name": "painel de vídeos recusa link que não é vídeo",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "vídeo de dica entra como rascunho, com crédito",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "rascunho não aparece no site",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "aprovado, o vídeo aparece na dica com o crédito do criador",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "dica com vídeo tem o botão Treinar no app, apontando para a tela do Treino",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "lista do app traz a dica com vídeo, resumo curto e link rastreável para o site",
+   "pass": true,
+   "detail": ""
+  },
+  {
    "name": "conteúdo-semente exige assinatura de revisor humano ao ser editado",
    "pass": true,
    "detail": ""
@@ -521,7 +576,7 @@
   {
    "name": "mudar slug cria redirecionamento 301",
    "pass": true,
-   "detail": "308 → /gta-6/dicas/como-salvar-o-jogo-novo/"
+   "detail": "308 → /gta-6/dicas/como-salvar-o-jogo-novo/, /gta-6/dicas/como-salvar-o-jogo-novo/"
   },
   {
    "name": "novo endereço responde 200 após revalidação",
@@ -545,6 +600,11 @@
   },
   {
    "name": "banco de palavras-chave acessível no painel",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "sem ID de medição, não há aviso de privacidade",
    "pass": true,
    "detail": ""
   },

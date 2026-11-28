@@ -20,7 +20,7 @@ export default function Privacidade() {
           <li><strong>Proteção contra abuso:</strong> para limitar envios em massa, guardamos por até 24 horas um identificador derivado do endereço IP de forma irreversível (hash). Não guardamos o IP em si.</li>
         </ul>
         <h2>Medição de audiência</h2>
-        <p>Se você aceitar no aviso de consentimento, carregamos o Google Tag Manager e o Google Analytics 4 para entender quais páginas ajudam mais: buscas feitas no site, páginas vistas e cliques em botões. Se você recusar, nada disso é carregado. Você pode mudar de ideia em “Preferências de privacidade”, no rodapé.</p>
+        <p>Se você aceitar no aviso de consentimento, carregamos o Google Analytics 4 para entender quais páginas ajudam mais: buscas feitas no site, páginas vistas, cliques em botões, vídeos assistidos e compras concluídas. A mesma medição vale para o aplicativo, que fica em app.missoessecretasgta.com.br. Com o aceite, também guardamos neste navegador de onde você chegou (por exemplo, um link do Instagram ou uma busca no Google); se você comprar, essa origem fica registrada junto com o pedido, para sabermos quais divulgações funcionam. Se você recusar, nada disso é carregado nem guardado. Você pode mudar de ideia em “Preferências de privacidade”, no rodapé.</p>
         <h2>Com quem compartilhamos</h2>
         <p>Com os fornecedores que operam o site (hospedagem, banco de dados e, com seu consentimento, medição de audiência). Não vendemos dados pessoais.</p>
         <h2>Por quanto tempo</h2>

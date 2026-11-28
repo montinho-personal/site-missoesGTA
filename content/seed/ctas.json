@@ -1,58 +1,58 @@
 [
   {
     "key": "padrao",
-    "eyebrow": "Seu comparsa de bolso",
+    "eyebrow": "{n} segredos pra meter o loko",
     "headline": "O segredo a gente revela. A aventura é você quem vive.",
-    "body": "Segredos, localizações, orientações e vídeos de quem já fez, no seu bolso. R$ 4,20, pagamento único, sem mensalidade.",
+    "body": "Onde tá a grana, o carro raro e o bunker, com mapa e vídeo de quem já fez. R$ 4,20, uma vez só, sem mensalidade.",
     "button_label": "Conhecer o aplicativo"
   },
   {
     "key": "missoes",
     "eyebrow": "Seu comparsa de bolso",
-    "headline": "A missão que o jogo não te mostra. O app mostra onde ela começa.",
-    "body": "O resto, a perseguição e o caos, é história sua. O segredo a gente revela; a aventura é você quem vive.",
+    "headline": "Missão que o jogo esconde? A gente entrega onde começa.",
+    "body": "A perseguição e o caos ficam por sua conta, parça. O segredo a gente revela; a aventura é você quem vive.",
     "button_label": "Conhecer o aplicativo"
   },
   {
     "key": "lugares",
     "eyebrow": "Seu comparsa de bolso",
-    "headline": "O app mostra a porta. Entrar é com você.",
-    "body": "Bunkers e esconderijos com localização e vídeo de quem já foi. O segredo a gente revela; a aventura é sua.",
+    "headline": "O app mostra a porta. Entrar é contigo, mano.",
+    "body": "Bunker e esconderijo com localização e vídeo de quem já colou lá. O segredo a gente revela; a aventura é sua.",
     "button_label": "Conhecer o aplicativo"
   },
   {
     "key": "dinheiro",
     "eyebrow": "Seu comparsa de bolso",
-    "headline": "Saber onde está o dinheiro é metade do assalto.",
-    "body": "A outra metade é escapar com ele. O app mostra o esconderijo e o caminho; a fuga é com você.",
+    "headline": "Saber onde tá a grana é metade do assalto.",
+    "body": "A outra metade é sair vazado com ela. O app mostra o esconderijo e o caminho; a fuga é contigo.",
     "button_label": "Conhecer o aplicativo"
   },
   {
     "key": "veiculos",
     "eyebrow": "Seu comparsa de bolso",
-    "headline": "Saber onde está o carro não faz a polícia facilitar.",
-    "body": "O app mostra o pino e o vídeo de quem já pegou. Chegar lá inteiro é com você.",
+    "headline": "Achar o carro raro é fácil. Quero ver despistar os homi.",
+    "body": "O app dá o pino no mapa e o vídeo de quem já pegou. Chegar lá inteiro é contigo.",
     "button_label": "Conhecer o aplicativo"
   },
   {
     "key": "colecionaveis",
     "eyebrow": "Seu comparsa de bolso",
-    "headline": "Quanta aventura você já deixou para trás?",
-    "body": "O app lembra o que você achou e mostra o que ainda falta. O segredo a gente revela; a aventura é sua.",
+    "headline": "Quanto rolê você já deixou passar batido?",
+    "body": "O app lembra o que você já achou e mostra o que falta, sem caô. O segredo a gente revela; a aventura é sua.",
     "button_label": "Conhecer o aplicativo"
   },
   {
     "key": "misterios",
     "eyebrow": "Seu comparsa de bolso",
-    "headline": "Tem coisa em Leonida que pouca gente viu.",
-    "body": "O app mostra onde procurar. O que acontece lá é história sua.",
+    "headline": "Tem coisa em Leonida que pouca gente viu, tá ligado?",
+    "body": "O app mostra onde procurar. O que rola lá é história sua.",
     "button_label": "Conhecer o aplicativo"
   },
   {
     "key": "dicas",
-    "eyebrow": "Seu comparsa de bolso",
-    "headline": "Você conhece GTA 6. Mas conhece tudo que ele esconde?",
-    "body": "Segredos, localizações e vídeos no seu bolso, por R$ 4,20. O segredo a gente revela; a aventura é você quem vive.",
+    "eyebrow": "{n} segredos pra meter o loko",
+    "headline": "Tu manja de GTA 6. Mas manja do que ele esconde?",
+    "body": "Mapa, passo a passo e vídeo de quem já fez, por R$ 4,20. Sim, 4,20. Entendedores entenderão.",
     "button_label": "Conhecer o aplicativo"
   }
 ]

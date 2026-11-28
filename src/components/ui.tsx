@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Icon } from "./Icon";
+import { TrailerCompact } from "./TrailerVideo";
 import { statusInfo, spoilerLabel } from "@/lib/labels";
 import type { Cta, EntryCardData, SpoilerLevel, VerificationStatus } from "@/lib/types";
 import { FavButton, RevealButton, TrackLink } from "./client";
@@ -86,7 +87,7 @@ export function EntryGrid({ entries }: { entries: EntryCardData[] }) {
   );
 }
 
-export function AppCta({ cta, placement, context }: { cta: Cta | undefined; placement: string; context?: string }) {
+export function AppCta({ cta, placement, context, video = true }: { cta: Cta | undefined; placement: string; context?: string; video?: boolean }) {
   if (!cta) return null;
   return (
     <aside data-app-cta aria-label="Aplicativo" className="card overflow-hidden border-violet/40 no-print">
@@ -95,6 +96,7 @@ export function AppCta({ cta, placement, context }: { cta: Cta | undefined; plac
           <p className="label text-violet mb-2 inline-flex items-center gap-2"><Icon name="phone" size={15} />{cta.eyebrow}</p>
           <p className="font-display text-2xl font-extrabold leading-tight">{cta.headline}</p>
           {cta.body && <p className="mt-2 text-fg-muted">{cta.body}</p>}
+          {video && <div className="mt-4"><TrailerCompact placement={`${placement}_video`} /></div>}
         </div>
         <TrackLink href="/app/" className="btn btn-app shrink-0" event="cta_click" params={{ cta_key: cta.key, placement, context: context ?? "" }}>
           {cta.button_label}<Icon name="arrow" size={18} />

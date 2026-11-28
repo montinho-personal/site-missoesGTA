@@ -4,6 +4,7 @@ import { Icon } from "@/components/Icon";
 import { breadcrumbLd, faqLd, pageMeta } from "@/lib/seo";
 import { site } from "@/lib/site";
 import { saleConfig } from "@/server/mercadopago";
+import { TrailerCompact } from "@/components/TrailerVideo";
 
 export const revalidate = 600;
 export const metadata = pageMeta({
@@ -69,6 +70,7 @@ export default async function ComoBaixarEUsar() {
         <p className="label text-violet mb-3">Manual do comparsa de bolso</p>
         <h1 className="text-4xl sm:text-5xl font-black">Como baixar e usar o aplicativo</h1>
         <p className="mt-4 text-lg text-fg-muted">Do pagamento ao primeiro pino no mapa, em três passos. O Brian jura que leva dois minutos. A Nina cronometrou: são uns cinco.</p>
+        <div className="mt-6"><TrailerCompact placement="manual_video" /></div>
       </header>
 
       <div className="mt-6 max-w-3xl">
