@@ -62,6 +62,6 @@ export async function redeemResetToken(token: string, pw: string): Promise<strin
 
 /** Acesso ativo mais recente do e-mail (compra primeiro, depois cortesia). */
 export async function activeLicenseFor(email: string): Promise<string | null> {
-  const [lic] = await q<{ code: string }>(`select code from licenses where lower(email) = $1 and status = 'ativa' order by (origin = 'compra') desc, created_at desc limit 1`, [email]);
+  const [lic] = await q<{ code: string }>(`select code from licenses where lower(email) = $1 and status = 'ativa' and (expires_at is null or expires_at > now()) order by (origin = 'compra') desc, created_at desc limit 1`, [email]);
   return lic?.code ?? null;
 }

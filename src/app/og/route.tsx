@@ -19,6 +19,7 @@ const PIN: Record<string, { cor: string; glyph: string }> = {
 
 const FIXAS: Record<string, Omit<OgCard, "cta"> & { cta?: string }> = {
   "/gta-6/": { eyebrow: "Guia de GTA 6", title: "Tudo que Leonida esconde, num lugar só.", chips: ["Dinheiro", "Carros raros", "Bunkers"] },
+  "/gta-6/perdiveis/": { eyebrow: "Corre, que some", title: "O que dá para perder em GTA 6.", chips: ["Por capítulo", "Com o prazo"], glyph: "!" },
   "/gta-6/segredos/": { eyebrow: "Todos os segredos", title: "A lista inteira do que o jogo não te conta." },
   "/gta-6/mapa/": { eyebrow: "Regiões do mapa", title: "Leonida é grande. Não se perde, parça.", glyph: "?" },
   "/sobre/": { eyebrow: "Quem escreve", title: "Fãs que leram o jogo de trás pra frente." },

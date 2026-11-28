@@ -15,12 +15,14 @@ export default async function Acessos({ searchParams }: { searchParams: Promise<
   const savedAppUrl = (await q<{ value: string }>(`select value from settings where key = 'app_url'`))[0]?.value ?? null;
   const appUrl = savedAppUrl ?? DEFAULT_APP_URL;
   const nome = sp.nome ?? "", tel = sp.tel ?? "", erro = sp.erro;
-  const lote = sp.lote && /^[a-f0-9]{16}$/.test(sp.lote) ? await q<{ code: string; max_uses: number | null }>(`select code, max_uses from licenses where batch = $1 order by code`, [sp.lote]) : [];
+  const lote = sp.lote && /^[a-f0-9]{16}$/.test(sp.lote) ? await q<{ code: string; max_uses: number | null; trial_hours: number | null }>(`select code, max_uses, trial_hours from licenses where batch = $1 order by code`, [sp.lote]) : [];
   const novo = lote.length === 1 ? lote[0].code : null;
-  const msg = novo ? courtesyMessage(novo, nome, site.url, lote[0].max_uses, appUrl) : "";
   const sale = await saleConfig();
+  const trialOf = (h: number | null) => ({ trialHours: h, preco: sale.priceLabel ?? undefined });
+  const msg = novo ? courtesyMessage(novo, nome, site.url, lote[0].max_uses, appUrl, trialOf(lote[0].trial_hours)) : "";
+  const msgIg = novo ? courtesyMessage(novo, nome, site.url, lote[0].max_uses, appUrl, { ...trialOf(lote[0].trial_hours), canal: "instagram" }) : "";
   const [lic, totals] = await Promise.all([
-    q<{ code: string; email: string | null; origin: string; status: string; note: string | null; created_at: string; last_used_at: string | null; max_uses: number | null; usados: number }>(`select l.code, l.email, l.origin, l.status, l.note, l.created_at::text, l.last_used_at::text, l.max_uses, (select count(*) from license_uses u where u.code = l.code)::int as usados from licenses l order by l.created_at desc limit 300`),
+    q<{ code: string; email: string | null; origin: string; status: string; note: string | null; created_at: string; last_used_at: string | null; max_uses: number | null; usados: number; trial_hours: number | null; expires_at: string | null; vencido: boolean }>(`select l.code, l.email, l.origin, l.status, l.note, l.created_at::text, l.last_used_at::text, l.max_uses, l.trial_hours, l.expires_at::text, (l.expires_at is not null and l.expires_at <= now()) as vencido, (select count(*) from license_uses u where u.code = l.code)::int as usados from licenses l order by l.created_at desc limit 300`),
     q<{ pagos: number; pendentes: number; receita: number; cortesias: number }>(`select (select count(*) from orders where status = 'pago')::int as pagos, (select count(*) from orders where status = 'pendente')::int as pendentes, (select coalesce(sum(amount_cents), 0) from orders where status = 'pago')::int as receita, (select count(*) from licenses where origin = 'cortesia' and status = 'ativa')::int as cortesias`),
   ]);
   const t = totals[0];
@@ -80,6 +82,9 @@ export default async function Acessos({ searchParams }: { searchParams: Promise<
           <div><label className="field-label" htmlFor="c-vagas">Quantas pessoas podem usar este código</label><input id="c-vagas" name="vagas" type="number" min={1} max={10000} defaultValue={1} inputMode="numeric" className="field" /><span className="field-hint">1 = código individual. 50 = as primeiras 50 pessoas (bom para influenciador ou grupo).</span></div>
           <div><label className="field-label" htmlFor="c-qtd">Quantos códigos gerar</label><input id="c-qtd" name="quantidade" type="number" min={1} max={200} defaultValue={1} inputMode="numeric" className="field" /><span className="field-hint">Mais de 1 = um código diferente para cada pessoa (sorteio, brinde). Com nome escolhido, saem numerados: NINA-01, NINA-02…</span></div>
           <div><label className="field-label" htmlFor="c-email">E-mail (opcional)</label><input id="c-email" name="email" type="email" className="field" /></div>
+          <div><label className="field-label" htmlFor="c-duracao">Duração do acesso</label>
+            <select id="c-duracao" name="duracao" className="field" defaultValue="0"><option value="0">Vitalício (cortesia)</option><option value="24">Teste grátis de 24 horas</option><option value="48">Teste grátis de 48 horas</option><option value="168">Teste grátis de 7 dias</option></select>
+            <span className="field-hint">No teste, o relógio começa quando a pessoa abre o link. Depois, o app mostra a compra.</span></div>
           <div className="sm:col-span-2"><label className="field-label" htmlFor="c-note">Anotação (por quê)</label><input id="c-note" name="note" maxLength={140} placeholder="Parceria Instagram, sorteio, amigo" className="field" /></div>
           <div className="sm:col-span-2"><button className="btn btn-primary">Gerar código</button></div>
         </form>
@@ -94,7 +99,7 @@ export default async function Acessos({ searchParams }: { searchParams: Promise<
               {lote.map((l) => (
                 <li key={l.code} className="py-2 flex items-center justify-between gap-3">
                   <span className="font-mono">{l.code}</span>
-                  <a className="link text-sm whitespace-nowrap" target="_blank" rel="noopener" href={whatsappLink(courtesyMessage(l.code, null, site.url, l.max_uses, appUrl))}>Enviar no WhatsApp</a>
+                  <a className="link text-sm whitespace-nowrap" target="_blank" rel="noopener" href={whatsappLink(courtesyMessage(l.code, null, site.url, l.max_uses, appUrl, trialOf(l.trial_hours)))}>Enviar no WhatsApp</a>
                 </li>
               ))}
             </ul>
@@ -110,6 +115,9 @@ export default async function Acessos({ searchParams }: { searchParams: Promise<
               <a href={whatsappLink(msg, tel)} target="_blank" rel="noopener" className="btn btn-primary grow">{tel ? `Enviar no WhatsApp para ${nome || "a pessoa"}` : "Enviar no WhatsApp"}</a>
               <CopyText text={msg} />
             </div>
+            <label className="field-label mt-5" htmlFor="c-msg-ig">Mensagem para o direct do Instagram</label>
+            <textarea id="c-msg-ig" readOnly value={msgIg} rows={6} className="field text-sm" />
+            <div className="mt-3"><CopyText text={msgIg} label="Copiar para o direct" /></div>
           </div>
         )}
       </section>
@@ -123,14 +131,14 @@ export default async function Acessos({ searchParams }: { searchParams: Promise<
             {lic.map((l) => (
               <tr key={l.code} className="border-b border-ink-700 last:border-0">
                 <td className="p-3 font-mono whitespace-nowrap">{l.code}</td>
-                <td className="p-3">{l.origin === "compra" ? "Compra" : "Cortesia"}</td>
+                <td className="p-3">{l.origin === "compra" ? "Compra" : l.trial_hours ? <>Teste de {l.trial_hours % 24 === 0 ? `${l.trial_hours / 24 === 1 ? "24 horas" : `${l.trial_hours / 24} dias`}` : `${l.trial_hours} h`}<span className="block text-sm text-fg-subtle">{l.vencido ? "acabou" : l.expires_at ? `até ${formatDate(l.expires_at, true)}` : "ainda não aberto"}</span></> : "Cortesia"}</td>
                 <td className="p-3">{l.email ?? "sem e-mail"}{l.note && <span className="block text-sm text-fg-subtle">{l.note}</span>}</td>
                 <td className="p-3 whitespace-nowrap">{formatDate(l.created_at, true)}</td>
                 <td className="p-3 whitespace-nowrap">{l.last_used_at ? formatDate(l.last_used_at, true) : "nunca"}</td>
                 <td className="p-3 whitespace-nowrap">{l.max_uses ? `${l.usados} de ${l.max_uses.toLocaleString("pt-BR")}${l.usados >= l.max_uses ? " · esgotado" : ""}` : "1 (individual)"}</td>
                 <td className="p-3">{l.status === "ativa" ? (
                   <div className="flex flex-col gap-1.5">
-                    {l.origin === "cortesia" && <a className="link text-sm whitespace-nowrap" target="_blank" rel="noopener" href={whatsappLink(courtesyMessage(l.code, /^Para: ([^·]+)/.exec(l.note ?? "")?.[1]?.trim(), site.url, l.max_uses, appUrl))}>Enviar no WhatsApp</a>}
+                    {l.origin === "cortesia" && <a className="link text-sm whitespace-nowrap" target="_blank" rel="noopener" href={whatsappLink(courtesyMessage(l.code, /^Para: ([^·]+)/.exec(l.note ?? "")?.[1]?.trim(), site.url, l.max_uses, appUrl, trialOf(l.trial_hours)))}>Enviar no WhatsApp</a>}
                     <form action={revokeLicense}><input type="hidden" name="code" value={l.code} /><button className="link text-sm">Revogar</button></form>
                   </div>
                 ) : <span className="badge tone-red">Revogado</span>}</td>

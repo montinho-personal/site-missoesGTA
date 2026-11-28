@@ -424,4 +424,12 @@ insert into entry_changes (entry_id, kind, note)
     id: "019_fichas_do_radar_28_11",
     sql: `select 1;`,
   },
+  {
+    // Teste grátis com prazo (ideia vinda da análise do Clube GTA 6, 28/11/2026): o código vale X horas a partir do primeiro uso.
+    id: "020_teste_gratis",
+    sql: `
+alter table licenses add column if not exists trial_hours int;
+alter table licenses add column if not exists expires_at timestamptz;
+`,
+  },
 ];

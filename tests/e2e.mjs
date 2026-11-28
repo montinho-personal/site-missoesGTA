@@ -14,7 +14,7 @@ const status = async (p, opts) => (await fetch(BASE + p, { redirect: "manual", .
 const ENTRY = "/gta-6/easter-eggs/skunk-ape/";
 
 // 1. Rotas e códigos HTTP
-for (const p of ["/", "/gta-6/", "/gta-6/segredos/", "/gta-6/dinheiro/", "/gta-6/mapa/", "/gta-6/mapa/vice-city/", ENTRY, "/app/", "/app/como-baixar-e-usar/", "/sobre/", "/metodologia/", "/radar/", "/ajuda/", "/contato/", "/enviar-descoberta/", "/privacidade/", "/termos/", "/busca/", "/favoritos/", "/robots.txt", "/sitemap.xml", "/llms.txt", "/search-index.json"])
+for (const p of ["/", "/gta-6/", "/gta-6/segredos/", "/gta-6/perdiveis/", "/gta-6/dinheiro/", "/gta-6/mapa/", "/gta-6/mapa/vice-city/", ENTRY, "/app/", "/app/como-baixar-e-usar/", "/sobre/", "/metodologia/", "/radar/", "/ajuda/", "/contato/", "/enviar-descoberta/", "/privacidade/", "/termos/", "/busca/", "/favoritos/", "/robots.txt", "/sitemap.xml", "/llms.txt", "/search-index.json"])
   ok(`200 ${p}`, (await status(p)) === 200);
 for (const p of ["/gta-6/missoes-secretas/nao-existe/", "/gta-6/misterios/", "/gta-6/categoria-falsa/", "/gta-5/", "/qualquer/coisa/muito/funda/"]) ok(`404 real em ${p}`, (await status(p)) === 404);
 ok("admin exige login", [302, 303, 307].includes(await status("/admin/")));
@@ -247,6 +247,25 @@ if (PW) {
     const feed = await (await fetch(BASE + "/api/dicas/")).json();
     const d = feed.dicas.find((x) => x.id === "gta6-0017");
     ok("lista do app traz a dica com vídeo, resumo curto e link rastreável para o site", !!d && d.videos[0]?.plataforma === "tiktok" && d.videos[0]?.criador === "@teste.e2e" && d.resumo.length <= 220 && d.site.includes("utm_source=app"));
+  }
+
+  // Teste grátis: código de 24 horas, mensagem pronta para WhatsApp e direct, e o relógio começa no primeiro uso
+  {
+    await page.goto(BASE + "/admin/acessos/");
+    await page.locator("#c-nome").fill("Teste Trial");
+    await page.locator("#c-duracao").selectOption("24");
+    await page.getByRole("button", { name: "Gerar código" }).click();
+    await page.waitForSelector("#c-msg");
+    const zap = await page.locator("#c-msg").inputValue();
+    const ig = await page.locator("#c-msg-ig").inputValue();
+    ok("teste grátis: mensagem do WhatsApp fala das 24 horas e do preço depois", /24 horas com tudo liberado/.test(zap) && /uma vez só/.test(zap) && /utm_campaign=teste_24h/.test(zap));
+    ok("teste grátis: mensagem do direct sem asteriscos, com origem do Instagram", !ig.includes("*") && /utm_source=instagram&utm_medium=dm/.test(ig));
+    const chave = /chave=([A-Z0-9]+)/.exec(zap)?.[1];
+    const r = await (await fetch(BASE + "/api/acesso/validar/", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ codigo: chave, aparelho: "aparelho-e2e-1234" }) })).json();
+    const horas = r.expira_em ? (new Date(r.expira_em).getTime() - Date.now()) / 3600e3 : 0;
+    ok("teste grátis vale e o prazo de 24 horas começa no primeiro uso", r.valido === true && horas > 23.5 && horas <= 24.05, JSON.stringify(r));
+    await page.goto(BASE + "/admin/acessos/");
+    ok("painel mostra o teste e até quando vale", (await page.locator("tr", { hasText: "Teste de 24 horas" }).count()) >= 1);
   }
 
   // trava editorial: "confirmado" sem evidência

@@ -66,26 +66,50 @@ export const STORY_HOOK: Record<string, string> = {
  * Mensagem de WhatsApp para quem ganhou uma cortesia: um link que abre o app já liberado (ninguém digita código)
  * e como deixar o ícone na tela. Com vagas, serve para divulgar a um grupo.
  */
-export function courtesyMessage(code: string, nome?: string | null, site = "", vagas?: number | null, appUrl = "https://app.missoessecretasgta.com.br"): string {
+export interface CourtesyMessageOpts {
+  /** Teste grátis: horas de acesso a partir do primeiro uso. */
+  trialHours?: number | null;
+  /** "instagram": texto para o direct, sem os asteriscos do WhatsApp, com a origem certa no link. */
+  canal?: "whatsapp" | "instagram";
+  /** Preço exibido depois do teste (ex.: "R$ 4,20"). */
+  preco?: string;
+}
+
+const prazo = (h: number) => (h % 24 === 0 ? (h / 24 === 1 ? "24 horas" : `${h / 24} dias`) : `${h} horas`);
+
+export function courtesyMessage(code: string, nome?: string | null, site = "", vagas?: number | null, appUrl = "https://app.missoessecretasgta.com.br", opts: CourtesyMessageOpts = {}): string {
   const grupo = Boolean(vagas && vagas > 1);
+  const ig = opts.canal === "instagram";
+  const b = (t: string) => (ig ? t : `*${t}*`);
+  const teste = opts.trialHours && opts.trialHours > 0 ? prazo(opts.trialHours) : null;
+  const campanha = teste ? `teste_${opts.trialHours}h` : "acesso_app";
+  const origem = ig ? "utm_source=instagram&utm_medium=dm" : `utm_source=whatsapp&utm_medium=${teste ? "teste" : "cortesia"}`;
   const oi = nome ? `Fala, ${nome.split(" ")[0]}!` : grupo ? "Fala, galera!" : "Fala, parceiro!";
-  const link = `${appUrl.replace(/\/$/, "")}/entrar?chave=${code.toUpperCase().replace(/[^A-Z0-9]/g, "")}&utm_source=whatsapp&utm_medium=cortesia&utm_campaign=acesso_app`;
+  const link = `${appUrl.replace(/\/$/, "")}/entrar?chave=${code.toUpperCase().replace(/[^A-Z0-9]/g, "")}&${origem}&utm_campaign=${campanha}`;
+  const abre = teste
+    ? grupo
+      ? `${oi} 🕵️ Liberei ${teste} de ${b("Missões Secretas GTA 6")} com tudo liberado para as primeiras ${vagas!.toLocaleString("pt-BR")} pessoas que abrirem este link.`
+      : `${oi} 🕵️ Liberei pra você ${b(`${teste} com tudo liberado`)} no app ${b("Missões Secretas GTA 6")}. Na faixa, sem cartão.`
+    : grupo
+      ? `${oi} 🕵️ Liberei o app ${b("Missões Secretas GTA 6")} de graça para as primeiras ${vagas!.toLocaleString("pt-BR")} pessoas que abrirem este link.`
+      : `${oi} 🕵️ Liberei pra você o acesso ao app ${b("Missões Secretas GTA 6")}, na faixa.`;
+  const fim = teste
+    ? `O relógio de ${teste} começa quando você abrir o link. Curtiu? Depois é ${opts.preco ?? "R$ 4,20"}, uma vez só, sem mensalidade. Sim, 4,20. 😏`
+    : grupo ? "Quando acabarem as vagas, o link para de funcionar. Corre. 🏃" : "O link é só seu, não espalha. 🤫";
   return [
-    grupo
-      ? `${oi} 🕵️ Liberei o app *Missões Secretas GTA 6* de graça para as primeiras ${vagas!.toLocaleString("pt-BR")} pessoas que abrirem este link.`
-      : `${oi} 🕵️ Liberei pra você o acesso ao app *Missões Secretas GTA 6*, na faixa.`,
+    abre,
     "",
-    "👉 *Toque aqui no celular e o app abre já liberado:*",
+    `👉 ${b("Toque aqui no celular e o app abre já liberado:")}`,
     link,
     "",
-    "📲 *Para ficar com o ícone na tela (sem loja de aplicativos):*",
-    "*Android (Chrome):* toque nos três pontinhos ⋮ lá em cima e em *Instalar app* (se não aparecer, *Adicionar à tela inicial*).",
-    "*Samsung Internet:* toque em ≡ embaixo, *Adicionar página a* e *Tela inicial*.",
-    "*iPhone (use o Safari):* toque em *Compartilhar* (o quadrado com a seta ⬆️), role e toque em *Adicionar à Tela de Início*.",
+    `📲 ${b("Para ficar com o ícone na tela (sem loja de aplicativos):")}`,
+    `${b("Android (Chrome):")} toque nos três pontinhos ⋮ lá em cima e em ${b("Instalar app")} (se não aparecer, ${b("Adicionar à tela inicial")}).`,
+    `${b("Samsung Internet:")} toque em ≡ embaixo, ${b("Adicionar página a")} e ${b("Tela inicial")}.`,
+    `${b("iPhone (use o Safari):")} toque em ${b("Compartilhar")} (o quadrado com a seta ⬆️), role e toque em ${b("Adicionar à Tela de Início")}.`,
     "",
     `Passo a passo com mais detalhes: ${site}/app/como-baixar-e-usar/#instalar`,
     "",
-    `Lá dentro tem o arquivo inteiro: missões secretas, carros raros, dinheiro escondido e lugares que o GPS não mostra, com local e passo a passo. ${grupo ? "Quando acabarem as vagas, o link para de funcionar. Corre. 🏃" : "O link é só seu, não espalha. 😉"}`,
+    `Lá dentro tem o arquivo inteiro: missões secretas, carros raros, dinheiro escondido e lugares que o GPS não mostra, com local e passo a passo. ${fim}`,
   ].join("\n");
 }
 

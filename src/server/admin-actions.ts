@@ -191,12 +191,14 @@ export async function createCourtesyAction(fd: FormData) {
   const custom = pedido ? customCode(pedido) : null;
   const num = (k: string) => Math.trunc(Number(s(fd, k).replace(/\D/g, "")) || 1);
   const vagas = num("vagas"), quantidade = num("quantidade");
+  const duracao = Number(s(fd, "duracao")) || 0; // 0 = vitalício; 24, 48 ou 168 horas = teste grátis
+  const trialHours = [24, 48, 168].includes(duracao) ? duracao : null;
   const volta = (extra: Record<string, string>) => `/admin/acessos/?${new URLSearchParams({ ...(nome && { nome }), ...(tel && { tel }), ...extra })}#cortesia`;
   if (pedido && !custom) redirect(volta({ erro: "O nome do código precisa ter de 4 a 24 letras ou números (pode usar hífen). Ex.: NINA-VIP." }));
   if (vagas > 10000 || quantidade > 200) redirect(volta({ erro: "Limite: até 200 códigos por vez e até 10.000 pessoas por código." }));
   const note = nul([nome && `Para: ${nome}`, s(fd, "note")].filter(Boolean).join(" · ").slice(0, 200));
   let batch: string;
-  try { batch = (await createCourtesy({ email: /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email) ? email : null, note, custom, vagas, quantidade })).batch; }
+  try { batch = (await createCourtesy({ email: /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email) ? email : null, note, custom, vagas, quantidade, trialHours })).batch; }
   catch (e) { redirect(volta({ erro: `O código ${String((e as Error).message).split(":")[1] ?? custom} já existe. Escolha outro nome.` })); }
   redirect(volta({ lote: batch! }));
 }

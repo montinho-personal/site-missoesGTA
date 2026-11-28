@@ -14,6 +14,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     allDates = allDates.concat(dates);
     out.push({ url: abs(`/${g.slug}/`), lastModified: latest([...dates]) });
     out.push({ url: abs(`/${g.slug}/segredos/`), lastModified: latest([...dates]) });
+    out.push({ url: abs(`/${g.slug}/perdiveis/`), lastModified: latest([...dates]) });
     out.push({ url: abs(`/${g.slug}/mapa/`) });
     for (const c of cats) out.push({ url: abs(`/${g.slug}/${c.slug}/`), lastModified: latest(entries.filter((e) => e.category_id === c.id).map((e) => e.updated_at)) });
     // região vazia fica fora do sitemap (e com noindex) até ter conteúdo

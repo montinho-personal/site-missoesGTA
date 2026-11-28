@@ -21,6 +21,7 @@ export function Footer({ categories }: { categories: Category[] }) {
           <p className="label text-fg-subtle mb-2">GTA 6</p>
           <Link className={a} href="/gta-6/">Guia de GTA 6</Link>
           <Link className={a} href="/gta-6/segredos/">Todos os segredos</Link>
+          <Link className={a} href="/gta-6/perdiveis/">O que dá para perder</Link>
           {categories.map((c) => <Link key={c.id} className={a} href={`/gta-6/${c.slug}/`}>{c.name}</Link>)}
           <Link className={a} href="/gta-6/mapa/">Regiões do mapa</Link>
         </nav>

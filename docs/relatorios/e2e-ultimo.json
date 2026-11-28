@@ -1,6 +1,6 @@
 {
- "quando": "2026-11-28T11:05:02.166Z",
- "total": 122,
+ "quando": "2026-11-28T14:21:44.127Z",
+ "total": 127,
  "falhas": 0,
  "results": [
   {
@@ -15,6 +15,11 @@
   },
   {
    "name": "200 /gta-6/segredos/",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "200 /gta-6/perdiveis/",
    "pass": true,
    "detail": ""
   },
@@ -560,6 +565,26 @@
   },
   {
    "name": "lista do app traz a dica com vídeo, resumo curto e link rastreável para o site",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "teste grátis: mensagem do WhatsApp fala das 24 horas e do preço depois",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "teste grátis: mensagem do direct sem asteriscos, com origem do Instagram",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "teste grátis vale e o prazo de 24 horas começa no primeiro uso",
+   "pass": true,
+   "detail": "{\"valido\":true,\"expira_em\":\"2026-11-29T14:21:42.330Z\"}"
+  },
+  {
+   "name": "painel mostra o teste e até quando vale",
    "pass": true,
    "detail": ""
   },

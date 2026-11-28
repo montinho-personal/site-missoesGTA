@@ -29,7 +29,7 @@ export function customCode(raw: string): string | null {
 
 export interface License { code: string; email: string | null; origin: "compra" | "cortesia"; status: "ativa" | "revogada"; order_id: string | null; note: string | null; created_at: string; last_used_at: string | null }
 
-export interface CourtesyOptions { email: string | null; note: string | null; custom?: string | null; vagas?: number; quantidade?: number }
+export interface CourtesyOptions { email: string | null; note: string | null; custom?: string | null; vagas?: number; quantidade?: number; /** Teste grátis: horas de acesso contadas a partir do primeiro uso. Vazio = vitalício. */ trialHours?: number | null }
 
 /**
  * Gera cortesias. Com nome escolhido e mais de um código, os códigos saem numerados (NINA-01, NINA-02...).
@@ -45,7 +45,8 @@ export async function createCourtesy(o: CourtesyOptions): Promise<{ batch: strin
     if (dup.length) throw new Error(`codigo-repetido:${dup[0].code}`);
   }
   const batch = randomBytes(8).toString("hex");
-  for (const code of wanted) await q(`insert into licenses (code, email, origin, note, max_uses, batch) values ($1, $2, 'cortesia', $3, $4, $5)`, [code, o.email, o.note, vagas > 1 ? vagas : null, batch]);
+  const trial = o.trialHours && o.trialHours > 0 ? Math.min(Math.trunc(o.trialHours), 24 * 30) : null;
+  for (const code of wanted) await q(`insert into licenses (code, email, origin, note, max_uses, batch, trial_hours) values ($1, $2, 'cortesia', $3, $4, $5, $6)`, [code, o.email, o.note, vagas > 1 ? vagas : null, batch, trial]);
   return { batch, codes: wanted };
 }
 
@@ -57,7 +58,7 @@ export async function licenseForPaidOrder(orderId: string, email: string): Promi
   return row.code;
 }
 
-export type Validation = { valido: boolean; motivo?: "inexistente" | "cancelado" | "esgotado" | "aparelho" };
+export type Validation = { valido: boolean; motivo?: "inexistente" | "cancelado" | "esgotado" | "aparelho" | "expirado"; /** Só no teste grátis: até quando o acesso vale (ISO). */ expira_em?: string };
 
 /**
  * Vale com ou sem hífen, em qualquer caixa. Código com vagas (max_uses) precisa do identificador do aparelho:
@@ -66,9 +67,11 @@ export type Validation = { valido: boolean; motivo?: "inexistente" | "cancelado"
 export async function checkCode(raw: string, device?: string | null): Promise<Validation> {
   const c = compactCode(raw);
   if (c.length < 4 || c.length > 24) return { valido: false, motivo: "inexistente" };
-  const [lic] = await q<{ code: string; max_uses: number | null; status: string }>(`select code, max_uses, status from licenses where regexp_replace(code, '[^A-Z0-9]', '', 'g') = $1`, [c]);
+  const [lic] = await q<{ code: string; max_uses: number | null; status: string; trial_hours: number | null; expires_at: string | Date | null; vencido: boolean }>(`select code, max_uses, status, trial_hours, expires_at, (expires_at is not null and expires_at <= now()) as vencido from licenses where regexp_replace(code, '[^A-Z0-9]', '', 'g') = $1`, [c]);
   if (!lic) return { valido: false, motivo: "inexistente" };
   if (lic.status !== "ativa") return { valido: false, motivo: "cancelado" };
+  // Teste grátis: depois do prazo, não vale mais (o app mostra a compra).
+  if (lic.vencido) return { valido: false, motivo: "expirado", expira_em: new Date(lic.expires_at!).toISOString() };
   if (lic.max_uses) {
     const dev = (device ?? "").replace(/[^A-Za-z0-9_-]/g, "").slice(0, 64);
     if (dev.length < 8) return { valido: false, motivo: "aparelho" };
@@ -79,8 +82,9 @@ export async function checkCode(raw: string, device?: string | null): Promise<Va
       if (!took.length) return { valido: false, motivo: "esgotado" };
     }
   }
-  await q(`update licenses set last_used_at = now() where code = $1`, [lic.code]);
-  return { valido: true };
+  // O relógio do teste começa no primeiro uso, não quando o código foi criado.
+  const [row] = await q<{ expires_at: string | Date | null }>(`update licenses set last_used_at = now(), expires_at = case when trial_hours is not null and expires_at is null then now() + make_interval(hours => trial_hours) else expires_at end where code = $1 returning expires_at`, [lic.code]);
+  return row?.expires_at ? { valido: true, expira_em: new Date(row.expires_at).toISOString() } : { valido: true };
 }
 
 export async function isCodeValid(raw: string, device?: string | null): Promise<boolean> {
